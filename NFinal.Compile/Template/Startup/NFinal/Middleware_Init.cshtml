@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+#if (!AspNET && !NFinalOwin)
+using Microsoft.Owin;
+#endif
+namespace NFinal
+{
+#if (!AspNET && !NFinalOwin)
+    using AppFunc = Func<IDictionary<string, object>, Task>;
+    public struct Middleware
+    {
+        private readonly AppFunc _next;
+        private static string rootDir = null;
+        public Middleware(AppFunc next)
+        {
+            this._next = next;
+        }
+        public Task Invoke(IDictionary<string, object> environment)
+        {
+            IOwinContext context = new OwinContext(environment);
+            context.Response.ContentType = "text/html;charset=utf-8";
+            context.Response.StatusCode = 200;
+            string requestPath = context.Request.PathBase.Value + context.Request.Path.Value;
+            int actionId= ActionSearch.Search(requestPath);
+            if (rootDir == null)
+            {
+                rootDir = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            }
+            if (actionId > 0)
+            {
+                try
+                {
+                    //初始化配置
+                    NFinal.Config.ConfigurationManager.Load(rootDir);
+                    @{@Model.project}.OwinRouter.Run(context, rootDir, requestPath, actionId);
+                }
+                catch (Exception e)
+                {
+                    context.Response.Write("错误消息：<br/>");
+                    context.Response.Write(e.Message);
+                    context.Response.Write("<br/>");
+                    context.Response.Write("请求时发生错误：<br>");
+                    context.Response.Write(requestPath);
+                    context.Response.Write("<br/>");
+                    context.Response.Write("请求时的Cookie:<br>");
+                    foreach (var cookie in context.Request.Cookies)
+                    {
+                        context.Response.Write(cookie.Key);
+                        context.Response.Write(":");
+                        context.Response.Write(cookie.Value);
+                        context.Response.Write("<br/>");
+                    }
+                    context.Response.Write("错误跟踪：</br>");
+                    string[] stackTraces = e.StackTrace.Split('\n');
+                    for (int i = 0; i < stackTraces.Length; i++)
+                    {
+                        context.Response.Write(stackTraces[i]);
+                        context.Response.Write("</br>");
+                    }
+                    context.Response.Body.Close();
+                }
+                //return Task.FromResult(0);.net 4.5;
+                return FromResult<int>(0);
+            }
+            else
+            {
+                return _next.Invoke(environment);
+            }
+        }
+        public static Task<TResult> FromResult<TResult>(TResult resultValue)
+        {
+            var completionSource = new TaskCompletionSource<TResult>();
+            completionSource.SetResult(resultValue);
+            return completionSource.Task;
+        }
+    }
+#endif
+}

@@ -1,0 +1,71 @@
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename :WebCompile .cs
+//        Description :生成器
+//
+//        created by Lucas at  2015-6-30`
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
+using System.Collections.Generic;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace @{@Model.project}.@{@Model.app}
+{
+    public partial class WebCompiler : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            Response.Write("生成开始<br/>");
+            Response.Flush();
+
+            string appRoot = Server.MapPath("/");
+            //获取WebConfig中的配置信息
+            NFinal.Compile.Frame frame = new NFinal.Compile.Frame(appRoot);
+            string[] Apps = frame.GetApps();
+            //创建主路由
+            System.Collections.Generic.List<NFinal.Compile.ControllerFileData> fileDataList = frame.GetAllControllers();
+            NFinal.Compile.ReWriteData rewriteData = NFinal.Compile.ConfigurationManager.GetReWriteData();
+			rewriteData.AddReWriteData(NFinal.Compile.Frame.reWriteData);
+            frame.CreateActionSearch(fileDataList, rewriteData);
+#if (!AspNET && !MicrosoftOwin && !NFinalOwin)
+            frame.CreateModuleAndRouter(fileDataList,rewriteData);
+            frame.CreateOwinMiddlewareAndRouter(fileDataList, rewriteData);
+            frame.CreateNFinalOwinMiddlewareAndRouter(fileDataList, rewriteData);
+#endif
+#if AspNET
+            frame.CreateModuleAndRouter(fileDataList,rewriteData);
+#endif
+#if MicrosoftOwin
+            frame.CreateOwinMiddlewareAndRouter(fileDataList, rewriteData);
+#endif
+#if NFinalOwin
+            frame.CreateNFinalOwinMiddlewareAndRouter(fileDataList, rewriteData);
+#endif
+            frame.CreateURLHelper(fileDataList,rewriteData);
+            //创建并生成Web站点
+            NFinal.Compile.Config config = NFinal.Compile.ConfigurationManager.GetConfig("@{@Model.app}",appRoot);
+            NFinal.Compile.Application application = new NFinal.Compile.Application(config);
+			frame.GetDB(config);
+            application.CreateApp();
+            application.CreateModelsFile();
+			application.CreateCookieManager();
+			application.CreateSessionManager();
+            application.CreateDAL(true);
+            application.CreateCompile(true);
+			frame.ClearDB();
+            Response.Write("生成结束<br/>");
+
+            Response.Flush();
+            Response.End();
+        }
+    }
+}

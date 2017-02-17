@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>1.0.控制器的定义</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>1.控制器的定义</h3>
+    当安装完NFinal后,Controllers目录下会有一个Index.cs的控制器
+    <pre class="brush: csharp;">
+		public class IndexController: Controller
+		{
+			public void Index()
+			{
+				View("Index.aspx");
+			}
+		}
+    </pre>
+    <p>
+	<b>控制器定义有以下原则：</b><br/>
+    1.控制器必须在Controllers目录下.<br/>
+    2.命名空间必须采用与文件夹一致的命名空间,即默认命名空间.<br/>
+    且该类必须继承自Controller类<br/>
+    3.其函数返回值类型必须为void.可访问修饰符必须为public.<br/>
+    </p>
+    简单示例:
+    1.在Controllers下新建SampleController.cs
+    <pre class="brush: csharp;">
+		public class SampleController:Controller
+		{
+			public void Show()
+			{
+				Write("Hello World.");
+			}
+		}
+    </pre>
+    2.右键点击WebCompiler.aspx.选择在浏览器中查看.
+    <p>
+        生成开始<br />生成结束
+    </p>
+    3.找到解决方案资源管理器，展开Web文件夹下的Default文件夹。<br/>
+	点击显示所有文件按钮，使其激活。则可看到SampleController文件夹，<br/>
+	其下有Show.cs和Show.html文件<br/>
+	如果未看到，请选择该目录并点击刷新按钮。<br/>
+	<img src="../Content/images/显示所有文件.gif" width="323px" height="76px"/><br/>
+    右键点击SampleController文件夹,选择包括在项目中,其中Show.cs的代码如下.<br/>
+    <pre class="brush: csharp;">
+		public class ShowAction  : Controller
+		{
+			public ShowAction(System.IO.TextWriter tw):base(tw){}
+			public ShowAction(string fileName) : base(fileName) {}
+			public void Show()
+			{
+				Write("Hello World.");
+			}
+		}
+    </pre>
+    Show.html中的代码如下:
+    <pre class="brush: html" type="text/template">
+        &lt;!DOCTYPE html&gt;
+        &lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+        &lt;head&gt;
+        &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;
+            &lt;title&gt;&lt;/title&gt;
+			&lt;script src="Url.js"&gt;&lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;script&gt;
+				function jump()
+				{
+					window.location.href=Url.App_SampleController_Show();
+				}
+				jump();
+	        &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+    </pre>
+    <p>
+        show中的代码只是跳转并执行SampleController下的Show方法.
+    </p>
+    <p>
+        4.右键点击Show.html并选择在浏览器中查看.可以看到浏览器输出Hello World.
+    </p>
+</body>
+</html>

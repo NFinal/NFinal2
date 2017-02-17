@@ -1,0 +1,63 @@
+﻿﻿﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename :Module.cs
+//        Description :路由类
+//
+//        created by Lucas at  2015-10-15`
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
+using System.Collections.Specialized;
+#if (!MicrosoftOwin && !NFinalOwin)
+using System.Web;
+#endif
+namespace NFinal
+{
+#if (!MicrosoftOwin && !NFinalOwin)
+    public class Module:IHttpModule
+    {
+		public virtual void Init(HttpApplication app)
+        {
+            app.AuthorizeRequest += new EventHandler(this.BaseModuleRewriter_AuthorizeRequest);
+        }
+        public virtual void Dispose()
+        { }
+        protected virtual void BaseModuleRewriter_AuthorizeRequest(object sender, EventArgs e)
+        {
+            HttpApplication app = (HttpApplication)sender;
+            // Remove the "Server" HTTP Header from response
+            if (null != app && null != app.Request &&
+                null != app.Context && null != app.Context.Response)
+            {
+				try
+				{
+					System.Collections.Specialized.NameValueCollection headers = app.Context.Response.Headers;
+					if (null != headers)
+					{
+						headers.Remove("Server");
+					}
+				}
+				catch
+				{
+				}
+            }
+            Rewrite(app.Request.Path, app);
+        }
+        protected void Rewrite(string requestedPath, HttpApplication app)
+        {
+			int actonId = ActionSearch.Search(requestedPath);
+            if (actonId > 0)
+            {
+                //重写url使其能够让NFinal.Handler进行处理
+                app.Context.RewritePath(string.Format("{0}{1}{2}", requestedPath, actonId.ToString("00000"), ".nf"));
+            }
+        }
+    }
+#endif
+}

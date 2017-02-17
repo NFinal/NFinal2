@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NFinal.Action">
+    <Position X="3.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAEAACABAAAAABAAAAACAAAAAAAAAACAAAAWAQAA=</HashCode>
+      <FileName>Core\Action\Action.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="NFinal.Cache.Cache" Collapsed="true">
+    <Position X="3.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQIABABABAAEAAJAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Cache\Cache.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NFinal.Cache.MemoryCache">
+    <Position X="2.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAIAAABABAAAAABAAAAAAgAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Core\Cache\MemoryCache.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NFinal.Cache.RedisCache">
+    <Position X="4.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAABABAAAAABAABAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Cache\RedisCache.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NFinal.BinarySerialize" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Serialize\BinarySerialize.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NFinal.ProtobufSerialize" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Serialize\ProtobufSerialize.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NFinal.Cookie" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAQAAAACEAEQAAIAAAICAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Cookie.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NFinal.Session" BaseTypeListCollapsed="true">
+    <Position X="13" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAIAAABABACAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Session.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NFinal.SimpleController">
+    <Position X="5.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Action\Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="NFinal.Cache.MemoryCacheValue">
+    <Position X="0.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Cache\MemoryCache.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="NFinal.IAction">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACABAAAAABAAAAAAAAAAAAAAAAAAAAAWAQAA=</HashCode>
+      <FileName>Core\Action\IAction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NFinal.Cache.ICache">
+    <Position X="0.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAABABAAEAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Cache\ICache.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NFinal.ISerializable">
+    <Position X="7.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Serialize\ISerializable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NFinal.ICookie">
+    <Position X="10.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\ICookie.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NFinal.ISession">
+    <Position X="13" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\ISession.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="NFinal.MethodType">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAEAQAAAQAAAgAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Action\MethodType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NFinal.ContentType">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAEAAAAAAAUAAAAAAAAAAAAAAAAAAAIAAIAA=</HashCode>
+      <FileName>Core\Action\ContentType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NFinal.ServerType">
+    <Position X="10.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAQAAAIAAAAIAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Core\Action\ServerType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

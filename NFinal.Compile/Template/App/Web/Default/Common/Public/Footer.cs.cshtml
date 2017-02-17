@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+
+namespace @{@Model.project}.@{@Model.app}.Web.Default.Common.Public
+{
+    public class FooterAction  : Controller
+	{
+		public FooterAction(System.IO.TextWriter tw):base(tw){}
+		public FooterAction(string fileName) : base(fileName) {}
+		public FooterAction(HttpContext context):base(context){}
+		public FooterAction(Microsoft.Owin.IOwinContext context):base(context){}
+		public FooterAction(Controller controller):base(controller){}
+        
+        
+        
+        public void Footer()
+        {
+            
+			Write("<footer> NFinal框架.这是尾 </footer>");
+        }
+        
+        
+    }
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  有关如何配置 ASP.NET 应用程序的详细信息，请访问
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  <!--禁用VS Browser Link功能，防止js post bug-->
+  <appSettings>
+    <add key="vs:EnableBrowserLink" value="false" />
+  </appSettings>
+  <system.web>
+    <!--删除http协议中无用的version头-->
+    <httpRuntime enableVersionHeader="false" />
+    <!--session重命名-->
+    <sessionState cookieName="session_id" mode="InProc">
+    </sessionState>
+    <compilation debug="true" />
+    <!--http handler重写-->
+    <httpHandlers>
+      <add verb="*" path="*.nf" type="NFinal.Handler" validate="false" />
+    </httpHandlers>
+    <!--http module重写-->
+    <httpModules>
+      <add name="NFinalMoudle" type="NFinal.Module" />
+    </httpModules>
+  </system.web>
+  <system.webServer>
+    <!--不检测system.web配置节下的配置，以加快网站运效率-->
+    <validation validateIntegratedModeConfiguration="false" />
+    <!--http handler重写，并设置新的管道模式-->
+    <handlers>
+      <add name="NFinalHandler" verb="*" path="*.nf" type="NFinal.Handler" preCondition="integratedMode" />
+    </handlers>
+    <!--http module重写，并设置新的管道模式-->
+    <modules>
+      <add name="NFinalMoudle" type="NFinal.Module" preCondition="integratedMode" />
+    </modules>
+    <!--删除无用的http头-->
+    <httpProtocol>
+      <customHeaders>
+        <clear/>
+      </customHeaders>
+    </httpProtocol>
+  </system.webServer>
+</configuration>

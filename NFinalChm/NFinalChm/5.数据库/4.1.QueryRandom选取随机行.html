@@ -1,0 +1,58 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>4.1.QueryRandom选取随机行</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>QueryRandom方法</h3>
+    <p>
+        QueryRandom(string sql，int top) 有两个参数 sql:为sql查询语句  top:需要获得的行数
+        <br />
+        返回：行对象数组
+    </p>
+    1、无参数
+    <pre class="brush: csharp;">
+    public void  Index()
+    {
+        //打开一个数据库链接
+        var con= Models.YMC.OpenConnection();
+        //可简写为:var rows= con.QueryRandom("user",3);
+        var rows= con.QueryRandom("select * from user",3);
+        //关闭数据库连接
+        con.Close();
+    }
+   </pre>
+   2、有默认值的参数
+    <pre class="brush: csharp;">
+    public void  Index(string pwd="123456")
+    {
+        //打开一个数据库链接
+        var con = Models.YMC.OpenConnection();
+        var row = con.QueryRandom("select * from user where pwd=@pwd"，3);
+        //关闭数据库连接
+        con.Close();
+    }
+   </pre>
+    3、vs2015支持的新语法，让SQL语句可以有自动提示
+    <pre class="brush: csharp;">
+        Models.Tips.Common.users users = new Models.Tips.Common.users();
+        public void queryRandom()
+        {
+            var con = Models.Common.OpenConnection();
+            var us = con.QueryRandom($"select {users.id},{users.name},{users.pwd} from {users}",3);
+            con.Close();
+            AjaxReturn(us);
+        }
+    </pre>
+    <p>
+        模板会根据以上代码生成正确的执行代码，此处不再显示。可以参见QueryRandom中的模板生成的代码
+    </p>  
+</body>
+</html>

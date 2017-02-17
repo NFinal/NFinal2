@@ -1,0 +1,46 @@
+﻿﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename :CookieManager.cs
+//        Description :Cookie管理类
+//
+//        created by Lucas at  2015-6-30`
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
+using System.Collections.Generic;
+using System.Web;
+
+namespace @{@Model.project}.@{@Model.app}.Code.Data
+{
+    public class CookieManager:NFinal.Cookie
+    {
+        private CookieInfo _cookieInfo = new CookieInfo();
+        public CookieManager()
+        {
+        }
+        public CookieManager(NFinal.IAction action):base(action)
+        {
+            
+        }
+        public CookieManager(IDictionary<string, string> cookies):base(cookies)
+        {
+
+        }
+        public string vcheck
+        {
+            get;
+            set;
+        }
+        public string check
+        {
+            get;
+            set;
+        }
+    }
+}

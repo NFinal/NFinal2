@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>2.2.Attribute路由</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+	<h3>特性路由函数</h3>
+	<p>
+		使用时请先引入NFinal.Advanced命名空间。<br/>
+		特性函数如下：<br/>
+		FormHtml,Html,GetHtml,PostHtml<br/>
+		Redirect,GetRedirect,PostRedirect<br/>
+		Json,GetJson,PostJson<br/>
+		JavaScript,GetJavaScript,PostJavaScript<br/>
+		Css,GetCss,PostCss<br/>
+		File,GetFile,PostFile<br/>
+		Jpeg,GetJpeg,PostJpeg<br/>
+		Gif,GetGif,PostGif<br/>
+		Png,GetPng,PostPng<br/>
+		Xml,GetXml,PostXml<br/>
+		Text,GetText,PostText<br/>
+		Empty,GetEmpty,PostEmpty<br/>
+		在输出不同内容时使用不同的特性。<br/>
+		一方面程序会更清晰，另一方面系统也会自动加上不同的contypeType头。<br/>
+	</p>
+    <h3>特性路由规则</h3>
+    默认
+    <p>
+        URL=URL前缀+控制器类名+控制器方法名+(自定义参数[00])+URL后缀<br />
+        Url=UrlPrefix+BaseUrl+ActionUrl+UrlExtesion;
+    </p>
+    <pre class="brush: csharp;">
+        //urlPrefix="/App";
+        namespace WebSite.App.Controllers
+        {
+            //BaseUrl="/User";
+            [BaseUrl("/User")]
+            public class IndexController
+            {
+                //ActionUrl="/Index.html";
+                [GetHtml("/Index.html")]
+                public void Index()
+                {
+                    Write("Hello!");
+                }
+            }
+        }
+        string url="/App"+ "/User" + "/Index.html";
+        对应的URL为:http://localhost/App/User/Index.html
+    </pre>
+    <pre class="brush: csharp;">
+        //BaseUrl中带有~/,表示路径从根目录开始，但不能忽略URL前缀
+        [BaseUrl("~/User")]
+        public class IndexController
+        {
+            [GetHtml("/Index.html")]
+            public void Index()
+            {
+                Write("Hello!");
+            }
+        }
+        对应的URL为:http://localhost/App/User/Index.html
+    </pre>
+    <pre class="brush: csharp;">
+        public class IndexController
+        {
+            //ActionUrl中带有~/,表示路径从根目录开始
+            [GetHtml("~/Index.html")]
+            public void Index()
+            {
+                Write("Hello!");
+            }
+        }
+        对应的URL为:http://localhost/App/Index.html
+    </pre>
+    <p>
+        参数绑定:<br />
+		<b style="color:red;">URL参数类型仅为基本类型或基本类型对应的数组类型</b><br />
+        ActionUrl规则:1.{函数参数名}<br />
+        2.{函数参数名:正则表达式(或数据类型)}<br />
+        3.{函数参数名:正则表达式:字符串格式化参数(与string.Format用法一致)}
+    </p>
+    <pre class="brush: csharp;">
+        //如果此类的模块名为App
+        //则ModuleUrl="/App"
+        namespace WebSite.App.Controllers
+        {
+            //BaseUrl="/IndexController"
+            public class IndexController
+            {
+                //ActionUrl="/Index.htm"
+                //首页
+                [GetHtml("~/ShouYe/{name}.htm")]
+                public void Index(string name)
+                {
+                    Write("Hello!");
+                }
+            }
+        }
+        //通过以上公式得出URL:http://localhost/App/ShouYe/NFinal.htm
+        //输出Hello!NFinal
+    </pre>
+    <p>
+        参数
+    </p>
+        规则:string url=Url.App_Controller_Action(type1 p1,type2 p2,....);//默认生成URL
+    </p>
+</body>
+</html>

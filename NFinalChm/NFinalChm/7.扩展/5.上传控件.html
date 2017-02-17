@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>5.上传控件</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>上传按钮的使用</h3>
+    <p>
+    控件在Views/Default/Common/Public目录下.<br />
+    1.使用之前请拖KindEditorLibrary.ascx到aspx页面中的head标签中.(如果是旧版需要去掉控件中的js注释)<br />
+	2.然后在textarea中加入属性data-type="upload-img"和data-img属性,<br />
+	当属性值与html中imgId值相同时,img标签则会自动获取上传的图片路径,并显示上传后的图片<br />
+	例:
+    </p>
+    <pre class="brush: html;">
+        <!--显示上传后的图片，也可预先指定一个图片-->
+	    &lt;img id="img" />
+        <!--上传按钮-->
+	    &lt;input type="button" data-type="upload-img" data-img="img"/>
+    </pre>
+    <p>
+	3.也可加入data-input属性,当属性值与html中input的Id值相同时,input的value值就是图片的路径值.<br />
+	例:
+    </p>
+    <pre class="brush: html;">
+        <!--显示上传后的图片，也可预先指定一个图片-->
+	    &lt;img id="img1" />
+        <!--用于存储上传后的路径-->
+	    &lt;input id="imgsrc" type="hidden" />
+        <!--上传按钮-->
+	    &lt;input type="button" data-type="upload-img" data-img="img" data-input="imgsrc"/>
+    </pre>
+    如果提示指定目录不存在，则需要在【模块】/Content/kindeditor/下新建attached文件夹
+</body>
+</html>

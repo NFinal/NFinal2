@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>SQL Alias</title>
+</head>
+<body>
+    <h3>通过使用 SQL，可以为列名称和表名称指定别名（Alias）</h3>
+    <pre>
+    表的 SQL Alias 语法
+    SELECT column_name(s)
+    FROM table_name
+    AS alias_name
+    列的 SQL Alias 语法
+    SELECT column_name AS alias_name
+    FROM table_name
+    Alias 实例: 使用表名称别名
+    假设我们有两个表分别是："Persons" 和 "Product_Orders"。我们分别为它们指定别名 "p" 和 "po"。
+    现在，我们希望列出 "John Adams" 的所有定单。
+    我们可以使用下面的 SELECT 语句：
+    SELECT po.OrderID, p.LastName, p.FirstName
+    FROM Persons AS p, Product_Orders AS po
+    WHERE p.LastName='Adams' AND p.FirstName='John'
+    不使用别名的 SELECT 语句：
+    SELECT Product_Orders.OrderID, Persons.LastName, Persons.FirstName
+    FROM Persons, Product_Orders
+    WHERE Persons.LastName='Adams' AND Persons.FirstName='John'
+    从上面两条 SELECT 语句您可以看到，别名使查询程序更易阅读和书写。
+    Alias 实例: 使用一个列名别名
+    表 Persons:
+    Id	LastName	FirstName	Address	City
+    1	Adams	John	Oxford Street	London
+    2	Bush	George	Fifth Avenue	New York
+    3	Carter	Thomas	Changan Street	Beijing
+    SQL:
+    SELECT LastName AS Family, FirstName AS Name
+    FROM Persons
+    结果：
+    Family	Name
+    Adams	John
+    Bush	George
+    Carter	Thomas
+    </pre>
+</body>
+</html>

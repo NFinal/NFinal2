@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1.NFinal执行原理</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <p>
+        我带大家一起走一下NFinal的执行流程.<br />
+        Web.Config中添加了NFinal.Module模块<br />
+        <pre class="brush: xml;">
+        &lt;add name="NFinalMoudle" type="NFinal.Module" />
+        </pre>
+        在启动IIS时，IIS会调用模块下的Init函数进行模块注册，<br />
+        NFinal.Module类位于NFinal目录中，其部分代码如下<br />
+        <pre class="brush: csharp;">
+        //模块初始化函数
+        public virtual void Init(HttpApplication app)
+        {
+            //注册事件，当发生用户验证时执行函数
+            app.AuthorizeRequest += new EventHandler(this.BaseModuleRewriter_AuthorizeRequest);
+        }
+        //重写URL路径,把所有NFinal相关的URL全重写为.nf后缀的url
+        protected virtual void BaseModuleRewriter_AuthorizeRequest(object sender, EventArgs e)
+        {
+            HttpApplication app = (HttpApplication)sender;
+			// Remove the "Server" HTTP Header from response
+            if (null != app && null != app.Request &&
+                null != app.Context && null != app.Context.Response)
+            {
+                NameValueCollection headers = app.Context.Response.Headers;
+                if (null != headers)
+                {
+                    headers.Remove("Server");
+                }
+            }
+            Rewrite(app.Request.Path, app);
+        }
+        </pre>
+    <p>
+        当HTTP发送http://localhost/App/Index.htm请求时,IIS会按顺序执行所有的模块所注册的事件。<br />
+        当执行到AuthorizeRequest事件时，也就是NFinal.Module中的BaseModuleRewriter_AuthorizeRequest函数<br />
+        首先函数删除了HTTP头 Server:ASP.NET 4.0，删除一是为了安全考虑，二是节省流量。<br />
+        然后调用了Rewrite函数进行Url重写。<br />
+    </p>
+    <pre class="brush: csharp;">
+        protected void Rewrite(string requestedPath, HttpApplication app)
+        {
+			string domainName = app.Context.Request.Url.Host;
+            //执行自定义重写函数
+            if (!RewriteUrl.Rewrite(requestedPath,app.Context))
+            {
+				//重写虚拟目录
+                //重写虚拟路径,也可以把此部分放到find中
+				switch (requestedPath)
+                {
+					//网站图标
+					case "/favicon.ico": return;
+					case "/App/Index.html":requestedPath = "/App/IndexController/Index.html"; break;
+					default: break;
+                }
+                //获取actionUrl
+                string actionUrl = GetActionUrl(requestedPath);
+                int find = FindAction(domainName, actionUrl, requestedPath);
+                if (find > 0)
+                {
+                    //重写url使其能够让NFinal.Handler进行处理
+                    app.Context.RewritePath(string.Format("{0}{1}{2}", requestedPath, find.ToString("00000"), ".nf"));
+                }
+            }
+        }
+    </pre>
+    <p>
+        请求的/App/Index.html会被重写为/App/IndexController/Index.html<br />
+        GetActionUrl用于查找/App/IndexController/Index.html是否属于网站下的Url.如果是，就返回一个代表该路径的数字.<br />
+        (在NFinal框架下所有的控制器下的Action都会有一个URL对应，NFinal会给这个Action一个数字编号，返回的数字指的就是该值。)<br />
+        随后调用.net的RewritePath进行重写，重写后的URL会在结尾加上一个五位数字和.nf后缀。
+    </p>
+    <p>
+        当执行完以上模块后，IIS会查看Web.Config中的配置.重写后的URL正好符合*.nf这个过滤条件<br />
+        <pre class="brush: xml;">
+            &lt;add verb="*" path="*.nf" type="NFinal.Handler"/>
+        </pre>
+    </p>
+    <p>
+        于是IIS会找到NFinal.Handler这个类,<br />
+        并调用其中的GetHandler返回Handler对象,然后再调用Handler对象的BeginProcess方法.<br />
+    </p>
+    <pre class="brush: csharp;">
+    public class Handler : IHttpAsyncHandler
+    {
+        public IAsyncResult BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+        {
+			//初始化配置
+			NFinal.ConfigurationManager.Load(context.Server.MapPath("/"));
+            AsynchOperation asynch = new AsynchOperation(cb, context, extraData);
+            asynch.StartAsyncWork();
+            return asynch;
+        }
+    }
+    </pre>
+    <p>
+        其中AsynchOperation是异步执行类，其中的StartAsyncWork代码如下：<br />
+    </p>
+    <pre class="brush: csharp;">
+    private void StartAsyncTask(Object workItemState)
+    {
+		try
+        {
+            WebMvc.Router.Run(_context, _context.Request.Path);
+        }
+        catch (Exception e)
+        {
+            _context.Response.Write("错误消息：&lt;br />");
+            _context.Response.Write(e.Message);
+            _context.Response.Write("&lt;br />");
+            _context.Response.Write("请求时发生错误：&lt;br>");
+            _context.Response.Write(_context.Request.FilePath);
+            _context.Response.Write("&lt;br />");
+            if (_context.Request.Cookies.Count > 0)
+            {
+                _context.Response.Write("请求时的Cookie:&lt;br>");
+                for (int i = 0; i < _context.Request.Cookies.Count; i++)
+                {
+                    _context.Response.Write(_context.Request.Cookies[i].Name);
+                    _context.Response.Write(":");
+                    _context.Response.Write(_context.Request.Cookies[i].Values);
+                    _context.Response.Write("&lt;br />");
+                }
+            }
+            _context.Response.Write("错误跟踪：&lt;/br>");
+            string[] stackTraces = e.StackTrace.Split('\n');
+            for (int i = 0; i < stackTraces.Length; i++)
+            {
+                _context.Response.Write(stackTraces[i]);
+                _context.Response.Write("&lt;/br>");
+            }
+            _context.Response.End();
+        }
+        _completed = true;
+        _callback(this);
+    }
+    </pre>
+    <p>
+        其代码中只有一句WebMvc.Router.Run(_context, _context.Request.Path);用于执行路由。
+        而catch内部的代码用于在页面输出详细的错误信息，这样调试时会方便一些。
+        路由用于根据不同的URL执行不同控制器下的函数。其代码如下：
+    </p>
+    <pre class="brush: csharp;">
+    public static void Run(HttpContext context, string requestedPath)
+    {
+        //取出action标识
+        int find = 0;
+        string f = requestedPath.Substring(requestedPath.Length - 8, 5);
+        int.TryParse(requestedPath.Substring(requestedPath.Length - 8, 5), out find);
+        //去掉00000.htm后缀,还原requestPath
+        requestedPath = requestedPath.Substring(0, requestedPath.Length - 8);
+        string[] hostName = context.Request.Url.Host.ToString().Split('.');
+        string subdomain = hostName.Length == 3 ? hostName[0] : "www";
+        string[] parameters = null;
+        NameValueCollection get = new NameValueCollection();
+		//提取form参数
+        if (context.Request.Form.Count > 0)
+        {
+            for (int i = 0; i < context.Request.Form.Count; i++)
+            {
+                get.Add(context.Request.Form.Keys[i], context.Request.Form[i]);
+            }
+        }
+		//提取URL?后的参数
+		if (context.Request.QueryString.Count > 0)
+        {
+            for (int i = 0; i < context.Request.QueryString.Count; i++)
+            {
+                get.Add(context.Request.QueryString.Keys[i], context.Request.QueryString[i]);
+            }
+        }
+		//提取MethodType
+		NFinal.MethodType methodType = NFinal.MethodType.NONE;
+        switch (context.Request.HttpMethod)
+        {
+            case "POST":methodType = NFinal.MethodType.POST; break;
+            case "GET":methodType = NFinal.MethodType.GET; break;
+            case "DELETE":methodType = NFinal.MethodType.DELETE; break;
+            case "PUT":methodType = NFinal.MethodType.PUT; break;
+            case "AJAX":methodType = NFinal.MethodType.AJAX; break;
+            default:methodType = NFinal.MethodType.NONE; break;
+        }
+        //获取actionUrl,用于获取参数
+        string actionUrl = GetActionUrl(requestedPath);
+        switch (find)
+        {
+				case 1:
+				{
+					context.Response.ContentType = "text/html";
+					Regex regParameters = new Regex("/App/IndexController/Index.html");
+                    Match matParameters = regParameters.Match(requestedPath);
+        			App.Web.Default.IndexController.IndexAction control= new App.Web.Default.IndexController.IndexAction(context);
+					control._methodType = methodType;
+					control._context = context;
+					control._subdomain = subdomain;
+					control._url=requestedPath;
+					control._get = get;
+					control._app="/App";
+					control.Before();
+					control.Index();
+					control.After();
+					control.Close();
+					context.Response.End();
+				}break;
+            default: break;
+        }
+    }
+    </pre>
+    <p>
+        解析URL时，先支掉.nf后缀，再提取出后5位数字，然后根据数字去执行Web层下不同的html生成类。
+        而生成类IndexAction的代码如下：
+    </p>
+    <pre class="brush: csharp;">
+    public class IndexAction  : Controller
+	{
+		public IndexAction(System.IO.TextWriter tw):base(tw){}
+		public IndexAction(string fileName) : base(fileName) {}
+		public IndexAction(HttpContext context):base(context){}
+        public void Index()
+        {
+            
+			Write("&lt;!doctype html>&lt;html>&lt;head>&lt;title>nfinal框架&lt;/title>&lt;script src=\"/App/Content/js/jquery-1.11.2.min.js\">&lt;/script>&lt;link href=\"/App/Content/css/frame.css\" type=\"text/css\" rel=\"stylesheet\" />&lt;style type=\"text/css\">.auto-style1 {width: 140px;}.auto-style2 {width: 197px;}&lt;/style>&lt;/head>&lt;body>");
+			Write("&lt;header class=\"header\"> NFinal框架:这是头,来自模版 &lt;/header>&lt;article> Hello,NFinal! &lt;/article>");
+			Write("&lt;footer> NFinal框架.这是尾 &lt;/footer>&lt;/body>&lt;/html>");
+        }
+    }
+    </pre>
+</body>
+</html>

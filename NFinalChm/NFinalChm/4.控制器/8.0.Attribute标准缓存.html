@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>8.0.Attribute标准缓存</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<style>
+table
+{
+	border-top:1px solid black;
+	border-left:1px solid black;
+}
+td
+{
+	border-right:1px solid black;
+	border-bottom:1px solid black;
+}
+</style>
+<body>
+    <h3>Attribute缓存</h3>
+    <p>
+        使用缓存时，请先引入NFinal.Advanced命名空间<br/>
+		缓存函数为：<br/>
+		<table cellspacing="0">
+			<tr>
+				<td>缓存特性</td>
+				<td>说明</td>
+			</tr>
+			<tr>
+				<td>[Cache(Server server,Browser browser,int second)]</td>
+				<td>使用缓存，<br/>
+				参数1为服务器缓存设置，<br/>
+				(NoCache,FileDependency,AbsoluteExpiration,SlidingExpiration)<br/>
+				参数2为浏览器缓存设置，<br/>
+				(NoStore,NotModify,Expires,NoExpires)<br/>
+				参数3为缓存的时间</td>
+			</tr>
+			<tr>
+				<td>[Cache(Standard standard,int second)]</td>
+				<td>使用标准缓存，<br/>
+				参数1为一般缓存设置<br/>
+				(其中有File和Nomal两种，一种是文件缓存，一种是内存缓存)，<br/>
+				参数2为缓存的时间</td>
+			</tr>
+			<tr>
+				<td>[CacheFile(int second)]</td>
+				<td>使用文件缓存，参数为缓存的时间</td>
+			</tr>
+			<tr>
+				<td>[CacheNormal(int second)]</td>
+				<td>使用内存缓存，参数为缓存的时间</td>
+			</tr>
+		</table>
+    </p>
+	<b>文件缓存</b>
+    <pre class="brush: csharp;">
+        //urlPrefix="/App";
+        namespace WebSite.App.Controllers
+        {
+            public class NewsController
+            {
+				[CacheFile(6000)]
+                public void Index()
+                {
+                    Write("Hello!");
+                }
+            }
+        }
+        //缓存100分钟，缓存文件将会存储于模块文件夹下的HTML中。
+		//当该文件改变时缓存将会失效。
+    </pre>
+	<b>内存缓存</b>
+    <pre class="brush: csharp;">
+        //urlPrefix="/App";
+        namespace WebSite.App.Controllers
+        {
+            public class NewsController
+            {
+				[CacheNormal(6000)]
+                public void Index()
+                {
+                    Write("Hello!");
+                }
+            }
+        }
+        //缓存100分钟，缓存文件将会存储于内存中。
+		//当重启IIS时缓存将会失效。
+    </pre>
+</body>
+</html>

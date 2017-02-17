@@ -1,0 +1,55 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+<#var nullableType=new string[]{"String"};#>
+<#var structType=new string[]{"SByte","Byte","Int16","UInt16","Int32","UInt32","Int64","UInt64","Boolean","Char","Decimal","Double","Single","DateTime","DateTimeOffset"};#>
+namespace System
+{
+	/// <summary>
+    /// string转其它基本类型的扩展类
+    /// </summary>
+    public static class TryParseExtension
+    {
+<# for(int i=0;i<nullableType.Length;i++){#>
+<#if(nullableType[i]!="String"){#>
+		/// <summary>
+        /// 转换为<#=nullableType[i]#>类型
+        /// </summary>
+        /// <param name="obj">字符串</param>
+        /// <returns><#=nullableType[i]#>类型</returns>
+		public static bool TryParse(this <#=structType[i]#> obj,string str,out string value)
+        {
+            value=str;
+            return true;
+        }
+<#}#>
+<#}#>
+<# for(int i=0;i<structType.Length;i++){#>
+		/// <summary>
+        /// 转换为<#=structType[i]#>类型
+        /// </summary>
+        /// <param name="obj">字符串</param>
+        /// <returns><#=structType[i]#>类型</returns>
+		public static bool TryParse(this <#=structType[i]#> obj,string str,out <#=structType[i]#>? value)
+        {
+			bool result;
+			if(string.IsNullOrEmpty(str))
+			{
+				value=null;
+				result=false;
+			}
+			else
+			{
+				<#=structType[i]#> temp;
+				result=<#=structType[i]#>.TryParse(str,out temp);
+				value=temp;
+			}
+            return result;
+        }
+<#}#>
+    }
+}

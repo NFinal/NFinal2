@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>NFinal在线.net编辑器</title>
+    <script src="/NFinal/Resource/fileTree/jquery.js" type="text/javascript"></script>
+    <script src="/NFinal/Resource/fileTree/jquery.easing.js" type="text/javascript"></script>
+    <script src="/NFinal/Resource/fileTree/jqueryFileTree.js" type="text/javascript"></script>
+    <link href="/NFinal/Resource/fileTree/jqueryFileTree.css" rel="stylesheet" type="text/css" media="screen" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            width: 100%;
+        }
+
+        footer {
+            width: 100%;
+        }
+
+        #main {
+            width: 100%;
+        }
+
+        #fileList {
+            width: 300px;
+            float: left;
+            height:902px;
+            border:1px solid #808080;
+            overflow:scroll;
+        }
+        #winCommand {
+            border:1px solid #808080;
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            height:300px;
+            overflow:scroll;
+            background-color:white;
+        }
+        article {
+            margin: 0 0 0 302px;
+            border:1px solid #808080;
+        }
+        #codeEditor {
+            height:860px;
+            overflow:scroll;
+            border:0;
+            width:100%;
+        }
+        menu {
+            border:1px solid #808080;
+            height:40px;
+        }
+    </style>
+</head>
+<body>
+    <header></header>
+    <div id="main">
+        <div id="fileList"></div>
+        <script>
+            String.prototype.startWith = function (str) {
+                var reg = new RegExp("^" + str);
+                return reg.test(this);
+            }
+
+            String.prototype.endWith = function (str) {
+                var reg = new RegExp(str + "$");
+                return reg.test(this);
+            }
+            var fileName = "";
+            $(document).ready(function () {
+                $('#fileList').fileTree({ root: '/', script: '/NFinal/Resource/fileTree/connectors/jqueryFileTree.ashx' }, function (file) {
+                    fileName = file;
+                    //可浏览文件
+                    if (file.endWith(".html") || file.endWith(".htm") || file.endWith(".asp") || file.endWith(".aspx") || file.endWith(".txt")
+                        || file.endWith(".xml") || file.endWith(".js") || file.endWith(".css"))
+                    {
+                        $("#explorer").attr("href", fileName);
+                    }
+                    $.post('/NFinal/Resource/fileTree/connectors/editor.ashx', { "method": "load", "file": file }, function (data) {
+                        if (data) {
+                            $("#codeEditor").val(data);
+                        }
+                    });
+                });
+            });
+        </script>
+        <article>
+            <menu id="menu">
+            <select id="version"></select>
+            <input id="build" type="button" value="编译" />
+            <input id="popWinCommand" type="button" onclick="$('#winCommand').toggle();" value="输出窗口" />
+            <input id="save" type="button" value="保存" />
+            <a id="explorer" href="/" target="_blank">打开HTML</a>
+            </menu>
+            <script>
+                $(document).ready(function () {
+                    $.post('/NFinal/Resource/fileTree/connectors/editor.ashx', { "method": "apps" }, function (data) {
+                        if (data != "")
+                        {
+                            var apps = data.split(',');
+                            for (var i = 0; i < apps.length; i++) {
+                                $("#menu").append("<a href=\"/"+apps[i]+"/WebCompiler.aspx\" target=\"_blank\">生成"+apps[i]+"</a>");
+                            }
+                        }
+                    });
+                    $.post('/NFinal/Resource/fileTree/connectors/editor.ashx', { "method": "version" }, function (data) {
+                        if (data != "")
+                        {
+                            var versions = data.split(',');
+                            for (var i = 0; i < versions.length; i++) {
+                                $("#version").append("<option value=\"" + versions[i] + "\">"+versions[i]+"</option>");
+                            }
+                        }
+                    })
+                    $("#winCommand").text(">>");
+                    $("#build").click(function () {
+                        $.post('/NFinal/Resource/fileTree/connectors/editor.ashx', { "method": "build", "version": $("#version").val() }, function (data) {
+                            $("#winCommand").text(Date() + "\r\n" + data);
+                            $("#winCommand").show();
+                        });
+                    });
+                    $("#save").click(function () {
+                        $.post('/NFinal/Resource/fileTree/connectors/editor.ashx', { "method": "save", "file": fileName, "content":encodeURI($("#codeEditor").val()) }, function (data) {
+                            if (data)
+                            {
+                                alert("保存成功");
+                            }
+                        })
+                    });
+                });
+            </script>
+            
+            <div style="position:relative;">
+                <textarea id="codeEditor" wrap="hard">
+                </textarea>
+                <pre id="winCommand" style="display:none;"></pre>
+            </div>
+        </article>
+    </div>
+    <footer></footer>
+</body>
+
+</html>

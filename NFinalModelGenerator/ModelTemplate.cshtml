@@ -1,0 +1,22 @@
+﻿@inherits NFinal.Razor.BasePage<Data.TableData>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace @SqlDocument.nameSpace
+{
+    /// <summary>
+    /// @Model.Name
+    ///</summary>
+    public class @Model.Name
+    {
+    @foreach (var column in Model.ColumnDataList)
+    {
+        @:/// <summary>
+        @:/// @column.Name
+        @:///</summary>
+        @:public @column.TypeString @column.Name { get; set; }
+    }
+    }
+}

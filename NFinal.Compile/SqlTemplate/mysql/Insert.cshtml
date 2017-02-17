@@ -1,0 +1,35 @@
+﻿@* Generator: Template
+    GeneratePrettyNames : true *@
+@functions{
+    public NFinal.Compile.SqlTemplate.Model.Insert Model { get; set; }
+}
+#region	var @{@Model.varName}; 插入并返回ID
+			var __@{@Model.functionName}_@{@Model.varName}_command__ = new MySql.Data.MySqlClient.MySqlCommand("@{@Model.sql};select @@@@IDENTITY;", @{@Model.connectionVarName});
+			@if(Model.isTransaction){
+			@:__@{@Model.functionName}_@{@Model.varName}_command__.Transaction=@{@Model.transactionVarName};
+			}
+			@if(Model.sqlVarParameters.Count>0){
+			@:var __@{@Model.functionName}_@{@Model.varName}_parameters__=new MySql.Data.MySqlClient.MySqlParameter[@{@Model.sqlVarParameters.Count}];
+			}
+			@{int i=0;}
+			@foreach(var sqlVarParameter in Model.sqlVarParameters){
+			if(sqlVarParameter.field.length>0){
+			@:__@{@Model.functionName}_@{@Model.varName}_parameters__[@i] = new MySql.Data.MySqlClient.MySqlParameter("?@{@sqlVarParameter.name}",MySql.Data.MySqlClient.MySqlDbType.@{@sqlVarParameter.field.dbType},@{@sqlVarParameter.field.length});
+			@:__@{@Model.functionName}_@{@Model.varName}_parameters__[@i].Value = @{@sqlVarParameter.csharpName}.WithDBNull();
+			}else{
+			@:__@{@Model.functionName}_@{@Model.varName}_parameters__[@i] = new MySql.Data.MySqlClient.MySqlParameter("?@{@sqlVarParameter.name}",MySql.Data.MySqlClient.MySqlDbType.@{@sqlVarParameter.field.dbType});
+			@:__@{@Model.functionName}_@{@Model.varName}_parameters__[@i].Value = @{@sqlVarParameter.csharpName}.WithDBNull();
+			}
+			i++;
+			}
+			@if(Model.sqlVarParameters.Count>0){
+			@:__@{@Model.functionName}_@{@Model.varName}_command__.Parameters.AddRange(__@{@Model.functionName}_@{@Model.varName}_parameters__);
+			}
+			@if(Model.isDeclaration){
+				@:var @{@Model.varName} = __@{@Model.functionName}_@{@Model.varName}_command__.ExecuteScalar().AsVar();
+			}else{
+				@:@{@Model.varName} = __@{@Model.functionName}_@{@Model.varName}_command__.ExecuteScalar().AsVar();
+			}
+			__@{@Model.functionName}_@{@Model.varName}_command__.Dispose();
+			#endregion
+			

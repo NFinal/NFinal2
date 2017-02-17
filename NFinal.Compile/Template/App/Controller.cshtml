@@ -1,0 +1,123 @@
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename :Controller.cs
+//        Description :控制器
+//
+//        created by Lucas at  2015-6-30`
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
+using System.Collections.Generic;
+using System.Web;
+using System.IO;
+
+namespace @{@Model.project}.@{@Model.app}
+{
+    //Controller基类
+#if (!AspNET && !MicrosoftOwin && !NFinalOwin)
+    public class Controller : NFinal.BaseAction
+    {
+#endif
+#if AspNET
+    public class Controller : NFinal.AspNETBaseAction
+    {
+#endif
+#if MicrosoftOwin
+    public class Controller : NFinal.MicrosoftOwinBaseAction
+    {
+#endif
+#if NFinalOwin
+    public class Controller : NFinal.NFinalOwinBaseAction
+    {
+#endif
+        public Code.Data.CookieManager Cookie = null;
+        public Code.Data.SessionManager Session = null;
+        public Controller() { }
+        public Controller(string fileName)
+            : base(fileName)
+        {
+        }
+        public Controller(TextWriter tw)
+            : base(tw)
+        {
+            Cookie = new Code.Data.CookieManager();
+            Session = new Code.Data.SessionManager();
+        }
+#if (!AspNET && !MicrosoftOwin && !NFinalOwin)
+        public Controller(HttpContext context)
+        {
+            this._serverType = NFinal.ServerType.AspNET;
+            this._tw = context.Response.Output;
+            this._context = context;
+            Cookie = new Code.Data.CookieManager(this);
+            Session = new Code.Data.SessionManager(Cookie.SessionId, new NFinal.RedisCache("localhost", 20));
+        }
+        public Controller(Microsoft.Owin.IOwinContext context)
+        {
+            this._serverType = NFinal.ServerType.MicrosoftOwin;
+            StreamWriter sw = new StreamWriter(context.Response.Body);
+            this._tw = sw;
+            this._webContext = context;
+            Cookie = new Code.Data.CookieManager(this);
+            Session = new Code.Data.SessionManager(Cookie.SessionId, new NFinal.RedisCache("localhost", 20));
+        }
+        public Controller(NFinal.Owin.HtmlWriter writer, NFinal.Owin.Request request)
+        {
+            this.htmlWriter = writer;
+            this.request = request;
+            this._serverType = NFinal.ServerType.NFinalOwin;
+            Cookie = new Code.Data.CookieManager(this);
+            Session = new Code.Data.SessionManager(Cookie.SessionId, new NFinal.RedisCache("localhost", 20));
+        }
+#endif
+#if AspNET
+        public Controller(HttpContext context)
+        {
+            this._serverType = NFinal.ServerType.AspNET;
+            this._tw = context.Response.Output;
+            this._context = context;
+            Cookie = new Code.Data.CookieManager(this);
+            Session = new Code.Data.SessionManager(Cookie.SessionId, new NFinal.RedisCache("localhost", 20));
+        }
+#endif
+#if MicrosoftOwin
+        public Controller(Microsoft.Owin.IOwinContext context)
+        {
+            this._serverType = NFinal.ServerType.MicrosoftOwin;
+            StreamWriter sw = new StreamWriter(context.Response.Body);
+            this._tw = sw;
+            this._webContext = context;
+            Cookie = new Code.Data.CookieManager(this);
+            Session = new Code.Data.SessionManager(Cookie.SessionId, new NFinal.RedisCache("localhost", 20));
+        }
+#endif
+        public Controller(Controller controller) : base(controller)
+        { }
+#if NFinalOwin
+        public Controller(NFinal.Owin.HtmlWriter writer, NFinal.Owin.Request request)
+        {
+			this.htmlWriter = writer;
+            this.request = request;
+			this._serverType = NFinal.ServerType.NFinalOwin;
+            Cookie = new Code.Data.CookieManager(this);
+            Session = new Code.Data.SessionManager(Cookie.SessionId, new NFinal.RedisCache("localhost", 20));
+        }
+#endif
+        public void Error(string msg, string url, int second)
+        {
+            Web.Default.Common.Public.ErrorAction errorAction = new Web.Default.Common.Public.ErrorAction(_tw);
+            errorAction.Error(msg, url, second);
+        }
+        public void Success(string msg, string url, int second)
+        {
+            Web.Default.Common.Public.SuccessAction successAction = new Web.Default.Common.Public.SuccessAction(_tw);
+            successAction.Success(msg, url, second);
+        }
+    }
+}

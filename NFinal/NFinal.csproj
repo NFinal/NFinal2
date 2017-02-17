@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{26B51552-007D-42EA-9EB8-5B57308427E1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NFinal</RootNamespace>
+    <AssemblyName>NFinal</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>
+    </DocumentationFile>
+    <CodeAnalysisRuleSet />
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet />
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Hprose, Version=4.0.30319.1, Culture=neutral, PublicKeyToken=eb8819713de2ccff, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hprose.1.5.6\lib\net40\Hprose.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net40\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Hosting, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Hosting.2.1.0\lib\net40\Microsoft.Owin.Hosting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.1.603\lib\net40\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Action\Actuator.cs" />
+    <Compile Include="Core\Action\AbtractAction.cs" />
+    <Compile Include="Core\Action\CompressMode.cs" />
+    <Compile Include="Core\Action\ContextAction.cs" />
+    <Compile Include="Core\Action\MasterPageModel.cs" />
+    <Compile Include="Core\Action\System\ViewBagAttribute.cs" />
+    <Compile Include="Core\Action\System\ViewBagMemberAttribute.cs" />
+    <Compile Include="Core\Action\UrlHelper.cs" />
+    <Compile Include="Core\Action\ViewData.cs" />
+    <Compile Include="Core\Cache\System\Browser.cs" />
+    <Compile Include="Core\Cache\System\CacheAttribute.cs" />
+    <Compile Include="Core\Cache\System\Server.cs" />
+    <Compile Include="Core\Cache\System\Standard.cs" />
+    <Compile Include="Core\Collections\FastDictionary\CodeNode.cs" />
+    <Compile Include="Core\Collections\FastDictionary\CodeNodeType.cs" />
+    <Compile Include="Core\Collections\FastDictionary\ColumnCompareData.cs" />
+    <Compile Include="Core\Collections\FastDictionary\FastDictionary.cs" />
+    <Compile Include="Core\Collections\FastDictionary\FastDictionaryUtility.cs" />
+    <Compile Include="Core\Collections\FastDictionary\ILWriter.cs" />
+    <Compile Include="Core\Collections\FastDictionary\KeyLongArrayCompare.cs" />
+    <Compile Include="Core\Collections\FastDictionary\LongCompare.cs" />
+    <Compile Include="Core\Collections\FastDictionary\SharpWriter.cs" />
+    <Compile Include="Core\Collections\NameValueDynamicCollection.cs" />
+    <Compile Include="Core\Exceptions\ModelNotFoundException.cs" />
+    <Compile Include="Core\Exceptions\ViewModelTypeUnMatched.cs" />
+    <Compile Include="Core\Filter\FilterHelper.cs" />
+    <Compile Include="Core\Filter\IBaseFilter.cs" />
+    <Compile Include="Core\Filter\IContextFilter.cs" />
+    <Compile Include="Core\IO\StringWriter.cs" />
+    <Compile Include="Core\Json\JsonHelper.cs" />
+    <Compile Include="Core\Middleware\ActionUrlHelper.cs" />
+    <Compile Include="Core\Middleware\ContextMiddleware.cs" />
+    <Compile Include="Core\Middleware\Middleware.cs" />
+    <Compile Include="Core\Middleware\StringBuilderCache.cs" />
+    <Compile Include="Core\Middleware\UrlSegment.cs" />
+    <Compile Include="Core\Model\ModelHelper.cs" />
+    <Compile Include="Core\Filter\FilterEvent.cs" />
+    <Compile Include="Core\Filter\IEnvironmentFilter.cs" />
+    <Compile Include="Core\Action\System\ActionAttribute.cs" />
+    <Compile Include="Core\Action\System\ControllerAttribute.cs" />
+    <Compile Include="Core\Filter\System\FilterAttribute.cs" />
+    <Compile Include="Core\Config\Common\CommonConfig.cs" />
+    <Compile Include="Core\Config\ConfigAttribute.cs" />
+    <Compile Include="Core\Config\Configration.cs" />
+    <Compile Include="Core\Config\ConnectionString.cs" />
+    <Compile Include="Core\Filter\IRequestFilter.cs" />
+    <Compile Include="Core\Filter\IResponseFilter.cs" />
+    <Compile Include="Core\Icon\Favicon.cs" />
+    <Compile Include="Core\Exceptions\ViewNotFoundException.cs" />
+    <Compile Include="Core\IO\StreamWriter.cs" />
+    <Compile Include="Core\IO\System\WriterExtension.cs" />
+    <Compile Include="Core\Json\System\List.cs" />
+    <Compile Include="Core\Logs\ConsoleLogger.cs" />
+    <Compile Include="Core\Logs\ILogger.cs" />
+    <Compile Include="Core\Logs\RequestLogs.cs" />
+    <Compile Include="Core\Middleware\ActionHelper.cs" />
+    <Compile Include="Core\Middleware\ActionKey.cs" />
+    <Compile Include="Core\Middleware\OwinMiddleware.cs" />
+    <Compile Include="Core\Middleware\MiddlewareConfigOptions.cs" />
+    <Compile Include="Core\Model\System\IModelExtension.cs" />
+    <Compile Include="Core\Owin\OwinModel.cs" />
+    <Compile Include="Core\Plugs\IPlug.cs" />
+    <Compile Include="Core\Razor\BasePage.cs" />
+    <Compile Include="Core\Serialize\HproseSerialize.cs" />
+    <Compile Include="Core\System\System\DynamicDictionary.cs" />
+    <Compile Include="Core\System\System\ObjectContainer.cs">
+      <DependentUpon>ObjectContainer.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\System\System\Run.cs" />
+    <Compile Include="Core\System\System\StringContainer.cs">
+      <DependentUpon>StringContainer.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Core\System\System\StringExtension.cs" />
+    <Compile Include="Core\Url\UrlHelper.cs" />
+    <Compile Include="Core\View\System\ViewAttribute.cs" />
+    <Compile Include="Core\Owin\System\EnvironmentExtension.cs" />
+    <Compile Include="Core\Action\MethodType.cs" />
+    <Compile Include="Core\Owin\HtmlWriter.cs" />
+    <Compile Include="Core\Owin\OwinKeys.cs" />
+    <Compile Include="Core\Collections\System\NameVarCollection.cs" />
+    <Compile Include="Core\Cache\CacheType.cs" />
+    <Compile Include="Core\Action\ContentType.cs" />
+    <Compile Include="Core\Emit\CopyHelper.cs" />
+    <Compile Include="Core\Emit\StructHelper.cs" />
+    <Compile Include="Core\Extension\System.Data.Common\DbCommandExtension.cs" />
+    <Compile Include="Core\Extension\System.Data.Common\DbParameterExtension.cs" />
+    <Compile Include="Core\Model\IModel.cs" />
+    <Compile Include="Core\System\System\INullable.cs" />
+    <Compile Include="Core\Json\IJson.cs" />
+    <Compile Include="Core\Collections\NameVarCollection.cs" />
+    <Compile Include="Core\Extension\System\Int32Extension.cs" />
+    <Compile Include="Core\Cache\Cache.cs" />
+    <Compile Include="Core\Cache\ICache.cs" />
+    <Compile Include="Core\Cache\MemoryCache.cs" />
+    <Compile Include="Core\Cache\RedisCache.cs" />
+    <Compile Include="Core\Owin\OwinCookie.cs" />
+    <Compile Include="Core\Action\IAction.cs" />
+    <Compile Include="Core\Action\OwinAction.cs" />
+    <Compile Include="Core\Extension\System\ConvertExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConvertExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Extension\JsonConvert.cs" />
+    <Compile Include="Core\Extension\System\ObjectContainerExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObjectContainerExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Extension\System\StreamAndByteExtension.cs" />
+    <Compile Include="Core\Extension\System\TryParseExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TryParseExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Extension\System\UniqueKeyDictionayExtension.cs" />
+    <Compile Include="Core\Extension\System\WithDBNullExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WithDBNullExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Extension\System\StringContainerExtension.cs" />
+    <Compile Include="Core\Json\IJsonSerialize.cs" />
+    <Compile Include="Core\Json\JilJsonSerialize.cs" />
+    <Compile Include="Core\Json\NewtonsoftJsonSerialize.cs" />
+    <Compile Include="Core\MVC\Config.cs" />
+    <Compile Include="Core\Owin\Builder\AppBuilder.cs" />
+    <Compile Include="Core\Owin\Response.cs" />
+    <Compile Include="Core\Action\ServerType.cs" />
+    <Compile Include="Core\Validation\Pattern.cs" />
+    <Compile Include="Core\Validation\ValidObject.cs" />
+    <Compile Include="Core\Owin\ICookie.cs" />
+    <Compile Include="Core\Session\ISession.cs" />
+    <Compile Include="Core\Serialize\ISerializable.cs" />
+    <Compile Include="Core\Serialize\ProtobufSerialize.cs" />
+    <Compile Include="Core\Serialize\BinarySerialize.cs" />
+    <Compile Include="Core\Session\Session.cs" />
+    <Compile Include="Core\Validation\ValidObjectExtension.cs" />
+    <Compile Include="Core\Validation\ValidResult.cs" />
+    <Compile Include="Core\Validation\ValidStatus.cs" />
+    <Compile Include="Core\View\ViewHelper.cs" />
+    <Compile Include="Core\IO\IWriter.cs" />
+    <Compile Include="Core\IO\FileWriter.cs" />
+    <Compile Include="Lib\VerifyCode.cs" />
+    <Compile Include="Core\Owin\Builder\Completed.cs" />
+    <Compile Include="Core\Owin\Builder\Constants.cs" />
+    <Compile Include="Core\Owin\HttpMultipart\HttpFile.cs" />
+    <Compile Include="Core\Owin\HttpMultipart\HttpMultipart.cs" />
+    <Compile Include="Core\Owin\HttpMultipart\HttpMultipartBoundary.cs" />
+    <Compile Include="Core\Owin\HttpMultipart\HttpMultipartBuffer.cs" />
+    <Compile Include="Core\Owin\HttpMultipart\HttpMultipartSubStream.cs" />
+    <Compile Include="Core\Collections\NameValueCollection.cs" />
+    <Compile Include="Core\Owin\Builder\NotFound.cs" />
+    <Compile Include="Core\Utility.cs" />
+    <Compile Include="Lib\Oauth\feixin_helper.cs" />
+    <Compile Include="Lib\Oauth\JsonHelper.cs" />
+    <Compile Include="Lib\Oauth\kaixin_helper.cs" />
+    <Compile Include="Lib\Oauth\oauth_config.cs" />
+    <Compile Include="Lib\Oauth\oauth_helper.cs" />
+    <Compile Include="Lib\Oauth\qq_helper.cs" />
+    <Compile Include="Lib\Oauth\renren_helper.cs" />
+    <Compile Include="Lib\Oauth\SessionCollection.cs" />
+    <Compile Include="Lib\Oauth\sina_helper.cs" />
+    <Compile Include="Lib\Oauth\taobao_helper.cs" />
+    <Compile Include="Lib\Oauth\user_oauth_app.cs" />
+    <Compile Include="Lib\Oauth\Utils.cs" />
+    <Compile Include="Core\Action\System\UrlAttribute.cs" />
+    <Compile Include="Core\Owin\Request.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Action.cd" />
+    <Compile Include="Core\Constant.cs" />
+    <None Include="key.snk" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="update.log" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="Core\Collections\DynamicDictionary\" />
+    <Folder Include="Lib\Sms\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Core\Extension\System\ConvertExtension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConvertExtension.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Extension\System\ObjectContainerExtension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ObjectContainerExtension.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Extension\System\TryParseExtension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TryParseExtension.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Extension\System\WithDBNullExtension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WithDBNullExtension.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\System\System\ObjectContainer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ObjectContainer.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\System\System\StringContainer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>StringContainer.cs</LastGenOutput>
+    </Content>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

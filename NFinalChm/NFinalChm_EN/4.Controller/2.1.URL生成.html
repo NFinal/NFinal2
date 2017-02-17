@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>2.1.URL生成</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>Url生成</h3>
+	<p>
+		Url采用函数生成（URL规则一旦改变，代码可保持不变）
+	</p>
+    <b>后端生成</b><br/>
+    <pre class="brush: csharp;">
+		public void Index()
+		{
+			//生成URL
+			string url=Url.App_IndexController_Index();
+		}
+        //对应的Url类位于根目录下的Url.cs文件中，
+		//此文件由生成器自动生成。
+		//模块名：App
+		//类名为:IndexController
+		//方法名:Index
+    </pre>
+    <b>前端生成</b>
+    <pre class="brush: javascript;">
+        //需要引入网站根目录下的Url.js文件
+        var url=Url.App_IndexController_Index();
+		//对应的Url类位于根目录下的Url.js文件中，
+		//此文件由生成器自动生成。
+		//模块名：App
+		//类名为:IndexController
+		//方法名:Index
+    </pre>
+	<p>
+		如果Url中有参数，则Url对应的生成函数也会有相应的参数。<br/>
+		例：<br/>
+		string url=Url.App_IndexController_News(int page);<br/>
+	</p>
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace @{@Model.project}.@{@Model.app}.Web.Default.Common.VCode
+{
+    public class GetVerifyImageAction  : Controller
+	{
+		public GetVerifyImageAction(System.IO.TextWriter tw):base(tw){}
+		public GetVerifyImageAction(string fileName) : base(fileName) {}
+		public GetVerifyImageAction(HttpContext context):base(context){}
+		public GetVerifyImageAction(Microsoft.Owin.IOwinContext context):base(context){}
+		public GetVerifyImageAction(Controller controller):base(controller){}
+		//将图片输出到页面上   
+		public void GetVerifyImage()
+        {
+            //将图片输出到页面上   
+            NFinal.Lib.VerifyCode verifyCode = new NFinal.Lib.VerifyCode();
+            Cookie.vcheck = verifyCode.vcheck;
+            ContentType = "image/gif";
+            Write(verifyCode.GetGif());
+        }
+    }
+}

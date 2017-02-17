@@ -1,0 +1,23 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <pre>
+    1.有时候会遇到这样一种情况。
+    一个简单的操作需要大量的计算才能返回结果。
+    所耗费的时间很长。
+    这个时候怎么办呢？
+    可以采用异步队列处理。
+    当有新的请求时，把该请求先存入数据库的task表中。
+    运行完某一操作后，直接修改task表中的状态值。
+    然后再运行下一个。
+    那么我们就可以单独做一个服务器，用于处理这样的请求。
+    前端就显示，正在处理中，请等待，当处理完毕后返回结果。
+    </pre>
+</body>
+</html>

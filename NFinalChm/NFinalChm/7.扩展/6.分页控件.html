@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>6.分页控件</title>
+</head>
+<body>
+    <h3>分页控件</h3>
+    <p>
+        <b style="color:red;">必须确保在控制器中使用了Page函数,且仅使用了一次.</b>
+    </p>
+    <pre>
+===============================================================================
+使用方法:
+1.用鼠标拖Views/Default/Common/Public/Navigator.ascx控件到aspx窗体中.对其进行数据绑定
+&lt;uc1:Navigator runat="server" db="<%ViewBag.page%>" />
+2.在使用分页控件所对应的Controller中要声明Page对象，如：
+        <pre class="brush: csharp;">
+            NFinal.Page page = new NFinal.Page(p, 2);
+        </pre>        
+    </pre>
+</body>
+</html>

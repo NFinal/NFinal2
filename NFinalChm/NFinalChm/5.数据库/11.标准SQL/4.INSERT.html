@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>INSERT INTO 语句</title>
+</head>
+<body>
+    <h3>INSERT INTO 语句用于向表格中插入新的行。</h3>
+    <pre>
+    语法
+    INSERT INTO 表名称 VALUES (值1, 值2,....)
+    我们也可以指定所要插入数据的列：
+    INSERT INTO table_name (列1, 列2,...) VALUES (值1, 值2,....)
+    插入新的行
+    "Persons" 表：
+    LastName	FirstName	Address	City
+    Carter	Thomas	Changan Street	Beijing
+    SQL 语句：
+    INSERT INTO Persons VALUES ('Gates', 'Bill', 'Xuanwumen 10', 'Beijing')
+    结果：
+    LastName	FirstName	Address	City
+    Carter	Thomas	Changan Street	Beijing
+    Gates	Bill	Xuanwumen 10	Beijing
+    在指定的列中插入数据
+    "Persons" 表：
+    LastName	FirstName	Address	City
+    Carter	Thomas	Changan Street	Beijing
+    Gates	Bill	Xuanwumen 10	Beijing
+    SQL 语句：
+    INSERT INTO Persons (LastName, Address) VALUES ('Wilson', 'Champs-Elysees')
+    结果：
+    LastName	FirstName	Address	City
+    Carter	Thomas	Changan Street	Beijing
+    Gates	Bill	Xuanwumen 10	Beijing
+    Wilson	 	Champs-Elysees	 
+    </pre>
+</body>
+</html>

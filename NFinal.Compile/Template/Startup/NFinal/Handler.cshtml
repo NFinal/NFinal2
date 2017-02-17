@@ -1,0 +1,156 @@
+﻿@* Generator: Template
+    GeneratePrettyNames : true *@
+@functions{
+    public Compile.Template.Startup.NFinal.HandlerModel Model { get; set; }
+}
+//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename :Handler.cs
+//        Description :HttpHandler
+//
+//        created by Lucas at  2015-6-30`
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
+#if (!MicrosoftOwin && !NFinalOwin)
+using System.Web;
+#endif
+using System.Threading;
+
+namespace NFinal
+{
+#if (!MicrosoftOwin && !NFinalOwin)
+    /// <summary>
+    /// NFinal框架重写的HttpHandler类
+    /// </summary>
+    public class Handler : IHttpAsyncHandler
+    {
+        public bool IsReusable { get { return false; } }
+
+        public Handler()
+        {
+        }
+        public IAsyncResult BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+        {
+			//初始化配置
+			NFinal.Config.ConfigurationManager.Load(context.Server.MapPath("/"));
+            AsynchOperation asynch = new AsynchOperation(cb, context, extraData);
+            asynch.StartAsyncWork();
+            return asynch;
+        }
+
+        public void EndProcessRequest(IAsyncResult result)
+        {
+        }
+
+        public void ProcessRequest(HttpContext context)
+        {
+            throw new InvalidOperationException();
+        }
+    }
+    internal class HandlerFactory : IHttpHandlerFactory
+    {
+        private IHttpHandler _handler;
+        private Type _handlerType;
+
+        internal HandlerFactory(IHttpHandler handler, Type handlerType)
+        {
+            this._handler = handler;
+            this._handlerType = handlerType;
+        }
+
+        public IHttpHandler GetHandler(HttpContext context,
+                                    string requestType, string url, string pathTranslated)
+        {
+            if (this._handler == null)
+                this._handler = new Handler();
+
+            return this._handler;
+        }
+
+        public void ReleaseHandler(IHttpHandler handler)
+        {
+            // 一个HttpHandler是否能重用，这里就是一个典型的实现方式
+            if (!this._handler.IsReusable)
+                this._handler = null;
+        }
+    }
+    public class AsynchOperation : IAsyncResult
+    {
+        private bool _completed;
+        private Object _state;
+        private readonly AsyncCallback _callback;
+        private readonly HttpContext _context;
+
+        bool IAsyncResult.IsCompleted { get { return _completed; } }
+        WaitHandle IAsyncResult.AsyncWaitHandle { get { return null; } }
+        Object IAsyncResult.AsyncState { get { return _state; } }
+        bool IAsyncResult.CompletedSynchronously { get { return false; } }
+
+        public AsynchOperation(AsyncCallback callback, HttpContext context, Object state)
+        {
+            _callback = callback;
+            _context = context;
+            _state = state;
+            _completed = false;
+        }
+
+        public void StartAsyncWork()
+        {
+            ThreadPool.QueueUserWorkItem(new WaitCallback(StartAsyncTask), null);
+        }
+
+        private void StartAsyncTask(Object workItemState)
+        {
+			if (NFinal.Config.ConfigurationManager.debug == true)
+            {
+                @{@Model.project}.Router.Run(_context, _context.Request.Path);
+            }
+            else
+            {
+                try
+                {
+                    @{@Model.project}.Router.Run(_context, _context.Request.Path);
+                }
+                catch (Exception e)
+                {
+                    _context.Response.Write("错误消息：<br/>");
+                    _context.Response.Write(e.Message);
+                    _context.Response.Write("<br/>");
+                    _context.Response.Write("请求时发生错误：<br>");
+                    _context.Response.Write(_context.Request.FilePath);
+                    _context.Response.Write("<br/>");
+                    if (_context.Request.Cookies.Count > 0)
+                    {
+                        _context.Response.Write("请求时的Cookie:<br>");
+                        for (int i = 0; i < _context.Request.Cookies.Count; i++)
+                        {
+                            _context.Response.Write(_context.Request.Cookies[i].Name);
+                            _context.Response.Write(":");
+                            _context.Response.Write(_context.Request.Cookies[i].Values);
+                            _context.Response.Write("<br/>");
+                        }
+                    }
+                    _context.Response.Write("错误跟踪：</br>");
+                    string[] stackTraces = e.StackTrace.Split('\n');
+                    for (int i = 0; i < stackTraces.Length; i++)
+                    {
+                        _context.Response.Write(stackTraces[i]);
+                        _context.Response.Write("</br>");
+                    }
+                    _context.Response.End();
+                }
+                //return Task.FromResult(0);.net 4.5;
+            }
+            _completed = true;
+            _callback(this);
+        }
+    }
+#endif
+}

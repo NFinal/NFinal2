@@ -1,0 +1,82 @@
+﻿@* Generator: Template
+    GeneratePrettyNames : true *@
+@functions{
+    public Compile.Template.Scripts.Url_JsModel Model { get; set; }
+}
+function StringFormat() {
+         if (arguments.length == 0)
+             return null;
+         var str = arguments[0];
+         for (var i = 1; i < arguments.length; i++) {
+             var re = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
+             str = str.replace(re, arguments[i]);
+         }
+         return str;
+     }
+String.prototype.endWith = function (s) {
+    if (s == null || s == "" || this.length == 0 || s.length > this.length)
+        return false;
+    if (this.substring(this.length - s.length) == s)
+        return true;
+    else
+        return false;
+    return true;
+}
+String.prototype.startWith = function (s) {
+    if (s == null || s == "" || this.length == 0 || s.length > this.length)
+        return false;
+    if (this.substr(0, s.length) == s)
+        return true;
+    else
+        return false;
+    return true;
+}
+function __ParseUrl__(__url__)
+{
+	this.next=function()
+    {
+		@foreach(var rewriteDirectory in Model.rewriteData.rewriteDirectoryList){
+		@:if(__url__.startWith("@{@rewriteDirectory.to}"))
+		@:{
+			@:__url__ = "@{@rewriteDirectory.from}" + __url__.substring("@{@rewriteDirectory.to}".length);
+		@:}
+		}
+		return __url__;
+	}
+	@foreach(var rewriteFile in Model.rewriteData.rewriteFileList){
+	@:if(__url__=="@{@rewriteFile.to}")
+	@:{
+		@:__url__ = "@{@rewriteFile.from}"; return this.next();
+	@:}
+	}
+	return __url__;
+}
+var Url=new function()
+{
+		@{int i=1;
+		foreach(var fileData in Model.controllerFileDataList){
+		foreach(var classData in fileData.ClassDataList){
+		foreach(var methodData in classData.MethodDataList){
+        if(methodData.isPublic){
+		@:this.@{@fileData.appName}_@{@classData.name}_@{@methodData.name}= function(@{@methodData.urlParser.formatParameterNames})
+        @:{
+            @:var __url__=StringFormat("@{@methodData.urlParser.formatUrl}"@{@methodData.urlParser.formatParameters});
+			@:__url__ = __ParseUrl__(__url__);
+            @:return __url__;
+        @:};
+		i++;
+		}
+		}
+		}
+		}
+		}
+}
+console.group("版权信息");
+console.info("write by lucas");
+console.info("qq:348764327");
+console.info("<a href=\"http://shang.qq.com/wpa/qunwpa?idkey=099af071ba2689e2ed4003697a514c2b01b8aa001d2cd9718e4819b8da29ef49\">加入QQ群</a>")
+console.groupEnd();
+console.group("感谢使用NFinal框架");
+console.info("http://bbs.nfinal.com");
+console.info("http://help.nfinal.com");
+console.groupEnd();

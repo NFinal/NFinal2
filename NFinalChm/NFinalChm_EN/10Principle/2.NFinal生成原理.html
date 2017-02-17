@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>2.NFinal生成原理</title>
+</head>
+<body>
+    <h3>NFinal生成原理.</h3>
+    <p>
+    1.数据库生成方面:<br />
+    在开发时,我们的数据库的类型是已知的.<br />
+    因此,程序可以从SQL语句中判断出数据库类型,<br />
+    然后再根据数据库类型判断出对应的csharp类型,最终生成类手工的代码.
+    </p>
+    <p>
+    2.NFinal.Module生成方面:<br />
+    在开发时,所有的重写URL都是已知的.<br />
+    因此,程序可以从所有的Attribute重写与config.json中提取出所有的URL重写，并生成相应的Module<br />
+    </p>
+    <p>
+    3.NFinal.Handler生成方面:<br />
+    在开发时,所有的URL都是已知的.<br />
+    因此,程序可以从所有的Action与AttributeUrl中提取出所有的URL，并生成相应的handler类<br />
+    </p>
+    <p>
+    2.Router生成方面<br />
+    在开发时,控制器都是放在Controllers目录下.<br />
+    因此通过分析类中的方法,就可以逆向生成相对应的Router执行代码.
+    </p>
+    <p>
+    3.代码的生成<br />
+    代码生成利用的是.net开源的JN模版引擎,此引擎是纯开源协议.<br />
+    </p>
+    4.为什么一定要生成？<br/>
+    以上生成，一是为了灵活，二是为了执行效率的考虑。<br />
+    这就是为什么我们的框架的ORM最简单，而执行速度比任何其它php，java,.net框架都快的原因。
+</body>
+</html>

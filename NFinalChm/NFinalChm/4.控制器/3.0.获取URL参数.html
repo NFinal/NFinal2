@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>3.0.获取URL参数</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+	<h3>获取URL参数</h3>
+    在控制器的方法中加入一些参数,例如name,然后输出.
+	<pre class="brush: csharp;">
+		using System;
+		using System.Collections.Generic;
+		using System.Web;
+
+		namespace WebMvc.App.Controllers
+		{
+			public class SampleController:Controller
+			{
+				public void Show(string name)
+				{
+					Write(string.Format("Hello {0}.",name));
+				}
+			}
+		}
+	</pre>
+    <p>
+        运行WebCompiler.aspx重新生成.<br />
+        然后把Web/Default/SampleControler文件夹包括在项目中.<br />
+        其中Show.cs代码如下
+    </p>
+    <pre class="brush: csharp;">
+        using System;
+        using System.Collections.Generic;
+        using System.Web;
+
+        namespace WebMvc.App.Web.Default.SampleController
+        {
+            public class ShowAction  : Controller
+	        {
+		        public ShowAction(System.IO.TextWriter tw):base(tw){}
+		        public ShowAction(string fileName) : base(fileName) {}
+                public void Show(string name)
+                {
+                    Write(string.Format("Hello {0}.",name));
+                }
+            }
+        }
+    </pre>
+	<p>
+		Sample.html中的代码如下(此文件只有在不存在的情况下才会重新生成，<br />
+		如果你的controller参数或Url改变，则需删除该文件然后重新生成)
+	</p>
+    <pre class="brush: html" type="text/template">
+        ﻿&lt;!DOCTYPE html>
+		﻿&lt;html xmlns="http://www.w3.org/1999/xhtml">
+		﻿&lt;head>
+		﻿&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+			﻿&lt;title></title>
+			﻿&lt;script src="/Url.js"></script>
+		﻿&lt;/head>
+		﻿&lt;body>
+			﻿&lt;script>
+				function jump()
+				{
+					var name="";
+					window.location.href = Url.App_SampleController_Index(name);
+				}
+				jump();
+			﻿&lt;/script>
+		﻿&lt;/body>
+		﻿&lt;/html>
+    </pre>
+	<p>
+        修改name变量
+	</p>
+        <pre class="brush: html" type="text/template">
+        ﻿&lt;!DOCTYPE html>
+		﻿&lt;html xmlns="http://www.w3.org/1999/xhtml">
+		﻿&lt;head>
+		﻿&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+			﻿&lt;title></title>
+			﻿&lt;script src="/Url.js"></script>
+		﻿&lt;/head>
+		﻿&lt;body>
+			﻿&lt;script>
+				function jump()
+				{
+					var name="NFinal";
+					window.location.href = Url.App_SampleController_Index(name);
+				}
+				jump();
+			﻿&lt;/script>
+		﻿&lt;/body>
+		﻿&lt;/html>
+    </pre>
+    <p>
+        用浏览器查看Show.html.则浏览器输出Hello NFinal.
+    </p>
+    <h3>
+        参数说明
+    </h3>
+    <p>
+        NFinal仅支持基础参数类型，以及基础参数类型一维数组.<br/>
+		如果定义为数组，则传参时使用,(逗号)分隔。
+    </p>
+</body>
+</html>

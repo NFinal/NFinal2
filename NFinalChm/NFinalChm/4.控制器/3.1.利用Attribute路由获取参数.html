@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>3.1.利用Attribute路由获取参数</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+	<h3>获取参数</h3>
+    当Action中有Attribute路由时。参数分为两种，<br/>
+	一种参数位于URL中（类似于Get传参），一种不在URL中（POST传参）。<br/>
+	在URL中的参数可以通过生成URL的函数作为参数直接传递，<br/>
+	不在URL中的参数可以通过POST传参。<br/>
+	<pre class="brush: csharp;">
+		using System;
+		using System.Collections.Generic;
+		using System.Web;
+
+		namespace WebMvc.App.Controllers
+		{
+			public class SampleController:Controller
+			{
+				[GetHtml("~/App/{cateId}.html")]
+				//cateId为URL参数，p为post参数
+				public void Show(int cateId,int p)
+				{
+					Write(string.Format("分类：{0}。分页：{1}.",cateId,p));
+				}
+			}
+		}
+	</pre>
+    <p>
+        运行WebCompiler.aspx重新生成.<br />
+        然后把Web/Default/SampleControler文件夹包括在项目中.<br />
+        其中Show.cs代码如下
+    </p>
+    <pre class="brush: csharp;">
+        using System;
+        using System.Collections.Generic;
+        using System.Web;
+
+        namespace WebMvc.App.Web.Default.SampleController
+        {
+            public class ShowAction  : Controller
+	        {
+		        public ShowAction(System.IO.TextWriter tw):base(tw){}
+		        public ShowAction(string fileName) : base(fileName) {}
+				[GetHtml("~/App/{cateId}.html")]
+                public void Show(int cateId,int p)
+                {
+                    Write(string.Format("分类：{0}。分页：{1}.",cateId,p));
+                }
+            }
+        }
+    </pre>
+	<p>
+		Sample.html中的代码如下(此文件只有在不存在的情况下才会重新生成，<br />
+		如果你的controller参数或Url改变，则需删除该文件然后重新生成)<br/>
+		运行此文件，输出始终为:"分类：2。分页：0."因为服务端获取不到参数p.
+	</p>
+    <pre class="brush: html" type="text/template">
+        ﻿&lt;!DOCTYPE html>
+		﻿&lt;html xmlns="http://www.w3.org/1999/xhtml">
+		﻿&lt;head>
+		﻿&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+			﻿&lt;title></title>
+			﻿&lt;script src="/Url.js"></script>
+		﻿&lt;/head>
+		﻿&lt;body>
+			﻿&lt;script>
+				function jump()
+				{
+					var cateId="2";
+					window.location.href = Url.App_SampleController_Index(cateId);
+				}
+				jump();
+			﻿&lt;/script>
+		﻿&lt;/body>
+		﻿&lt;/html>
+    </pre>
+	<p>
+        如何传递参数p?
+	</p>
+        <pre class="brush: html" type="text/template">
+        ﻿&lt;!DOCTYPE html>
+		﻿&lt;html xmlns="http://www.w3.org/1999/xhtml">
+		﻿&lt;head>
+		﻿&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+			﻿&lt;title></title>
+			﻿&lt;script src="/Url.js"></script>
+		﻿&lt;/head>
+		﻿&lt;body>
+			<!--form传参-->
+			<form action="<%=Url.App_SampleController_Index(2)%>">
+				<input type="text" name="p" value="1"/>
+				<input type="submit" value="提交"/>
+			</form>
+			﻿<!--js传参-->
+			&lt;script>
+				var cateId=2
+				//URL传参及POST传参
+				$.post(Url.App_SampleController_Index(cateId),{"p":1},function(data){
+					alert(data);
+				});
+				jump();
+			﻿&lt;/script>
+		﻿&lt;/body>
+		﻿&lt;/html>
+    </pre>
+    <p>
+        用浏览器查看Show.html.则浏览器弹出消息："分类：2。分页：1."
+		当点击提交按钮时页面会输出："分类：2。分页：1."
+    </p>
+    <h3>
+        参数说明
+    </h3>
+    <p>
+        NFinal仅支持基础参数类型，以及基础参数类型一维数组.<br/>
+		如果定义为数组，则传参时使用,(逗号)分隔。
+    </p>
+</body>
+</html>

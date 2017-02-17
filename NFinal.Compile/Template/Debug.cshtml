@@ -1,0 +1,30 @@
+﻿@* Generator: Template
+    GeneratePrettyNames : true *@
+@functions{
+    public NFinal.Compile.Template.DebugModel Model { get; set; }
+}﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <script src="/Scripts/jquery-1.11.2.min.js"></script>
+</head>
+<body>
+    <script>
+        $.getScript("/Scripts/Url.js?_" + Math.random(), function () {
+            @foreach(var parameter in Model.parameterDataList){
+			if(parameter.isUrlParameter){
+			if(parameter.type=="int"){
+			@:var @{@parameter.name}=1;
+			}else{
+			@:var @{@parameter.name}="";
+			}
+			}
+			}
+			window.location.href = Url.@{@Model.methodName}(@{@Model.methodParameters});
+        });
+	</script>
+</body>
+</html>

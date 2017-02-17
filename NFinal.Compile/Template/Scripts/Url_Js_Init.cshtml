@@ -1,0 +1,58 @@
+﻿﻿function StringFormat() {
+         if (arguments.length == 0)
+             return null;
+         var str = arguments[0];
+         for (var i = 1; i < arguments.length; i++) {
+             var re = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
+             str = str.replace(re, arguments[i]);
+         }
+         return str;
+     }
+String.prototype.endWith = function (s) {
+    if (s == null || s == "" || this.length == 0 || s.length > this.length)
+        return false;
+    if (this.substring(this.length - s.length) == s)
+        return true;
+    else
+        return false;
+    return true;
+}
+String.prototype.startWith = function (s) {
+    if (s == null || s == "" || this.length == 0 || s.length > this.length)
+        return false;
+    if (this.substr(0, s.length) == s)
+        return true;
+    else
+        return false;
+    return true;
+}
+function __ParseUrl__(__url__)
+{
+	this.next=function()
+    {
+		return __url__;
+	}
+	if(__url__=="/@{@Model.app}/IndexController/Index.html")
+	{
+		__url__ = "/@{@Model.app}/Index.html"; return this.next();
+	}
+	return __url__;
+}
+var Url=new function()
+{
+		this.@{@app}_IndexController_Index= function()
+        {
+            var __url__=StringFormat("/@{@Model.app}/IndexController/Index.html");
+			__url__ = __ParseUrl__(__url__);
+            return __url__;
+        };
+}
+console.group("版权信息");
+console.info("write by lucas");
+console.info("qq:348764327");
+console.info("<a href=\"http://shang.qq.com/wpa/qunwpa?idkey=099af071ba2689e2ed4003697a514c2b01b8aa001d2cd9718e4819b8da29ef49\">加入QQ群</a>")
+console.groupEnd();
+console.group("感谢使用NFinal框架");
+console.info("http://bbs.nfinal.com");
+console.info("http://help.nfinal.com");
+console.groupEnd();

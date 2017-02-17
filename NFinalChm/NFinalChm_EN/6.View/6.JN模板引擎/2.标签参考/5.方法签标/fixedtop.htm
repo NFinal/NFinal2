@@ -1,0 +1,205 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>方法签标</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="winchm_template_style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function d_onresize(){
+if (window.navigator.userAgent.indexOf("MSIE")>=1){
+document.getElementById('winchm_template_content').style.pixelWidth = document.body.offsetWidth - 3;
+document.getElementById('winchm_template_content').style.pixelHeight = document.body.offsetHeight - document.getElementById('winchm_template_top').offsetHeight - 4;
+}
+document.getElementById('winchm_template_content').style.top = document.getElementById('winchm_template_top').offsetHeight + 'px';
+}
+
+function d_onbeforeprint(){
+document.getElementById('winchm_template_content').style.width = 'auto';
+document.getElementById('winchm_template_content').style.height = 'auto';
+}
+
+function d_onafterprint(){
+d_onresize();
+}
+
+window.onload = d_onresize;
+window.onresize = d_onresize;
+window.onbeforeprint = d_onbeforeprint;
+window.onafterprint = d_onafterprint;
+</script>
+</head>
+
+<body>
+
+<div id="winchm_template_top">
+<table width="100%" height="50" bgcolor="#c4d0f4" style="WIDTH: 100%" cellSpacing=0 cellPadding=3 border=0>
+<tr>
+<td>
+<div id="winchm_template_navigation"><EM>New&nbsp;Help 
+      &gt;&nbsp;</EM>方法签标 </div>
+<div id="winchm_template_title">
+方法签标</div>
+</td>
+<td align="right" style="WIDTH: 90px">
+<IMG alt=Previous src="btn_prev_n.gif"><IMG alt=Next src="btn_next_n.gif">
+</td>
+</tr>
+</table>
+</div>
+<div id="winchm_template_content">
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+style="BOX-SIZING: border-box; COLOR: rgb(0,0,205)">方法签标</SPAN></STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold">标签作用：</STRONG>执行模板后台定义的方法</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold">书写格式：</STRONG>${方法名(参数1，参数2，参数3,...)}</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold">标签简写：</STRONG>$方法名(参数1，参数2，参数3,...)</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold">注意事项：</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　1.多个参数使用英文逗号“,”分隔！</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　2.参数如果是字符串，必须使用双引号！</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　3.变量无须加$，直接使用变量名即可！</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　4.后台定义支持委托与反射两种方法(见示例)</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　5.方法参数里面应避免嵌套使用方法，正确用法应该配合赋值标签(set)使用</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　6.方法名称避免以下关键字：if,set,load,includeTag,foreach,for,true,false</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">示例代码：</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　模板：$set(id 
+= getQuery("id"))</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　$cmd.ExcuteTable("myTable","id="+id);</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　后台：</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　template.Context.TempData["getQuery"]= 
+new JinianNet.JNTemplate.FuncHandler(delegate(object[] args) 
+//委托，获取当前页面的GET参数</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　{</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　　　if 
+(args == null || args.Length != 1)</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　　　　　&nbsp;throw 
+new Exception("agrs");</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　　　return 
+Request.QueryString[args[0].ToString()];</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　});</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　template.Context.TempData["cmd"] 
+= new Command();//反射</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　Command类：</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　using 
+System;</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　using 
+System.Collections;</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　using 
+System.Collections.Generic;</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　using 
+System.Data;</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　using 
+System.Linq;</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　using 
+System.Web;</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　namespace 
+JinianNet.DemoSite</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　{</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　　　public 
+class Command</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　　　{</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　　　　　public 
+string ExcuteTable(string tableName,string where)</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　　　　　{</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　　　　　　　return 
+DbHelper.ExecuteTable("select * from "+tableName+" where " + 
+wher));//DbHelper为自定义的数据库操作类</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　　　　　}</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　　　}</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　}</SPAN></P>
+<hr>
+  <font face="Arial" color="#808080" size="1">Copyright 2003-2012 Your company 
+  name</font>(Edit the text to change this template.)</div>
+
+</body>
+
+</html>

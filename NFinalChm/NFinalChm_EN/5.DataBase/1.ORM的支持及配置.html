@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>1.ORM的支持及配置</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>数据库支持</h3>
+	<p>
+        NFinal框架支持Mysql,Sqlserver,sqlite,oracle,postgresql数据库.<br />
+    </p>
+    <p>
+        在建立数据库时有以下原则:<br />
+        <b style="color:red;">1.表名与表字段不能与csharp的关键字重名.</b><br />
+        <b style="color:red;">2.select语句选取的结果中,列名不能相同,若有相同的列名,必须使用as重命名.</b><br />
+    </p>
+	<p>
+		1.sqlserver数据库不支持注释管理。<br />
+		2.oracle在配置并生成后，会在Models目录生成相应的sql文件，此文件中的sql语句用于添加自增id.<br />
+		3.postgreql在建表时，id字段选择serial类型，则会自动自增。<br />
+		4.为了统一管理，所有数据库sql语句中插入的变量均采用@符号。<br />
+	</p>
+    <p>
+        NFinal使用数据库操作类操作数据库,首先请先配置好Web.config中的连接字符串,<br />
+        <a href="../3.配置/4.数据库配置.html">数据库的配置请参考这里</a><br />
+    </p>
+</body>
+</html>

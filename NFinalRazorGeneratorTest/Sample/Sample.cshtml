@@ -1,0 +1,33 @@
+﻿@inherits NFinal.Razor.BasePage<NFinalRazorGeneratorTest.Sample.Model>
+@using System.Text
+<!DOCTYPE html>
+@*这里是注释内容*@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    @foreach (m)
+    { }
+    @{ int vaa = 1;}df
+    @{ var vbb=vaa.ToString();}
+    @Model.a
+    @Model.b
+    @Model.c
+    @foreach (string a in Model.d)
+    {
+        @a.ToString();
+    }
+    @if (Model.a == Model.b)
+    {
+        @Model.a
+    }
+    @while (true)
+    {
+        @Model.a
+    }
+
+</body>
+
+</html>

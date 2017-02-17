@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>7.父子表,多表关系</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>AddNewFiled方法</h3>
+    <p>
+        AddNewFiled(string filedName,type t) 有一个参数 filedName:所要添加的列名 type:所要添加列的类型（一般为typeof(List<dynamic>)）
+    <br />
+    返回：无返回值<br />
+        为查询到的数据（表）添加一列数据（字段、子表）,实现数据的树形展示（层次化）
+</p>
+    <p>用例说明：查询所有班级表并且查询班级下的学生信息</p>
+    <pre class="brush: csharp;">
+
+    public void  Index()
+    {
+        //打开一个数据库链接
+        var con = Models.YMC.OpenConnection();
+        var classes = con.QueryAll("select id,name from classes");
+        //为classes行对象数组的每一个行对象添加一个students行对象数组的属性
+        classes.AddNewField("students", typeof(List<dynamic>));
+        foreach( var cla in classes)
+        {
+            int cla_id = cla.id;
+            var students = Models.YMC.QueryAll("select name,sex from stutent where cla_id=@cla_id");
+            //为行对象cla的属性students赋值
+            cla.students = students;
+        }
+        //关闭数据库连接
+        con.Close();
+        View("IndexController/Index.aspx");
+    }
+   </pre>
+    <p>
+        模板会根据以上代码生成以下代码
+    </p>
+    <pre class="brush: csharp;">
+        		public class __Index_classes__:NFinal.DB.Struct
+		{
+			
+			public int id;
+			
+			public string name;
+			
+			public NFinal.DB.NList<__index_students__> students;
+			
+			#region 写Json字符串
+			public override void WriteJson(System.IO.TextWriter tw)
+			{
+				tw.Write("{");
+				
+						tw.Write("\"id\":");
+						tw.Write("\"");
+						WriteString(id==null?"null":id.ToString(),tw);
+						tw.Write("\"");
+					
+						tw.Write(",");
+					
+						tw.Write("\"name\":");
+						tw.Write("\"");
+						WriteString(name==null?"null":name.ToString(),tw);
+						tw.Write("\"");
+					
+							tw.Write(",");
+							tw.Write("\"students\":");
+							students.WriteJson(students.GetEnumerator(),tw);
+						
+				tw.Write("}");
+			}
+			#endregion
+		}
+	#endregion
+		#region __Index_students__声明
+		public class __Index_students__:NFinal.DB.Struct
+		{
+			
+			public string name;
+			
+			public string sex;
+			
+			#region 写Json字符串
+			public override void WriteJson(System.IO.TextWriter tw)
+			{
+				tw.Write("{");
+				
+						tw.Write("\"name\":");
+						tw.Write("\"");
+						WriteString(name==null?"null":name.ToString(),tw);
+						tw.Write("\"");
+					
+						tw.Write(",");
+					
+						tw.Write("\"sex\":");
+						tw.Write("\"");
+						WriteString(sex==null?"null":sex.ToString(),tw);
+						tw.Write("\"");
+					
+				tw.Write("}");
+			}
+			#endregion
+		}
+	#endregion
+        public void Index()
+        {
+            //打开一个数据库链接
+                        var __Index_YMC_con__ = new MySql.Data.MySqlClient.MySqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["YMC"].ConnectionString);
+            __Index_YMC_con__.Open();
+            	#region	var classes;选取所有记录
+			var classes = new NFinal.DB.NList<__index_classes__>();
+            
+			var __Index_classes_command__ = new MySql.Data.MySqlClient.MySqlCommand("select id,name from classes", __Index_YMC_con__);
+			
+			var __Index_classes_reader__= __Index_classes_command__.ExecuteReader();
+			if (__Index_classes_reader__.HasRows)
+			{
+				while (__Index_classes_reader__.Read())
+				{
+					var __Index_classes_temp__ = new __Index_classes__();
+					
+					if(!__Index_classes_reader__.IsDBNull(1-1)){__Index_classes_temp__.id = __Index_classes_reader__.GetInt32(1-1);}
+					
+					if(!__Index_classes_reader__.IsDBNull(2-1)){__Index_classes_temp__.name = __Index_classes_reader__.GetString(2-1);}
+					classes.Add(__Index_classes_temp__);
+				}
+			}
+			__Index_classes_reader__.Close();
+	#endregion
+			
+            /*field:classes.students*/                             
+            foreach( var cla in classes)
+            {
+                int cla_id = cla.id;
+                	#region	var students;选取所有记录
+			var students = new NFinal.DB.NList<__index_students__>();
+            
+			var __Index_students_command__ = new MySql.Data.MySqlClient.MySqlCommand("select name,sex from stutent where cla_id=?cla_id", __Index_YMC_con__);
+			
+			var __Index_students_parameters__=new MySql.Data.MySqlClient.MySqlParameter[1];
+			
+			__Index_students_parameters__[1-1] = new MySql.Data.MySqlClient.MySqlParameter("?cla_id",MySql.Data.MySqlClient.MySqlDbType.Int32);
+			__Index_students_parameters__[1-1].Value = cla_id;
+			
+			__Index_students_command__.Parameters.AddRange(__Index_students_parameters__);
+			
+			var __Index_students_reader__= __Index_students_command__.ExecuteReader();
+			if (__Index_students_reader__.HasRows)
+			{
+				while (__Index_students_reader__.Read())
+				{
+					var __Index_students_temp__ = new __Index_students__();
+					
+					if(!__Index_students_reader__.IsDBNull(1-1)){__Index_students_temp__.name = __Index_students_reader__.GetString(1-1);}
+					
+					if(!__Index_students_reader__.IsDBNull(2-1)){__Index_students_temp__.sex = __Index_students_reader__.GetString(2-1);}
+					students.Add(__Index_students_temp__);
+				}
+			}
+			__Index_students_reader__.Close();
+	#endregion
+			
+                cla.students = students;
+            }
+            //关闭数据库连接
+           _Index_YMC_con__.Close();
+       }
+    </pre>
+    <p>前台读取数据</p>
+    <pre class="brush: csharp;">
+    <form id="form1" runat="server">
+    <div>
+        <%foreach (var classe in classes){%>
+            <p>班级名称：<%=classe.name%></p>
+            <%foreach(var stutent in classe.students){ %>
+                <%=stutent.name %>&nbsp;<%=stutent.sex %>&nbsp;&nbsp;
+        <%}} %>
+    </div>
+    </form>
+    </pre>
+    <p>展示效果</p>
+    <img src="../Content/images/AddNewFiled方法展示效果.png" />
+</body>
+</html>

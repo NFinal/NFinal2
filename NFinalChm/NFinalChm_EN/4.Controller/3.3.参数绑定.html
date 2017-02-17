@@ -1,0 +1,52 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>3.3.参数绑定</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+	<h3>参数绑定</h3>
+    <p>
+        在控制器函数内,NFinal框架支持默认参数.
+        也就是说,当该参数值不存在的情况下.就使用其默认值.
+    </p>
+    <pre class="brush: csharp;">
+        using System;
+        using System.Collections.Generic;
+        using System.Web;
+
+        namespace WebMvc.App.Controllers
+        {
+            public class SampleController : Controller
+            {
+                //在这里使用了默认参数
+                public void Show(int id=5)
+                {
+                    if (id == 5)
+                    {
+                        Write("Success");
+                    }
+                    else
+                    {
+                        Write("Error");
+                    }
+                }
+            }
+        }
+    </pre>
+    <p>
+        运行WebCompiler.aspx生成Web层.
+    </p>
+    <p>
+		修改Show.html，把id值改为空字符串或null;<br/>
+        然后再用浏览器查看Show.html.<br/>
+        浏览器返回Success.说明参数绑定成功
+    </p>
+</body>
+</html>

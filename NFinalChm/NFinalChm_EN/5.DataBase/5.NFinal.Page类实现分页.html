@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>5.NFinal.Page类实现分页</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>Page方法</h3>
+    <p>
+        Page(string sql,int ) 有两个参数 sql:sql查询语句  pageSize:每页显示行数
+        <br />
+        返回：行对象数组
+        <br/>
+    </p>
+    1.1
+    <pre class="brush: csharp;">
+    public void  Index(int p)
+    {
+        //打开一个数据库链接
+        var con = Models.YMC.OpenConnection();
+		//参数1为当前页数，参数2为每页大小
+		NFinal.Page page=new NFinal.Page(p,5);
+        var rows = con.Page("SELECT * FROM user",page);
+        //关闭数据库连接
+        con.Close();
+        View("IndexController/Index.aspx");
+    }
+   </pre>
+    1.2、vs2015支持的新语法，让SQL语句可以有自动提示
+    <pre class="brush: csharp;">
+        Models.Tips.Common.users users = new Models.Tips.Common.users();
+        [GetJson("/page-{p}.json")]
+        public void page(int p)
+        {
+            var con = Models.Common.OpenConnection();
+            NFinal.Page page = new NFinal.Page(p, 2);
+            var us = con.Page($"select {users.id},{users.name},{users.pwd} from {users}",page);
+            con.Close();
+            AjaxReturn(us);
+        }
+    </pre>
+    2.使用分页控件Views/Default/Common/Public/Navigator.ascx,将其拖入要使用的aspx页面即可
+    <pre class="brush:html;">
+        &lt;div>
+            &lt;uc1:navigator runat="server" id="navigator" db="<%ViewBag.page%>" />
+        &lt;/div>
+    </pre>
+    <p>
+        说明：db="Page对象"
+    </p>
+    <p>
+        3.模板会根据以上代码生成正确的执行代码，此处不再显示。
+    </p>
+</body>
+</html>

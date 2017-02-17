@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>2.ORM生成原则及使用流程</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>数据库使用原则</h3>
+    <p>
+        <b style="color:red;">1.所有的数据库语句只能写在Controlers文件夹或Models/BLL文件夹下的类中</b>
+    </p>
+    <h3>数据库函数使用流程</h3>
+    1.函数中的代码如下:
+    <pre class="brush: csharp;">
+        //打开关闭连接,必须以Models开头.其中YMC是Web.Config中连接字符串的名称.
+        public void Index(int id)
+        {
+            //打开数据库连接
+            var con=Models.YMC.OpenConnection();
+            //查询
+            //使用@变量名添加csharp中的变量到SQL中.
+            var users=con.QueryAll("select * from users where id=@id");
+            //关闭连接
+            con.Close();
+            //输出
+            foreach(var user in users)
+            {
+                Write(user.id);
+                Write(user.name);
+                Write(user.pwd);
+            }
+        }  
+    </pre>
+    2.运行WebCompiler.aspx将在Web层或DAL层对应位置的类中生成以下代码:
+    <pre class="brush: csharp;">
+        public void Index(int id)
+        {
+            var __QueryAll_Common_con__ = new System.Data.SQLite.SQLiteConnection(Models.ConnectionStrings.Common);
+			__QueryAll_Common_con__.Open();
+            	#region	var users;选取所有记录
+			var users = new NFinal.DB.NList&lt;__queryall_users__>();
+            
+			var __QueryAll_users_command__ = new System.Data.SQLite.SQLiteCommand("select * from users where id=@id", __queryall_common_con__);
+            var __QueryObject_count_parameters__=new System.Data.SQLite.SQLiteParameter[1];
+
+			__QueryObject_count_parameters__[0] = new System.Data.SQLite.SQLiteParameter("@id",System.Data.DbType.Int64,8);
+			__QueryObject_count_parameters__[0].Value = id;
+			
+			__QueryObject_count_command__.Parameters.AddRange(__QueryObject_count_parameters__);    
+        
+            var __queryall_users_reader__=__QueryAll_users_command__.ExecuteReader();
+            if (__queryall_users_reader__.hasrows)
+            {
+                while (__queryall_users_reader__.read())
+                {
+                    var __queryall_users_temp__=new __queryall_users__();
+                    if(!__queryall_users_reader__.isdbnull(0)){__queryall_users_temp__.uid=__QueryAll_users_reader__.GetInt64(0);}
+                    if(!__queryall_users_reader__.isdbnull(1)){__queryall_users_temp__.name=__QueryAll_users_reader__.GetString(1);}
+                    if(!__queryall_users_reader__.isdbnull(2)){__queryall_users_temp__.pwd=__QueryAll_users_reader__.GetString(2);}
+                    users.add(__queryall_users_temp__);
+                }
+            }
+            __queryall_users_reader__.close();
+            #endregion
+            __queryall_common_con__.close();
+            foreach (var user in users)
+            {
+                Write(user.id);
+                Write(user.name);
+                Write(user.pwd);
+            }
+        }
+    </pre>
+    还生成了users所对应的实体类__queryall_users__
+    <pre class="brush: csharp;">
+    public class __QueryAll_users__:NFinal.DB.Struct
+    {
+        public System.Int64 id;
+        public System.String name;
+        public System.String pwd;
+        #region 写Json字符串
+        public override void WriteJson(System.IO.TextWriter tw)
+        {
+            tw.Write("{");
+            tw.Write("\"id\":");
+            tw.Write(id.ToString());
+            tw.Write(",");
+            tw.Write("\"name\":");
+            tw.Write("\"");
+            tw.Write(name);
+            tw.Write("\"");
+            tw.Write(",");
+            tw.Write("\"pwd\":");
+            tw.Write("\"");
+            tw.Write(pwd);
+            tw.Write("\"");
+            tw.Write("}");
+        }
+        #endregion
+    }
+    </pre>
+
+</body>
+</html>

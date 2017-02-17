@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>9.前置,后置操作</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+	<h3>前置后置操作类</h3>
+    <p>
+        每个控制器继承自Controller方法.<br />
+        其中有两个函数,Before,After,一个在函数之前执行,一个在函数之后执行.<br />
+        有什么用呢?例:我在Common中添加了一个类UserAction,继承自Controller方法.<br />
+        重写了Before函数.并声明了一个变量,用于判断用户是否登陆.
+    </p>
+    <pre class ="brush: csharp;">
+        using System;
+        using System.Collections.Generic;
+        using System.Web;
+
+        namespace WebMvc.App.Common
+        {
+            public class UserAction:Controller
+            {
+                //初始化函数,固定格式.
+                public UserAction() : base() { }
+                public UserAction(System.IO.TextWriter tw):base(tw){}
+                public UserAction(string fileName) : base(fileName) { }
+                //用于判断用户是否登陆成功
+                public bool isLogion = false;
+                public override void Before()
+                {
+                    //判断是否登陆成功
+                    isLogion = true;
+                    base.Before();
+                }
+            }
+        }
+    </pre>
+    <p>
+        然后在Controler增加一个控制器,使其继承自以上类.如下:
+    </p>
+	<pre class="brush: csharp;">
+        using System;
+        using System.Collections.Generic;
+        using System.Web;
+
+        namespace WebMvc.App.Controllers
+        {
+            public class SampleController:App.Common.UserAction
+            {
+                public void Show()
+                {
+                    //如果没有登陆则返回
+                    if (isLogion)
+                    {
+                        Write("登陆成功");
+                    }
+                    else
+                    {
+                        Write("登陆失败");
+                    }
+                }
+            }
+        }
+	</pre>
+    <p>
+        我们可以把所有需要用户操作权限的控制器全都继承自该类,以达到权限控制的目地.<br />
+        这样做的好处是,不同的权限可以用不同的类进行控制,而且修改起来也简单.
+    </p>
+    <p>
+        用浏览器查看WebCompiler.aspx重新生成Web层.
+    </p>
+    <p>
+        然后再用浏览器查看Show.html,则会显示登陆成功的字样.
+    </p>
+</body>
+</html>

@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace @{@Model.project}.@{@Model.app}.Web.Default.IndexController
+{
+    public class IndexAction  : Controller
+	{
+		public IndexAction(System.IO.TextWriter tw):base(tw){}
+		public IndexAction(string fileName) : base(fileName) {}
+		public IndexAction(HttpContext context):base(context){}
+		public IndexAction(Microsoft.Owin.IOwinContext context):base(context){}
+		public IndexAction(Controller controller):base(controller){}
+        public void Index()
+        {
+            
+			Write("<!doctype html><html><head><title>nfinal框架</title><script src=\"/@{@app}/Content/js/jquery-1.11.2.min.js\"></script><link href=\"/@{@app}/Content/css/frame.css\" type=\"text/css\" rel=\"stylesheet\" /><style type=\"text/css\"> .auto-style1 { width: 140px; } .auto-style2 { width: 197px; } </style></head><body>");
+			Write("<header class=\"header\"> NFinal框架:这是头,来自模版 </header><article> Hello,NFinal! </article>");
+			Write("<footer> NFinal框架.这是尾 </footer></body></html>");
+        }
+    }
+}

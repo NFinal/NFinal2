@@ -1,0 +1,46 @@
+﻿@* Generator: Template
+    GeneratePrettyNames : true *@
+@functions{
+    public Compile.Template.Startup.UrlModel Model { get; set; }
+}
+namespace @{@Model.project}
+{
+    public class Url
+    {
+		private static string __ParseUrl__(string __url__)
+        {
+            switch (__url__)
+            {
+				@foreach(var rewriteFile in Model.rewriteData.rewriteFileList){
+				@:case "@{@rewriteFile.to}":__url__ = "@{@rewriteFile.from}"; break;
+				}
+				default: break;
+            }
+			@foreach(var rewriteDirectory in Model.rewriteData.rewriteDirectoryList){
+			@:if(__url__.StartsWith("@{@rewriteDirectory.to}"))
+			@:{
+				@:__url__ = "@{@rewriteDirectory.from}" + __url__.Remove(0,"@{@rewriteDirectory.to}".Length);
+			@:}
+			}
+            return __url__;
+        }
+        @{int i=1;
+		foreach(var fileData in Model.controllerFileDataList){
+		foreach(var classData in fileData.ClassDataList){
+		foreach(var methodData in classData.MethodDataList){
+        if(methodData.isPublic){
+		@:@methodData.CommitString
+		@:public static string @{@fileData.appName}_@{@classData.name}_@{@methodData.name}(@{@methodData.urlParser.formatParameterTypeAndNames})
+        @:{
+            @:string __url__=string.Format("@{@methodData.urlParser.formatUrl}"@{@methodData.urlParser.formatParameters});
+			@:__url__ = __ParseUrl__(__url__);
+            @:return __url__;
+        @:}
+		i++;
+		}
+		}
+		}
+		}
+		}
+    }
+}

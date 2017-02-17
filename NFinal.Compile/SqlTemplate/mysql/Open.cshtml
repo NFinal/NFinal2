@@ -1,0 +1,7 @@
+﻿@* Generator: Template
+    GeneratePrettyNames : true *@
+@functions{
+    public NFinal.Compile.SqlTemplate.Model.Open Model { get; set; }
+}
+var @{@Model.connectionVarName} = new MySql.Data.MySqlClient.MySqlConnection(NFinal.Config.ConfigurationManager.ConnectionStrings[@{@Model.dbName}].ConnectionString);
+			@{@Model.connectionVarName}.Open();

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>本章讲解 SELECT 和 SELECT * 语句</title>
+</head>
+<body>
+    <h3>本章讲解 SELECT 和 SELECT * 语句</h3>
+    <pre>
+    SQL SELECT 语句
+    SELECT 语句用于从表中选取数据。
+    结果被存储在一个结果表中（称为结果集）。
+    SQL SELECT 语法
+    SELECT 列名称 FROM 表名称
+    以及：
+    SELECT * FROM 表名称
+    注释：SQL 语句对大小写不敏感。SELECT 等效于 select。
+    SQL SELECT 实例
+    如需获取名为 "LastName" 和 "FirstName" 的列的内容（从名为 "Persons" 的数据库表），请使用类似这样的 SELECT 语句：
+    SELECT LastName,FirstName FROM Persons
+    "Persons" 表:
+    Id	LastName	FirstName	Address	City
+    1	Adams	John	Oxford Street	London
+    2	Bush	George	Fifth Avenue	New York
+    3	Carter	Thomas	Changan Street	Beijing
+    结果：
+    LastName	FirstName
+    Adams	John
+    Bush	George
+    Carter	Thomas
+    SQL SELECT * 实例
+    现在我们希望从 "Persons" 表中选取所有的列。
+    请使用符号 * 取代列的名称，就像这样：
+    SELECT * FROM Persons
+    提示：星号（*）是选取所有列的快捷方式。
+    结果：
+    Id	LastName	FirstName	Address	City
+    1	Adams	John	Oxford Street	London
+    2	Bush	George	Fifth Avenue	New York
+    3	Carter	Thomas	Changan Street	Beijing
+</pre>
+</body>
+</html>

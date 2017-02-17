@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Web;
+
+namespace @{@Model.project}.@{@Model.app}.Web.Default.Common.Public
+{
+    public class KindEditorAction  : Controller
+	{
+		public KindEditorAction(System.IO.TextWriter tw):base(tw){}
+		public KindEditorAction(string fileName) : base(fileName) {}
+		public KindEditorAction(HttpContext context):base(context){}
+		public KindEditorAction(Microsoft.Owin.IOwinContext context):base(context){}
+		public KindEditorAction(Controller controller):base(controller){}
+        
+        
+        
+        
+        
+        public void KindEditor()
+        {
+            
+			Write("<link rel=\"stylesheet\" href=\"");
+			Write(_app);
+			Write("/Content/kindeditor/themes/default/default.css\" /><link rel=\"stylesheet\" href=\"");
+			Write(_app);
+			Write("/Content/kindeditor/plugins/code/prettify.css\" /><script charset=\"utf-8\" src=\"");
+			Write(_app);
+			Write("/Content/kindeditor/kindeditor.js\"></script><script charset=\"utf-8\" src=\"");
+			Write(_app);
+			Write("/Content/kindeditor/lang/zh_CN.js\"></script><script charset=\"utf-8\" src=\"");
+			Write(_app);
+			Write("/Content/kindeditor/plugins/code/prettify.js\"></script><script> KindEditor.ready(function (K) { K.create(\"textarea[data-type=\'kindeditor\']\", { cssPath: \'");
+			Write(_app);
+			Write("/Content/kindeditor/plugins/code/prettify.css\', uploadJson: \'");
+			Write(_app);
+			Write("/Content/kindeditor/asp.net/upload_json.ashx\', fileManagerJson: \'");
+			Write(_app);
+			Write("/Content/kindeditor/asp.net/file_manager_json.ashx\', allowFileManager: true }); prettyPrint(); K(\"input[data-type=\'upload-img\']\").each(function () { var upload = K(this); var img = K(this).attr(\'data-img\'); var input = K(this).attr(\'data-input\'); var uploadbutton = K.uploadbutton({ button: upload, fieldName: \'imgFile\', url: \'");
+			Write(_app);
+			Write("/Content/kindeditor/asp.net/upload_json.ashx\', afterUpload: function (data) { if (data.error === 0) { //alert(data.url); if (img != \"\") { K(\'#\' + img).attr(\'src\', data.url); } if (input != \"\") { K(\'#\' + input).val(data.url); } } else { alert(data.message); } } }); uploadbutton.fileBox.change(function (e) { uploadbutton.submit(); }); }); }); </script>");
+        }
+    }
+}

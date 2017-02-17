@@ -1,0 +1,39 @@
+﻿@* Generator: Template
+    GeneratePrettyNames : true *@
+@functions{
+    public NFinal.Compile.SqlTemplate.Model.Update Model { get; set; }
+}
+#region	var @{@Model.varName}; 更新表,并返回受影响行数
+			var __@{@Model.functionName}_@{@Model.varName}_command__ = new Npgsql.NpgsqlCommand("@{@Model.sql};", @{@Model.connectionVarName});
+			@if(Model.isTransaction){
+			@:__@{@Model.functionName}_@{@Model.varName}_command__.Transaction=@{@Model.transactionVarName};
+			}
+			@if(Model.sqlVarParameters.Count>0){
+			@:var __@{@Model.functionName}_@{@Model.varName}_parameters__=new Npgsql.NpgsqlParameter[@{@Model.sqlVarParameters.Count}];
+			}
+			@{int i=0;}
+			@foreach(var sqlVarParameter in Model.sqlVarParameters){
+				if(sqlVarParameter.field!=null){
+					if(sqlVarParameter.field.length>0){
+					@:__@{@Model.functionName}_@{@Model.varName}_parameters__[@i] = new Npgsql.NpgsqlParameter("@@@{@sqlVarParameter.name}",NpgsqlTypes.NpgsqlDbType.@{@sqlVarParameter.field.dbType},@{@sqlVarParameter.field.length});
+					@:__@{@Model.functionName}_@{@Model.varName}_parameters__[@i].Value = @{@sqlVarParameter.csharpName}.WithDBNull();
+					}else{
+					@:__@{@Model.functionName}_@{@Model.varName}_parameters__[@i] = new Npgsql.NpgsqlParameter("@@@{@sqlVarParameter.name}",NpgsqlTypes.NpgsqlDbType.@{@sqlVarParameter.field.dbType});
+					@:__@{@Model.functionName}_@{@Model.varName}_parameters__[@i].Value = @{@sqlVarParameter.csharpName}.WithDBNull();
+					}
+				}else{
+					@:__@{@Model.functionName}_@{@Model.varName}_parameters__[@i] = new Npgsql.NpgsqlParameter(":@{@sqlVarParameter.name}",@{@sqlVarParameter.csharpName});
+				}
+				i++;
+			}
+			@if(Model.sqlVarParameters.Count>0){
+			@:__@{@Model.functionName}_@{@Model.varName}_command__.Parameters.AddRange(__@{@Model.functionName}_@{@Model.varName}_parameters__);
+			}
+			@if(Model.isDeclaration){
+				@:var @{@Model.varName} = __@{@Model.functionName}_@{@Model.varName}_command__.ExecuteNonQuery();
+			}else{
+				@:@{@Model.varName} = __@{@Model.functionName}_@{@Model.varName}_command__.ExecuteNonQuery();
+			}
+			__@{@Model.functionName}_@{@Model.varName}_command__.Dispose();
+			#endregion
+			

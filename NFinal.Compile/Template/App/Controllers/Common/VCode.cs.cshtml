@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace @{@Model.project}.@{@Model.app}.Controllers.Common
+{
+    public class VCode:Controller
+    {
+        public void GetVerifyImage()
+        {
+            //将图片输出到页面上   
+            NFinal.Lib.VerifyCode verifyCode = new NFinal.Lib.VerifyCode();
+            Cookie["vcheck"] = verifyCode.vcheck;
+            ContentType = "image/gif";
+            Write(verifyCode.GetGif());
+        }
+        public void VCheck(string vcode)
+        {
+            NFinal.Lib.VerifyCode verifyCode = new NFinal.Lib.VerifyCode();
+            bool result= verifyCode.Check(Cookie["vcheck"], vcode);
+            this.AjaxReturn(result);
+        }
+    }
+}

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>保留关键词</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="winchm_template_style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function d_onresize(){
+if (window.navigator.userAgent.indexOf("MSIE")>=1){
+document.getElementById('winchm_template_content').style.pixelWidth = document.body.offsetWidth - 3;
+document.getElementById('winchm_template_content').style.pixelHeight = document.body.offsetHeight - document.getElementById('winchm_template_top').offsetHeight - 4;
+}
+document.getElementById('winchm_template_content').style.top = document.getElementById('winchm_template_top').offsetHeight + 'px';
+}
+
+function d_onbeforeprint(){
+document.getElementById('winchm_template_content').style.width = 'auto';
+document.getElementById('winchm_template_content').style.height = 'auto';
+}
+
+function d_onafterprint(){
+d_onresize();
+}
+
+window.onload = d_onresize;
+window.onresize = d_onresize;
+window.onbeforeprint = d_onbeforeprint;
+window.onafterprint = d_onafterprint;
+</script>
+</head>
+
+<body>
+
+<div id="winchm_template_top">
+<table width="100%" height="50" bgcolor="#c4d0f4" style="WIDTH: 100%" cellSpacing=0 cellPadding=3 border=0>
+<tr>
+<td>
+<div id="winchm_template_navigation"><EM>New&nbsp;Help 
+      &gt;&nbsp;</EM>保留关键词 </div>
+<div id="winchm_template_title">
+保留关键词</div>
+</td>
+<td align="right" style="WIDTH: 90px">
+<IMG alt=Previous src="btn_prev_n.gif"><IMG alt=Next src="btn_next_n.gif">
+</td>
+</tr>
+</table>
+</div>
+<div id="winchm_template_content">
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold">使用JNTemplate时，变量或方法的命名，就避免使用以下关键词：</STRONG></P>
+<OL 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); MARGIN-TOP: 0px; TEXT-INDENT: 0px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; MARGIN-BOTTOM: 10px; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">if</SPAN></STRONG></LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">set</SPAN></STRONG></LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">load</SPAN></STRONG></LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">include</SPAN></STRONG></LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">foreach</SPAN></STRONG></LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">for</SPAN></STRONG></LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">true</SPAN></STRONG></LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">false</SPAN></STRONG></LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">else</SPAN></STRONG></LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">elseif</SPAN></STRONG></LI>
+  <LI style="BOX-SIZING: border-box"><STRONG 
+  style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+  style="BOX-SIZING: border-box; COLOR: rgb(0,0,255)">end</SPAN></STRONG></LI></OL>
+<hr>
+  <font face="Arial" color="#808080" size="1">Copyright 2003-2012 Your company 
+  name</font>(Edit the text to change this template.)</div>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>模板</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>	
+   <h3>创建模板</h3>
+		<p>
+			1.新建Header.ascx用户控件,此控件就是模板,修改内容如下:<br />
+			<pre class="brush:csharp;">
+                &lt;%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Header.ascx.cs" Inherits="WebMvc.App.Views.Default.Common.Public.Header" %>
+				&lt;header class="header">
+					我是头模板，
+					&lt;%=ViewBag.message %>
+				&lt;/header>
+			</pre>
+            以下是为了让编译器不出现错误警告而增加的内容,可以忽略.<br />
+            a.以上模版中,ViewBag.message变量是不存在的.为了让编译不出错,请在Header.ascx.cs文件中添加如下变量:
+            <pre class="brush:csharp;">
+            public partial class Header : System.Web.UI.UserControl
+            {
+                public class Header_AutoComplete:Controller
+                {
+				        public string message;
+                }
+                public Header_AutoComplete ViewBag = new Header_AutoComplete();
+            }
+            </pre>
+            b.以上手动添加模板的ViewBag类,十分烦索.可以添加如下控制器函数,然后运行WebCompiler.aspx将自动生成ViewBag类:
+            <pre class="brush:csharp;">
+            public void Header()
+            {
+                string message=null;
+                View("Public/Header.ascx");
+            }
+            </pre>
+		</p>
+    
+	<h3>使用模板</h3>
+		<p>
+			直接将.ascx拖入要使用的aspx(Web页面)地方，<br/>
+				<pre class="brush:csharp;">
+					public void Index(string message)
+					{
+                        string message="我来自模版";
+						View("Index.aspx");
+					}	
+				</pre>
+		</p>
+</body>
+</html>

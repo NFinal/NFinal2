@@ -1,0 +1,42 @@
+﻿<%@@ Control Language="C#" AutoEventWireup="true" CodeBehind="KindEditorLibrary.ascx.cs" Inherits="@{@Model.project}.@{@Model.app}.Views.Default.Common.Public.KindEditorLibrary" %>
+<link rel="stylesheet" href="<%=ViewBag._app; %>/Content/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="<%=ViewBag._app; %>/Content/kindeditor/plugins/code/prettify.css" />
+<script charset="utf-8" src="<%=ViewBag._app; %>/Content/kindeditor/kindeditor.js"></script>
+<script charset="utf-8" src="<%=ViewBag._app; %>/Content/kindeditor/lang/zh_CN.js"></script>
+<script charset="utf-8" src="<%=ViewBag._app; %>/Content/kindeditor/plugins/code/prettify.js"></script>
+<script>
+    KindEditor.ready(function (K) {
+        K.create("textarea[data-type='kindeditor']", {
+            cssPath: '<%=ViewBag._app; %>/Content/kindeditor/plugins/code/prettify.css',
+            uploadJson: '<%=ViewBag._app; %>/Content/kindeditor/asp.net/upload_json.ashx',
+            fileManagerJson: '<%=ViewBag._app; %>/Content/kindeditor/asp.net/file_manager_json.ashx',
+		    allowFileManager: true
+		});
+	    prettyPrint();
+	    K("input[data-type='upload-img']").each(function () {
+	        var upload = K(this);
+	        var img = K(this).attr('data-img');
+	        var input = K(this).attr('data-input');
+	        var uploadbutton = K.uploadbutton({
+	            button: upload,
+	            fieldName: 'imgFile',
+	            url: '<%=ViewBag._app; %>/Content/kindeditor/asp.net/upload_json.ashx',
+	            afterUpload: function (data) {
+	                if (data.error === 0) {
+	                    if (img != "") {
+	                        K('#' + img).attr('src', data.url);
+	                    }
+	                    if (input != "") {
+	                        K('#' + input).val(data.url);
+	                    }
+	                } else {
+	                    alert(data.message);
+	                }
+	            }
+	        });
+	        uploadbutton.fileBox.change(function (e) {
+	            uploadbutton.submit();
+	        });
+	    });
+	});
+</script>

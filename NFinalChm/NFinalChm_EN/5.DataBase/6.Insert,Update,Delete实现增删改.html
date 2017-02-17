@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>6.Insert,Update,Delete实现增删改</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>Insert方法</h3>
+    <p>
+        语法： Insert(string sql)  参数 sql:为sql插入语句
+        <br />
+        返回：插入数据的id(int类型)<br />
+    </p>   
+    <pre class="brush: csharp;">
+    public void Insert(string name ,string pwd)
+    {
+        //打开数据库链接
+        var con = Models.YMC.OpenConnection();
+        //获取插入数据的id
+        var id = con.Insert("insert into user(name,pwd) values(@name,@pwd)");
+        //关闭数据库连接
+        con.Close();
+    }
+   </pre>
+    使用vs2015新增语法，SQL语句有自动提示
+    <pre class="brush: csharp;">
+    Models.Tips.Common.users users = new Models.Tips.Common.users();
+    public void insert(string name, string pwd)
+    {
+        var con = Models.Common.OpenConnection();
+        var id = con.Insert($"insert into {users}({users.name},{users.pwd}) values(@name,@pwd)");
+        con.Close();
+        Write(id);
+    }
+   </pre>
+    <p>
+        模板会根据以上代码生成正确的执行代码，此处不再显示。
+    </p>
+   
+    <h3>Update方法</h3>
+    <p>
+        语法： Update(string sql)  参数 sql:为slq修改语句
+        <br />
+        返回：int 受影响行数<br />
+    </p>
+    <pre class="brush: csharp;">
+    public void Index(string name="大白",int id=23)
+    {
+        //打开一个数据库链接
+        var con = Models.YMC.OpenConnection();
+        var count = con.Update("Update user set name=@name where id=@id");
+        //关闭数据库连接
+        con.Close();
+    }
+   </pre>
+    使用vs2015新增语法，SQL语句有自动提示
+    <pre class="brush: csharp;">
+    Models.Tips.Common.users users = new Models.Tips.Common.users();
+    public void update(
+        [maxLength(12),required()]
+        string name,
+        
+        string pwd)
+    {
+        var con = Models.Common.OpenConnection();
+        var count = con.Update($"update {users} set {users.name}=@name,{users.pwd}=@pwd where {users.id}=1");
+        con.Close();
+        Write(count);
+    }
+   </pre>
+    <p>
+        模板会根据以上代码生成正确的执行代码，此处不再显示。
+    </p>
+    
+    <h3>Delete方法</h3>
+    <p>
+        语法： Delete(string sql)  参数 sql:为sql删除语句
+        <br />
+        返回：int 受影响行数<br />
+    </p>
+   
+    <pre class="brush: csharp;">
+    public void Index(int id=25)
+    {
+        //打开一个数据库链接
+        var con = Models.YMC.OpenConnection();
+        var count = con.Delete("delete from user  where id=@id");
+        //关闭数据库连接
+        con.Close();
+    }
+   </pre>
+    使用vs2015新增语法，SQL语句有自动提示
+    <pre class="brush: csharp;">
+    Models.Tips.Common.users users = new Models.Tips.Common.users();
+    public void delete(int id)
+    {
+        var con = Models.Common.OpenConnection();
+        var count = con.Delete($"delete from {users} where {users.id}=@id");
+        con.Close();
+        Write(count);
+    }
+   </pre>
+    <p>
+        模板会根据以上代码生成正确的执行代码，此处不再显示。可以参见QueryRandom中的模板生成的代码
+    </p>
+    
+</body>
+</html>

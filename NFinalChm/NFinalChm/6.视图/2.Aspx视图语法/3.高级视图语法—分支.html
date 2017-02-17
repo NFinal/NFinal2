@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>3.高级视图语法—分支</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+	<h3>高级视图语法—分支</h3>
+    <pre class="brush: csharp;">
+        &lt;%int a = 3; %>
+        &lt;%//if判断 %>
+        &lt;if condition="&lt;%=a > 3 %>">
+		    true
+        &lt;else />
+		    false
+        &lt;/if>
+
+        &lt;if condition="&lt;%=a&gt;1 %>">
+		    1
+        &lt;elseif condition="&lt;%=a&gt;2 %>" />
+		    2
+        &lt;else/>
+			3
+        &lt;/if>
+
+
+        &lt;%//switch判断 %>
+        &lt;switch variable="&lt;%=a%>">
+            &lt;case value="&lt;%=1 %>">
+                1
+            &lt;/case>
+            &lt;case value="&lt;%=2 %>">
+                2
+            &lt;/case>
+            &lt;default>
+                other
+            &lt;/default>
+        &lt;/switch>
+
+        &lt;%int[] b=new int[]{1,2,3,4}; %>
+	</pre>
+</body>
+</html>

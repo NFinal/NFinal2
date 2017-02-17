@@ -1,0 +1,7 @@
+﻿@* Generator: Template
+    GeneratePrettyNames : true *@
+@functions{
+    public NFinal.Compile.SqlTemplate.Model.Open Model { get; set; }
+}
+var @{@Model.connectionVarName} = new Oracle.ManagedDataAccess.Client.OracleConnection(NFinal.Config.ConfigurationManager.ConnectionStrings[@{@Model.dbName}].ConnectionString);
+			@{@Model.connectionVarName}.Open();

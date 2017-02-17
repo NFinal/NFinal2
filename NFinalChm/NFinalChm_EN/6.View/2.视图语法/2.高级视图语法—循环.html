@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>2.高级视图语法—循环</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+	<h3>高级视图语法—循环</h3>
+    <pre class="brush: csharp;">
+        &lt;%//Foreach循环 %>
+        &lt;foreach enumerator="&lt;%var c = b.GetEnumerator();%>">
+            &lt;%=c.Current.ToString() %>
+        &lt;/foreach>
+
+        &lt;%//For循环 %>
+        &lt;for start="&lt;%int  i = 0; %>" condition="&lt;%= i &lt; b.Length %>" step="&lt;%i++;%>">
+            &lt;%=b[i].ToString() %>
+        &lt;/for>
+
+        &lt;%//While do循环 %>
+        &lt;%int k = 0; %>
+        &lt;while condition="&lt;%=k &lt; b.Length; %>">
+            &lt;%=b[k].ToString(); %>
+            &lt;%k++; %>
+        &lt;/while>
+	</pre>
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>3.ORM使用的几种方式</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>数据库操作</h3>
+	<p>
+        一般执行
+    </p>
+    <pre class="brush: csharp;">
+        var con = Models.Common.OpenConnection();
+        var us= con.QueryAll("select id,name,pwd from users");
+        con.Close();
+    </pre>
+    <p>
+        带参数的执行
+    </p>
+    <pre class="brush: csharp;">
+        int vid=2;
+        var con = Models.Common.OpenConnection();
+        //在sql语句中直接写@变量名即可把变量值写入sql中。
+        var us= con.QueryAll("select id,name,pwd from users where id>@vid");
+        con.Close();
+    </pre>
+    <p>
+        使用SQL语句提示（$号开头的字符串只有vs2005及以上版本才可使用）
+    </p>
+    <pre class="brush: csharp;">
+        //使用sql自动提示类，找不到类的把Models/Tips目录包含进项目中来
+        Models.Tips.Common.users users = new Models.Tips.Common.users();
+        var con = Models.Common.OpenConnection();
+        //Tips类不起任何作用代码方面的作用，只是起自动提示的效果。
+        //NFinal引擎在解析时会把大括号{}去掉，当成sql语句进行进一步解析。
+        //以下语句和var us= con.QueryAll("select users.id,users.name,users.pwd from users");相同。
+        var us= con.QueryAll($"select {users.id},{users.name},{users.pwd} from {users}");
+        con.Close();
+    </pre>
+    <p>
+        使用SQL语句提示下的带参数执行
+    </p>
+    <pre class="brush: csharp;">
+        //使用sql自动提示类，找不到类的把Models/Tips目录包含进项目中来
+        Models.Tips.Common.users users = new Models.Tips.Common.users();
+        int vid=2;
+        var con = Models.Common.OpenConnection();
+        //Tips类不起任何作用代码方面的作用，只是起自动提示的效果。
+        //NFinal引擎在解析时会把大括号{}去掉，当成sql语句进行进一步解析。
+        //以下语句和var us= con.QueryAll("select users.id,users.name,users.pwd from users where users.id >@vid");相同。
+        var us= con.QueryAll($"select {users.id},{users.name},{users.pwd} from {users} where {users.id}>@vid");
+        con.Close();
+    </pre>
+    <p>
+        使用自定义的Entity类
+    </p>
+    <pre class="brush: csharp;">
+        var con = Models.Common.OpenConnection();
+        List&lt;Models.Entity.Common.users> users = new List&lt;Models.Entity.Common.users>();
+        users= con.QueryAll&lt;Models.Entity.Common.users>("select * from users");
+        con.Close();
+    </pre>
+    <p>
+        使用存储过程
+    </p>
+    <pre class="brush: csharp;">
+        var con = Models.Common.OpenConnection();
+        var trans = con.BeginTransaction();
+        try
+        {
+            var users = trans.QueryAll("select * from users");
+            AjaxReturn(users);
+            trans.Rollback();
+        }
+        catch
+        {
+            trans.Rollback();
+        }
+        con.Close();
+    </pre>
+    <p>
+        使用缓存,首先应启动NFinal\Redis\32bit或NFinal\Redis\64bit下的redis-server.exe服务
+    </p>
+    <pre class="brush: csharp;">
+        var client = NFinal.Cache.GetRedisClient();
+        var client2 = client.As&lt;Models.Entity.Common.users>();
+        var users = client2.GetAll();
+        if (users.Count==0)
+        {
+            var con = Models.Common.OpenConnection();
+            users = con.QueryAll&lt;Models.Entity.Common.users>("select * from users");
+            client2.StoreAll(users);
+            con.Close();
+        }
+        client.Dispose();
+    </pre>
+    <p>
+        使用ajax返回数据
+    </p>
+    <pre class="brush: csharp;">
+        var con = Models.Common.OpenConnection();
+        var us= con.QueryAll($"select {users.id},{users.name},{users.pwd} from {users}");
+        con.Close();
+        //所有的对象均可调用此函数返回json字符串，
+        //若调用的是con返回的数据库对象，其速度是newtonsoft的1000倍以上。
+        AjaxReturn(us);
+    </pre>
+</body>
+</html>

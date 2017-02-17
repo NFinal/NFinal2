@@ -1,0 +1,150 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>赋值标签</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="winchm_template_style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function d_onresize(){
+if (window.navigator.userAgent.indexOf("MSIE")>=1){
+document.getElementById('winchm_template_content').style.pixelWidth = document.body.offsetWidth - 3;
+document.getElementById('winchm_template_content').style.pixelHeight = document.body.offsetHeight - document.getElementById('winchm_template_top').offsetHeight - 4;
+}
+document.getElementById('winchm_template_content').style.top = document.getElementById('winchm_template_top').offsetHeight + 'px';
+}
+
+function d_onbeforeprint(){
+document.getElementById('winchm_template_content').style.width = 'auto';
+document.getElementById('winchm_template_content').style.height = 'auto';
+}
+
+function d_onafterprint(){
+d_onresize();
+}
+
+window.onload = d_onresize;
+window.onresize = d_onresize;
+window.onbeforeprint = d_onbeforeprint;
+window.onafterprint = d_onafterprint;
+</script>
+</head>
+
+<body>
+
+<div id="winchm_template_top">
+<table width="100%" height="50" bgcolor="#c4d0f4" style="WIDTH: 100%" cellSpacing=0 cellPadding=3 border=0>
+<tr>
+<td>
+<div id="winchm_template_navigation"><EM>New&nbsp;Help 
+      &gt;&nbsp;</EM>赋值标签 </div>
+<div id="winchm_template_title">
+赋值标签</div>
+</td>
+<td align="right" style="WIDTH: 90px">
+<IMG alt=Previous src="btn_prev_n.gif"><IMG alt=Next src="btn_next_n.gif">
+</td>
+</tr>
+</table>
+</div>
+<div id="winchm_template_content">
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold"><SPAN 
+style="BOX-SIZING: border-box; COLOR: rgb(0,0,205)">赋值标签</SPAN></STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold">标签作用：</STRONG>将值赋给某个指定变量，如果该变量已经存在，则改变该变量的值，否则创建一个新变量！该标签也是经常使用的一个标签，用以配合方法，循环等标签使用</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold">书写格式：</STRONG>${set(变量名=值)}</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold">标签简写：</STRONG>$set(变量名=值)</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><STRONG 
+style="BOX-SIZING: border-box; FONT-WEIGHT: bold">注意事项：</STRONG></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　1.等于后面可以接变量，方法，表达式，或者数字，字符，true与false</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　2.字符串必须使用双引号！</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　3.如果同一个变量重复赋值，最后面的结果会覆盖之前的结果！</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">　　　　　3.如果是在循环体（具体见循环标签）内创建的变量，则当前循环结速后，该变量不再存在！如果是在循环体内重新赋值，则离开循环体后将丢失更改！如：</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　$set(id 
+= 11.5)</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　$id 
+//结果是11.5</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　$foreach(node 
+in list)</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　$set(id 
+= 88/2)</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　$id 
+//值被改变，结果是44</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　$end</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　$id 
+//结果是11.5</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px">&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">示例代码：</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)"></SPAN>&nbsp;</P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　模板：$set(id 
+= getQuery("id")) //将getQuery方法返回的结果赋给id</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　$set(a= 
+1)&nbsp; //将数字赋给变量a</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　$set(a= 
+true)//将布尔值(true/false)赋给变量a</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　$set(a= 
+"字符串") //将字符串赋给变量a</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　$set(a= 
+user.Name) //将变量usr的属性Name赋给变量a</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)">　　　　　　　　$set(a= 
+3+5) 将表达式3+5的结果赋给变量a,注意 表达式支持复杂的加减乘除四则运算与逻辑判断，比如 $set(a= (20+20)/40)</SPAN></P>
+<P 
+style="BOX-SIZING: border-box; WIDOWS: 1; TEXT-TRANSFORM: none; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; MARGIN: 0px 0px 10px; FONT: 14px/20px Tahoma, Helvetica, Arial, 'Microsoft YaHei', 宋体, sans-serif; WHITE-SPACE: normal; LETTER-SPACING: normal; COLOR: rgb(51,51,51); WORD-SPACING: 0px; -webkit-text-stroke-width: 0px"><SPAN 
+style="BOX-SIZING: border-box; BACKGROUND-COLOR: rgb(240,248,255)"></SPAN>&nbsp;</P>
+<hr>
+  <font face="Arial" color="#808080" size="1">Copyright 2003-2012 Your company 
+  name</font>(Edit the text to change this template.)</div>
+
+</body>
+
+</html>

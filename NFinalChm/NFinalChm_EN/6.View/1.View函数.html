@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>View函数的使用</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+	<h3>View函数的使用</h3>
+    <p>View函数只能在控制器中使用,<br />
+       其作用为调用模板进行渲染,参数值为模板路径.<br />
+       其使用方法为:
+    </p>
+    <pre class="brush: csharp;">
+        //在Controllers/Admin/IndexController.cs 中的Index方法体内.
+        //正常的写法为:
+        View("IndexController/Index.aspx");
+        
+        //当调用Views/Default/Admin/IndexController/Show.aspx时,可简写为
+        View("Show.aspx");
+        //当调用Views/Default/Admin/IndexController/Index.aspx时,可以简写为
+        View("");
+
+        //前面加'/'符号代表相对于Views/Default/根目录的路径.
+        View("/Admin/IndexController/Index.aspx");
+    </pre>
+    <p>
+        生成完成后再编辑aspx时，就会有自动提示功能。<br/>包括ViewBag的自提示，以及有模板标签的自提示。
+    </p>
+</body>
+</html>

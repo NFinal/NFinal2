@@ -1,0 +1,22 @@
+﻿CHAR	string	Char	String
+NCHAR	string	NChar	String
+VARCHAR2	string	Varchar2	String
+NVARCHAR2	string	NVarchar2	String
+CLOB	string	Clob	String
+NCLOB	string	NClob	String
+LONG	string	Long	String
+LONG RAW	object	LongRaw	String
+NUMBER	decimal	Decimal	Number
+BINARY_FLOAT	float	BinaryFloat	Number
+BINARY_DOUBLE	double	Double	Number
+DATE	DateTime	Date	Time
+INTERVAL DAY	TimeSpan	IntervalDS	Time
+INTERVAL YEAR	TimeSpan	IntervalYM	Time
+TIMESTAMP	DateTime	TimeStamp	Time
+WITH TIME ZONE	DateTime	TimeStampTZ	Time
+WITH LOCAL TIME ZONE	DateTime	TimeStampLTZ	Time
+BLOB	object	Blob	String
+BFILE	object	BFile	String
+RAW	object	Raw	String
+ROWID	string	Varchar2	String
+FLOAT	decimal	Decimal	Number

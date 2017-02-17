@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>7.用户控件</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>自定义控件</h3>
+	
+	<h3>定义控件</h3>
+	以Label控件为例：<br/>
+		1、首先在Views/Default/Common/Public文件夹下添加Label.cs文件，其中代码如下：
+			<pre class="brush:csharp;">
+                    //a.control的实体类必须继承NFinal.UserControl类
+				    public class Label:NFinal.UserControl
+					{
+                        //b.因定格式,其中的泛型类必须为此控件类
+						public __Render__&lt;Navigator&gt; __render__ = null;
+                        
+                        #region c.自定义变量
+						public string text;
+                        #endregion
+					}
+			</pre>
+		
+		2、新建Label.ascx文件，其中可以定义要使用的控件的模板内容
+				<pre class="brush:html;">
+					<%=ViewBag.text%>
+				</pre>
+    <h3>控件的使用</h3>
+		1、可以在要使用该模板的Controller.cs中声明成员。
+		<pre class="brush: csharp;">
+        public void Index()
+        {
+            //声明控件实体对象
+            Label label1=new Label();
+            lable1.text="我来自控件";
+            View("Index.aspx");
+        }
+		</pre>
+    <p>
+	    2.用鼠标拖Label.ascx控件模版到Index.aspx窗体中，增加db属性,此属性绑定到控件变量上<br />
+		<pre class="brush:html;">
+            &lt;div>
+                &lt;uc1:Label runat="server" id="label1" db="<%#ViewBag.label1%>" />
+            &lt;/div>
+		</pre>
+	</p>
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>1.基本视图语法</title>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+	<h3>基本视图语法</h3>
+    <pre class="brush: csharp;">
+        //1、@{}中可直接写csharp代码.
+        @{ int a=0; }
+        //2、@name 输出变量
+        @a
+        //3、ViewBag.变量名(访问控制器中的变量)
+        @ViewBag.title
+    </pre>
+
+    <br />
+    <p>在视图中可以直接输出控制器方法内的变量以及方法中的参数</p>
+    <pre class="brush: csharp;">
+    public class IndexController:Controller
+    {
+        public void Index(string name)
+        {
+            string word="hello ";
+            View("Index.aspx");
+        }
+    }
+    </pre>
+    <p>
+        运行生成器Web.Compiler.aspx,则可直接生成Razor模板Index.cshtml<br/>
+        以及Index.cshtml.cs模型文件，当然，你也可以自己手动创建。但必须要声明一个指向model的ViewBag变量。
+    </p>
+    <pre class="brush: html;">
+        @{var ViewBag=new WebApp.App.Views.Default.IndexController.Index_AutoComplete();}
+        &lt;!DOCTYPE html>
+        &lt;html>
+        &lt;head>
+                &lt;meta name="viewport" content="width=device-width" />
+                &lt;title>&lt;/title>
+        &lt;/head>
+        &lt;body>
+            @ViewBag.word @ViewBag.name
+        &lt;/body>
+        &lt;/html>
+    </pre>
+    <p>
+        Index.cshtml.cs如下
+    </p>
+    <pre class="brush: csharp;">
+        using System;
+        using System.Collections.Generic;
+        namespace WebApp.App.Views.Default.IndexController
+        {
+	        //数据库模型
+	        //函数内变量
+            public class Index_AutoComplete:Controller
+            {
+		        /*参数变量*/
+                public string name;
+		        /*数据库变量*/
+		        /*一般变量*/
+                public string word;
+		        /*DAL函数声明变量*/
+            }
+        }
+    </pre>
+</body>
+</html>

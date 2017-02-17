@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>2.0.URL默认规则</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>路由配置</h3>
+    <p>
+        路由前缀，后缀<br/>
+        在模块目录下的config.json文件中。
+    </p>
+    <pre class="brush: javascript;">
+        //URL前缀
+        "urlPrefix": "/App",
+        //URL后缀
+        "urlExtension": ".html",
+    </pre>
+    <h3>默认路由规则</h3>
+    <b>不带参数</b><br/>
+    URL=URL前缀（config.json中的urlPrefix项）<br/>
+    +"/"+类名+"/"+方法名<br/>
+    +URL后缀(config.json中的urlExtension项)
+    <pre class="brush: csharp;">
+        //如果此类的模块名为App
+        namespace WebSite.App.Controllers
+        {
+            public class IndexController
+            {
+                public void Index()
+                {
+                    Write("Hello!");
+                }
+            }
+        }
+		//URL前缀为：/App
+		//类名为:IndexController
+		//方法名:Index
+		//URL后缀为:.html
+        //对应的URL为:http://localhost/App/IndexController/Index.html
+    </pre>
+    <b>带参数</b><br />
+    URL=URL前缀（config.json中的urlPrefix项）<br />
+    +"/"+类名+"/"+方法名<br />
+    +"/"+参数1+"/"+参数2+"/"+参数3....<br />
+    +两位数字(两位数字代表urlPrefix+类名+方法名的长度)<br />
+    +URL后缀(config.json中的urlExtension项)
+    <pre class="brush: csharp;">
+        //如果此类的模块名为App
+        namespace WebSite.App.Controllers
+        {
+            public class IndexController
+            {
+                public void Index(int id)
+                {
+                    Write("Hello!");
+                }
+            }
+        }
+		//URL前缀为：/App
+		//类名为:User
+		//方法名:Index
+		//数字:15
+		//参数1为：3
+		//URL后缀为:.html
+        //对应的URL为:http://localhost/App/User/Index/315.html
+    </pre>
+    <b>后台生成</b>
+    <pre class="brush: csharp;">
+        //Url.cs类位于网站根目录下。
+        string url=Url.IndexController_Index(int id);
+        //模板调用时
+        //<%=Urls.IndexController_Index(3);%>
+    </pre>
+    <b>前端生成</b>
+    <pre class="brush: javascript;">
+        //需要引入网站根目录下的Url.js文件
+        var id="1";
+        var url=Url.IndexController_Index(int id);
+    </pre>
+</body>
+</html>

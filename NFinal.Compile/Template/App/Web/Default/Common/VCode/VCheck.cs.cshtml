@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace @{@Model.project}.@{@Model.app}.Web.Default.Common.VCode
+{
+    public class VCheckAction  : Controller
+	{
+		public VCheckAction(System.IO.TextWriter tw):base(tw){}
+		public VCheckAction(string fileName) : base(fileName) {}
+		public VCheckAction(HttpContext context):base(context){}
+		public VCheckAction(Microsoft.Owin.IOwinContext context):base(context){}
+		public VCheckAction(Controller controller):base(controller){}
+        public void VCheck(string vcode)
+        {
+            NFinal.Lib.VerifyCode verifyCode = new NFinal.Lib.VerifyCode();
+            bool result= verifyCode.Check(Cookie.vcheck, vcode);
+            this.AjaxReturn(result);
+        }
+    }
+}

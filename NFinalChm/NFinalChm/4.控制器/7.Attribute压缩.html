@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>7.Attribute压缩</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css" />
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>7.Attribute压缩</h3>
+    <p>
+        Gzip压缩
+    </p>
+    <pre class="brush: csharp;">
+        //urlPrefix="/App";
+        namespace WebSite.App.Controllers
+        {
+            public class NewsController
+            {
+				//调用带有Zip后缀的Attribute路由，即实现Gzip压缩功能。
+				[GetHtmlZip("~/Index.html")]
+                public void Index()
+                {
+                    Write("Hello world!");
+                }
+            }
+        }
+    </pre>
+	<p>
+        Deflate压缩
+    </p>
+        <pre class="brush: csharp;">
+        //urlPrefix="/App";
+        namespace WebSite.App.Controllers
+        {
+            public class NewsController
+            {
+				//调用带有Deflate后缀的Attribute路由，即实现Deflate压缩功能。
+				[GetHtmlDeflate("~/Index.html")]
+                public void Index()
+                {
+                    Write("Hello world!");
+                }
+            }
+        }
+    </pre>
+</body>
+</html>

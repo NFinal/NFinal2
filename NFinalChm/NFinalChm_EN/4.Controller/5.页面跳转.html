@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>5.页面跳转</title>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushCSharp.js"></script>
+    <script type="text/javascript" src="../Content/highlighter/scripts/shBrushXml.js"></script>
+    <link type="text/css" rel="stylesheet" href="../Content/highlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body>
+    <h3>页面跳转</h3>
+    <p>
+        Extesion.cs类提供了两个函数,Success和Error
+        我们可以在控制器中直接调用.如下:
+    </p>
+    <pre class="brush: csharp;">
+        if(isLogin)
+        {
+			//参数1：显示信息，参数2为跳转后的URL，参数3为跳转所需的秒数
+            this.Success("登陆成功", "/App/AdminController/Index.htm", 3);
+        }
+        else
+        {
+			//参数1：显示信息，参数2为跳转后的URL，参数3为跳转所需的秒数
+            this.Error("登陆失败","/App/UserController/Login.htm",3);
+        }
+    </pre>
+    <p>
+        对应的模板位于Views/Default/Common/Public/下
+        分别是Success.aspx和Error.aspx,用户可以重新修改其样式.
+    </p>
+</body>
+</html>

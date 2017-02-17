@@ -1,0 +1,10 @@
+﻿INTEGER	int	Int32	Number
+REAL	decimal	Decimal	Number
+TEXT	string	String	String
+BLOB	Stream	Binary	Stream
+VARCHAR	string	String	String
+long varbinary	int	Int32	Number
+smallint	int	Int32	Number
+date	string	String	String
+numeric	decimal	Decimal	Number
+float	decimal	Decimal	Number
