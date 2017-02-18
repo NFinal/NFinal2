@@ -279,7 +279,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="update.log" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
