@@ -35,6 +35,8 @@ namespace NFinal.Core.Middleware
                     writer.Write("\",parameters);\r\n        ");
                     writer.Write("}\r\n");
                 }
+                writer.Write("    ");
+                writer.Write("}\r\n");
             }
             writer.Write("};");
         }

@@ -1,9 +1,9 @@
 ﻿@inherits NFinal.Razor.BasePage<NFinal.Middleware.UrlRouteJsModel>
 @using System.Collections.Generic
 var Url={
-@foreach(KeyValuePair<Type,Dictionary<string,string>> formatController in Model.formatControllerDictionary)
+@foreach (KeyValuePair<Type, Dictionary<string, string>> formatController in Model.formatControllerDictionary)
 {
-    string controllerName= formatController.Key.Namespace.Replace(',', '_') + "_" + formatController.Key.Name;
+    string controllerName = formatController.Key.Namespace.Replace(',', '_') + "_" + formatController.Key.Name;
     @:"@controllerName":{
     foreach (KeyValuePair<string, string> formatMethod in formatController.Value)
     {
@@ -12,5 +12,6 @@ var Url={
             @:string.Format("@formatMethod.Value",parameters);
         @:}
     }
+    @:}
 }
 };
