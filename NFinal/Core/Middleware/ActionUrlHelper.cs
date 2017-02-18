@@ -265,6 +265,7 @@ namespace NFinal.Middleware
                             ch = format[pos];
                             pos++;
                         }
+
                         pos--;
                     }
                 }
