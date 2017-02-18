@@ -169,11 +169,11 @@ namespace NFinal.Middleware
                     {
                         if (actionData.actionUrlData.isSimpleUrl)
                         {
-                            ActionUrlHelper.SimpleParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames, requestPath.Length);
+                            ActionUrlHelper.SimpleParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames, requestPath.Length,actionData.actionUrlData.extensionLength);
                         }
                         else
                         {
-                            ActionUrlHelper.RegexParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames,requestPath.Length, actionData.actionUrlData.parameterRegex);
+                            ActionUrlHelper.RegexParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames,actionData.actionUrlData.parameterRegex);
                         }
                     }
                 }

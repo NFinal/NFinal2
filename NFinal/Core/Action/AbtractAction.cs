@@ -225,10 +225,26 @@ namespace NFinal
         {
             return NFinal.Utility.MapPath(path);
         }
-        public string Url(string actionName, params StringContainer[] urlParameters)
+        /// <summary>
+        /// 获取Url
+        /// </summary>
+        /// <param name="controllerType">控制器名称</param>
+        /// <param name="methodName">方法名</param>
+        /// <param name="urlParameters">Url参数</param>
+        /// <returns></returns>
+        public static string Url<TController>(string methodName, params StringContainer[] urlParameters)
         {
-            string formatKey = string.Concat("/" + this.Area, "/", this.Controller, "/", actionName);
-            return NFinal.Middleware.ActionUrlHelper.Format(Middleware.ActionUrlHelper.formatDictionary[formatKey], urlParameters);
+            return NFinal.Middleware.ActionUrlHelper.Format(Middleware.ActionUrlHelper.formatControllerDictionary[typeof(TController)][methodName], urlParameters);
+        }
+        /// <summary>
+        /// 获取Url
+        /// </summary>
+        /// <param name="methodName">方法名</param>
+        /// <param name="urlParameters">Url参数</param>
+        /// <returns></returns>
+        public string Url(string methodName, params StringContainer[] urlParameters)
+        {
+            return NFinal.Middleware.ActionUrlHelper.Format(Middleware.ActionUrlHelper.formatControllerDictionary[this.GetType()][methodName], urlParameters);
         }
         /// <summary>
         /// 模板渲染函数

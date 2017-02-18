@@ -131,6 +131,10 @@
     <Compile Include="Core\Middleware\ContextMiddleware.cs" />
     <Compile Include="Core\Middleware\Middleware.cs" />
     <Compile Include="Core\Middleware\StringBuilderCache.cs" />
+    <Compile Include="Core\Middleware\UrlRouteJs.template.cs">
+      <DependentUpon>UrlRouteJs.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Middleware\UrlRouteJsModel.cs" />
     <Compile Include="Core\Middleware\UrlSegment.cs" />
     <Compile Include="Core\Model\ModelHelper.cs" />
     <Compile Include="Core\Filter\FilterEvent.cs" />
@@ -275,6 +279,9 @@
     <None Include="app.config" />
     <None Include="Action.cd" />
     <Compile Include="Core\Constant.cs" />
+    <None Include="Core\Middleware\UrlRouteJs.cshtml">
+      <Generator>NFinalRazorGenerator</Generator>
+    </None>
     <None Include="key.snk" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

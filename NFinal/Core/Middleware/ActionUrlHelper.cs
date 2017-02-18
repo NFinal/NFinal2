@@ -18,6 +18,7 @@ namespace NFinal.Middleware
     public class ActionUrlData
     {
         public MethodInfo methodInfo;
+        public int extensionLength;
         public string actionUrl;
         public string[] actionUrlNames;
         public bool hasNoParamsInUrl;
@@ -28,7 +29,7 @@ namespace NFinal.Middleware
     }
     public class ActionUrlHelper
     {
-        public static NFinal.Collections.FastDictionary<string> formatDictionary;
+        public static Dictionary<Type,Dictionary<string,string>> formatControllerDictionary;
         /// <summary>
         /// 是否是URL分隔符
         /// </summary>
@@ -60,6 +61,7 @@ namespace NFinal.Middleware
             int leftBracePosition = 0;
             int rightBraceCount = 0;
             int rightBracePosition = 0;
+            int lastSingleRightBraceIndex = 0;
             //用于解析字符串
             List<UrlSegment> segmentList = new List<UrlSegment>();
             UrlSegment segment = null;
@@ -126,6 +128,7 @@ namespace NFinal.Middleware
 
                         if (leftBraceCount == rightBraceCount)
                         {
+                            lastSingleRightBraceIndex = i;
                             segment = new UrlSegment(actionUrl, leftBracePosition + 1, rightBracePosition - leftBracePosition - 1);
                             segmentList.Add(segment);
                         }
@@ -144,6 +147,7 @@ namespace NFinal.Middleware
                 }
             }
             actionUrlData.isSimpleUrl = isSimpleUrl;
+            actionUrlData.extensionLength = actionUrl.Length - lastSingleRightBraceIndex - 1;
             #endregion
             //生成名称数组
             #region
@@ -195,11 +199,11 @@ namespace NFinal.Middleware
                     int pos = ext.LastIndexOf('.');
                     if (pos > -1)
                     {
-                        formatUrl = formatUrl.Insert(segmentList[i].start + relitivePosition + segmentList[i].length + pos, (actionKey.Length - 1).ToString("00"));
+                        formatUrl = formatUrl.Insert(segmentList[i].start + relitivePosition + segmentList[i].length + pos, (actionKey.Length).ToString("00"));
                     }
                     else
                     {
-                        formatUrl = formatUrl + (actionKey.Length - 1).ToString("00");
+                        formatUrl = formatUrl + (actionKey.Length).ToString("00");
                     }
                 }
             }
@@ -220,11 +224,11 @@ namespace NFinal.Middleware
                     int pos = ext.LastIndexOf('.');
                     if (pos > -1)
                     {
-                        parameterRegex = parameterRegex.Insert(segmentList[i].start + relitivePosition + segmentList[i].length + pos, (actionKey.Length - 1).ToString("00"));
+                        parameterRegex = parameterRegex.Insert(segmentList[i].start + relitivePosition + segmentList[i].length + pos, (actionKey.Length).ToString("00"));
                     }
                     else
                     {
-                        parameterRegex = parameterRegex + (actionKey.Length - 1).ToString("00");
+                        parameterRegex = parameterRegex + (actionKey.Length).ToString("00");
                     }
                 }
             }
@@ -288,7 +292,7 @@ namespace NFinal.Middleware
             }
             return StringBuilderCache.GetStringAndRelease(sb);
         }
-        public static void SimpleParse(string url, NameValueCollection nvc,string[] urlParameterNames, int actionKeyWithoutSubDomainAndMethodLength)
+        public static void SimpleParse(string url, NameValueCollection nvc,string[] urlParameterNames, int actionKeyWithoutSubDomainAndMethodLength,int extensionLength)
         {
             int pos = 0;
             int len = url.Length;
@@ -298,19 +302,19 @@ namespace NFinal.Middleware
             int right = 0;
             int index = 0;
 
-            int colonCount = 0;
-            while (pos < len)
-            {
-                if (url[pos] == ':')
-                {
-                    colonCount++;
-                    if (colonCount == 2)
-                    {
-                        break;
-                    }
-                }
-                pos++;
-            }
+            //int colonCount = 0;
+            //while (pos < len)
+            //{
+            //    if (url[pos] == ':')
+            //    {
+            //        colonCount++;
+            //        if (colonCount == 2)
+            //        {
+            //            break;
+            //        }
+            //    }
+            //    pos++;
+            //}
             pos += actionKeyWithoutSubDomainAndMethodLength;
             
             left = 0;
@@ -328,29 +332,33 @@ namespace NFinal.Middleware
                 }
                 pos++;
             }
+
             left = right+1;
-            right = pos;
+            //这里要减去两个数字定位符
+            right = url.Length-left-extensionLength-2;
             nvc.Add(urlParameterNames[index], url.Substring(left, right));
         }
-        public static void RegexParse(string url,NameValueCollection nvc,string[] urlParameterNames,int actionKeyLength,string parameterRegex)
+        public static void RegexParse(string url,NameValueCollection nvc,string[] urlParameterNames,string parameterRegex)
         {
             var Regex = new Regex(parameterRegex);
             Match mat = Regex.Match(url);
-            for (int i= 0;i< mat.Groups.Count;i++)
+            if (mat.Success)
             {
-                nvc.Add(urlParameterNames[i], mat.Groups[i].Value);
-            }
-        }
-        public void Parse(string url, UrlParseData parseData, NameValueCollection nvc)
-        {
-            if (!parseData.hasNoParamsInUrl)
-            {
-                if (parseData.isSimpleUrl)
+                for (int i = 0; i < urlParameterNames.Length; i++)
                 {
-                    
+                    nvc.Add(urlParameterNames[i], mat.Groups[i + 1].Value);
                 }
             }
         }
+        public static void GetUrlRouteJsContent(string url, UrlParseData parseData, NameValueCollection nvc)
+        {
+            UrlRouteJsModel model = new UrlRouteJsModel();
+            model.formatControllerDictionary = formatControllerDictionary;
+            NFinal.IO.FileWriter fileWriter = new IO.FileWriter(NFinal.Utility.MapPath("/Url.js"));
+            NFinal.Core.Middleware.UrlRouteJs.Render(fileWriter, model);
+            fileWriter.Dispose();
+        }
+
     }
     /// <summary>
     /// 输出URL专用

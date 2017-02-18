@@ -8,6 +8,10 @@ using System.Reflection.Emit;
 public delegate void ActionExecute<TContext, TResquest>(TContext context,NFinal.Middleware.ActionData<TContext,TResquest> actionData,TResquest request,NFinal.NameValueCollection parameters);
 namespace NFinal.Middleware
 {
+    public class ControllerData
+    {
+        public Dictionary<Type, Dictionary<string,string>> formatList;
+    }
     public class ActionData<TContext,TRequest>
     {
         public string actionUrl;
@@ -40,7 +44,7 @@ namespace NFinal.Middleware
             Type[] types = null;
 
             List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList = new List<KeyValuePair<string, ActionData<TContext, TRequest>>>();
-            List<KeyValuePair<string, string>> formatList = new List<KeyValuePair<string, string>>();
+            Dictionary<Type, Dictionary<string, string>> formatControllerDictionary = new Dictionary<Type, Dictionary<string, string>>();
             Type controller = null;
 
 
@@ -92,6 +96,7 @@ namespace NFinal.Middleware
                 for (int j = 0; j < modules.Length; j++)
                 {
                     types = modules[j].GetTypes();
+                   
                     for (int k = 0; k < types.Length; k++)
                     {
                         controller = types[k];
@@ -100,20 +105,23 @@ namespace NFinal.Middleware
                         {
                             if (!controller.IsGenericType)
                             {
-                                AddActionData(actionDataList,formatList,assembly, controller, options);
+                                Dictionary<string, string> formatMethodDic = new Dictionary<string, string>();
+                                AddActionData(actionDataList, formatMethodDic, assembly, controller, options);
+                                formatControllerDictionary.Add(controller, formatMethodDic);
                             }
                         }
+                        
                     }
                 }
             }
-            Middleware.ActionUrlHelper.formatDictionary=new Collections.FastDictionary<string>(formatList,formatList.Count);
+            Middleware.ActionUrlHelper.formatControllerDictionary=formatControllerDictionary;
             //}
             //添加图标响应
             //Icon.Favicon.Init(actionDataList);
             Middleware.Middleware<TContext, TRequest>.actionFastDic = new Collections.FastDictionary<ActionData<TContext, TRequest>>(actionDataList, actionDataList.Count);
         }
         public static void AddActionData<TContext, TRequest>(List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList,
-            List<KeyValuePair<string,string>> formatList,
+            Dictionary<string,string> formatMethodDictionary,
             Assembly assembly,Type controller, NFinal.Middleware.MiddlewareConfigOptions options)
         {
             Type viewBagType = null;
@@ -165,14 +173,7 @@ namespace NFinal.Middleware
                     actionData.actionUrl = actionUrl;
                     actionData.actionName = actionName;
                     actionData.method = method;
-                    if (areaName == null)
-                    {
-                        formatList.Add(new KeyValuePair<string,string>(string.Concat("/", controllerName, "/", method), actionData.actionUrl));
-                    }
-                    else
-                    {
-                        formatList.Add(new KeyValuePair<string, string>(string.Concat("/",areaName,"/", controllerName, "/", method), actionData.actionUrl));
-                    }
+                    formatMethodDictionary.Add(actions[m].Name, actionData.actionUrl);
                     methodInfo = actions[m];
                     actionData.IBaseFilters = GetFilters<NFinal.Filter.IBaseFilter<TContext>>(
                         typeof(NFinal.Filter.IBaseFilter<TContext>), controller, actions[m]);

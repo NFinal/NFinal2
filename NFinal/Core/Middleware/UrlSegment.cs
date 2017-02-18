@@ -69,13 +69,13 @@ namespace NFinal.Middleware
             if (found < 1)
             {
                 this.name = expression;
-                this.regex = "[\\\\S]+";
+                this.regex = "[\\S]+";
             }
             else
             {
                 if (this.regex == "string")
                 {
-                    this.regex = "[\\\\S]+";
+                    this.regex = "[\\S]+";
                 }
                 else if (this.regex == "int")
                 {
