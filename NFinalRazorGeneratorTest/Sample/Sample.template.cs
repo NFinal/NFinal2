@@ -17,8 +17,6 @@ namespace NFinalRazorGeneratorTest.Sample
             writer.Write("<!DOCTYPE html>\r\n");
             /*这里是注释内容*/
             writer.Write("\r\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <title></title>\r\n</head>\r\n<body>\r\n");
-            foreach (m)
-            { }
             writer.Write("    ");
             int vaa = 1; writer.Write("df\r\n");
             var vbb = vaa.ToString(); writer.Write("\r\n    ");
