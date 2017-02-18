@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NFinalControllerGeneratorTest.Action
 {
-    public class Index:NFinal.OwinAction<NFinal.EmptyMasterPageModel,dynamic,object>
+    public class Index:NFinal.OwinAction<NFinal.EmptyMasterPageModel,dynamic>
     {
         [ViewBagMember]
         public string c = "3";
