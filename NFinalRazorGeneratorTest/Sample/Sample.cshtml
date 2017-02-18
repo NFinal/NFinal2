@@ -8,24 +8,9 @@
     <title></title>
 </head>
 <body>
-    @foreach (m)
-    { }
-    @{ int vaa = 1;}df
-    @{ var vbb=vaa.ToString();}
-    @Model.a
-    @Model.b
-    @Model.c
-    @foreach (string a in Model.d)
+    @if (Model.a == "")
     {
-        @a.ToString();
-    }
-    @if (Model.a == Model.b)
-    {
-        @Model.a
-    }
-    @while (true)
-    {
-        @Model.a
+        @:writea @Model.b @:dfsdfsdf
     }
 
 </body>

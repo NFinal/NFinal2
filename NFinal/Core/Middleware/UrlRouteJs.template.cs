@@ -27,14 +27,13 @@ namespace NFinal.Core.Middleware
                     writer.Write("        ");
                     writer.Write("function ");
                     writer.Write(formatMethod.Key);
-                    writer.Write("\r\n        ");
-                    writer.Write("(parameters)\r\n");
-                    {
-                        writer.Write("            ");
-                        writer.Write("string.Format(\"");
-                        writer.Write(formatMethod.Value);
-                        writer.Write("\",parameters);\r\n");
-                    }
+                    writer.Write("");
+                    writer.Write("(parameters)\r\n        ");
+                    writer.Write("{\r\n            ");
+                    writer.Write("string.Format(\"");
+                    writer.Write(formatMethod.Value);
+                    writer.Write("\",parameters);\r\n        ");
+                    writer.Write("}\r\n");
                 }
             }
             writer.Write("};");

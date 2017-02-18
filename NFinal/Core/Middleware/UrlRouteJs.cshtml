@@ -7,11 +7,10 @@ var Url={
     @:"@controllerName":{
     foreach (KeyValuePair<string, string> formatMethod in formatController.Value)
     {
-        @:function @formatMethod.Key
-        @:(parameters)
-        {
+        @:function @formatMethod.Key@:(parameters)
+        @:{
             @:string.Format("@formatMethod.Value",parameters);
-        }
+        @:}
     }
 }
 };
