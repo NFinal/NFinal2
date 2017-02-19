@@ -41,6 +41,7 @@
     <Compile Include="Razor\BasePage.cs" />
     <Compile Include="StreamWriter.cs" />
     <Compile Include="StringWriter.cs" />
+    <Compile Include="System\ViewBagAttribute.cs" />
     <Compile Include="ViewAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

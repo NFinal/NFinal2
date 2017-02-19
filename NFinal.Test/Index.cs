@@ -11,7 +11,7 @@ namespace NFinal.Test
     {
         public void Main()
         {
-            
+            this.Write("ss");
         }
     }
 }
