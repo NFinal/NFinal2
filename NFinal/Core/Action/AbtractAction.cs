@@ -294,7 +294,7 @@ namespace NFinal
                 for (int i = 0; i < nameSpace.Length; i++)
                 {
                     sw.Write("/");
-                    if (nameSpace[i] == "Controller")
+                    if (nameSpace[i] == "Controllers")
                     {
                         sw.Write("Views");
                     }

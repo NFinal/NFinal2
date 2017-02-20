@@ -8,185 +8,79 @@ using NFinal.Owin;
 
 namespace NFinal
 {
-    public class ContextAction<TViewBag,TUser>:IAction<IOwinContext,IOwinRequest>
+    public class ContextAction<TMasterPage, TUser> : AbstractAction<IOwinContext, IOwinRequest, TUser, TMasterPage> where TMasterPage : NFinal.MasterPageModel
     {
-        public TViewBag viewBat;
-        public TUser user;
-
-        public IOwinContext context
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public Request request
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public Response response
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        IOwinRequest IAction<IOwinContext, IOwinRequest>.request
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public Stream outputStream
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public CompressMode compressMode
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void Execute()
+        public override void After()
         {
             throw new NotImplementedException();
         }
 
-        public string GetRemoteIpAddress()
+        public override void BaseInitialization(IOwinContext context)
         {
             throw new NotImplementedException();
         }
 
-        public string GetRequestHeader(string key)
+        public override bool Before()
         {
             throw new NotImplementedException();
         }
 
-        public void SetResponseHeader(string key, string value)
+        public override void Close()
         {
             throw new NotImplementedException();
         }
 
-        public void SetResponseHeader(string key, string[] value)
+        public override void Dispose()
         {
             throw new NotImplementedException();
         }
 
-        public void SetResponseStatusCode(int statusCode)
+        public override string GetRemoteIpAddress()
         {
             throw new NotImplementedException();
         }
 
-        public bool Before()
+        public override string GetRequestHeader(string key)
         {
             throw new NotImplementedException();
         }
 
-        public void After()
+        public override string GetRequestPath()
         {
             throw new NotImplementedException();
         }
 
-        public void Close()
+        public override string GetSubDomain(IOwinContext context)
         {
             throw new NotImplementedException();
         }
 
-        public void Write(byte[] buffer, int offset, int count)
+        public override void Initialization(IOwinContext context, Stream outputStream, IOwinRequest request, CompressMode compressMode)
         {
             throw new NotImplementedException();
         }
 
-        public void Write(string value)
+        public override void SetResponseHeader(string key, string[] value)
         {
             throw new NotImplementedException();
         }
 
-        public void BaseInitialization(IOwinContext context)
+        public override void SetResponseHeader(string key, string value)
         {
             throw new NotImplementedException();
         }
 
-        public void Initialization(IOwinContext context, Stream outputStream, Request request, CompressMode compressMode)
+        public override void SetResponseStatusCode(int statusCode)
         {
             throw new NotImplementedException();
         }
 
-        public string GetRequestPath()
+        public override void Write(string value)
         {
             throw new NotImplementedException();
         }
 
-        string IAction<IOwinContext,IOwinRequest>.GetRequestPath()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Initialization(IOwinContext context, Stream outputStream, IOwinRequest request, CompressMode compressMode)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Initialization(IAction<IOwinContext, IOwinRequest> action, IOwinContext context, Stream outputStream, IOwinRequest request, CompressMode compressMode)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Redirect(string url)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetSubDomain(IOwinContext context)
+        public override void Write(byte[] buffer, int offset, int count)
         {
             throw new NotImplementedException();
         }
