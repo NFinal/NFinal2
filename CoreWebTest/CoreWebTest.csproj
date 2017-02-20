@@ -90,16 +90,18 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Controllers\Index_INN.html" />
     <Content Include="Index.html" />
     <Content Include="Index\Show.html" />
+    <Content Include="Scripts\Url.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Index.cs">
       <Generator>NFinalControllerGenerator</Generator>
-      <LastGenOutput>Index_Model.cs</LastGenOutput>
+      <LastGenOutput>Index._Model.cs</LastGenOutput>
     </Compile>
-    <Compile Include="Controllers\Index_Model.cs">
+    <Compile Include="Controllers\Index._Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cs</DependentUpon>

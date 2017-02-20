@@ -45,7 +45,7 @@ namespace NFinal.Middleware
 
             Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary = new Dictionary<string, ActionData<TContext, TRequest>>();
             //List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList = new List<KeyValuePair<string, ActionData<TContext, TRequest>>>();
-            Dictionary<Type, Dictionary<string, string>> formatControllerDictionary = new Dictionary<Type, Dictionary<string, string>>();
+            Dictionary<Type, Dictionary<string, FormatData>> formatControllerDictionary = new Dictionary<Type, Dictionary<string, FormatData>>();
             Type controller = null;
 
 
@@ -106,7 +106,7 @@ namespace NFinal.Middleware
                         {
                             if (!controller.IsGenericType)
                             {
-                                Dictionary<string, string> formatMethodDic = new Dictionary<string, string>();
+                                Dictionary<string, FormatData> formatMethodDic = new Dictionary<string, FormatData>();
                                 AddActionData(actionDataDictionary, formatMethodDic, assembly, controller, options);
                                 formatControllerDictionary.Add(controller, formatMethodDic);
                             }
@@ -116,6 +116,7 @@ namespace NFinal.Middleware
                 }
             }
             Middleware.ActionUrlHelper.formatControllerDictionary=formatControllerDictionary;
+            Middleware.ActionUrlHelper.GetUrlRouteJsContent();
             //}
             //添加图标响应
             //Icon.Favicon.Init(actionDataList);
@@ -123,7 +124,7 @@ namespace NFinal.Middleware
             actionDataDictionary.Clear();
         }
         public static void AddActionData<TContext, TRequest>(Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
-            Dictionary<string,string> formatMethodDictionary,
+            Dictionary<string, FormatData> formatMethodDictionary,
             Assembly assembly,Type controller, NFinal.Middleware.MiddlewareConfigOptions options)
         {
             Type viewBagType = null;
@@ -177,7 +178,14 @@ namespace NFinal.Middleware
                     actionData.actionUrl = actionUrl;
                     actionData.actionName = actionName;
                     actionData.method = method;
-                    formatMethodDictionary.Add(actions[m].Name, actionData.actionUrl);
+                    if (actionData.actionUrlData != null)
+                    {
+                        formatMethodDictionary.Add(actions[m].Name, new FormatData(actionData.actionUrlData.formatUrl, actionData.actionUrlData.actionUrlNames));
+                    }
+                    else
+                    {
+                        formatMethodDictionary.Add(actions[m].Name, new FormatData(actionData.actionUrl,null));
+                    }
                     methodInfo = actions[m];
                     actionData.IBaseFilters = GetFilters<NFinal.Filter.IBaseFilter<TContext>>(
                         typeof(NFinal.Filter.IBaseFilter<TContext>), controller, actions[m]);
@@ -291,6 +299,7 @@ namespace NFinal.Middleware
                         hasUrlAttribute = true;
                         urlAttribute = (UrlAttribute)attr;
                         actionUrlData = NFinal.Middleware.ActionUrlHelper.GetActionUrlData(urlAttribute.urlString);
+                        actionUrl = actionUrlData.actionKey;
                         break;
                     } 
                 }

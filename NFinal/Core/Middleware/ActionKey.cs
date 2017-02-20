@@ -12,7 +12,7 @@ namespace NFinal.Middleware
         /// </summary>
         /// <param name="requestedPath"></param>
         /// <returns></returns>
-        public unsafe static string GetActionKey(string subDomain, string method, string requestedPath, NFinal.Middleware.UrlRouteRule urlRouteRule)
+        public unsafe static string GetActionKey(string subDomain, string method, string requestedPath,out int shortActionKeyLength,NFinal.Middleware.UrlRouteRule urlRouteRule)
         {
             if (urlRouteRule == UrlRouteRule.AreaControllerCustomActionUrl)
             {
@@ -25,7 +25,7 @@ namespace NFinal.Middleware
                 int pos = len;
                 int count = 0;
                 bool hasExtension = false;
-                int shortActionKeyLength = 0;
+                shortActionKeyLength = 0;
 
                 while (pos > 3)
                 {
@@ -117,6 +117,7 @@ namespace NFinal.Middleware
             }
             else
             {
+                shortActionKeyLength = requestedPath.Length;
                 return string.Concat(subDomain,":",method,":",requestedPath);
             }
         }

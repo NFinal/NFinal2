@@ -18,12 +18,12 @@ namespace CoreWebTest.Controllers
         {
             base.After();
         }
-        public void INN()
+        [GetHtml("/Index-{a}.html")]
+        public void INN(int a)
         {
-            this.ViewBag = new ViewBagModel();
             this.ViewBag.a = "2";
-            
             ViewBag.ddd = "sd";
+            Write(a.ToString());
         }
         public override bool Before()
         {

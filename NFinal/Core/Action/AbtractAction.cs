@@ -231,7 +231,7 @@ namespace NFinal
         /// <returns></returns>
         public static string Url<TController>(string methodName, params StringContainer[] urlParameters)
         {
-            return NFinal.Middleware.ActionUrlHelper.Format(Middleware.ActionUrlHelper.formatControllerDictionary[typeof(TController)][methodName], urlParameters);
+            return NFinal.Middleware.ActionUrlHelper.Format(Middleware.ActionUrlHelper.formatControllerDictionary[typeof(TController)][methodName].formatUrl, urlParameters);
         }
         /// <summary>
         /// 获取Url
@@ -241,7 +241,7 @@ namespace NFinal
         /// <returns></returns>
         public string Url(string methodName, params StringContainer[] urlParameters)
         {
-            return NFinal.Middleware.ActionUrlHelper.Format(Middleware.ActionUrlHelper.formatControllerDictionary[this.GetType()][methodName], urlParameters);
+            return NFinal.Middleware.ActionUrlHelper.Format(Middleware.ActionUrlHelper.formatControllerDictionary[this.GetType()][methodName].formatUrl, urlParameters);
         }
         /// <summary>
         /// 模板渲染函数

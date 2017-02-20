@@ -145,7 +145,7 @@ namespace NFinalControllerGenerator
             {
                 extension = "." + extension.TrimStart(".".ToCharArray());
             }
-            extension = "_Model"+ extension;
+            extension = "Model"+ extension;
             return extension;
         }
 

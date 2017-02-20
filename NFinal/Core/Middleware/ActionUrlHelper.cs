@@ -15,6 +15,16 @@ namespace NFinal.Middleware
         public Type parameterType;
         public string name;
     }
+    public class FormatData
+    {
+        public FormatData(string formatUrl,string[] actionUrlNames)
+        {
+            this.formatUrl = formatUrl;
+            this.actionUrlNames = actionUrlNames;
+        }
+        public string formatUrl;
+        public string[] actionUrlNames;
+    }
     public class ActionUrlData
     {
         public MethodInfo methodInfo;
@@ -29,7 +39,7 @@ namespace NFinal.Middleware
     }
     public class ActionUrlHelper
     {
-        public static Dictionary<Type,Dictionary<string,string>> formatControllerDictionary;
+        public static Dictionary<Type,Dictionary<string,FormatData>> formatControllerDictionary;
         /// <summary>
         /// 是否是URL分隔符
         /// </summary>
@@ -315,9 +325,9 @@ namespace NFinal.Middleware
             //    }
             //    pos++;
             //}
-            pos += actionKeyWithoutSubDomainAndMethodLength;
+            pos += actionKeyWithoutSubDomainAndMethodLength-1;
             
-            left = 0;
+            left = pos;
             right = pos;
             pos++;
             while (pos < len)
@@ -350,11 +360,16 @@ namespace NFinal.Middleware
                 }
             }
         }
-        public static void GetUrlRouteJsContent(string url, UrlParseData parseData, NameValueCollection nvc)
+        public static void GetUrlRouteJsContent()
         {
             UrlRouteJsModel model = new UrlRouteJsModel();
             model.formatControllerDictionary = formatControllerDictionary;
-            NFinal.IO.FileWriter fileWriter = new IO.FileWriter(NFinal.Utility.MapPath("/Url.js"));
+            string directory = NFinal.Utility.MapPath("/Scripts");
+            if (!System.IO.Directory.Exists(directory))
+            {
+                System.IO.Directory.CreateDirectory(directory);
+            }
+            NFinal.IO.FileWriter fileWriter = new IO.FileWriter(NFinal.Utility.MapPath("/Scripts/Url.js"));
             NFinal.Core.Middleware.UrlRouteJs.Render(fileWriter, model);
             fileWriter.Dispose();
         }

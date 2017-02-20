@@ -7,6 +7,6 @@ namespace NFinal.Middleware
 {
     public class UrlRouteJsModel
     {
-        public Dictionary<Type, Dictionary<string, string>> formatControllerDictionary;
+        public Dictionary<Type, Dictionary<string, FormatData>> formatControllerDictionary;
     }
 }

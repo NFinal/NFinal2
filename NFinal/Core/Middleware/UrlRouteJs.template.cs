@@ -14,26 +14,56 @@ namespace NFinal.Core.Middleware
         public static void Render(this NFinal.IO.IWriter writer, NFinal.Middleware.UrlRouteJsModel Model)
         {
             writer.Write("");
-            writer.Write("var Url={\r\n");
-            foreach (KeyValuePair<Type, Dictionary<string, string>> formatController in Model.formatControllerDictionary)
+            writer.Write("function StringFormat() {\r\n    if (arguments.length == 0)\r\n        return null;\r\n    var str = arguments[0];\r\n    for (var i = 1; i < arguments.length; i++) {\r\n        var re = new RegExp(\'\\\\{\' + (i - 1) + \'\\\\}\', \'gm\');\r\n        str = str.replace(re, arguments[i]);\r\n    }\r\n    return str;\r\n}\r\nvar Url={\r\n");
+            bool isFirst = true; writer.Write("\r\n");
+            foreach (KeyValuePair<Type, Dictionary<string, NFinal.Middleware.FormatData>> formatController in Model.formatControllerDictionary)
             {
-                string controllerName = formatController.Key.Namespace.Replace(',', '_') + "_" + formatController.Key.Name;
+                string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + formatController.Key.Name;
+                isFirst = true;
                 writer.Write("    ");
                 writer.Write("\"");
                 writer.Write(controllerName);
                 writer.Write("\":{\r\n");
-                foreach (KeyValuePair<string, string> formatMethod in formatController.Value)
+                foreach (KeyValuePair<string, NFinal.Middleware.FormatData> formatMethod in formatController.Value)
                 {
-                    writer.Write("        ");
-                    writer.Write("function ");
-                    writer.Write(formatMethod.Key);
-                    writer.Write("");
-                    writer.Write("(parameters)\r\n        ");
-                    writer.Write("{\r\n            ");
-                    writer.Write("string.Format(\"");
-                    writer.Write(formatMethod.Value);
-                    writer.Write("\",parameters);\r\n        ");
-                    writer.Write("}\r\n");
+                    if (isFirst)
+                    {
+                        isFirst = false;
+                    }
+                    else
+                    {
+                        writer.Write("            ");
+                        writer.Write(",\r\n");
+                    }
+
+                    if (formatMethod.Value.actionUrlNames != null && formatMethod.Value.actionUrlNames.Length > 0)
+                    {
+                        writer.Write("            ");
+                        writer.Write("\"");
+                        writer.Write(formatMethod.Key);
+                        writer.Write("\":function(");
+                        writer.Write(string.Join(",", formatMethod.Value.actionUrlNames));
+                        writer.Write(")\r\n            ");
+                        writer.Write("{\r\n            ");
+                        writer.Write("return StringFormat(\"");
+                        writer.Write(formatMethod.Value.formatUrl);
+                        writer.Write("\",");
+                        writer.Write(string.Join(",", formatMethod.Value.actionUrlNames));
+                        writer.Write(");\r\n            ");
+                        writer.Write("}\r\n");
+                    }
+                    else
+                    {
+                        writer.Write("            ");
+                        writer.Write("\"");
+                        writer.Write(formatMethod.Key);
+                        writer.Write("\":function()\r\n            ");
+                        writer.Write("{\r\n            ");
+                        writer.Write("return \"");
+                        writer.Write(formatMethod.Value.formatUrl);
+                        writer.Write("\";\r\n            ");
+                        writer.Write("}\r\n");
+                    }
                 }
                 writer.Write("    ");
                 writer.Write("}\r\n");

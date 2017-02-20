@@ -167,6 +167,10 @@
   <ItemGroup>
     <Compile Include="Action\Index.cs" />
     <Compile Include="Attr\Env.cs" />
+    <Compile Include="Debug.template.cs">
+      <DependentUpon>Debug.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="DebugData.cs" />
     <Compile Include="Model\ViewBagStruct.cs" />
     <Compile Include="TypeExtension.cs">
       <DependentUpon>TypeExtension.tt</DependentUpon>
@@ -187,6 +191,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="Debug.cshtml">
+      <Generator>NFinalRazorGenerator</Generator>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
