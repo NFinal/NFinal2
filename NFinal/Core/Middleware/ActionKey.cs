@@ -117,7 +117,7 @@ namespace NFinal.Middleware
             }
             else
             {
-                return requestedPath;
+                return string.Concat(subDomain,":",method,":",requestedPath);
             }
         }
         public static string GetUrlDelegate(string urlString,string path, System.Reflection.MethodInfo methodInfo)

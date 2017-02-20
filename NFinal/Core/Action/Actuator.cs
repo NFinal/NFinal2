@@ -174,7 +174,7 @@ namespace NFinal.Action
                 //controller,environment,null,Request
                 methodIL.Emit(OpCodes.Ldarg_2);
                 //controller,environment,null,Request,CompressMode
-                methodIL.Emit(OpCodes.Ldc_I4, (int)NFinal.CompressMode.None);
+                methodIL.Emit(OpCodes.Ldc_I4, (int)NFinal.CompressMode.Deflate);
                 methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("Initialization",
                     new Type[] { typeof(TContext),
                         typeof(System.IO.Stream),

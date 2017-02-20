@@ -120,6 +120,8 @@
     <Compile Include="Core\Collections\FastDictionary\LongCompare.cs" />
     <Compile Include="Core\Collections\FastDictionary\SharpWriter.cs" />
     <Compile Include="Core\Collections\NameValueDynamicCollection.cs" />
+    <Compile Include="Core\Exceptions\DuplicateActionUrlException.cs" />
+    <Compile Include="Core\Exceptions\DuplicateViewUrlException.cs" />
     <Compile Include="Core\Exceptions\ModelNotFoundException.cs" />
     <Compile Include="Core\Exceptions\ViewModelTypeUnMatched.cs" />
     <Compile Include="Core\Filter\FilterHelper.cs" />
@@ -289,7 +291,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
-    <Folder Include="Core\Collections\DynamicDictionary\" />
     <Folder Include="Lib\Sms\" />
   </ItemGroup>
   <ItemGroup>

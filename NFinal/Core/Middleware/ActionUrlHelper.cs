@@ -382,7 +382,7 @@ namespace NFinal.Middleware
     }
     public class IndexController
     {
-        public NFinal.Collections.FastDictionary<string> UrlRouteData;
+        //public NFinal.Collections.FastDictionary<string> UrlRouteData;
         public void Init()
         {
             
@@ -390,10 +390,10 @@ namespace NFinal.Middleware
     }
     public class UrlRun
     {
-        public static string Run(string methodName, params StringContainer[] urlParameters)
-        {
-            NFinal.Collections.FastDictionary<string> formatDictionary=null;
-            return ActionUrlHelper.Format(formatDictionary[methodName], urlParameters);
-        }
+        //public static string Run(string methodName, params StringContainer[] urlParameters)
+        //{
+        //    NFinal.Collections.FastDictionary<string> formatDictionary=null;
+        //    return ActionUrlHelper.Format(formatDictionary[methodName], urlParameters);
+        //}
     }
 }

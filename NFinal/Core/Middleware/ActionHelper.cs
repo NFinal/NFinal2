@@ -43,7 +43,8 @@ namespace NFinal.Middleware
             Module[] modules = null;
             Type[] types = null;
 
-            List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList = new List<KeyValuePair<string, ActionData<TContext, TRequest>>>();
+            Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary = new Dictionary<string, ActionData<TContext, TRequest>>();
+            //List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList = new List<KeyValuePair<string, ActionData<TContext, TRequest>>>();
             Dictionary<Type, Dictionary<string, string>> formatControllerDictionary = new Dictionary<Type, Dictionary<string, string>>();
             Type controller = null;
 
@@ -106,7 +107,7 @@ namespace NFinal.Middleware
                             if (!controller.IsGenericType)
                             {
                                 Dictionary<string, string> formatMethodDic = new Dictionary<string, string>();
-                                AddActionData(actionDataList, formatMethodDic, assembly, controller, options);
+                                AddActionData(actionDataDictionary, formatMethodDic, assembly, controller, options);
                                 formatControllerDictionary.Add(controller, formatMethodDic);
                             }
                         }
@@ -118,9 +119,10 @@ namespace NFinal.Middleware
             //}
             //添加图标响应
             //Icon.Favicon.Init(actionDataList);
-            Middleware.Middleware<TContext, TRequest>.actionFastDic = new Collections.FastDictionary<ActionData<TContext, TRequest>>(actionDataList, actionDataList.Count);
+            Middleware.Middleware<TContext, TRequest>.actionFastDic = new Collections.FastDictionary<ActionData<TContext, TRequest>>(actionDataDictionary, actionDataDictionary.Count);
+            actionDataDictionary.Clear();
         }
-        public static void AddActionData<TContext, TRequest>(List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList,
+        public static void AddActionData<TContext, TRequest>(Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
             Dictionary<string,string> formatMethodDictionary,
             Assembly assembly,Type controller, NFinal.Middleware.MiddlewareConfigOptions options)
         {
@@ -166,6 +168,8 @@ namespace NFinal.Middleware
                         actionData.contentType = urlAttribute.contentType;
                         actionData.compressMode = urlAttribute.compressMode;
                     }
+                    actionData.className = controller.FullName;
+                    actionData.methodName = actions[m].Name;
                     actionData.actionUrlData = actionUrlData;
                     actionData.controllerName = controllerName;
                     actionData.areaName = areaName;
@@ -184,7 +188,15 @@ namespace NFinal.Middleware
                     actionData.actionExecute = NFinal.Action.Actuator.GetRunActionDelegate<TContext, TRequest>(assembly,controller, methodInfo);
                     foreach (var actionKey in actionKeys)
                     {
-                        actionDataList.Add(new KeyValuePair<string, ActionData<TContext, TRequest>>(actionKey, actionData));
+                        if (actionDataDictionary.ContainsKey(actionKey))
+                        {
+                            var oldActionData = actionDataDictionary[actionKey];
+                            throw new NFinal.Exceptions.DuplicateActionUrlException(oldActionData.className, oldActionData.methodName, actionData.className, actionData.methodName);
+                        }
+                        else
+                        {
+                            actionDataDictionary.Add(actionKey, actionData);
+                        }
                     }
                 }
             }
@@ -282,9 +294,9 @@ namespace NFinal.Middleware
                         break;
                     } 
                 }
-                if (hasUrlAttribute)
+                if (!hasUrlAttribute)
                 {
-                    actionUrl += "/" + method + options.defaultSuffix;
+                    actionUrl += "/" + methodInfo.Name + options.defaultSuffix;
                 }
             }
             if (method == null)

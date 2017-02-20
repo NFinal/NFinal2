@@ -25,6 +25,7 @@ namespace NFinal
             this.response = new Owin.Response();
             this.response.headers = new Dictionary<string, string[]>(StringComparer.Ordinal);
             this.response.statusCode = 200;
+            this.response.stream = new MemoryStream();
             SetCompressMode(CompressMode.None);
         }
         /// <summary>
@@ -52,6 +53,7 @@ namespace NFinal
             }
             this.response.headers = new Dictionary<string, string[]>(StringComparer.Ordinal);
             this.response.statusCode = 200;
+            this.response.stream = new MemoryStream();
             //action._serverType = ServerType.IsStatic;
             SetCompressMode(compressMode);
         }
@@ -64,18 +66,18 @@ namespace NFinal
             this.compressMode = compressMode;
             if (compressMode == CompressMode.None)
             {
-                this.response.stream = new MemoryStream();
+                this.writeStream = this.response.stream;
             }
             else
             {
                 if (compressMode == CompressMode.GZip)
                 {
-                    this.response.stream = new System.IO.Compression.GZipStream(new MemoryStream(), System.IO.Compression.CompressionMode.Compress, true);
+                    this.writeStream = new System.IO.Compression.GZipStream(this.response.stream, System.IO.Compression.CompressionMode.Compress, true);
                     this.response.headers.Add(NFinal.Constant.HeaderContentEncoding, NFinal.Constant.HeaderContentEncodingGzip);
                 }
                 else if (compressMode == CompressMode.Deflate)
                 {
-                    this.response.stream = new System.IO.Compression.DeflateStream(new MemoryStream(), System.IO.Compression.CompressionMode.Compress, true);
+                    this.writeStream = new System.IO.Compression.DeflateStream(this.response.stream, System.IO.Compression.CompressionMode.Compress, true);
                     this.response.headers.Add(NFinal.Constant.HeaderContentEncoding, NFinal.Constant.HeaderContentEncodingDeflate);
                 }
             }
@@ -143,19 +145,7 @@ namespace NFinal
         /// <param name="count"></param>
         public override void Write(byte[] buffer, int offset, int count)
         {
-            if (beforeWrite)
-            {
-                beforeWrite = false;
-                if (_serverType != ServerType.IsStatic)
-                {
-                    IDictionary<string, string[]> headers = (IDictionary<string, string[]>)context[Owin.OwinKeys.ResponseHeaders];
-                    foreach (var header in this.response.headers)
-                    {
-                        headers.AddValue(header.Key, header.Value);
-                    }
-                }
-            }
-            this.response.stream.Write(buffer, 0, count);
+            this.writeStream.Write(buffer, 0, count);
         }
         /// <summary>
         /// 输出文本内容
@@ -163,22 +153,10 @@ namespace NFinal
         /// <param name="value">文本</param>
         public override void Write(string value)
         {
-            if (beforeWrite)
-            {
-                beforeWrite = false;
-                if (_serverType != ServerType.IsStatic)
-                {
-                    IDictionary<string, string[]> headers = (IDictionary<string, string[]>)context[Owin.OwinKeys.ResponseHeaders];
-                    foreach (var header in this.response.headers)
-                    {
-                        headers.AddValue(header.Key, header.Value);
-                    }
-                }
-            }
-            if (value != null)
+            if (value != null && value.Length!=0)
             {
                 byte[] buffer = NFinal.Constant.encoding.GetBytes(value);
-                this.response.stream.Write(buffer, 0, buffer.Length);
+                this.writeStream.Write(buffer, 0, buffer.Length);
             }
         }
         /// <summary>
@@ -190,6 +168,19 @@ namespace NFinal
         /// </summary>
         public override void Close()
         {
+            if (_serverType != ServerType.IsStatic)
+            {
+                if (!this.response.headers.ContainsKey(NFinal.Constant.HeaderContentType))
+                {
+                    this.response.headers.Add(NFinal.Constant.HeaderContentType, new string[] { NFinal.Constant.ResponseContentType_Text_html });
+                }
+                IDictionary<string, string[]> headers = (IDictionary<string, string[]>)context[Owin.OwinKeys.ResponseHeaders];
+                foreach (var header in this.response.headers)
+                {
+                    headers.AddValue(header.Key, header.Value);
+                }
+            }
+            this.writeStream.Close();
             this.response.stream.Seek(0, SeekOrigin.Begin);
             this.response.stream.CopyTo(this.outputStream);
             this.Dispose();
@@ -199,6 +190,7 @@ namespace NFinal
         /// </summary>
         public override void Dispose()
         {
+            this.writeStream?.Dispose();
             this.response.stream?.Dispose();
             if (this.request?.files != null)
             {

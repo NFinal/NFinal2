@@ -9,6 +9,7 @@ namespace NFinal
     //public delegate void GetRenderMethod<T>(T t);
     public struct ViewDelegateData
     {
+        public string viewClassName;
         public System.Reflection.MethodInfo renderMethodInfo;
         public Delegate renderMethod;
     }
@@ -24,7 +25,7 @@ namespace NFinal
             Module[] modules= null;
             NFinal.ViewDelegateData dele;
             ViewAttribute viewAttr;
-            List<KeyValuePair<string, ViewDelegateData>> viewList = new List<KeyValuePair<string, NFinal.ViewDelegateData>>();
+            Dictionary<string, ViewDelegateData> viewDataDictionary = new Dictionary<string, NFinal.ViewDelegateData>();
             for (int i = 0; i < options.plugs.Length; i++)
             {
                 plug = options.plugs[i];
@@ -46,13 +47,23 @@ namespace NFinal
                             dele = new ViewDelegateData();
                             dele.renderMethodInfo = types[k].GetMethod("Render");
                             dele.renderMethod = null;// GetRenderDelegate(dele.renderMethodInfo);
+                            dele.viewClassName = types[k].FullName;
                             //dicViews.Add(viewAttr.viewUrl, dele);
-                            viewList.Add(new KeyValuePair<string, ViewDelegateData>(viewAttr.viewUrl, dele));
+                            if (viewDataDictionary.ContainsKey(viewAttr.viewUrl))
+                            {
+                                var oldViewDelegateData = viewDataDictionary[viewAttr.viewUrl];
+                                throw new NFinal.Exceptions.DuplicateViewUrlException(oldViewDelegateData.viewClassName, dele.viewClassName);
+                            }
+                            else
+                            {
+                                viewDataDictionary.Add(viewAttr.viewUrl, dele);
+                            }
                         }
                     }
                 }
             }
-            viewFastDic = new Collections.FastDictionary<NFinal.ViewDelegateData>(viewList, viewList.Count);
+            viewFastDic = new Collections.FastDictionary<NFinal.ViewDelegateData>(viewDataDictionary, viewDataDictionary.Count);
+            viewDataDictionary.Clear();
         }
         public static Delegate renderMethodDelegate = null;
         public static Delegate GetRenderDelegate<T>(string url,MethodInfo renderMethodInfo)
@@ -61,7 +72,7 @@ namespace NFinal
             Type modelType = parameters[1].ParameterType;
             if (typeof(T) != modelType)
             {
-                throw new Exceptions.ViewModelTypeUnMatched(url, typeof(T), modelType);
+                throw new Exceptions.ViewModelTypeUnMatchedException(url, typeof(T), modelType);
             }
             DynamicMethod method = new DynamicMethod("RenderX", typeof(void), new Type[] { typeof(NFinal.IO.IWriter), modelType });
             ILGenerator methodIL = method.GetILGenerator();

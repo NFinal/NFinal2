@@ -43,17 +43,14 @@ namespace NFinal
         /// </summary>
         [ViewBagMember]
         public static NFinal.Collections.FastDictionary<StringContainer> systemConfig { get; }
-        NFinal.Collections.FastDictionary<string> formatDictionary = null;
-        public string Area;
-        public string Controller;
         /// <summary>
         /// 请求参数信息
         /// </summary>
         public NameValueCollection parameters;
+        protected Stream writeStream;
         public virtual TMasterPage MasterPage { get; set; }
         public ServerType _serverType = ServerType.UnKnown;
         public ICookie<IDictionary<string, object>> Cookie;
-        protected bool beforeWrite = true;
         public ISession Session;
         private TUser _user;
         public TUser user
