@@ -22,8 +22,7 @@ namespace NFinalRazorGeneratorTest.Sample
                 writer.Write("        ");
                 writer.Write("writea ");
                 writer.Write(Model.b);
-                writer.Write(" ");
-                writer.Write("dfsdfsdf\r\n");
+                writer.Write(" dfsdfsdf\r\n");
             }
             writer.Write("\r\n</body>\r\n\r\n</html>");
         }

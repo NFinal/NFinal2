@@ -162,7 +162,7 @@ namespace NFinalRazorGeneratorTest
                         if (!string.IsNullOrEmpty(span.Content))
                         {
                             tw.Write("\t\t\twriter.Write(");
-                            tw.Write(span.Content.TrimEnd(';'));
+                            tw.Write(span.Content);
                             tw.Write(");\r\n");
                         }
                     }
@@ -238,43 +238,38 @@ namespace NFinalRazorGeneratorTest
                 bool isFirst = ((span.Previous != null) && span.Previous.Kind != SpanKind.Markup) || span.Previous == null;
                 bool isMid = false;
                 bool isLast = (span.Next != null && span.Next.Kind != SpanKind.Markup) || (span.Next == null);
-                string content = span.Content;
-                if (span.Content?.Length > 0 && span.Content[0] == ':' && span.Previous.Kind != SpanKind.Markup)
-                {
-                    content = span.Content.Substring(1);
-                }
                 //<html><html><html>
                 if (isLast == true && isFirst == true)
                 {
                     isMid = true;
                     tw.Write("\t\t\twriter.Write(\"");
-                    if (!string.IsNullOrEmpty(content))
+                    if (!string.IsNullOrEmpty(span.Content))
                     {
-                        tw.Write(ReserveString(content));
+                        tw.Write(ReserveString(span.Content));
                     }
                     tw.Write("\");\r\n");
                 }
                 else if (isFirst == false && isLast == false)
                 {
                     isMid = true;
-                    if (!string.IsNullOrEmpty(content))
+                    if (!string.IsNullOrEmpty(span.Content))
                     {
-                        tw.Write(ReserveString(content));
+                        tw.Write(ReserveString(span.Content));
                     }
                 }
                 else if (isFirst==true && isLast ==false)
                 {
                     tw.Write("\t\t\twriter.Write(\"");
-                    if (!string.IsNullOrEmpty(content))
+                    if (!string.IsNullOrEmpty(span.Content))
                     {
-                        tw.Write(ReserveString(content));
+                        tw.Write(ReserveString(span.Content));
                     }
                 }
                 else if (isFirst==false && isLast==true)
                 {
-                    if (!string.IsNullOrEmpty(content))
+                    if (!string.IsNullOrEmpty(span.Content))
                     {
-                        tw.Write(ReserveString(content));
+                        tw.Write(ReserveString(span.Content));
                     }
                     tw.Write("\");\r\n");
                 }

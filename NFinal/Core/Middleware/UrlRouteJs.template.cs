@@ -41,7 +41,7 @@ namespace NFinal.Core.Middleware
                         writer.Write("            ");
                         writer.Write("\"");
                         writer.Write(formatMethod.Key);
-                        writer.Write("\":function(");
+                        writer.Write(":\":function(");
                         writer.Write(string.Join(",", formatMethod.Value.actionUrlNames));
                         writer.Write(")\r\n            ");
                         writer.Write("{\r\n            ");
@@ -57,7 +57,7 @@ namespace NFinal.Core.Middleware
                         writer.Write("            ");
                         writer.Write("\"");
                         writer.Write(formatMethod.Key);
-                        writer.Write("\":function()\r\n            ");
+                        writer.Write(":\":function()\r\n            ");
                         writer.Write("{\r\n            ");
                         writer.Write("return \"");
                         writer.Write(formatMethod.Value.formatUrl);
