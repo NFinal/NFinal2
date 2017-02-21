@@ -9,10 +9,16 @@ namespace NFinal
     {
         public void Configuration(IAppBuilder appBuilder)
         {
-            NFinal.Middleware.OwinMiddlewareConfigOptions options = new NFinal.Middleware.OwinMiddlewareConfigOptions();
-            options.plugs = new string[] {};
-            options.debug = Server.debug;
-            appBuilder.Use(typeof(NFinal.Middleware.NFinalOwinMiddleware), options);
+            NFinal.Middleware.MiddlewareConfigOptions options = new NFinal.Middleware.MiddlewareConfigOptions();
+            options.plugs = new NFinal.Middleware.Plug[] {
+                new NFinal.Middleware.Plug { filePath = @"E:\work\NFinal2\NFinal2\CoreWebTest\bin\CoreWebTest.dll" ,subDomain="www"} };
+            options.debug = true;
+            options.customErrors = new NFinal.Middleware.CustomErrors();
+            options.customErrors.mode = NFinal.Middleware.Mode.Off;
+            options.defaultDocument = "Index.html";
+            options.urlRouteRule = NFinal.Middleware.UrlRouteRule.AreaControllerCustomActionUrl;
+            appBuilder.Use<NFinal.Middleware.OwinMiddleware>(options);
+            //appBuilder.UseStageMarker(PipelineStage.Authenticate);
         }
     }
 }

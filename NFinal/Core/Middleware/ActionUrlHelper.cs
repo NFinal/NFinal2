@@ -373,7 +373,39 @@ namespace NFinal.Middleware
             NFinal.Core.Middleware.UrlRouteJs.Render(fileWriter, model);
             fileWriter.Dispose();
         }
+        public static void GenerateActionDebugHtml(NFinal.Middleware.MiddlewareConfigOptions options)
+        {
+            NFinal.IO.FileWriter fileWriter;
+            DebugData debugData;
+            string fileName;
+            string direcotyName;
+            if (options.debugDirectory == null)
+            {
+                options.debugDirectory = "Debug";
+            }
+            foreach (var controller in formatControllerDictionary)
+            {
+                direcotyName ="/" +options.debugDirectory.TrimStart('/')+"/"+ controller.Key.Namespace.Replace('.','/') + "/" + controller.Key.Name;
+                direcotyName = NFinal.Utility.MapPath(direcotyName);
+                System.IO.Directory.CreateDirectory(direcotyName);
+                foreach (var method in controller.Value)
+                {
+                    fileName = System.IO.Path.Combine(direcotyName, method.Key + ".html");
+                    if (!System.IO.File.Exists(fileName))
+                    {
+                        debugData = new NFinal.Middleware.DebugData();
+                        debugData.className = controller.Key.FullName;
+                        debugData.methodName = method.Key;
+                        debugData.formatData = method.Value;
+                        using (fileWriter = new IO.FileWriter(fileName))
+                        {
+                            NFinal.Core.Middleware.Debug.Render(fileWriter, debugData);
+                        }
+                    }
 
+                }
+            }
+        }
     }
     /// <summary>
     /// 输出URL专用

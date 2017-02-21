@@ -48,16 +48,8 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hprose, Version=4.0.30319.1, Culture=neutral, PublicKeyToken=eb8819713de2ccff, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hprose.1.5.6\lib\net40\Hprose.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net40\Microsoft.Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Hosting, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Hosting.2.1.0\lib\net40\Microsoft.Owin.Hosting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -81,15 +73,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
       <Private>True</Private>
@@ -102,7 +85,6 @@
     <Compile Include="Core\Action\CompressMode.cs" />
     <Compile Include="Core\Action\ContextAction.cs" />
     <Compile Include="Core\Action\MasterPageModel.cs" />
-    <Compile Include="Core\Action\System\ViewBagAttribute.cs" />
     <Compile Include="Core\Action\System\ViewBagMemberAttribute.cs" />
     <Compile Include="Core\Action\UrlHelper.cs" />
     <Compile Include="Core\Action\ViewData.cs" />
@@ -131,6 +113,10 @@
     <Compile Include="Core\Json\JsonHelper.cs" />
     <Compile Include="Core\Middleware\ActionUrlHelper.cs" />
     <Compile Include="Core\Middleware\ContextMiddleware.cs" />
+    <Compile Include="Core\Middleware\Debug.template.cs">
+      <DependentUpon>Debug.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Middleware\DebugData.cs" />
     <Compile Include="Core\Middleware\Middleware.cs" />
     <Compile Include="Core\Middleware\StringBuilderCache.cs" />
     <Compile Include="Core\Middleware\UrlRouteJs.template.cs">
@@ -166,7 +152,6 @@
     <Compile Include="Core\Owin\OwinModel.cs" />
     <Compile Include="Core\Plugs\IPlug.cs" />
     <Compile Include="Core\Razor\BasePage.cs" />
-    <Compile Include="Core\Serialize\HproseSerialize.cs" />
     <Compile Include="Core\System\System\DynamicDictionary.cs" />
     <Compile Include="Core\System\System\ObjectContainer.cs">
       <DependentUpon>ObjectContainer.tt</DependentUpon>
@@ -281,6 +266,9 @@
     <None Include="app.config" />
     <None Include="Action.cd" />
     <Compile Include="Core\Constant.cs" />
+    <Content Include="Core\Middleware\Debug.cshtml">
+      <Generator>NFinalRazorGenerator</Generator>
+    </Content>
     <None Include="Core\Middleware\UrlRouteJs.cshtml">
       <Generator>NFinalRazorGenerator</Generator>
     </None>

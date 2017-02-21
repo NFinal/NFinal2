@@ -117,6 +117,7 @@ namespace NFinal.Middleware
             }
             Middleware.ActionUrlHelper.formatControllerDictionary=formatControllerDictionary;
             Middleware.ActionUrlHelper.GetUrlRouteJsContent();
+            Middleware.ActionUrlHelper.GenerateActionDebugHtml(options);
             //}
             //添加图标响应
             //Icon.Favicon.Init(actionDataList);

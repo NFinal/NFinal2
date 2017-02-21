@@ -47,6 +47,7 @@ namespace NFinal.Middleware
         /// 是否是调试状态
         /// </summary>
         public bool debug = true;
+        public string debugDirectory = "Debug";
         /// <summary>
         /// 默认文档
         /// </summary>

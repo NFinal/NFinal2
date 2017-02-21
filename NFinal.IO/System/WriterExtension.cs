@@ -71,20 +71,5 @@ namespace System
             writer.Write(obj.ToString());
             writer.Write(NFinal.Constant.Html_Br);
         }
-        //public static void Write(this NFinal.IO.IWriter writer, NFinal.Validation.ValidResult result)
-        //{
-        //    foreach (var r in result)
-        //    {
-        //        writer.Write(r.message);
-        //    }
-        //}
-        //public static void Write(this NFinal.IO.IWriter writer, ObjectContainer obj)
-        //{
-        //    writer.Write(obj.value.ToString());
-        //}
-        //public static void Write(this NFinal.IO.IWriter writer, StringContainer obj)
-        //{
-        //    writer.Write(obj.value);
-        //}
     }
 }

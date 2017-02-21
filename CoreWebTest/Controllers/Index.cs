@@ -10,14 +10,6 @@ namespace CoreWebTest.Controllers
     [SubDomain("www")]
     public class Index : NFinal.OwinAction<NFinal.EmptyMasterPageModel, dynamic>
     {
-        private void Main()
-        {
-
-        }
-        public override void After()
-        {
-            base.After();
-        }
         [GetHtml("/Index-{a}.html")]
         public void INN(int a)
         {
@@ -25,14 +17,9 @@ namespace CoreWebTest.Controllers
             ViewBag.ddd = "sd";
             Write(a.ToString());
         }
-        public override bool Before()
-        {
-            return base.Before();
-        }
         [ViewBagMember]
         public string a = "lucas";
         [Action("Show")]
-        [ViewBag(typeof(ViewBagModel))]
         public void Show(int a, parameterModel model)
         {
             ViewBag.cc2 = DateTime.Now;
@@ -42,18 +29,8 @@ namespace CoreWebTest.Controllers
             //this.Write("hello!");
             this.Render();
         }
-        private void Render(NFinal.IO.IWriter writer,object obj)
-        {
-            Index_Model.Show m = (Index_Model.Show)obj;
-            CoreWebTest.Views.Index.Render(this, m);
-        }
     }
     public class parameterModel
-    {
-        public string a;
-        public int b;
-    }
-    public class ViewBagModel
     {
         public string a;
         public int b;

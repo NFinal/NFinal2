@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NFinalControllerGeneratorTest
+namespace NFinal.Middleware
 {
     public class DebugData
     {
