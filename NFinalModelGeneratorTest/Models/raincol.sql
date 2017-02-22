@@ -5,6 +5,6 @@ set @providerName='MySql.Data.MySqlClient'
 set @generateAllTable=false
 */
 --UserA
-select *,'nameA' as '(string)' from user;
+select *,'nameA' as '(DateTime)' from user;
 --UserB
-select *,'arr' as '(List<string>)' from user;
+select *,'arr' as '(List<NFinalModelGeneratorTest.Models.UserA>)' from user;
