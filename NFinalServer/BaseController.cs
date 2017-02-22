@@ -6,7 +6,7 @@ using System.Text;
 namespace NFinalServer
 {
     /// <summary>
-    /// 此类必须是泛型
+    /// 控制器的父类必须是泛型
     /// </summary>
     /// <typeparam name="TMasterPage">母页模板数据</typeparam>
     public class BaseController<TMasterPage>:NFinal.OwinAction<TMasterPage,Code.User> where TMasterPage :NFinal.MasterPageModel

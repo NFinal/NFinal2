@@ -11,6 +11,7 @@ namespace NFinalServer.Controllers
         public void Default()
         {
             this.ViewBag.Message = "Hello World!";
+            this.ViewBag.Title = "Title";
             this.Render();
         }
         public void Ajax()

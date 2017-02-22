@@ -15,6 +15,7 @@ namespace NFinalServer.Controllers.Index_Model
 		[Newtonsoft.Json.JsonIgnore]
 		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig;
 		public string Message;
+		public string Title;
 	}
 	public class Ajax
 	{
