@@ -7,7 +7,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
     <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
     <title></title>
-    <script src="/Scripts/Url.js"></script>
+    <script src="@Model.debugUrl/Scripts/Url.js"></script>
 </head>
 <body>
     此文件负责跳转到 @Model.className 下的 @Model.methodName 方法
@@ -22,11 +22,11 @@
             @:var @name = '@name';
                 }
         @:var urlString = Url.@Model.className.Replace('.', '_').@Model.methodName (@string.Join(",", Model.formatData.actionUrlNames));
-                    @:window.location.href = urlString;
+                    @:window.location.href ="@Model.debugUrl"+ urlString;
             }
     else
     {
         @:var urlString = Url.@Model.className.Replace('.', '_').@Model.methodName ();
-                @:window.location.href = urlString;
+                @:window.location.href ="@Model.debugUrl" + urlString;
         }
 </script>

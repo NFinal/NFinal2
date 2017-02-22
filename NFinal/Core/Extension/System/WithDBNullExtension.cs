@@ -12,14 +12,14 @@ namespace System
         /// </summary>
         /// <param name="obj">object类型变量</param>
         /// <returns>object</returns>
-		public static object WithDBNull(this object obj)
-		{
-			if (obj != null)
-			{
-				return obj.ToString();
-			}
-			return DBNull.Value;
-		}
+		//public static object WithDBNull(this object obj)
+		//{
+		//	if (obj != null)
+		//	{
+		//		return obj.ToString();
+		//	}
+		//	return DBNull.Value;
+		//}
 		/// <summary>
         /// 转换为SqlParameter的值类型
         /// </summary>

@@ -22,8 +22,11 @@ namespace NFinal.IO
         }
         public void Write(string value)
         {
-            byte[] buffer = NFinal.Constant.encoding.GetBytes(value);
-            this.stream.Write(buffer, 0, buffer.Length);
+            if (value != null)
+            {
+                byte[] buffer = NFinal.Constant.encoding.GetBytes(value);
+                this.stream.Write(buffer, 0, buffer.Length);
+            }
         }
         public void Write(byte[] buffer, int offset, int count)
         {

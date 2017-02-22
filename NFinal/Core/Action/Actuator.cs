@@ -87,8 +87,37 @@ namespace NFinal.Action
             //try
             methodIL.BeginExceptionBlock();
             {
+                //controller
+                methodIL.Emit(OpCodes.Ldloc, controller);
+                //controller,environment
+                methodIL.Emit(OpCodes.Ldarg_0);
+                //controller,environment,null
+                methodIL.Emit(OpCodes.Ldnull);
+                //controller,environment,null,Request
+                methodIL.Emit(OpCodes.Ldarg_2);
+                //controller,environment,null,Request,CompressMode
+                methodIL.Emit(OpCodes.Ldc_I4, (int)NFinal.CompressMode.Deflate);
+                methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("Initialization",
+                    new Type[] { typeof(TContext),
+                        typeof(System.IO.Stream),
+                        typeof(TRequest),
+                        typeof(NFinal.CompressMode) }));
+                
+                //controller
+                methodIL.Emit(OpCodes.Ldloc, controller);
+                //controller.Before();
+                methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("Before", Type.EmptyTypes));
+                //bool,0
+                methodIL.Emit(OpCodes.Ldc_I4_0);
+                methodIL.Emit(OpCodes.Ceq);
+                var BeforeEnd = methodIL.DefineLabel();
+                methodIL.Emit(OpCodes.Brfalse_S, BeforeEnd);
+                methodIL.Emit(OpCodes.Leave_S,methodEnd);
+                methodIL.MarkLabel(BeforeEnd);
+
                 //ViewBag初始化
-                if(true){
+                if (true)
+                {
                     var ControllerViewBagFieldInfo = controllerType.GetField("ViewBag");
                     Type ViewBagType = null;
                     if (ControllerViewBagFieldInfo.FieldType == typeof(object))
@@ -110,30 +139,39 @@ namespace NFinal.Action
 
                     //controller
                     methodIL.Emit(OpCodes.Newobj, ViewBagContructorInfo);
-                    methodIL.Emit(OpCodes.Stloc,ViewBag);
+                    methodIL.Emit(OpCodes.Stloc, ViewBag);
 
                     //获取所有字段
-                    var controllerFieldInfos= controllerType.GetFields();
+                    var controllerFieldInfos = controllerType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static|BindingFlags.FlattenHierarchy);
                     foreach (var controllerFieldInfo in controllerFieldInfos)
                     {
                         //查找Controller中具有ViewBagMember特性的字段
-                        var viewBagMemberAttribute= controllerFieldInfo.GetCustomAttributes(typeof(ViewBagMemberAttribute), true);
+                        var viewBagMemberAttribute = controllerFieldInfo.GetCustomAttributes(typeof(ViewBagMemberAttribute), true);
                         if (viewBagMemberAttribute.Length > 0)
                         {
                             var ViewBagFiledInfo = ViewBagType.GetField(
-                                controllerFieldInfo.Name,BindingFlags.Public|BindingFlags.Instance|BindingFlags.Static);
+                                controllerFieldInfo.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
                             //查找到ViewBag中具有相同名字的字段
-                            if (ViewBagFiledInfo != null && ViewBagFiledInfo.FieldType== controllerFieldInfo.FieldType)
+                            if (ViewBagFiledInfo != null && ViewBagFiledInfo.FieldType == controllerFieldInfo.FieldType)
                             {
-                                //赋值操作
-                                methodIL.Emit(OpCodes.Ldloc, ViewBag);
-                                methodIL.Emit(OpCodes.Ldloc, controller);
-                                methodIL.Emit(OpCodes.Ldfld, controllerFieldInfo);
-                                methodIL.Emit(OpCodes.Stfld, ViewBagFiledInfo);
+                                if (controllerFieldInfo.IsStatic)
+                                {
+                                    methodIL.Emit(OpCodes.Ldloc, ViewBag);
+                                    methodIL.Emit(OpCodes.Ldsfld, controllerFieldInfo);
+                                    methodIL.Emit(OpCodes.Stfld, ViewBagFiledInfo);
+                                }
+                                else
+                                {
+                                    //赋值操作
+                                    methodIL.Emit(OpCodes.Ldloc, ViewBag);
+                                    methodIL.Emit(OpCodes.Ldloc, controller);
+                                    methodIL.Emit(OpCodes.Ldfld, controllerFieldInfo);
+                                    methodIL.Emit(OpCodes.Stfld, ViewBagFiledInfo);
+                                }
                             }
                         }
                     }
-                    var controllerPropertyInfos = controllerType.GetProperties();
+                    var controllerPropertyInfos = controllerType.GetProperties(BindingFlags.Public|BindingFlags.Instance|BindingFlags.Static| BindingFlags.FlattenHierarchy);
                     foreach (var controllerPropertyInfo in controllerPropertyInfos)
                     {
                         var viewBagMemberAttribute = controllerPropertyInfo.GetCustomAttributes(typeof(ViewBagMemberAttribute), true);
@@ -141,13 +179,13 @@ namespace NFinal.Action
                         {
                             var viewBagPropertyInfo = ViewBagType.GetProperty(
                                 controllerPropertyInfo.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
-                            if (viewBagPropertyInfo != null && viewBagPropertyInfo.PropertyType== controllerPropertyInfo.PropertyType)
+                            if (viewBagPropertyInfo != null && viewBagPropertyInfo.PropertyType == controllerPropertyInfo.PropertyType)
                             {
                                 MethodInfo controllerPropertyInfoGetGetMethod = controllerPropertyInfo.GetGetMethod();
                                 MethodInfo viewBagPropertyInfoGetSetMethod = viewBagPropertyInfo.GetSetMethod();
                                 if (controllerPropertyInfo.GetGetMethod().IsStatic)
                                 {
-                                    methodIL.Emit(OpCodes.Ldloc,ViewBag);
+                                    methodIL.Emit(OpCodes.Ldloc, ViewBag);
                                     methodIL.Emit(OpCodes.Call, controllerPropertyInfoGetGetMethod);
                                     methodIL.Emit(OpCodes.Callvirt, viewBagPropertyInfoGetSetMethod);
                                 }
@@ -161,32 +199,10 @@ namespace NFinal.Action
                             }
                         }
                     }
-                    methodIL.Emit(OpCodes.Ldloc,controller);
-                    methodIL.Emit(OpCodes.Ldloc,ViewBag);
+                    methodIL.Emit(OpCodes.Ldloc, controller);
+                    methodIL.Emit(OpCodes.Ldloc, ViewBag);
                     methodIL.Emit(OpCodes.Stfld, ControllerViewBagFieldInfo);
                 }
-                //controller
-                methodIL.Emit(OpCodes.Ldloc, controller);
-                //controller,environment
-                methodIL.Emit(OpCodes.Ldarg_0);
-                //controller,environment,null
-                methodIL.Emit(OpCodes.Ldnull);
-                //controller,environment,null,Request
-                methodIL.Emit(OpCodes.Ldarg_2);
-                //controller,environment,null,Request,CompressMode
-                methodIL.Emit(OpCodes.Ldc_I4, (int)NFinal.CompressMode.Deflate);
-                methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("Initialization",
-                    new Type[] { typeof(TContext),
-                        typeof(System.IO.Stream),
-                        typeof(TRequest),
-                        typeof(NFinal.CompressMode) }));
-
-                //controller
-                methodIL.Emit(OpCodes.Ldloc, controller);
-                //controller.Before();
-                methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("Before", Type.EmptyTypes));
-                //bool
-                methodIL.Emit(OpCodes.Pop);
 
                 //controller
                 methodIL.Emit(OpCodes.Ldloc, controller);
@@ -335,9 +351,14 @@ namespace NFinal.Action
                 ViewModel ViewBag = new ViewModel();
                 ViewBag.a = 2;
                 ViewBag.b = "3";
+                
+                ViewBag.c = Index.c;
+                ViewBag.c1 = Index.c1;
                 controller.ViewBag = ViewBag;
-              
-                controller.Before();
+                if (!controller.Before())
+                {
+                    return;
+                }
                 {
                     //添参数问题。。。
                     //string a = request.parameters["a"];
@@ -383,6 +404,8 @@ namespace NFinal.Action
     [ResFilter]
     public class Index : BaseController
     {
+        public static string c;
+        public static string c1;
         [GetHtml("/Index.html")]
         public void Index1(string a,int b,ParameterModel c)
         {
@@ -446,6 +469,8 @@ namespace NFinal.Action
     }
     public class ViewModel
     {
+        public string c;
+        public string c1 { get; set; }
         public int a;
         public string b;
     }

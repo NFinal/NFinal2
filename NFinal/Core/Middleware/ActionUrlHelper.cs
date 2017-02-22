@@ -364,12 +364,14 @@ namespace NFinal.Middleware
         {
             UrlRouteJsModel model = new UrlRouteJsModel();
             model.formatControllerDictionary = formatControllerDictionary;
-            string directory = NFinal.Utility.MapPath("/Scripts");
+            string webApplicationRoot = NFinal.Utility.GetWebApplicationRoot();
+            string directory = System.IO.Path.Combine(webApplicationRoot,"Scripts");
             if (!System.IO.Directory.Exists(directory))
             {
                 System.IO.Directory.CreateDirectory(directory);
             }
-            NFinal.IO.FileWriter fileWriter = new IO.FileWriter(NFinal.Utility.MapPath("/Scripts/Url.js"));
+            
+            NFinal.IO.FileWriter fileWriter = new IO.FileWriter(System.IO.Path.Combine(directory, "Url.js"));
             NFinal.Core.Middleware.UrlRouteJs.Render(fileWriter, model);
             fileWriter.Dispose();
         }
@@ -383,11 +385,19 @@ namespace NFinal.Middleware
             {
                 options.debugDirectory = "Debug";
             }
+            string webApplicationRoot = NFinal.Utility.GetWebApplicationRoot();
             foreach (var controller in formatControllerDictionary)
             {
                 direcotyName ="/" +options.debugDirectory.TrimStart('/')+"/"+ controller.Key.Namespace.Replace('.','/') + "/" + controller.Key.Name;
-                direcotyName = NFinal.Utility.MapPath(direcotyName);
-                System.IO.Directory.CreateDirectory(direcotyName);
+                string[] directoryTemp= direcotyName.Split('/');
+                string[] directoryList = new string[directoryTemp.Length+1];
+                directoryList[0] = webApplicationRoot;
+                directoryTemp.CopyTo(directoryList, 1);
+                direcotyName =System.IO.Path.Combine(directoryList);
+                if (!System.IO.Directory.Exists(direcotyName))
+                {
+                    System.IO.Directory.CreateDirectory(direcotyName);
+                }
                 foreach (var method in controller.Value)
                 {
                     fileName = System.IO.Path.Combine(direcotyName, method.Key + ".html");
@@ -397,6 +407,7 @@ namespace NFinal.Middleware
                         debugData.className = controller.Key.FullName;
                         debugData.methodName = method.Key;
                         debugData.formatData = method.Value;
+                        debugData.debugUrl = options.debugUrl;
                         using (fileWriter = new IO.FileWriter(fileName))
                         {
                             NFinal.Core.Middleware.Debug.Render(fileWriter, debugData);

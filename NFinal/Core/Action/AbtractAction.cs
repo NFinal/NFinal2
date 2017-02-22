@@ -42,7 +42,7 @@ namespace NFinal
         /// 常用系统变量
         /// </summary>
         [ViewBagMember]
-        public static NFinal.Collections.FastDictionary<StringContainer> systemConfig { get; }
+        public static NFinal.Collections.FastDictionary<StringContainer> systemConfig = null;
         /// <summary>
         /// 请求参数信息
         /// </summary>

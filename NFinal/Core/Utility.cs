@@ -13,6 +13,18 @@ namespace NFinal
         /// 站点根目录
         /// </summary>
         public static string rootPath = (AppDomain.CurrentDomain.GetData(".appPath") as string) ?? Environment.CurrentDirectory;
+        public static string GetWebApplicationRoot()
+        {
+            string dirName = Path.GetFileName(rootPath);
+            if (dirName == "Debug" || dirName == "Release")
+            {
+                return Path.GetDirectoryName(Path.GetDirectoryName(rootPath));
+            }
+            else
+            {
+                return rootPath;
+            }
+        }
         /// <summary>
         /// 获得当前绝对路径，同时兼容windows和linux（系统自带的都不兼容）。
         /// </summary>

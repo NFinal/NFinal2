@@ -39,6 +39,7 @@ namespace NFinal.Middleware
     }
     public class MiddlewareConfigOptions
     {
+        public string debugUrl;
         /// <summary>
         /// 插件集合
         /// </summary>

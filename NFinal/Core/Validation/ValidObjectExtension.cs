@@ -139,7 +139,7 @@ namespace NFinal.Validation
         public static ValidObject Range(this ValidObject obj, float min, float max)
         {
             ValidateStatus status = new ValidateStatus("参数必须大于"+min+"且小于"+max, false);
-            float result = obj.AsVar();
+            float result = obj.value.AsVar();
             if (result >= min && result <= max)
             {
                 status.isDirty = false;
@@ -154,7 +154,7 @@ namespace NFinal.Validation
         public static ValidObject Max(this ValidObject obj, float value)
         {
             ValidateStatus status = new ValidateStatus("参数必须小于" + value, false);
-            float result = obj.AsVar();
+            float result = obj.value.AsVar();
             if (result <= value)
             {
                 status.isDirty = false;
@@ -169,7 +169,7 @@ namespace NFinal.Validation
         public static ValidObject Min(this ValidObject obj, float value)
         {
             ValidateStatus status = new ValidateStatus("参数必须大于" + value, false);
-            float result = obj.AsVar();
+            float result = obj.value.AsVar();
             if (result >= value)
             {
                 status.isDirty = false;

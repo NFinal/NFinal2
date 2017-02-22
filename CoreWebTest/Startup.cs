@@ -18,6 +18,7 @@ namespace CoreWebTest
             options.customErrors = new NFinal.Middleware.CustomErrors();
             options.customErrors.mode = NFinal.Middleware.Mode.Off;
             options.defaultDocument = "Index.html";
+            options.debugUrl = null;
             options.urlRouteRule = NFinal.Middleware.UrlRouteRule.AreaControllerCustomActionUrl;
             appBuilder.Use<SimpleMiddleware>(options);
             appBuilder.UseStageMarker(PipelineStage.Authenticate);

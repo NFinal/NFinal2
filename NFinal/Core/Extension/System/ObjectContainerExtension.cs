@@ -7,10 +7,6 @@ namespace System
     /// </summary>
     public static class ObjectContainerExtension
     {
-		public static ObjectContainer AsVar(this object obj)
-		{
-			return new ObjectContainer(obj);
-		}
 		/// <summary>
         /// ExecuteScalar()返回值转换为SByte
         /// </summary>

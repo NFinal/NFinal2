@@ -20,5 +20,9 @@ namespace NFinal.Middleware
         /// 方法名
         /// </summary>
         public string methodName;
+        /// <summary>
+        /// 调试用的url
+        /// </summary>
+        public string debugUrl;
     }
 }
