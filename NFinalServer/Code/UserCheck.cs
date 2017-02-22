@@ -6,7 +6,11 @@ using NFinal.Owin;
 
 namespace NFinalServer.Code
 {
-    public class UserCheck : NFinal.Filter.IRequestFilter<NFinal.Owin.Request>
+    /// <summary>
+    /// 用户自定义过滤器
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
+    public class UserCheckAttribute : Attribute, NFinal.Filter.IRequestFilter<NFinal.Owin.Request>
     {
         public bool RequestFilter(Request request)
         {

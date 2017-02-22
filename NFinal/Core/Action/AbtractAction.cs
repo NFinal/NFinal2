@@ -47,6 +47,7 @@ namespace NFinal
         /// 请求参数信息
         /// </summary>
         public NameValueCollection parameters;
+        public string contentType = "text/html; charset=utf-8";
         protected Stream writeStream;
         public virtual TMasterPage MasterPage { get; set; }
         public ServerType _serverType = ServerType.UnKnown;
@@ -305,6 +306,9 @@ namespace NFinal
                 }
                 sw.Write("/");
                 sw.Write(controllerType.Name);
+                sw.Write("/");
+                System.Reflection.MethodBase MethodBase = new System.Diagnostics.StackTrace().GetFrame(1).GetMethod();
+                sw.Write(MethodBase.Name);
                 sw.Write(".cshtml"); sw.Dispose();
                 this.RenderModel(sw.ToString(), ViewBag);
                 sw.Dispose();

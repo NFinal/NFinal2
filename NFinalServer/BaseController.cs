@@ -5,10 +5,20 @@ using System.Text;
 
 namespace NFinalServer
 {
+    /// <summary>
+    /// 此类必须是泛型
+    /// </summary>
+    /// <typeparam name="TMasterPage">母页模板数据</typeparam>
     public class BaseController<TMasterPage>:NFinal.OwinAction<TMasterPage,Code.User> where TMasterPage :NFinal.MasterPageModel
     {
+        /// <summary>
+        /// 此字段加上ViewBagMember属性将会自动添加到ViewBag中。
+        /// </summary>
+        [ViewBagMember]
+        public static string imageServerUrl = "";
         public override bool Before()
         {
+            //systemConfig通常用于全局缓存。
             if (systemConfig == null)
             {
                 Dictionary<string, StringContainer> systemConfigDictionary = new Dictionary<string, StringContainer>();
@@ -17,7 +27,7 @@ namespace NFinalServer
                 BaseController<TMasterPage>.systemConfig = new NFinal.Collections.FastDictionary<StringContainer>(systemConfigDictionary, systemConfigDictionary.Count);
                 systemConfigDictionary.Clear();
             }
-            return base.Before();
+            return true;
         }
     }
 }

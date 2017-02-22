@@ -8,6 +8,7 @@ namespace NFinalServer.Controllers.Index_Model
 {
 	public class Default
 	{
+		public string imageServerUrl;
 		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig;
 		public string Message;
 	}

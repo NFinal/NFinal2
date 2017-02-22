@@ -56,21 +56,6 @@ namespace NFinal.Owin
                 return environment.GetRequestRoot(headers);
             }
         }
-        public Request()
-        { }
-        public Request(IDictionary<string, string> cookies, NameValueCollection parameters,string requestPath,string subdomain)
-        {
-            this.parameters = null;
-            this.headers = null;
-            this.cookies = cookies;
-            this.environment = null;
-            this.files = null;
-            this.parameters = parameters;
-            this.methodType = MethodType.GET;
-            this.requestPath = requestPath;
-            this.stream = null;
-            this.queryString = null;
-        }
 
     }
 }

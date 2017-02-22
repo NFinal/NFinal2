@@ -364,8 +364,7 @@ namespace NFinal.Middleware
         {
             UrlRouteJsModel model = new UrlRouteJsModel();
             model.formatControllerDictionary = formatControllerDictionary;
-            string webApplicationRoot = NFinal.Utility.GetWebApplicationRoot();
-            string directory = System.IO.Path.Combine(webApplicationRoot,"Scripts");
+            string directory = NFinal.Utility.MapPath("/Scripts");
             if (!System.IO.Directory.Exists(directory))
             {
                 System.IO.Directory.CreateDirectory(directory);

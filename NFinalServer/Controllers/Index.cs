@@ -7,10 +7,11 @@ namespace NFinalServer.Controllers
 {
     public class Index:BaseController<NFinal.EmptyMasterPageModel>
     {
+        [Code.UserCheck]
         public void Default()
         {
             this.ViewBag.Message = "Hello World!";
-            this.Render("/NFinalServer/Views/Default.cshtml");
+            this.Render();
         }
     }
 }
