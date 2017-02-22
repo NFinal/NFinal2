@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-
+using Newtonsoft.Json;
 
 namespace System
 {
@@ -40,7 +40,7 @@ namespace System
         }
         public static string ToJson<T>(this T t)
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(t);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(t,new Newtonsoft.Json.Converters.JavaScriptDateTimeConverter());
         }
     }
 }

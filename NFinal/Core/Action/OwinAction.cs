@@ -171,7 +171,14 @@ namespace NFinal
             if (_serverType != ServerType.IsStatic)
             {
                 IDictionary<string, string[]> headers = (IDictionary<string, string[]>)context[Owin.OwinKeys.ResponseHeaders];
-                headers.Add(NFinal.Constant.HeaderContentType, new string[] { this.contentType});
+                if (headers.ContainsKey(NFinal.Constant.HeaderContentType))
+                {
+                    headers[NFinal.Constant.HeaderContentType] = new string[] { this.contentType };
+                }
+                else
+                {
+                    headers.Add(NFinal.Constant.HeaderContentType, new string[] { this.contentType });
+                }
                 foreach (var header in this.response.headers)
                 {
                     headers.AddValue(header.Key, header.Value);

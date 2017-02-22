@@ -10,13 +10,13 @@ namespace CoreWebTest.Controllers.Index_Model
 	public class INN
 	{
 		public string a;
-		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig{get;set;}
+		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig;
 		public string ddd;
 	}
 	public class Show
 	{
 		public string a;
-		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig{get;set;}
+		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig;
 		public System.DateTime cc2;
 	}
 }

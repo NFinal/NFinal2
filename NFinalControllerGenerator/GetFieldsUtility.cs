@@ -16,6 +16,16 @@ namespace NFinalControllerGenerator
         {
             foreach (var de in declares)
             {
+                if (de.Value.AttributeList != null)
+                {
+                    foreach (var attrString in de.Value.AttributeList)
+                    {
+                        sw.Write("\t\t");
+                        sw.Write("[");
+                        sw.Write(attrString);
+                        sw.WriteLine("]");
+                    }
+                }
                 sw.Write("\t\t");
                 sw.Write("public ");
                 sw.Write(de.Value.Type);
@@ -34,7 +44,7 @@ namespace NFinalControllerGenerator
         public static void GetLocalVars(MethodDeclarationSyntax methodT, SemanticModel model, ref Dictionary<string, DeclareData> declares)
         {
             var methodSy = model.GetDeclaredSymbol(methodT);
-            DeclareData data;
+            DeclareData data = new DeclareData();
             TypeInfo typeInfo;
             var assignmentList = methodT.DescendantNodes().OfType<AssignmentExpressionSyntax>();
             foreach (var assignment in assignmentList)
@@ -91,20 +101,23 @@ namespace NFinalControllerGenerator
         {
             if (symbol != null)
             {
+                bool hasViewBagAttribute = false;
                 DeclareData data = new DeclareData();
                 System.Collections.Immutable.ImmutableArray<AttributeData> attrArray;
                 INamedTypeSymbol nameTypeSymbol = null;
+                string AttrbuteListString = null;
                 foreach (var filed in symbol.GetMembers().OfType<IFieldSymbol>())
                 {
-
                     if (filed.CanBeReferencedByName)
                     {
                         attrArray = filed.GetAttributes();
+                        hasViewBagAttribute = false;
                         foreach (var attr in attrArray)
                         {
                             nameTypeSymbol = attr.AttributeClass;
                             if (nameTypeSymbol.Name == "ViewBagMemberAttribute")
                             {
+                                hasViewBagAttribute = true;
                                 data.IsAttribute = false;
                                 data.Type = filed.Type.ToString();
                                 data.Name = filed.Name;
@@ -125,16 +138,27 @@ namespace NFinalControllerGenerator
                                 }
                             }
                         }
+                        if (hasViewBagAttribute)
+                        {
+                            data.AttributeList = new List<string>();
+                            foreach (var attr in attrArray)
+                            {
+                                AttrbuteListString = attr.ApplicationSyntaxReference.SyntaxTree.GetText().ToString(attr.ApplicationSyntaxReference.Span);
+                                data.AttributeList.Add(AttrbuteListString);
+                            }
+                        }
                     }
                 }
                 foreach (var property in symbol.GetMembers().OfType<IPropertySymbol>())
                 {
                     attrArray = property.GetAttributes();
+                    hasViewBagAttribute = false;
                     foreach (var attr in attrArray)
                     {
                         nameTypeSymbol = attr.AttributeClass;
                         if (nameTypeSymbol.Name == "ViewBagMemberAttribute")
                         {
+                            hasViewBagAttribute = true;
                             data.IsAttribute = true;
                             data.Type = property.Type.ToString();
                             data.Name = property.Name;
@@ -153,6 +177,15 @@ namespace NFinalControllerGenerator
                                     }
                                 }
                             }
+                        }
+                    }
+                    if (hasViewBagAttribute)
+                    {
+                        data.AttributeList = new List<string>();
+                        foreach (var attr in attrArray)
+                        {
+                            AttrbuteListString = attr.ApplicationSyntaxReference.SyntaxTree.GetText().ToString(attr.ApplicationSyntaxReference.Span);
+                            data.AttributeList.Add(AttrbuteListString);
                         }
                     }
                 }

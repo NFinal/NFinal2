@@ -8,8 +8,24 @@ namespace NFinalServer.Controllers.Index_Model
 {
 	public class Default
 	{
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
 		public string imageServerUrl;
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
 		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig;
 		public string Message;
+	}
+	public class Ajax
+	{
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
+		public string imageServerUrl;
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
+		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig;
+		public string Message;
+		public int id;
+		public System.DateTime time;
 	}
 }

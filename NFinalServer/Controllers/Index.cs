@@ -13,5 +13,12 @@ namespace NFinalServer.Controllers
             this.ViewBag.Message = "Hello World!";
             this.Render();
         }
+        public void Ajax()
+        {
+            this.ViewBag.Message = "Hello Json!";
+            this.ViewBag.id = 2;
+            this.ViewBag.time = DateTime.Now;
+            this.AjaxReturn();
+        }
     }
 }

@@ -18,11 +18,11 @@ namespace NFinal.Collections
         /// <summary>
         /// 转换为Long数组之后列的最大长度
         /// </summary>
-        public int maxColumnCount = 0;
+        private int maxColumnCount = 0;
         /// <summary>
         /// 二分节点,用于构造代码
         /// </summary>
-        public CodeNode rootNode;
+        private CodeNode rootNode;
         private GetKeyIndex getKeyIndex;
 
         /// <summary>

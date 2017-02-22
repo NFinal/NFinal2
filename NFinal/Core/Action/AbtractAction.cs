@@ -42,6 +42,7 @@ namespace NFinal
         /// 常用系统变量
         /// </summary>
         [ViewBagMember]
+        [Newtonsoft.Json.JsonIgnore]
         public static NFinal.Collections.FastDictionary<StringContainer> systemConfig = null;
         /// <summary>
         /// 请求参数信息
@@ -116,7 +117,11 @@ namespace NFinal
             this.SetResponseHeader(NFinal.Constant.HeaderContentType, NFinal.Constant.ResponseContentType_Text_html);
             this.SetResponseHeader(NFinal.Constant.HeaderLocation, url);
         }
-        
+        public void AjaxReturn()
+        {
+            this.contentType = "application/json; charset=utf-8";
+            this.Write(Newtonsoft.Json.JsonConvert.SerializeObject(this.ViewBag, new Newtonsoft.Json.Converters.JavaScriptDateTimeConverter()));
+        }
         /// <summary>
         /// 返回json{code:1,msg:"",result:[json字符串]}
         /// </summary>
@@ -277,10 +282,6 @@ namespace NFinal
             {
                 throw new NFinal.Exceptions.ViewNotFoundException(url);
             }
-        }
-        public void AjaxReturn()
-        {
-            Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag);
         }
         /// <summary>
         /// 按照默认路径渲染模板

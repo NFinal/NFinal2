@@ -15,6 +15,7 @@ namespace NFinalServer
         /// 此字段加上ViewBagMember属性将会自动添加到ViewBag中。
         /// </summary>
         [ViewBagMember]
+        [Newtonsoft.Json.JsonIgnore]
         public static string imageServerUrl = "";
         public override bool Before()
         {

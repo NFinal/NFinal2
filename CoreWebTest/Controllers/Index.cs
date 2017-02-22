@@ -24,10 +24,7 @@ namespace CoreWebTest.Controllers
         {
             ViewBag.cc2 = DateTime.Now;
             ViewBag.a = "23";
-            //this.Write(a);
-            //this.Write(ViewBag.a);
-            //this.Write("hello!");
-            this.Render();
+            this.Render("/CoreWebTest/Views/Index.cshtml");
         }
     }
     public class parameterModel
