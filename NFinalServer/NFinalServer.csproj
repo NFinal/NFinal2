@@ -100,12 +100,6 @@
       <Generator>NFinalRazorGenerator</Generator>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NFinal\NFinal.csproj">
-      <Project>{26b51552-007d-42ea-9eb8-5b57308427e1}</Project>
-      <Name>NFinal</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
