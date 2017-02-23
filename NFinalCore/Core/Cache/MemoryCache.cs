@@ -6,16 +6,22 @@ namespace NFinal.Cache
     /// <summary>
     /// 内存缓存
     /// </summary>
-    public class MemoryCacheA : Cache
+    public class MemoryCache : Cache
     {
-        private IMemoryCache _cache = null;
-        private MemoryCacheEntryOptions _cacheEntryOptions;
-        public MemoryCacheA(int minutes) : base(minutes)
+        private static Microsoft.Extensions.Caching.Memory.IMemoryCache _cache = null;
+        private static Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions _cacheEntryOptions;
+        public MemoryCache(int minutes) : base(minutes)
         {
-            _cache = new MemoryCache(new MemoryCacheOptions());
-            _cacheEntryOptions = new MemoryCacheEntryOptions()
-            // Keep in cache for this time, reset time if accessed.
-            .SetSlidingExpiration(TimeSpan.FromSeconds(60*40));
+            if (_cache == null)
+            {
+                _cache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new MemoryCacheOptions());
+            }
+            if (_cacheEntryOptions == null)
+            {
+                _cacheEntryOptions = new MemoryCacheEntryOptions()
+                // Keep in cache for this time, reset time if accessed.
+                .SetSlidingExpiration(TimeSpan.FromSeconds(60 * 40));
+            }
         }
 
         public override bool HasKey(string key)

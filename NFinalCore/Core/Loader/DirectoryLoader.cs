@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.IO;
+#if NETCORE
 using Microsoft.Extensions.PlatformAbstractions;
 using System.Runtime.Loader;
-using System.IO;
 using Microsoft.Extensions.DependencyModel;
-
+#endif
 namespace NFinal.Loader
 {
+#if NETCORE
     public class SimpleAssemblyLoader : AssemblyLoadContext
     {
         //public static void Main(string[] args)
@@ -30,6 +32,7 @@ namespace NFinal.Loader
             return assembly;
         }
     }
+#endif
     //public class AssemblyLoader : AssemblyLoadContext
     //{
     //    private string folderPath;

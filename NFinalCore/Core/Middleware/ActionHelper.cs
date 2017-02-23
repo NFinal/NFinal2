@@ -91,8 +91,13 @@ namespace NFinal.Middleware
                 ///Assembly.LoadFile
                 ///仅加载自己
                 ///
-                /////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+#if NETCORE
                 Assembly assembly = Assembly.Load(new AssemblyName(options.plugs[i].assemblyName));
+#endif
+#if NET461
+                Assembly assembly = Assembly.LoadFrom(options.plugs[i].assemblyName);
+#endif
                 modules = assembly.GetModules();
                 for (int j = 0; j < modules.Length; j++)
                 {

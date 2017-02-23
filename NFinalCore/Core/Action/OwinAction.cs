@@ -20,7 +20,7 @@ namespace NFinal
             this.request = enviroment.GetRequest();
             this.parameters = request.parameters;
             this.Cookie = new OwinCookie(this.request.cookies);
-            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.MemoryCacheA(30));
+            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.MemoryCache(30));
             this.outputStream = enviroment.GetResponseBody();
             this.response = new Owin.Response();
             this.response.headers = new Dictionary<string, string[]>(StringComparer.Ordinal);
@@ -42,7 +42,7 @@ namespace NFinal
             this.request = request;
             this.parameters = request.parameters;
             this.Cookie = new OwinCookie(this.request.cookies);
-            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.MemoryCacheA(30));
+            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.MemoryCache(30));
             if (outputStream == null)
             {
                 this.outputStream = enviroment.GetResponseBody();
