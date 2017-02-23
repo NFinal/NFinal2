@@ -1,0 +1,71 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+
+<#var nullableType=new string[]{"String"};#>
+<#var structType=new string[]{"SByte","Byte","Int16","UInt16","Int32","UInt32","Int64","UInt64","Boolean","Char","Decimal","Double","Single","DateTime","DateTimeOffset"};#>
+namespace System
+{
+	/// <summary>
+    /// 基本类型转SqlParameter类型的类
+    /// </summary>
+    public static class WithDBNullExtension
+    {
+		/// <summary>
+        /// 转换为SqlParameter的值类型
+        /// </summary>
+        /// <param name="obj">object类型变量</param>
+        /// <returns>object</returns>
+		public static object WithDBNull(this object obj)
+		{
+			if (obj != null)
+			{
+				return obj.ToString();
+			}
+			return DBNull.Value;
+		}
+<#for(int i=0;i<nullableType.Length;i++){#>
+		/// <summary>
+        /// 转换为SqlParameter的值类型
+        /// </summary>
+        /// <param name="obj"><#=nullableType[i]#>类型变量</param>
+        /// <returns>object</returns>
+		public static object WithDBNull(this <#=nullableType[i]#> obj)
+		{
+			if (obj != null)
+			{
+				return obj.ToString();
+			}
+			return DBNull.Value;
+		}
+<#}#>
+<#for(int i=0;i<structType.Length;i++){#>
+		/// <summary>
+        /// 转换为SqlParameter的值类型
+        /// </summary>
+        /// <param name="obj"><#=structType[i]#>类型变量</param>
+        /// <returns>object</returns>
+		public static object WithDBNull(this <#=structType[i]#> obj)
+        {
+            return obj;
+        }
+		/// <summary>
+        /// 转换为SqlParameter的值类型
+        /// </summary>
+        /// <param name="obj"><#=structType[i]#>?类型变量</param>
+        /// <returns>object</returns>
+        public static object WithDBNull(this <#=structType[i]#>? obj)
+        {
+            if (obj != null)
+            {
+                return obj;
+            }
+            return DBNull.Value;
+        }
+<#}#>
+	}
+}

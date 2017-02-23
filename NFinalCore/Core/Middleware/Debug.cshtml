@@ -1,0 +1,32 @@
+﻿@inherits NFinal.Razor.BasePage<NFinal.Middleware.DebugData>
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+    <title></title>
+    <script src="@Model.debugUrl/Scripts/Url.js"></script>
+</head>
+<body>
+    此文件负责跳转到 @Model.className 下的 @Model.methodName 方法
+    把此文件设为首页，即可调试对应的函数。
+</body>
+</html>
+<script>
+    @if (Model.formatData.actionUrlNames != null && Model.formatData.actionUrlNames.Length > 0)
+    {
+        foreach (string name in Model.formatData.actionUrlNames)
+        {
+            @:var @name = '@name';
+                }
+        @:var urlString = Url.@Model.className.Replace('.', '_').@Model.methodName (@string.Join(",", Model.formatData.actionUrlNames));
+                    @:window.location.href ="@Model.debugUrl"+ urlString;
+            }
+    else
+    {
+        @:var urlString = Url.@Model.className.Replace('.', '_').@Model.methodName ();
+                @:window.location.href ="@Model.debugUrl" + urlString;
+        }
+</script>

@@ -1,0 +1,48 @@
+﻿@inherits NFinal.Razor.BasePage<NFinal.Middleware.UrlRouteJsModel>
+@using System.Collections.Generic
+function StringFormat() {
+    if (arguments.length == 0)
+        return null;
+    var str = arguments[0];
+    for (var i = 1; i < arguments.length; i++) {
+        var re = new RegExp('\\{' + (i - 1) + '\\}', 'gm');
+        str = str.replace(re, arguments[i]);
+    }
+    return str;
+}
+var Url={
+@{bool isFirst = true; }
+@foreach (KeyValuePair<Type, Dictionary<string, NFinal.Middleware.FormatData>> formatController in Model.formatControllerDictionary)
+{
+    string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + formatController.Key.Name;
+    isFirst = true;
+    @:"@controllerName":{
+    foreach (KeyValuePair<string, NFinal.Middleware.FormatData> formatMethod in formatController.Value)
+    {
+        @if (isFirst)
+        {
+            isFirst = false;
+        }
+        else
+        {
+            @:,
+        }
+
+        if (formatMethod.Value.actionUrlNames != null && formatMethod.Value.actionUrlNames.Length > 0)
+        {
+            @:"@formatMethod.Key:":function(@string.Join(",", formatMethod.Value.actionUrlNames))
+            @:{
+            @:return StringFormat("@formatMethod.Value.formatUrl",@string.Join(",", formatMethod.Value.actionUrlNames));
+            @:}
+        }
+        else
+        {
+            @:"@formatMethod.Key":function()
+            @:{
+            @:return "@formatMethod.Value.formatUrl";
+            @:}
+        }
+    }
+    @:}
+}
+};
