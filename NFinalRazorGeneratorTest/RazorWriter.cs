@@ -71,7 +71,7 @@ namespace NFinalRazorGeneratorTest
             sw.WriteLine("\t\t//如果此处报错，请添加NFinal引用");
             sw.WriteLine("\t\t//PMC命令为：Install-Package NFinal");
             sw.Write("\t\tpublic static void Render(");
-            sw.Write("this NFinal.IO.IWriter writer,");
+            sw.Write("NFinal.IO.Writer writer,");
             sw.Write(modelType);
             sw.WriteLine(" Model)");
             sw.WriteLine("\t\t{");

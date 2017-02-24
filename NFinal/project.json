@@ -1,0 +1,75 @@
+﻿{
+  "version": "1.0.0-*",
+  "dependencies": {
+    "Newtonsoft.Json": "9.0.1",
+    "protobuf-net": "2.1.0",
+    "StackExchange.Redis": "1.2.1"
+  },
+  "frameworks": {
+    "net40": {
+      "buildOptions": {
+        "define": [ "NET40" ]
+      },
+      "dependencies": {
+        "Microsoft.Owin": "2.1.0",
+        "Owin": "1.0.0",
+        "MemoryCache": "1.2.0"
+      }
+    },
+    "net451": {
+      "buildOptions": {
+        "define": [ "NET451" ]
+      },
+      "dependencies": {
+        "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+        "Microsoft.Extensions.Caching.Memory": "1.1.0",
+        "Microsoft.Extensions.DependencyModel": "1.1.0",
+        "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
+        "System.Data.Common": "4.3.0",
+        "System.Drawing.Primitives": "4.3.0",
+        "System.Reflection": "4.0.0",
+        "System.Reflection.Extensions": "4.0.0",
+        "System.Reflection.Primitives": "4.0.0",
+        "System.Reflection.TypeExtensions": "4.0.0"
+      }
+    },
+    "net461" :{
+      "buildOptions": {
+        "define": [ "NET461" ]
+      },
+      "dependencies": {
+        "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+        "Microsoft.Extensions.Caching.Memory": "1.1.0",
+        "Microsoft.Extensions.DependencyModel": "1.1.0",
+        "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
+        "System.Data.Common": "4.3.0",
+        "System.Drawing.Primitives": "4.3.0",
+        "System.Reflection": "4.0.0",
+        "System.Reflection.Extensions": "4.0.0",
+        "System.Reflection.Primitives": "4.0.0",
+        "System.Reflection.TypeExtensions": "4.0.0"
+      }
+    },
+    "netstandard1.6": {
+      "imports": "dnxcore50",
+      "buildOptions": { "define": [ "NETCORE" ] },
+      "dependencies": {
+        "System.Data.Common": "4.3.0",
+        "Microsoft.Extensions.Caching.Memory": "1.1.0",
+        "System.Reflection": "4.3.0",
+        "System.Reflection.Extensions": "4.3.0",
+        "System.Reflection.Primitives": "4.3.0",
+        "System.Reflection.TypeExtensions": "4.3.0",
+        "System.Runtime.Loader": "4.3.0",
+        "System.Drawing.Primitives": "4.3.0",
+        "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+        "Microsoft.Extensions.DependencyModel": "1.1.0",
+        "Microsoft.Extensions.PlatformAbstractions": "1.1.0"
+      }
+
+    }
+  },
+  "buildOptions": {
+    "allowUnsafe": true
+  }
+}

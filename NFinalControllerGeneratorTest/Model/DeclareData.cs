@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NFinalControllerGenerator.Model
+namespace NFinalControllerGenerator
 {
-    public struct DeclareData
+    public class DeclareData
     {
+        public List<string> AttributeList;
         public string Type;
         public string Name;
         public bool IsAttribute;

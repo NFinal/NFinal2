@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>NFinal2</id>
+        <version>2.0.003</version>
+        <title>NFinal2.dll</title>
+        <authors>Lucas</authors>
+        <owners>Lucas</owners>
+        <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+        <projectUrl>https://git.oschina.net/LucasDot/NFinal.git</projectUrl>
+        <iconUrl>http://api.nfinal.com/logo.gif</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>NFinal2 MVC framework</description>
+        <summary>NFinal2,The fast Mvc framework for .net and vNext.</summary>
+        <releaseNotes>emit mvc framework.</releaseNotes>
+        <copyright>Zhengzhou Strawberry Computer Technology Co.,LTD.</copyright>
+        <language>zh-CN</language>
+        <tags>NFinal2,MVC,Owin,AspNet</tags>
+        <dependencies>
+            <group targetFramework=".NETFramework4.0">
+                <dependency id="Microsoft.Owin" version="2.1.0" />
+                <dependency id="Newtonsoft.Json" version="9.0.1" />
+                <dependency id="Owin" version="1.0" />
+                <dependency id="protobuf-net" version="2.1.0" />
+                <dependency id="StackExchange.Redis" version="1.1.603" />
+                <dependency id="System.Net.Http" version="2.0.20710.0" />
+                <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
+            </group>
+        </dependencies>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="" />
+            <frameworkAssembly assemblyName="System" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Core" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Data" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Drawing" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Web" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Xml" targetFramework="" />
+        </frameworkAssemblies>
+    </metadata>
+    <files>
+        <file src="lib\net40\NFinal.dll" target="lib\net40\NFinal.dll" />
+    </files>
+</package>
