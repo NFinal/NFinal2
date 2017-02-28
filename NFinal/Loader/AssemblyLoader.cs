@@ -20,7 +20,7 @@ namespace NFinal.Loader
             }
             foreach (var assemblyFileName in assemblyFileNames)
             {
-                if (_assemblyDictionary.ContainsKey(assemblyFileName))
+                if (!_assemblyDictionary.ContainsKey(assemblyFileName))
                 {
                     assemblyDictionary.Add(assemblyFileName, System.Reflection.Assembly.LoadFrom(assemblyFileName));
                 }
@@ -32,7 +32,7 @@ namespace NFinal.Loader
             {
                 _assemblyDictionary = new Dictionary<string, System.Reflection.Assembly>();
             }
-            if (_assemblyDictionary.ContainsKey(assemblyFileName))
+            if (!_assemblyDictionary.ContainsKey(assemblyFileName))
             {
                 _assemblyDictionary.Add(assemblyFileName, System.Reflection.Assembly.LoadFrom(assemblyFileName));
             }

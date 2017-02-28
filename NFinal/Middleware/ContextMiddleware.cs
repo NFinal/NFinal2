@@ -12,8 +12,9 @@ namespace NFinal.Middleware
     {
         public ContextMiddleware(InvokeDelegate<IOwinContext> next, MiddlewareConfigOptions options) : base(next, options)
         {
+            
         }
-
+        
         public override IAction<IOwinContext,IOwinRequest> GetAction(IOwinContext context)
         {
             ContextAction<NFinal.EmptyMasterPageModel,object> controller= new ContextAction<NFinal.EmptyMasterPageModel, object>();

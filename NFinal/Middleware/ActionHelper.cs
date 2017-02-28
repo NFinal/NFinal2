@@ -130,7 +130,7 @@ namespace NFinal.Middleware
             //}
             //添加图标响应
             //Icon.Favicon.Init(actionDataList);
-            Middleware.Middleware<TContext, TRequest>.actionFastDic = new Collections.FastDictionary<ActionData<TContext, TRequest>>(actionDataDictionary, actionDataDictionary.Count);
+            //Middleware.Middleware<TContext, TRequest,TDelegate>.actionFastDic = new Collections.FastDictionary<ActionData<TContext, TRequest>>(actionDataDictionary, actionDataDictionary.Count);
             actionDataDictionary.Clear();
         }
         public static void AddActionData<TContext, TRequest>(Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,

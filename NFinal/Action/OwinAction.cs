@@ -97,28 +97,6 @@ namespace NFinal
             return true;
         }
         /// <summary>
-        /// 输出字节流，用于输出二进制流，如图象，文件等。
-        /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="offset"></param>
-        /// <param name="count"></param>
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            this.writeStream.Write(buffer, 0, count);
-        }
-        /// <summary>
-        /// 输出文本内容
-        /// </summary>
-        /// <param name="value">文本</param>
-        public override void Write(string value)
-        {
-            if (value != null && value.Length!=0)
-            {
-                byte[] buffer = NFinal.Constant.encoding.GetBytes(value);
-                this.writeStream.Write(buffer, 0, buffer.Length);
-            }
-        }
-        /// <summary>
         /// 模板渲染后函数，用于子类重写
         /// </summary>
         public override void After(){}
