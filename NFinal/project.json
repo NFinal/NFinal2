@@ -33,11 +33,6 @@
         "Newtonsoft.Json": "9.0.1",
         "protobuf-net": "2.1.0",
         "StackExchange.Redis": "1.2.1"
-        //"System.Drawing.Primitives": "4.3.0",
-        //"System.Reflection": "4.0.0",
-        //"System.Reflection.Extensions": "4.0.0",
-        //"System.Reflection.Primitives": "4.0.0",
-        //"System.Reflection.TypeExtensions": "4.0.0"
       }
     },
     "net461": {
@@ -55,11 +50,6 @@
         "Newtonsoft.Json": "9.0.1",
         "protobuf-net": "2.1.0",
         "StackExchange.Redis": "1.2.1"
-        //"System.Drawing.Primitives": "4.3.0",
-        //"System.Reflection": "4.0.10",
-        //"System.Reflection.Extensions": "4.0.0",
-        //"System.Reflection.Primitives": "4.0.0",
-        //"System.Reflection.TypeExtensions": "4.0.0"
       }
     },
     "netstandard1.6": {
