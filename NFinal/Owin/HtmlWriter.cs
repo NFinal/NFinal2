@@ -137,12 +137,14 @@ namespace NFinal.Owin
         {
             if (compressMode == CompressMode.Deflate)
             {
-                writeStream.Close();
+                writeStream.Flush();
+                writeStream.Dispose();
                 response.stream.Flush();
             }
             else if (compressMode == CompressMode.GZip)
             {
-                writeStream.Close();
+                writeStream.Flush();
+                writeStream.Dispose();
                 response.stream.Flush();
             }
             else
@@ -157,11 +159,13 @@ namespace NFinal.Owin
         {
             if (compressMode == CompressMode.Deflate)
             {
-                writeStream.Close();
+                writeStream.Flush();
+                writeStream.Dispose();
             }
             else if (compressMode == CompressMode.GZip)
             {
-                writeStream.Close();
+                writeStream.Flush();
+                writeStream.Dispose();
             }
         }
         /// <summary>

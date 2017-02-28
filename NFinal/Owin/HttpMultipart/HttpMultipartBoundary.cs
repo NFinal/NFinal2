@@ -41,7 +41,7 @@ namespace NFinal.Owin.HttpMultipart
                     this.Filename = FilenameReg.Match(header).Value;
                 }
 
-                if (header.StartsWith("Content-Type", StringComparison.InvariantCultureIgnoreCase))
+                if (header.StartsWith("Content-Type", StringComparison.Ordinal))
                 {
                     this.ContentType = header.Split(new[] { ':', ' ' }, StringSplitOptions.RemoveEmptyEntries).Last().Trim();
                 }

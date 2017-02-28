@@ -106,7 +106,14 @@ namespace NFinal.Middleware
                         //该类型继承自IAction并且其泛不是dynamic类型
                         if (typeof(NFinal.IAction<TContext, TRequest>).IsAssignableFrom(controller))
                         {
-                            if (!controller.IsGenericType)
+                            if (!controller
+#if (NET40 || NET451 || NET461)
+                                .IsGenericType
+#endif
+#if NETCORE
+                                .GetTypeInfo().IsGenericType
+#endif
+                                )
                             {
                                 Dictionary<string, FormatData> formatMethodDic = new Dictionary<string, FormatData>();
                                 AddActionData(actionDataDictionary, formatMethodDic, assembly, controller, options);
@@ -217,7 +224,14 @@ namespace NFinal.Middleware
             ControllerAttribute[] controllerAttributes = null;
             AreaAttribute[] areaAttributes = null;
             SubDomainAttribute[] subDomainAttributes = null;
-            controllerAttributes = (ControllerAttribute[])controller.GetCustomAttributes(typeof(ControllerAttribute), true);
+            controllerAttributes = (ControllerAttribute[])
+#if (NET40 || NET451 || NET461)
+                controller
+#endif
+#if NETCORE
+                controller.GetTypeInfo()
+#endif                
+                .GetCustomAttributes(typeof(ControllerAttribute), true);
             if (controllerAttributes.Length > 0)
             {
                 controllerName = controllerAttributes[0].Name;
@@ -226,7 +240,14 @@ namespace NFinal.Middleware
             {
                 controllerName = controller.Name;
             }
-            areaAttributes = (AreaAttribute[])controller.GetCustomAttributes(typeof(AreaAttribute), true);
+            areaAttributes = (AreaAttribute[])
+#if (NET40 || NET451 || NET461)
+                controller
+#endif
+#if NETCORE
+                controller.GetTypeInfo()
+#endif   
+                .GetCustomAttributes(typeof(AreaAttribute), true);
             if (areaAttributes.Length > 0)
             {
                 areaName = areaAttributes[0].Name;
@@ -235,7 +256,14 @@ namespace NFinal.Middleware
             {
                 areaName = null;
             }
-            subDomainAttributes = (SubDomainAttribute[])controller.GetCustomAttributes(typeof(SubDomainAttribute), true);
+            subDomainAttributes = (SubDomainAttribute[])
+#if (NET40 || NET451 || NET461)
+                controller
+#endif
+#if NETCORE
+                controller.GetTypeInfo()
+#endif   
+                .GetCustomAttributes(typeof(SubDomainAttribute), true);
             if (subDomainAttributes.Length > 0)
             {
                 subDomain = subDomainAttributes[0].Name;
@@ -297,7 +325,14 @@ namespace NFinal.Middleware
                 var attributes = methodInfo.GetCustomAttributes(true);
                 foreach (var attr in attributes)
                 {
-                    if (attr.GetType().IsSubclassOf(typeof(UrlAttribute)))
+                    if (attr
+#if (NET40 || NET451 || NET461)
+                        .GetType()
+#endif
+#if NETCORE
+                        .GetType().GetTypeInfo()
+#endif
+                        .IsSubclassOf(typeof(UrlAttribute)))
                     {
                         hasUrlAttribute = true;
                         urlAttribute = (UrlAttribute)attr;
@@ -355,20 +390,27 @@ namespace NFinal.Middleware
         public static TArrayType[] GetFilters<TArrayType>(Type filterType, Type controller, MethodInfo action)
         {
             List<TArrayType> filterList = new List<TArrayType>();
-            object[] controllerFilters = controller.GetCustomAttributes(true);
-            for(int i=0;i<controllerFilters.Length;i++)
+            var controllerFilters =
+#if (NET40 || NET451 || NET461)
+                controller
+#endif
+#if NETCORE
+                controller.GetTypeInfo()   
+#endif                
+                .GetCustomAttributes(true);
+            foreach(var controllerFilter in controllerFilters)
             {
-                if (filterType.IsAssignableFrom(controllerFilters[i].GetType()))
+                if (filterType.IsAssignableFrom(controllerFilter.GetType()))
                 {
-                    filterList.Add((TArrayType)controllerFilters[i]);
+                    filterList.Add((TArrayType)(object)controllerFilter);
                 }
             }
-            object[] actionFilters = action.GetCustomAttributes(true);
-            for (int i = 0; i < actionFilters.Length; i++)
+            var actionFilters =action.GetCustomAttributes(true);
+            foreach (var actionFilter in actionFilters)
             {
-                if (filterType.IsAssignableFrom(actionFilters[i].GetType()))
+                if (filterType.IsAssignableFrom(actionFilter.GetType()))
                 {
-                    filterList.Add((TArrayType)actionFilters[i]);
+                    filterList.Add((TArrayType)(object)actionFilter);
                 }
             }
             if (filterList.Count > 0)

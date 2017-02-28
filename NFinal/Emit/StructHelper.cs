@@ -27,7 +27,14 @@ namespace NFinal.Emit
         }
         private static TypeBuilder CreateTypeBuilder(string assemblyName, string moduleName, string typeName)
         {
-            TypeBuilder typeBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(new AssemblyName(assemblyName), AssemblyBuilderAccess.Run).DefineDynamicModule(moduleName).DefineType(typeName, TypeAttributes.Public);
+            TypeBuilder typeBuilder =
+#if (NET40 || NET451 || NET461)
+                AppDomain.CurrentDomain
+#endif
+#if NETCORE
+                AssemblyBuilder
+#endif
+                .DefineDynamicAssembly(new AssemblyName(assemblyName), AssemblyBuilderAccess.Run).DefineDynamicModule(moduleName).DefineType(typeName, TypeAttributes.Public);
             typeBuilder.DefineDefaultConstructor(MethodAttributes.Public);
             //typeBuilder.DefineConstructor(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig, CallingConventions.Standard, new Type[] { });
             return typeBuilder;

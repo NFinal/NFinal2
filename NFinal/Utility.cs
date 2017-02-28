@@ -15,7 +15,13 @@ namespace NFinal
         /// <summary>
         /// 站点根目录
         /// </summary>
-        public static string rootPath = (AppDomain.CurrentDomain.GetData(".appPath") as string) ?? Environment.CurrentDirectory;
+        public static string rootPath =
+#if (NET40 || NET451 || NET461)
+        (AppDomain.CurrentDomain.GetData(".appPath") as string) ?? Environment.CurrentDirectory;
+#endif
+#if NETCORE
+        AppContext.BaseDirectory;
+#endif
         public static string GetWebApplicationRoot()
         {
             string dirName = Path.GetFileName(rootPath);

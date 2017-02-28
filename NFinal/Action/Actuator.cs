@@ -150,7 +150,7 @@ namespace NFinal.Action
                     {
                         //查找Controller中具有ViewBagMember特性的字段
                         var viewBagMemberAttribute = controllerFieldInfo.GetCustomAttributes(typeof(ViewBagMemberAttribute), true);
-                        if (viewBagMemberAttribute.Length > 0)
+                        if (viewBagMemberAttribute.Count() > 0)
                         {
                             var ViewBagFiledInfo = ViewBagType.GetField(
                                 controllerFieldInfo.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
@@ -178,7 +178,7 @@ namespace NFinal.Action
                     foreach (var controllerPropertyInfo in controllerPropertyInfos)
                     {
                         var viewBagMemberAttribute = controllerPropertyInfo.GetCustomAttributes(typeof(ViewBagMemberAttribute), true);
-                        if (viewBagMemberAttribute.Length > 0)
+                        if (viewBagMemberAttribute.Count() > 0)
                         {
                             var viewBagPropertyInfo = ViewBagType.GetProperty(
                                 controllerPropertyInfo.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
@@ -216,7 +216,14 @@ namespace NFinal.Action
                     for (int i = 0; i < parameterInfos.Length; i++)
                     {
                         Type parameterType = parameterInfos[i].ParameterType;
-                        if (parameterInfos[i].ParameterType.IsGenericType && parameterInfos[i].ParameterType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                        if (parameterInfos[i].ParameterType
+#if (NET40 || NET451 || NET461)
+                            .IsGenericType
+#endif
+#if NETCORE
+                            .GetTypeInfo().IsGenericType
+#endif
+                            && parameterInfos[i].ParameterType.GetGenericTypeDefinition() == typeof(Nullable<>))
                         {
                             parameterType = parameterInfos[i].ParameterType.GetGenericArguments()[0];
                         }

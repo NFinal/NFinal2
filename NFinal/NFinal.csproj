@@ -45,7 +45,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -191,7 +192,6 @@
     <Compile Include="Action\ContentType.cs" />
     <Compile Include="Emit\CopyHelper.cs" />
     <Compile Include="Emit\StructHelper.cs" />
-    <Compile Include="Extension\System.Data.Common\DbParameterExtension.cs" />
     <Compile Include="Model\IModel.cs" />
     <Compile Include="System\System\INullable.cs" />
     <Compile Include="Json\IJson.cs" />
@@ -269,14 +269,11 @@
     <None Include="Middleware\UrlRouteJs.cshtml">
       <Generator>NFinalRazorGenerator</Generator>
     </None>
-    <None Include="key.snk" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Extension\System\ConvertExtension.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

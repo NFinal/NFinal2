@@ -244,9 +244,9 @@ namespace NFinal.Emit
             AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
 #endif
 #if NET451 || NET461 || NETCORE
-                AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run)
+                AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
 #endif
-            var modBuilder = asmBuilder.DefineDynamicModule("Mod",    );
+            var modBuilder = asmBuilder.DefineDynamicModule("Mod");
             var typeBuilder = modBuilder.DefineType("Test", TypeAttributes.Public);
 
             var weakTyping = typeof(TTarget) == typeof(object);
@@ -290,9 +290,13 @@ namespace NFinal.Emit
                 emit.il = buildMethod("Ctor", typeof(TTarget), new Type[] { typeof(object[]) });
                 GenCtor<TTarget>(targetType, ctorParamTypes);
             }
-
+#if (NET40 || NET451 || NET461)
             typeBuilder.CreateType();
             asmBuilder.Save(name);
+#endif
+#if NETCORE
+            typeBuilder.CreateTypeInfo();
+#endif
         }
 
         static long GetKey<T>(MemberInfo member)
@@ -609,7 +613,15 @@ namespace NFinal.Emit
 
             // we're weakly-typed
             targetType = member.DeclaringType;
-            if (!targetType.IsValueType) // are we a reference-type?
+            if (!targetType
+#if (NET40 || NET451 || NET461)
+                .IsValueType
+#endif
+#if NETCORE
+                .GetTypeInfo().IsValueType
+#endif
+                )
+            // are we a reference-type?
             {
                 // load and cast target, load and cast value and set
                 // ((TargetType)target).member = (MemberType)value;

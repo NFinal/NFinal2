@@ -48,8 +48,14 @@ namespace NFinal.Config
                 for (int j = 0; j < modules.Length; j++)
                 {
                     types = modules[j].GetTypes();
-                    object[] attributes= types[j].GetCustomAttributes(typeof(ConfigAttribute),true);
-                    if (attributes.Length > 0)
+                    var attributes = types[j]
+#if (NET40 || NET451 || NET461)
+                        .GetCustomAttributes(typeof(ConfigAttribute),true);
+#endif
+#if NETCORE
+                    .GetTypeInfo().GetCustomAttributes(typeof(ConfigAttribute), true);
+#endif
+                    if (attributes.Count() > 0)
                     {
                         methodInfo= types[j].GetMethod("Init", BindingFlags.Static | BindingFlags.Public);
                         //执行配置读取函数

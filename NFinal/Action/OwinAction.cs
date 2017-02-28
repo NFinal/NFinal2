@@ -143,7 +143,8 @@ namespace NFinal
                     headers.AddValue(header.Key, header.Value);
                 }
             }
-            this.writeStream.Close();
+            this.writeStream.Flush();
+            this.writeStream.Dispose();
             this.response.stream.Seek(0, SeekOrigin.Begin);
             this.response.stream.CopyTo(this.outputStream);
             this.Dispose();

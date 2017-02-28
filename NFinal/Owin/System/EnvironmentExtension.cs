@@ -475,7 +475,8 @@ namespace System
                 }
             }
             response.stream.CopyTo((Stream)environment[OwinKeys.ResponseBody]);
-            response.stream.Close();
+            response.stream.Flush();
+            response.stream.Dispose();
         }
     }
 }

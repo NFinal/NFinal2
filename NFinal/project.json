@@ -1,9 +1,7 @@
-﻿{
+{
   "version": "1.0.0-*",
   "dependencies": {
-    "Newtonsoft.Json": "9.0.1",
-    "protobuf-net": "2.1.0",
-    "StackExchange.Redis": "1.2.1"
+
   },
   "frameworks": {
     "net40": {
@@ -13,7 +11,10 @@
       "dependencies": {
         "Microsoft.Owin.Hosting": "2.1.0",
         "Microsoft.Owin": "2.1.0",
-        "Owin": "1.0.0"
+        "Owin": "1.0.0",
+        "Newtonsoft.Json": "9.0.1",
+        "protobuf-net": "2.1.0",
+        "StackExchange.Redis": "1.2.1"
       }
     },
     "net451": {
@@ -29,6 +30,9 @@
         "microsoft.owin.Hosting": "3.0.0",
         "Microsoft.Owin": "3.0.0",
         "Owin": "1.0.0",
+        "Newtonsoft.Json": "9.0.1",
+        "protobuf-net": "2.1.0",
+        "StackExchange.Redis": "1.2.1"
         //"System.Drawing.Primitives": "4.3.0",
         //"System.Reflection": "4.0.0",
         //"System.Reflection.Extensions": "4.0.0",
@@ -48,6 +52,9 @@
         "System.Data.Common": "4.3.0",
         "Microsoft.Owin": "3.0.0",
         "Owin": "1.0.0",
+        "Newtonsoft.Json": "9.0.1",
+        "protobuf-net": "2.1.0",
+        "StackExchange.Redis": "1.2.1"
         //"System.Drawing.Primitives": "4.3.0",
         //"System.Reflection": "4.0.10",
         //"System.Reflection.Extensions": "4.0.0",
@@ -70,12 +77,18 @@
         "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
         "Microsoft.Extensions.DependencyModel": "1.1.0",
         "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
-        "System.Xml.XmlDocument": "4.3.0"
+        "System.Xml.XmlDocument": "4.3.0",
+        "Newtonsoft.Json": "9.0.1",
+        "protobuf-net": "2.1.0",
+        "StackExchange.Redis": "1.2.1"
       }
 
     }
   },
-  "sharedExclude": ["lib/*.cs","lib/*/*.cs","lib/*/*/*.cs"],
+  "runtimes": {
+    "win": {}
+  },
+  "sharedExclude": [ "lib/*.cs", "lib/*/*.cs", "lib/*/*/*.cs" ],
   "buildOptions": {
     "allowUnsafe": true
   }

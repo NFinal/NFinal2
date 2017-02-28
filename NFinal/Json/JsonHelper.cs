@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Reflection.Emit;
 
 namespace NFinal.Json
@@ -141,14 +142,21 @@ namespace NFinal.Json
             }
             Type propertyType = propertyInfo.PropertyType;
             bool isNullable = false;
-            if (propertyInfo.PropertyType.IsGenericType && propertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (propertyInfo.PropertyType
+#if (NET40 || NET451 || NET461)
+                .IsGenericType
+#endif
+#if NETCORE
+                .GetTypeInfo().IsGenericType
+#endif
+                && propertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 isNullable = true;
                 propertyType = propertyInfo.PropertyType.GetGenericArguments()[0];
             }
             if (propertyType == typeof(System.String))
             {
-                #region
+#region
                 var elseCase = methodIL.DefineLabel();
                 var endCase = methodIL.DefineLabel();
                 WriteComma(methodIL, ref isFirst);
@@ -177,7 +185,7 @@ namespace NFinal.Json
                 methodIL.Emit(OpCodes.Call, WriteJsonReverseStringMethodInfo);
                 WriteString(methodIL, "\"");
                 methodIL.MarkLabel(endCase);
-                #endregion
+#endregion
             }
             else if (propertyType == typeof(System.Byte[]))
             {
@@ -205,7 +213,7 @@ namespace NFinal.Json
             else if (propertyType == typeof(System.Char) ||
                 propertyType == typeof(System.Guid))
             {
-                #region
+#region
                 if (isNullable)
                 {
                     var elseCase = methodIL.DefineLabel();
@@ -254,7 +262,7 @@ namespace NFinal.Json
                     methodIL.Emit(OpCodes.Callvirt, writeMethodInfo);
                     WriteString(methodIL, "\"");
                 }
-                #endregion
+#endregion
             }
             else if (propertyType == typeof(System.Int32) ||
                 propertyType == typeof(System.Int16) ||
@@ -268,7 +276,7 @@ namespace NFinal.Json
                 propertyType == typeof(System.Double) ||
                 propertyType == typeof(System.Decimal))
             {
-                #region
+#region
                 if (isNullable)
                 {
                     var elseCase = methodIL.DefineLabel();
@@ -313,12 +321,12 @@ namespace NFinal.Json
                     methodIL.Emit(OpCodes.Call, propertyType.GetMethod("ToString", Type.EmptyTypes));
                     methodIL.Emit(OpCodes.Callvirt, writeMethodInfo);
                 }
-                #endregion
+#endregion
             }
             else if (propertyType == typeof(System.DateTime)
                 )
             {
-                #region
+#region
                 if (isNullable)
                 {
                     var elseCase = methodIL.DefineLabel();
@@ -446,7 +454,7 @@ namespace NFinal.Json
                     }
 
                 }
-                #endregion
+#endregion
             }
             else if (propertyType == typeof(System.Boolean))
             {
@@ -514,7 +522,14 @@ namespace NFinal.Json
         {
             Type fieldType = fieldInfo.FieldType;
             bool isNullable = false;
-            if (fieldInfo.FieldType.IsGenericType && fieldInfo.FieldType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (fieldInfo.FieldType
+#if (NET40 || NET451 || NET461)
+                .IsGenericType
+#endif
+#if NETCORE
+                .GetTypeInfo().IsGenericType
+#endif
+                && fieldInfo.FieldType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 isNullable = true;
                 fieldType = fieldInfo.FieldType.GetGenericArguments()[0];

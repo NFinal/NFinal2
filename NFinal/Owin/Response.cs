@@ -70,7 +70,7 @@ namespace NFinal.Owin
                 stream.Read(buffer, 0, buffer.Length);
                 stream.Seek(0, SeekOrigin.Begin);
                 memoryStream.Write(buffer, 0, buffer.Length);
-                buffer = memoryStream.GetBuffer();
+                buffer = memoryStream.ToBytes();
             }
             return buffer;
         }

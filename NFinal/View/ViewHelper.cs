@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -38,10 +39,15 @@ namespace NFinal
                     Type[] types = modules[j].GetTypes();
                     for (int k = 0; k < types.Length; k++)
                     {
-                        object[] attrs = types[k].GetCustomAttributes(typeof(ViewAttribute), true);
-                        if (attrs.Length > 0)
+#if (NET40 || NET451 || NET461)
+                         var attrs =   types[k].GetCustomAttributes(typeof(ViewAttribute), true);
+#endif 
+#if NETCORE
+                         var attrs = types[k].GetTypeInfo().GetCustomAttributes(typeof(ViewAttribute), true);
+#endif
+                        if (attrs.Count() > 0)
                         {
-                            viewAttr = (ViewAttribute)attrs[0];
+                            viewAttr = (ViewAttribute)attrs.First();
                             if (string.IsNullOrEmpty(viewAttr.viewUrl))
                             {
                                 viewAttr.viewUrl = types[k].FullName.Replace('.', '/');
