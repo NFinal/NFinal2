@@ -1,16 +1,14 @@
-﻿using System;
+﻿#if (NET40 || NET451 || NET461)
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-#if NET40
 using Microsoft.Owin;
-#endif
 using NFinal.Owin;
 
 namespace NFinal
 {
-#if NET40
     public class ContextAction<TMasterPage, TUser> : AbstractAction<IOwinContext, IOwinRequest, TUser, TMasterPage> where TMasterPage : NFinal.MasterPageModel
     {
         public override void After()
@@ -88,5 +86,5 @@ namespace NFinal
             throw new NotImplementedException();
         }
     }
-#endif
 }
+#endif

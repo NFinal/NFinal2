@@ -11,9 +11,9 @@
         "define": [ "NET40" ]
       },
       "dependencies": {
+        "Microsoft.Owin.Hosting": "2.1.0",
         "Microsoft.Owin": "2.1.0",
-        "Owin": "1.0.0",
-        "MemoryCache": "1.2.0"
+        "Owin": "1.0.0"
       }
     },
     "net451": {
@@ -26,14 +26,17 @@
         "Microsoft.Extensions.DependencyModel": "1.1.0",
         "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
         "System.Data.Common": "4.3.0",
-        "System.Drawing.Primitives": "4.3.0",
-        "System.Reflection": "4.0.0",
-        "System.Reflection.Extensions": "4.0.0",
-        "System.Reflection.Primitives": "4.0.0",
-        "System.Reflection.TypeExtensions": "4.0.0"
+        "microsoft.owin.Hosting": "3.0.0",
+        "Microsoft.Owin": "3.0.0",
+        "Owin": "1.0.0",
+        //"System.Drawing.Primitives": "4.3.0",
+        //"System.Reflection": "4.0.0",
+        //"System.Reflection.Extensions": "4.0.0",
+        //"System.Reflection.Primitives": "4.0.0",
+        //"System.Reflection.TypeExtensions": "4.0.0"
       }
     },
-    "net461" :{
+    "net461": {
       "buildOptions": {
         "define": [ "NET461" ]
       },
@@ -43,11 +46,13 @@
         "Microsoft.Extensions.DependencyModel": "1.1.0",
         "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
         "System.Data.Common": "4.3.0",
-        "System.Drawing.Primitives": "4.3.0",
-        "System.Reflection": "4.0.0",
-        "System.Reflection.Extensions": "4.0.0",
-        "System.Reflection.Primitives": "4.0.0",
-        "System.Reflection.TypeExtensions": "4.0.0"
+        "Microsoft.Owin": "3.0.0",
+        "Owin": "1.0.0",
+        //"System.Drawing.Primitives": "4.3.0",
+        //"System.Reflection": "4.0.10",
+        //"System.Reflection.Extensions": "4.0.0",
+        //"System.Reflection.Primitives": "4.0.0",
+        //"System.Reflection.TypeExtensions": "4.0.0"
       }
     },
     "netstandard1.6": {
@@ -64,11 +69,13 @@
         "System.Drawing.Primitives": "4.3.0",
         "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
         "Microsoft.Extensions.DependencyModel": "1.1.0",
-        "Microsoft.Extensions.PlatformAbstractions": "1.1.0"
+        "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
+        "System.Xml.XmlDocument": "4.3.0"
       }
 
     }
   },
+  "sharedExclude": ["lib/*.cs","lib/*/*.cs","lib/*/*/*.cs"],
   "buildOptions": {
     "allowUnsafe": true
   }

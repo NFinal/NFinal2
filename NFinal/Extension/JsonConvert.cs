@@ -8,7 +8,7 @@ namespace NFinal.Extension
     {
         //设置转换格式  需要引入命名空间：using System.Globalization;  
         static string  fmtDate = "ddd MMM d HH:mm:ss 'UTC'zz'00' yyyy";
-        static CultureInfo ciDate = CultureInfo.CreateSpecificCulture("en-US");
+        static CultureInfo ciDate = CultureInfo.CurrentCulture;
         public static string AsJsonDataTime(this DateTime dt)
         {
             //将C#时间转换成JS时间字符串

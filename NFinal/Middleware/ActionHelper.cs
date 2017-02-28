@@ -76,6 +76,7 @@ namespace NFinal.Middleware
             //}
             //else
             //{
+            NFinal.Loader.IAssemblyLoader assemblyLoader = new NFinal.Loader.AssemblyLoader();
             for (int i = 0; i < options.plugs.Length; i++)
             {
                 /////////////////////////////////////////////////////////////////////
@@ -92,7 +93,8 @@ namespace NFinal.Middleware
                 ///仅加载自己
                 ///
                 /////////////////////////////////////////////////////////////////////
-                Assembly assembly = Assembly.LoadFrom(options.plugs[i].filePath);
+                assemblyLoader.Load(options.plugs[i].filePath);
+                Assembly assembly = assemblyLoader.assemblyDictionary[options.plugs[i].filePath];
                 modules = assembly.GetModules();
                 for (int j = 0; j < modules.Length; j++)
                 {

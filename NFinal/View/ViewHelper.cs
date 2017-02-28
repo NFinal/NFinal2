@@ -26,10 +26,12 @@ namespace NFinal
             NFinal.ViewDelegateData dele;
             ViewAttribute viewAttr;
             Dictionary<string, ViewDelegateData> viewDataDictionary = new Dictionary<string, NFinal.ViewDelegateData>();
+            NFinal.Loader.IAssemblyLoader assemblyLoader = new NFinal.Loader.AssemblyLoader();
             for (int i = 0; i < options.plugs.Length; i++)
             {
                 plug = options.plugs[i];
-                assembly = Assembly.LoadFrom(plug.filePath);
+                assemblyLoader.Load(plug.filePath);
+                assembly = assemblyLoader.assemblyDictionary[plug.filePath];
                 modules = assembly.GetModules();
                 for (int j = 0; j < modules.Length; j++)
                 {

@@ -46,7 +46,7 @@ namespace NFinal.Json
                 localDate = dateTime.ToLocalTime();
             }
             
-            return localDate.ToLongTimeString();
+            return localDate.ToString();
         }
         public static readonly System.Reflection.MethodInfo GetLocalTimeStringMethodInfo = typeof(JsonHelper).GetMethod("GetLocalTimeString", new Type[] { typeof(DateTime) });
         public static string GetUTCTimeString(DateTime dateTime)
@@ -56,7 +56,7 @@ namespace NFinal.Json
             {
                 utcDate = dateTime.ToUniversalTime();
             }
-            return utcDate.ToLongTimeString();
+            return utcDate.ToString();
         }
         public static readonly System.Reflection.MethodInfo GetUTCTimeStringMethodInfo = typeof(JsonHelper).GetMethod("GetUTCTimeString", new Type[] { typeof(DateTime) });
         public struct GetJsonDelegateData

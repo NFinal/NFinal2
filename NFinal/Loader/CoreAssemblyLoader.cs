@@ -12,8 +12,41 @@ using Microsoft.Extensions.DependencyModel;
 namespace NFinal.Loader
 {
 #if NETCORE
-    public class SimpleAssemblyLoader : AssemblyLoadContext
+    public class AssemblyLoader : AssemblyLoadContext, IAssemblyLoader
     {
+        public static Dictionary<string, System.Reflection.Assembly> _assemblyDictionary = null;
+        public Dictionary<string, System.Reflection.Assembly> assemblyDictionary
+        {
+            get
+            {
+                return _assemblyDictionary;
+            }
+        }
+        public void LoadAll(string[] assemblyFileNames)
+        {
+            if (_assemblyDictionary == null)
+            {
+                _assemblyDictionary = new Dictionary<string, System.Reflection.Assembly>();
+            }
+            foreach (var assemblyFileName in assemblyFileNames)
+            {
+                if (_assemblyDictionary.ContainsKey(assemblyFileName))
+                {
+                    assemblyDictionary.Add(assemblyFileName, LoadFromAssemblyPath(assemblyFileName));
+                }
+            }
+        }
+        public void Load(string assemblyFileName)
+        {
+            if (_assemblyDictionary == null)
+            {
+                _assemblyDictionary = new Dictionary<string, System.Reflection.Assembly>();
+            }
+            if (_assemblyDictionary.ContainsKey(assemblyFileName))
+            {
+                _assemblyDictionary.Add(assemblyFileName, LoadFromAssemblyPath(assemblyFileName));
+            }
+        }
         //public static void Main(string[] args)
         //{
         //    var asl = new SimpleAssemblyLoader();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Reflection.Emit;
 
 namespace NFinal.Model
@@ -87,7 +88,14 @@ namespace NFinal.Model
         {
             Type propertyType = propertyInfo.PropertyType;
             bool isNullable = false;
-            if (propertyInfo.PropertyType.IsGenericType && propertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (propertyInfo.PropertyType
+#if (NET40 || NET451 || NET461)
+                .IsGenericType
+#endif
+#if NETCORE
+                .GetTypeInfo().IsGenericType
+#endif
+                && propertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 isNullable = true;
                 propertyType = propertyInfo.PropertyType.GetGenericArguments()[0];
@@ -218,7 +226,14 @@ namespace NFinal.Model
         {
             Type fieldType = fieldInfo.FieldType;
             bool isNullable = false;
-            if (fieldInfo.FieldType.IsGenericType && fieldInfo.FieldType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (fieldInfo.FieldType
+#if (NET40 || NET451 || NET461)
+                .IsGenericType
+#endif
+#if NETCORE
+                .GetTypeInfo().IsGenericType
+#endif
+                && fieldInfo.FieldType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
                 isNullable = true;
                 fieldType = fieldInfo.FieldType.GetGenericArguments()[0];
@@ -311,11 +326,11 @@ namespace NFinal.Model
                     //methodIL.Emit(OpCodes.Pop);
                 }
             }
-            else if (fieldInfo == typeof(NFinal.Owin.HttpMultipart.HttpFile))
+            else if (fieldType == typeof(NFinal.Owin.HttpMultipart.HttpFile))
             {
 
             }
-            else if (fieldInfo == typeof(System.IO.Stream))
+            else if (fieldType == typeof(System.IO.Stream))
             {
 
             }

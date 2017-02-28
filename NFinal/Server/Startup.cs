@@ -1,7 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+#if (NET40 || NET451 || NET461)
 using Owin;
 namespace NFinal
 {
@@ -22,3 +24,4 @@ namespace NFinal
         }
     }
 }
+#endif

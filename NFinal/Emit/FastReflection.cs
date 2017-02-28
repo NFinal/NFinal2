@@ -238,8 +238,15 @@ namespace NFinal.Emit
         public static void GenDebugAssembly<TTarget>(string name, FieldInfo field, PropertyInfo property, MethodInfo method, Type targetType, Type[] ctorParamTypes)
         {
             var asmName = new AssemblyName("Asm");
-            var asmBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.RunAndSave);
-            var modBuilder = asmBuilder.DefineDynamicModule("Mod", name);
+
+            var asmBuilder =
+#if NET40
+            AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run);
+#endif
+#if NET451 || NET461 || NETCORE
+                AssemblyBuilder.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.Run)
+#endif
+            var modBuilder = asmBuilder.DefineDynamicModule("Mod",    );
             var typeBuilder = modBuilder.DefineType("Test", TypeAttributes.Public);
 
             var weakTyping = typeof(TTarget) == typeof(object);
@@ -378,7 +385,14 @@ namespace NFinal.Emit
             // goal: return new T(arguments)
             Type targetType = typeof(T) == typeof(object) ? type : typeof(T);
 
-            if (targetType.IsValueType && paramTypes.Length == 0)
+            if (targetType
+#if (NET40 || NET451 || NET461)
+                .IsValueType 
+#endif
+#if NETCORE
+                .GetTypeInfo().IsValueType
+#endif
+                && paramTypes.Length == 0)
             {
                 var tmp = emit.declocal(targetType);
                 emit.ldloca(tmp)
@@ -406,7 +420,14 @@ namespace NFinal.Emit
                 emit.newobj(ctor);
             }
 
-            if (typeof(T) == typeof(object) && targetType.IsValueType)
+            if (typeof(T) == typeof(object) && targetType
+#if (NET40 || NET451 || NET461)
+                    .IsValueType
+#endif
+#if NETCORE
+                    .GetTypeInfo().IsValueType
+#endif
+                )
                 emit.box(targetType);
 
             emit.ret();
@@ -463,7 +484,14 @@ namespace NFinal.Emit
                     emit.ldarg1()
                         .ldc_i4(i)
                         .ldloc(i + localVarStart);
-                    if (byRefType.IsValueType)
+                    if (byRefType
+#if (NET40 || NET451 || NET461)
+                    .IsValueType
+#endif
+#if NETCORE
+                    .GetTypeInfo().IsValueType
+#endif
+                        )
                         emit.box(byRefType);
                     emit.stelem_ref();
                 }
@@ -646,7 +674,14 @@ namespace NFinal.Emit
             public ILEmitter ldarg(int idx) { il.Emit(OpCodes.Ldarg, idx); return this; }
             public ILEmitter ldarg_s(int idx) { il.Emit(OpCodes.Ldarg_S, idx); return this; }
             public ILEmitter ldstr(string str) { il.Emit(OpCodes.Ldstr, str); return this; }
-            public ILEmitter ifclass_ldind_ref(Type type) { if (!type.IsValueType) il.Emit(OpCodes.Ldind_Ref); return this; }
+            public ILEmitter ifclass_ldind_ref(Type type) { if (!type
+#if (NET40 || NET451 || NET461)
+                    .IsValueType
+#endif
+#if NETCORE
+                    .GetTypeInfo().IsValueType
+#endif
+                    ) il.Emit(OpCodes.Ldind_Ref); return this; }
             public ILEmitter ldloc0() { il.Emit(OpCodes.Ldloc_0); return this; }
             public ILEmitter ldloc1() { il.Emit(OpCodes.Ldloc_1); return this; }
             public ILEmitter ldloc2() { il.Emit(OpCodes.Ldloc_2); return this; }
@@ -675,18 +710,47 @@ namespace NFinal.Emit
             public ILEmitter ldfld(FieldInfo field) { il.Emit(OpCodes.Ldfld, field); return this; }
             public ILEmitter ldsfld(FieldInfo field) { il.Emit(OpCodes.Ldsfld, field); return this; }
             public ILEmitter lodfld(FieldInfo field) { if (field.IsStatic) ldsfld(field); else ldfld(field); return this; }
-            public ILEmitter ifvaluetype_box(Type type) { if (type.IsValueType) il.Emit(OpCodes.Box, type); return this; }
+            public ILEmitter ifvaluetype_box(Type type) { if (type
+#if (NET40 || NET451 || NET461)
+                    .IsValueType
+#endif
+#if NETCORE
+                    .GetTypeInfo().IsValueType
+#endif
+
+                    ) il.Emit(OpCodes.Box, type); return this; }
             public ILEmitter stfld(FieldInfo field) { il.Emit(OpCodes.Stfld, field); return this; }
             public ILEmitter stsfld(FieldInfo field) { il.Emit(OpCodes.Stsfld, field); return this; }
             public ILEmitter setfld(FieldInfo field) { if (field.IsStatic) stsfld(field); else stfld(field); return this; }
-            public ILEmitter unboxorcast(Type type) { if (type.IsValueType) unbox(type); else cast(type); return this; }
+            public ILEmitter unboxorcast(Type type) { if (type
+#if (NET40 || NET451 || NET461)
+                    .IsValueType
+#endif
+#if NETCORE
+                    .GetTypeInfo().IsValueType
+#endif
+                    ) unbox(type); else cast(type); return this; }
             public ILEmitter callorvirt(MethodInfo method) { if (method.IsVirtual) il.Emit(OpCodes.Callvirt, method); else il.Emit(OpCodes.Call, method); return this; }
             public ILEmitter stind_ref() { il.Emit(OpCodes.Stind_Ref); return this; }
             public ILEmitter ldind_ref() { il.Emit(OpCodes.Ldind_Ref); return this; }
             public LocalBuilder declocal(Type type) { return il.DeclareLocal(type); }
             public Label deflabel() { return il.DefineLabel(); }
-            public ILEmitter ifclass_ldarg_else_ldarga(int idx, Type type) { if (type.IsValueType) emit.ldarga(idx); else emit.ldarg(idx); return this; }
-            public ILEmitter ifclass_ldloc_else_ldloca(int idx, Type type) { if (type.IsValueType) emit.ldloca(idx); else emit.ldloc(idx); return this; }
+            public ILEmitter ifclass_ldarg_else_ldarga(int idx, Type type) { if (type
+#if (NET40 || NET451 || NET461)
+                    .IsValueType
+#endif
+#if NETCORE
+                    .GetTypeInfo().IsValueType
+#endif
+                    ) emit.ldarga(idx); else emit.ldarg(idx); return this; }
+            public ILEmitter ifclass_ldloc_else_ldloca(int idx, Type type) { if (type
+#if (NET40 || NET451 || NET461)
+                    .IsValueType
+#endif
+#if NETCORE
+                    .GetTypeInfo().IsValueType
+#endif
+                    ) emit.ldloca(idx); else emit.ldloc(idx); return this; }
             public ILEmitter perform(Action<ILEmitter, MemberInfo> action, MemberInfo member) { action(this, member); return this; }
             public ILEmitter ifbyref_ldloca_else_ldloc(LocalBuilder local, Type type) { if (type.IsByRef) ldloca(local); else ldloc(local); return this; }
         }

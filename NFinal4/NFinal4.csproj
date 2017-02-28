@@ -255,12 +255,6 @@
     <Compile Include="..\NFinal\Extension\JsonConvert.cs">
       <Link>Core\Extension\JsonConvert.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Extension\System.Data.Common\DbCommandExtension.cs">
-      <Link>Core\Extension\System.Data.Common\DbCommandExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Extension\System.Data.Common\DbParameterExtension.cs">
-      <Link>Core\Extension\System.Data.Common\DbParameterExtension.cs</Link>
-    </Compile>
     <Compile Include="..\NFinal\Extension\System\ConvertExtension.cs">
       <Link>Core\Extension\System\ConvertExtension.cs</Link>
     </Compile>
@@ -345,14 +339,17 @@
     <Compile Include="..\NFinal\Json\NewtonsoftJsonSerialize.cs">
       <Link>Core\Json\NewtonsoftJsonSerialize.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Json\SimpleJson.cs">
-      <Link>Core\Json\SimpleJson.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Json\SimpleJsonSerialize.cs">
-      <Link>Core\Json\SimpleJsonSerialize.cs</Link>
-    </Compile>
     <Compile Include="..\NFinal\Json\System\List.cs">
       <Link>Core\Json\System\List.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Loader\AssemblyLoader.cs">
+      <Link>Core\Loader\AssemblyLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Loader\CoreAssemblyLoader.cs">
+      <Link>Core\Loader\CoreAssemblyLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Loader\IAssemblyLoader.cs">
+      <Link>Core\Loader\IAssemblyLoader.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Logs\ConsoleLogger.cs">
       <Link>Core\Logs\ConsoleLogger.cs</Link>
@@ -411,17 +408,8 @@
     <Compile Include="..\NFinal\Model\System\IModelExtension.cs">
       <Link>Core\Model\System\IModelExtension.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\MVC\Config.cs">
-      <Link>Core\MVC\Config.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Owin\Builder\AppBuilder.cs">
-      <Link>Core\Owin\Builder\AppBuilder.cs</Link>
-    </Compile>
     <Compile Include="..\NFinal\Owin\Builder\Completed.cs">
       <Link>Core\Owin\Builder\Completed.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Owin\Builder\Constants.cs">
-      <Link>Core\Owin\Builder\Constants.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Owin\Builder\NotFound.cs">
       <Link>Core\Owin\Builder\NotFound.cs</Link>
@@ -546,7 +534,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\Loader\" />
     <Folder Include="Core\Server\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

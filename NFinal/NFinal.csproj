@@ -124,6 +124,9 @@
     <Compile Include="IO\StringWriter.cs" />
     <Compile Include="IO\Writer.cs" />
     <Compile Include="Json\JsonHelper.cs" />
+    <Compile Include="Loader\AssemblyLoader.cs" />
+    <Compile Include="Loader\CoreAssemblyLoader.cs" />
+    <Compile Include="Loader\IAssemblyLoader.cs" />
     <Compile Include="Middleware\ActionUrlHelper.cs" />
     <Compile Include="Middleware\ContextMiddleware.cs" />
     <Compile Include="Middleware\Debug.template.cs">
@@ -227,8 +230,6 @@
     <Compile Include="Json\IJsonSerialize.cs" />
     <Compile Include="Json\JilJsonSerialize.cs" />
     <Compile Include="Json\NewtonsoftJsonSerialize.cs" />
-    <Compile Include="MVC\Config.cs" />
-    <Compile Include="Owin\Builder\AppBuilder.cs" />
     <Compile Include="Owin\Response.cs" />
     <Compile Include="Action\ServerType.cs" />
     <Compile Include="Validation\Pattern.cs" />
@@ -245,9 +246,7 @@
     <Compile Include="View\ViewHelper.cs" />
     <Compile Include="IO\IWriter.cs" />
     <Compile Include="IO\FileWriter.cs" />
-    <Compile Include="Lib\VerifyCode.cs" />
     <Compile Include="Owin\Builder\Completed.cs" />
-    <Compile Include="Owin\Builder\Constants.cs" />
     <Compile Include="Owin\HttpMultipart\HttpFile.cs" />
     <Compile Include="Owin\HttpMultipart\HttpMultipart.cs" />
     <Compile Include="Owin\HttpMultipart\HttpMultipartBoundary.cs" />
@@ -256,18 +255,6 @@
     <Compile Include="Collections\NameValueCollection.cs" />
     <Compile Include="Owin\Builder\NotFound.cs" />
     <Compile Include="Utility.cs" />
-    <Compile Include="Lib\Oauth\feixin_helper.cs" />
-    <Compile Include="Lib\Oauth\JsonHelper.cs" />
-    <Compile Include="Lib\Oauth\kaixin_helper.cs" />
-    <Compile Include="Lib\Oauth\oauth_config.cs" />
-    <Compile Include="Lib\Oauth\oauth_helper.cs" />
-    <Compile Include="Lib\Oauth\qq_helper.cs" />
-    <Compile Include="Lib\Oauth\renren_helper.cs" />
-    <Compile Include="Lib\Oauth\SessionCollection.cs" />
-    <Compile Include="Lib\Oauth\sina_helper.cs" />
-    <Compile Include="Lib\Oauth\taobao_helper.cs" />
-    <Compile Include="Lib\Oauth\user_oauth_app.cs" />
-    <Compile Include="Lib\Oauth\Utils.cs" />
     <Compile Include="Action\System\UrlAttribute.cs" />
     <Compile Include="Owin\Request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -289,9 +276,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
-    <Folder Include="Core\" />
-    <Folder Include="Lib\Sms\" />
-    <Folder Include="Loader\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Extension\System\ConvertExtension.tt">
