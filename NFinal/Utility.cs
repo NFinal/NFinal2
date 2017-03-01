@@ -25,9 +25,14 @@ namespace NFinal
         public static string GetWebApplicationRoot()
         {
             string dirName = Path.GetFileName(rootPath);
+            string dirName2 = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(rootPath)));
             if (dirName == "Debug" || dirName == "Release")
             {
                 return Path.GetDirectoryName(Path.GetDirectoryName(rootPath));
+            }
+            else if (dirName2 == "Debug" || dirName2 == "Release")
+            {
+                return Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(rootPath))));
             }
             else
             {

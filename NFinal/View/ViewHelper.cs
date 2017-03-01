@@ -40,10 +40,10 @@ namespace NFinal
                     for (int k = 0; k < types.Length; k++)
                     {
 #if (NET40 || NET451 || NET461)
-                         var attrs =   types[k].GetCustomAttributes(typeof(ViewAttribute), true);
+                        var attrs =   types[k].GetCustomAttributes(typeof(ViewAttribute), true);
 #endif 
 #if NETCORE
-                         var attrs = types[k].GetTypeInfo().GetCustomAttributes(typeof(ViewAttribute), true);
+                        var attrs = types[k].GetTypeInfo().GetCustomAttributes(typeof(ViewAttribute), false);
 #endif
                         if (attrs.Count() > 0)
                         {

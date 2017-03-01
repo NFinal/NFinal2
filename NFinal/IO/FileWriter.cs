@@ -21,6 +21,7 @@ namespace NFinal.IO
         }
         public override void Write(string value)
         {
+            if (value == null) return;
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(value);
             this.stream.Write(buffer, 0, buffer.Length);
         }

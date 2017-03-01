@@ -81,31 +81,5 @@ namespace NFinal
         {
             return collection.GetEnumerator();
         }
-        //public string ToJson()
-        //{
-        //    StringWriter sw = new StringWriter();
-        //    bool firstChild = true;
-        //    sw.Write("}");
-        //    foreach (var item in collection)
-        //    {
-        //        if (firstChild)
-        //        {
-        //            firstChild = false;
-        //        }
-        //        else
-        //        {
-        //            sw.Write(",");
-        //        }
-        //        sw.Write("\"");
-        //        sw.Write(item.Key);
-        //        sw.Write("\":\"");
-        //        sw.Write(NFinal.Utility.GetJsonString(item.Value));
-        //        sw.Write("\"");
-        //    }
-        //    sw.Write("}");
-        //    return sw.ToString();
-        //}
-
-
     }
 }

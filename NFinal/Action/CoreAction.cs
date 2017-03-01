@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace NFinal
 {
-    public class CoreAction<TUser, TMasterPage> : AbstractAction<HttpContext, HttpRequest, TUser, TMasterPage> where TMasterPage : MasterPageModel
+    public class CoreAction<TMasterPage, TUser> : AbstractAction<HttpContext, HttpRequest, TUser, TMasterPage> where TMasterPage : MasterPageModel
     {
         public override void After()
         {

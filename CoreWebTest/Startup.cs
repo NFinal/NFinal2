@@ -21,6 +21,7 @@ namespace CoreWebTest
             options.debugUrl = null;
             options.urlRouteRule = NFinal.Middleware.UrlRouteRule.AreaControllerCustomActionUrl;
             appBuilder.Use<SimpleMiddleware>(options);
+            appBuilder.UseStaticFiles();
             appBuilder.UseStageMarker(PipelineStage.Authenticate);
         }
     }

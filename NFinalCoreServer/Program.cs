@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
 
 namespace NFinalCoreServer
@@ -11,10 +12,23 @@ namespace NFinalCoreServer
     {
         public static void Main(string[] args)
         {
+            bool debug = true;
+            string url = null;
+            if (debug)
+            {
+                url = "http://localhost:8083";
+            }
+            else
+            {
+                url = "http://localhost:80";
+            }
+            Code.User user = new Code.User();
+            var attr= user.GetType().GetTypeInfo().GetCustomAttributes(typeof(ViewAttribute));
             var host = new WebHostBuilder()
-               .UseKestrel()
                .UseStartup<Startup>()
-               //.UseContentRoot(Directory.GetCurrentDirectory())
+               .UseContentRoot(AppContext.BaseDirectory)
+               .UseUrls(url)
+               .UseKestrel()
                .Build();
 
             host.Run();

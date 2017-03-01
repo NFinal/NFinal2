@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NFinalServer
 {
-    class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -24,6 +24,11 @@ namespace NFinalServer
                 Console.WriteLine("服务器已经启动");
                 Console.ReadKey();
             }
+        }
+        public static void MM()
+        {
+            StringContainer str = "";
+            int num = str;
         }
     }
 }

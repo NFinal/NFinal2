@@ -30,7 +30,7 @@ var Url={
 
         if (formatMethod.Value.actionUrlNames != null && formatMethod.Value.actionUrlNames.Length > 0)
         {
-            @:"@formatMethod.Key:":function(@string.Join(",", formatMethod.Value.actionUrlNames))
+            @:"@formatMethod.Key":function(@string.Join(",", formatMethod.Value.actionUrlNames))
             @:{
             @:return StringFormat("@formatMethod.Value.formatUrl",@string.Join(",", formatMethod.Value.actionUrlNames));
             @:}

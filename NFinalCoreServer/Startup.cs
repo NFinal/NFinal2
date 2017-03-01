@@ -23,6 +23,7 @@ namespace NFinalCoreServer
             options.defaultDocument = "Index.html";
             options.urlRouteRule = NFinal.Middleware.UrlRouteRule.AreaControllerCustomActionUrl;
             app.UseMiddleware<NFinal.Middleware.CoreMiddleware>(options);
+           
         }
     }
 }

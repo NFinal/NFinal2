@@ -104,16 +104,16 @@ namespace NFinal.Middleware
                     {
                         controller = types[k];
                         //该类型继承自IAction并且其泛不是dynamic类型
+#if (NET40 || NET451 || NET461)
                         if (typeof(NFinal.IAction<TContext, TRequest>).IsAssignableFrom(controller))
                         {
-                            if (!controller
-#if (NET40 || NET451 || NET461)
-                                .IsGenericType
+                            if (!controller.IsGenericType)
 #endif
 #if NETCORE
-                                .GetTypeInfo().IsGenericType
+                        if (typeof(NFinal.IAction<TContext, TRequest>).IsAssignableFrom(controller))
+                        {
+                            if (!controller.GetTypeInfo().IsGenericType)
 #endif
-                                )
                             {
                                 Dictionary<string, FormatData> formatMethodDic = new Dictionary<string, FormatData>();
                                 AddActionData(actionDataDictionary, formatMethodDic, assembly, controller, options);
@@ -130,7 +130,7 @@ namespace NFinal.Middleware
             //}
             //添加图标响应
             //Icon.Favicon.Init(actionDataList);
-            //Middleware.Middleware<TContext, TRequest,TDelegate>.actionFastDic = new Collections.FastDictionary<ActionData<TContext, TRequest>>(actionDataDictionary, actionDataDictionary.Count);
+            Middleware.Middleware<TContext, TRequest>.actionFastDic = new Collections.FastDictionary<ActionData<TContext, TRequest>>(actionDataDictionary, actionDataDictionary.Count);
             actionDataDictionary.Clear();
         }
         public static void AddActionData<TContext, TRequest>(Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
