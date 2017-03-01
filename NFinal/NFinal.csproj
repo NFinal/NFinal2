@@ -86,7 +86,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net" />
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
       <Private>True</Private>
@@ -94,82 +102,446 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Action\Actuator.cs" />
-    <Compile Include="Action\AbtractAction.cs" />
-    <Compile Include="Action\CompressMode.cs" />
-    <Compile Include="Action\ContextAction.cs" />
-    <Compile Include="Action\MasterPageModel.cs" />
-    <Compile Include="Action\System\ViewBagMemberAttribute.cs" />
-    <Compile Include="Action\ViewData.cs" />
-    <Compile Include="Cache\System\Browser.cs" />
-    <Compile Include="Cache\System\CacheAttribute.cs" />
-    <Compile Include="Cache\System\Server.cs" />
-    <Compile Include="Cache\System\Standard.cs" />
-    <Compile Include="Collections\FastDictionary\CodeNode.cs" />
-    <Compile Include="Collections\FastDictionary\CodeNodeType.cs" />
-    <Compile Include="Collections\FastDictionary\ColumnCompareData.cs" />
-    <Compile Include="Collections\FastDictionary\FastDictionary.cs" />
-    <Compile Include="Collections\FastDictionary\FastDictionaryUtility.cs" />
-    <Compile Include="Collections\FastDictionary\ILWriter.cs" />
-    <Compile Include="Collections\FastDictionary\KeyLongArrayCompare.cs" />
-    <Compile Include="Collections\FastDictionary\LongCompare.cs" />
-    <Compile Include="Collections\FastDictionary\SharpWriter.cs" />
-    <Compile Include="Collections\NameValueDynamicCollection.cs" />
-    <Compile Include="Exceptions\DuplicateActionUrlException.cs" />
-    <Compile Include="Exceptions\DuplicateViewUrlException.cs" />
-    <Compile Include="Exceptions\ModelNotFoundException.cs" />
-    <Compile Include="Exceptions\ViewModelTypeUnMatched.cs" />
-    <Compile Include="Filter\FilterHelper.cs" />
-    <Compile Include="Filter\IBaseFilter.cs" />
-    <Compile Include="Filter\IContextFilter.cs" />
-    <Compile Include="IO\StringWriter.cs" />
-    <Compile Include="IO\Writer.cs" />
-    <Compile Include="Json\JsonHelper.cs" />
-    <Compile Include="Loader\AssemblyLoader.cs" />
-    <Compile Include="Loader\CoreAssemblyLoader.cs" />
-    <Compile Include="Loader\IAssemblyLoader.cs" />
-    <Compile Include="Middleware\ActionUrlHelper.cs" />
-    <Compile Include="Middleware\ContextMiddleware.cs" />
+    <Compile Include="..\NFinalCore\Action\AbtractAction.cs">
+      <Link>Action\System\AbtractAction.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\Actuator.cs">
+      <Link>Action\System\Actuator.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\CompressMode.cs">
+      <Link>Action\System\CompressMode.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\ContentType.cs">
+      <Link>Action\System\ContentType.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\ContextAction.cs">
+      <Link>Action\System\ContextAction.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\CoreAction.cs">
+      <Link>Action\System\CoreAction.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\IAction.cs">
+      <Link>Action\System\IAction.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\MasterPageModel.cs">
+      <Link>Action\System\MasterPageModel.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\MethodType.cs">
+      <Link>Action\System\MethodType.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\OwinAction.cs">
+      <Link>Action\System\OwinAction.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\ServerType.cs">
+      <Link>Action\System\ServerType.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\System\ActionAttribute.cs">
+      <Link>Action\System\ActionAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\System\ControllerAttribute.cs">
+      <Link>Action\System\ControllerAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\System\UrlAttribute.cs">
+      <Link>Action\System\UrlAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\System\ViewBagMemberAttribute.cs">
+      <Link>Action\System\ViewBagMemberAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Action\ViewData.cs">
+      <Link>Action\System\ViewData.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Attribute\html5Validate.cs">
+      <Link>Attribute\html5Validate.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Attribute\pattern.cs">
+      <Link>Attribute\pattern.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Cache\Cache.cs">
+      <Link>Cache\Cache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Cache\CacheType.cs">
+      <Link>Cache\CacheType.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Cache\ICache.cs">
+      <Link>Cache\ICache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Cache\MemoryCache.cs">
+      <Link>Cache\MemoryCache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Cache\RedisCache.cs">
+      <Link>Cache\RedisCache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Cache\System\Browser.cs">
+      <Link>Cache\System\Browser.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Cache\System\CacheAttribute.cs">
+      <Link>Cache\System\CacheAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Cache\System\Server.cs">
+      <Link>Cache\System\Server.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Cache\System\Standard.cs">
+      <Link>Cache\System\Standard.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\FastDictionary\CodeNode.cs">
+      <Link>Collections\FastDictionary\CodeNode.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\FastDictionary\CodeNodeType.cs">
+      <Link>Collections\FastDictionary\CodeNodeType.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\FastDictionary\ColumnCompareData.cs">
+      <Link>Collections\FastDictionary\ColumnCompareData.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\FastDictionary\CoreFastDictionary.cs">
+      <Link>Collections\FastDictionary\CoreFastDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\FastDictionary\FastDictionary.cs">
+      <Link>Collections\FastDictionary\FastDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\FastDictionary\FastDictionaryUtility.cs">
+      <Link>Collections\FastDictionary\FastDictionaryUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\FastDictionary\ILWriter.cs">
+      <Link>Collections\FastDictionary\ILWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\FastDictionary\KeyLongArrayCompare.cs">
+      <Link>Collections\FastDictionary\KeyLongArrayCompare.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\FastDictionary\LongCompare.cs">
+      <Link>Collections\FastDictionary\LongCompare.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\FastDictionary\SharpWriter.cs">
+      <Link>Collections\FastDictionary\SharpWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\NameValueCollection.cs">
+      <Link>Collections\NameValueCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\NameValueDynamicCollection.cs">
+      <Link>Collections\NameValueDynamicCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\NameVarCollection.cs">
+      <Link>Collections\NameVarCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Collections\System\NameVarCollection.cs">
+      <Link>Collections\System\NameVarCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Config\Common\CommonConfig.cs">
+      <Link>Config\Common\CommonConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Config\ConfigAttribute.cs">
+      <Link>Config\ConfigAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Config\Configration.cs">
+      <Link>Config\Configration.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Config\ConnectionString.cs">
+      <Link>Config\ConnectionString.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Constant.cs">
+      <Link>Constant.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Emit\CopyHelper.cs">
+      <Link>Emit\CopyHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Emit\FastReflection.cs">
+      <Link>Emit\FastReflection.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Emit\StructHelper.cs">
+      <Link>Emit\StructHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Exceptions\DuplicateActionUrlException.cs">
+      <Link>Exceptions\DuplicateActionUrlException.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Exceptions\DuplicateViewUrlException.cs">
+      <Link>Exceptions\DuplicateViewUrlException.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Exceptions\ModelNotFoundException.cs">
+      <Link>Exceptions\ModelNotFoundException.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Exceptions\ViewModelTypeUnMatched.cs">
+      <Link>Exceptions\ViewModelTypeUnMatched.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Exceptions\ViewNotFoundException.cs">
+      <Link>Exceptions\ViewNotFoundException.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Extension\BitConstant.cs">
+      <Link>Extension\BitConstant.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Extension\JsonConvert.cs">
+      <Link>Extension\JsonConvert.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Extension\System\Int32Extension.cs">
+      <Link>Extension\System\Int32Extension.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Extension\System\StreamAndByteExtension.cs">
+      <Link>Extension\System\StreamAndByteExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Extension\System\StringContainerExtension.cs">
+      <Link>Extension\System\StringContainerExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Extension\System\UniqueKeyDictionayExtension.cs">
+      <Link>Extension\System\UniqueKeyDictionayExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Filter\FilterEvent.cs">
+      <Link>Filter\FilterEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Filter\FilterHelper.cs">
+      <Link>Filter\FilterHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Filter\IBaseFilter.cs">
+      <Link>Filter\IBaseFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Filter\IContextFilter.cs">
+      <Link>Filter\IContextFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Filter\IEnvironmentFilter.cs">
+      <Link>Filter\IEnvironmentFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Filter\IRequestFilter.cs">
+      <Link>Filter\IRequestFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Filter\IResponseFilter.cs">
+      <Link>Filter\IResponseFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Filter\System\FilterAttribute.cs">
+      <Link>Filter\System\FilterAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Icon\Favicon.cs">
+      <Link>Icon\Favicon.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\IO\FileWriter.cs">
+      <Link>IO\FileWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\IO\IWriter.cs">
+      <Link>IO\IWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\IO\StreamWriter.cs">
+      <Link>IO\StreamWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\IO\StringWriter.cs">
+      <Link>IO\StringWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\IO\System\WriterExtension.cs">
+      <Link>IO\System\WriterExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\IO\Writer.cs">
+      <Link>IO\Writer.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Json\IJson.cs">
+      <Link>Json\IJson.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Json\IJsonSerialize.cs">
+      <Link>Json\IJsonSerialize.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Json\JilJsonSerialize.cs">
+      <Link>Json\JilJsonSerialize.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Json\JsonHelper.cs">
+      <Link>Json\JsonHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Json\NewtonsoftJsonSerialize.cs">
+      <Link>Json\NewtonsoftJsonSerialize.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Json\System\List.cs">
+      <Link>Json\System\List.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Loader\AssemblyLoader.cs">
+      <Link>Loader\AssemblyLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Loader\CoreAssemblyLoader.cs">
+      <Link>Loader\CoreAssemblyLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Loader\IAssemblyLoader.cs">
+      <Link>Loader\IAssemblyLoader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Logs\ConsoleLogger.cs">
+      <Link>Logs\ConsoleLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Logs\ILogger.cs">
+      <Link>Logs\ILogger.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Logs\RequestLogs.cs">
+      <Link>Logs\RequestLogs.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\ActionHelper.cs">
+      <Link>Middleware\ActionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\ActionKey.cs">
+      <Link>Middleware\ActionKey.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\ActionUrlHelper.cs">
+      <Link>Middleware\ActionUrlHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\ContextMiddleware.cs">
+      <Link>Middleware\ContextMiddleware.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\CoreMiddleware.cs">
+      <Link>Middleware\CoreMiddleware.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\DebugData.cs">
+      <Link>Middleware\DebugData.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\Middleware.cs">
+      <Link>Middleware\Middleware.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\MiddlewareConfigOptions.cs">
+      <Link>Middleware\MiddlewareConfigOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\OwinMiddleware.cs">
+      <Link>Middleware\OwinMiddleware.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\StringBuilderCache.cs">
+      <Link>Middleware\StringBuilderCache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\UrlRouteJsModel.cs">
+      <Link>Middleware\UrlRouteJsModel.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\UrlSegment.cs">
+      <Link>Middleware\UrlSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Model\IModel.cs">
+      <Link>Model\IModel.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Model\ModelHelper.cs">
+      <Link>Model\ModelHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Model\System\IModelExtension.cs">
+      <Link>Model\System\IModelExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\Builder\Completed.cs">
+      <Link>Owin\Builder\Completed.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\Builder\NotFound.cs">
+      <Link>Owin\Builder\NotFound.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\Filter.cs">
+      <Link>Owin\Filter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\HtmlWriter.cs">
+      <Link>Owin\HtmlWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\HttpMultipart\HttpFile.cs">
+      <Link>Owin\HttpMultipart\HttpFile.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\HttpMultipart\HttpMultipart.cs">
+      <Link>Owin\HttpMultipart\HttpMultipart.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\HttpMultipart\HttpMultipartBoundary.cs">
+      <Link>Owin\HttpMultipart\HttpMultipartBoundary.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\HttpMultipart\HttpMultipartBuffer.cs">
+      <Link>Owin\HttpMultipart\HttpMultipartBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\HttpMultipart\HttpMultipartSubStream.cs">
+      <Link>Owin\HttpMultipart\HttpMultipartSubStream.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\ICookie.cs">
+      <Link>Owin\ICookie.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\OwinCookie.cs">
+      <Link>Owin\OwinCookie.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\OwinHelper.cs">
+      <Link>Owin\OwinHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\OwinKeys.cs">
+      <Link>Owin\OwinKeys.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\OwinModel.cs">
+      <Link>Owin\OwinModel.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\Request.cs">
+      <Link>Owin\Request.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\Response.cs">
+      <Link>Owin\Response.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Owin\System\EnvironmentExtension.cs">
+      <Link>Owin\System\EnvironmentExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Plugs\IPlug.cs">
+      <Link>Plugs\IPlug.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Razor\BasePage.cs">
+      <Link>Razor\BasePage.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Serialize\BinarySerialize.cs">
+      <Link>Serialize\BinarySerialize.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Serialize\ISerializable.cs">
+      <Link>Serialize\ISerializable.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Serialize\ProtobufSerialize.cs">
+      <Link>Serialize\ProtobufSerialize.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Session\ISession.cs">
+      <Link>Session\ISession.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Session\Session.cs">
+      <Link>Session\Session.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\System\System\DynamicDictionary.cs">
+      <Link>System\System\DynamicDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\System\System\INullable.cs">
+      <Link>System\System\INullable.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\System\System\StringExtension.cs">
+      <Link>System\System\StringExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Url\UrlHelper.cs">
+      <Link>Url\UrlHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Utility.cs">
+      <Link>Utility.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Validation\Pattern.cs">
+      <Link>Validation\Pattern.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Validation\ValidObject.cs">
+      <Link>Validation\ValidObject.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Validation\ValidObjectExtension.cs">
+      <Link>Validation\ValidObjectExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Validation\ValidResult.cs">
+      <Link>Validation\ValidResult.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Validation\ValidStatus.cs">
+      <Link>Validation\ValidStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\View\System\ViewAttribute.cs">
+      <Link>View\System\ViewAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\View\ViewHelper.cs">
+      <Link>View\ViewHelper.cs</Link>
+    </Compile>
+    <Compile Include="Extension\System\ConvertExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConvertExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Extension\System\ObjectContainerExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObjectContainerExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Extension\System\TryParseExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TryParseExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Extension\System\WithDBNullExtension.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WithDBNullExtension.tt</DependentUpon>
+    </Compile>
     <Compile Include="Middleware\Debug.template.cs">
       <DependentUpon>Debug.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Middleware\DebugData.cs" />
-    <Compile Include="Middleware\Middleware.cs" />
-    <Compile Include="Middleware\StringBuilderCache.cs" />
     <Compile Include="Middleware\UrlRouteJs.template.cs">
       <DependentUpon>UrlRouteJs.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Middleware\UrlRouteJsModel.cs" />
-    <Compile Include="Middleware\UrlSegment.cs" />
-    <Compile Include="Model\ModelHelper.cs" />
-    <Compile Include="Filter\FilterEvent.cs" />
-    <Compile Include="Filter\IEnvironmentFilter.cs" />
-    <Compile Include="Action\System\ActionAttribute.cs" />
-    <Compile Include="Action\System\ControllerAttribute.cs" />
-    <Compile Include="Filter\System\FilterAttribute.cs" />
-    <Compile Include="Config\Common\CommonConfig.cs" />
-    <Compile Include="Config\ConfigAttribute.cs" />
-    <Compile Include="Config\Configration.cs" />
-    <Compile Include="Config\ConnectionString.cs" />
-    <Compile Include="Filter\IRequestFilter.cs" />
-    <Compile Include="Filter\IResponseFilter.cs" />
-    <Compile Include="Icon\Favicon.cs" />
-    <Compile Include="Exceptions\ViewNotFoundException.cs" />
-    <Compile Include="IO\StreamWriter.cs" />
-    <Compile Include="IO\System\WriterExtension.cs" />
-    <Compile Include="Json\System\List.cs" />
-    <Compile Include="Logs\ConsoleLogger.cs" />
-    <Compile Include="Logs\ILogger.cs" />
-    <Compile Include="Logs\RequestLogs.cs" />
-    <Compile Include="Middleware\ActionHelper.cs" />
-    <Compile Include="Middleware\ActionKey.cs" />
-    <Compile Include="Middleware\OwinMiddleware.cs" />
-    <Compile Include="Middleware\MiddlewareConfigOptions.cs" />
-    <Compile Include="Model\System\IModelExtension.cs" />
-    <Compile Include="Owin\OwinModel.cs" />
-    <Compile Include="Plugs\IPlug.cs" />
-    <Compile Include="Razor\BasePage.cs" />
-    <Compile Include="System\System\DynamicDictionary.cs" />
     <Compile Include="System\System\ObjectContainer.cs">
       <DependentUpon>ObjectContainer.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -180,101 +552,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="System\System\StringExtension.cs" />
-    <Compile Include="Url\UrlHelper.cs" />
-    <Compile Include="View\System\ViewAttribute.cs" />
-    <Compile Include="Owin\System\EnvironmentExtension.cs" />
-    <Compile Include="Action\MethodType.cs" />
-    <Compile Include="Owin\HtmlWriter.cs" />
-    <Compile Include="Owin\OwinKeys.cs" />
-    <Compile Include="Collections\System\NameVarCollection.cs" />
-    <Compile Include="Cache\CacheType.cs" />
-    <Compile Include="Action\ContentType.cs" />
-    <Compile Include="Emit\CopyHelper.cs" />
-    <Compile Include="Emit\StructHelper.cs" />
-    <Compile Include="Model\IModel.cs" />
-    <Compile Include="System\System\INullable.cs" />
-    <Compile Include="Json\IJson.cs" />
-    <Compile Include="Collections\NameVarCollection.cs" />
-    <Compile Include="Extension\System\Int32Extension.cs" />
-    <Compile Include="Cache\Cache.cs" />
-    <Compile Include="Cache\ICache.cs" />
-    <Compile Include="Cache\MemoryCache.cs" />
-    <Compile Include="Owin\OwinCookie.cs" />
-    <Compile Include="Action\IAction.cs" />
-    <Compile Include="Action\OwinAction.cs" />
-    <Compile Include="Extension\System\ConvertExtension.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConvertExtension.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Extension\JsonConvert.cs" />
-    <Compile Include="Extension\System\ObjectContainerExtension.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ObjectContainerExtension.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Extension\System\StreamAndByteExtension.cs" />
-    <Compile Include="Extension\System\TryParseExtension.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TryParseExtension.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Extension\System\UniqueKeyDictionayExtension.cs" />
-    <Compile Include="Extension\System\WithDBNullExtension.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WithDBNullExtension.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Extension\System\StringContainerExtension.cs" />
-    <Compile Include="Json\IJsonSerialize.cs" />
-    <Compile Include="Json\JilJsonSerialize.cs" />
-    <Compile Include="Json\NewtonsoftJsonSerialize.cs" />
-    <Compile Include="Owin\Response.cs" />
-    <Compile Include="Action\ServerType.cs" />
-    <Compile Include="Validation\Pattern.cs" />
-    <Compile Include="Validation\ValidObject.cs" />
-    <Compile Include="Owin\ICookie.cs" />
-    <Compile Include="Session\ISession.cs" />
-    <Compile Include="Serialize\ISerializable.cs" />
-    <Compile Include="Serialize\ProtobufSerialize.cs" />
-    <Compile Include="Serialize\BinarySerialize.cs" />
-    <Compile Include="Session\Session.cs" />
-    <Compile Include="Validation\ValidObjectExtension.cs" />
-    <Compile Include="Validation\ValidResult.cs" />
-    <Compile Include="Validation\ValidStatus.cs" />
-    <Compile Include="View\ViewHelper.cs" />
-    <Compile Include="IO\IWriter.cs" />
-    <Compile Include="IO\FileWriter.cs" />
-    <Compile Include="Owin\Builder\Completed.cs" />
-    <Compile Include="Owin\HttpMultipart\HttpFile.cs" />
-    <Compile Include="Owin\HttpMultipart\HttpMultipart.cs" />
-    <Compile Include="Owin\HttpMultipart\HttpMultipartBoundary.cs" />
-    <Compile Include="Owin\HttpMultipart\HttpMultipartBuffer.cs" />
-    <Compile Include="Owin\HttpMultipart\HttpMultipartSubStream.cs" />
-    <Compile Include="Collections\NameValueCollection.cs" />
-    <Compile Include="Owin\Builder\NotFound.cs" />
-    <Compile Include="Utility.cs" />
-    <Compile Include="Action\System\UrlAttribute.cs" />
-    <Compile Include="Owin\Request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Action.cd" />
-    <Compile Include="Constant.cs" />
-    <Content Include="Middleware\Debug.cshtml">
-      <Generator>NFinalRazorGenerator</Generator>
-    </Content>
-    <None Include="Middleware\UrlRouteJs.cshtml">
-      <Generator>NFinalRazorGenerator</Generator>
-    </None>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
     <Content Include="Extension\System\ConvertExtension.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ConvertExtension.cs</LastGenOutput>
@@ -291,6 +573,20 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>WithDBNullExtension.cs</LastGenOutput>
     </Content>
+    <Content Include="Middleware\Debug.cshtml">
+      <Generator>NFinalRazorGenerator</Generator>
+    </Content>
+    <None Include="Middleware\UrlRouteJs.cshtml">
+      <Generator>NFinalRazorGenerator</Generator>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="System\System\ObjectContainer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ObjectContainer.cs</LastGenOutput>
@@ -301,11 +597,12 @@
     </Content>
     <Content Include="favicon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
