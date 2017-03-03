@@ -19,17 +19,24 @@ namespace NFinal.Middleware
 
         public override NameValueCollection GetParameters(HttpRequest request)
         {
-            var queryString= request.QueryString.Value.Split('&');
+            
             NameValueCollection nvc = new NameValueCollection();
-            string[] kv;
-            foreach (var qs in queryString)
+            if (!string.IsNullOrEmpty(request.QueryString.Value))
             {
-                kv=qs.Split('=');
-                nvc.Add(kv[0], kv[1]);
+                var queryString = request.QueryString.Value.Split('&');
+                string[] kv;
+                foreach (var qs in queryString)
+                {
+                    kv = qs.Split('=');
+                    nvc.Add(kv[0], kv[1]);
+                }
             }
-            foreach (var form in request.Form)
+            if (request.HasFormContentType)
             {
-                nvc.Add(form.Key,form.Value);
+                foreach (var form in request.Form)
+                {
+                    nvc.Add(form.Key, form.Value);
+                }
             }
             return nvc;
         }

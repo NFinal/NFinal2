@@ -19,8 +19,8 @@ namespace NFinal.Action
         public static FieldInfo actionDataResponseFilters = typeof(NFinal.Middleware.ActionData<,>).GetField("IResponseFilters");
         public static MethodInfo ResponseFiltersMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("ResponseFilter");//, new Type[] { typeof(NFinal.Filter.IResponseFilter[]), typeof(NFinal.Owin.Response) });
         public static ConstructorInfo MemoryStreamConstructorInfo = typeof(System.IO.MemoryStream).GetConstructor(Type.EmptyTypes);
-        public static MethodInfo OwinActionInitializationMethodInfo = typeof(NFinal.OwinAction<,>).GetMethod("Initialization");//, new Type[] { typeof(IDictionary<string, object>), typeof(System.IO.Stream), typeof(NFinal.Owin.Request), typeof(NFinal.CompressMode) });
-        public static FieldInfo requestParametersFieldInfo = typeof(NFinal.Owin.Request).GetField("parameters");
+        //public static MethodInfo OwinActionInitializationMethodInfo = typeof(NFinal.OwinAction<,>).GetMethod("Initialization");//, new Type[] { typeof(IDictionary<string, object>), typeof(System.IO.Stream), typeof(NFinal.Owin.Request), typeof(NFinal.CompressMode) });
+        //public static FieldInfo requestParametersFieldInfo = typeof(NFinal.Owin.Request).GetField("parameters");
         public static MethodInfo nameValueCollectionGetItemMethodInfo = typeof(NFinal.NameValueCollection).GetMethod("get_Item", new Type[] { typeof(string) });
         public static MethodInfo modelHelperGetModelMethodInfo = typeof(NFinal.Model.ModelHelper).GetMethod("GetModel");
         //public static MethodInfo getRequestMethodInfo = typeof(System.EnvironmentExtension).GetMethod("GetRequest", new Type[] { typeof(IDictionary<string,object>)});
@@ -45,7 +45,7 @@ namespace NFinal.Action
             DynamicMethod method = new DynamicMethod("RunActionX", typeof(void), new Type[] { typeof(TContext),typeof(NFinal.Middleware.ActionData<TContext,TRequest>),typeof(TRequest),typeof(NameValueCollection)});
             ILGenerator methodIL = method.GetILGenerator();
             var methodEnd = methodIL.DefineLabel();
-            var request= methodIL.DeclareLocal(typeof(NFinal.Owin.Request));
+            var request= methodIL.DeclareLocal(typeof(TRequest));
             var controller = methodIL.DeclareLocal(controllerType);
             ////null
             //methodIL.Emit(OpCodes.Ldnull);

@@ -1,10 +1,12 @@
-﻿#if (NET40 || NET451 || NET461)
+﻿#if (NET40 || NET451 || NET461 || NETCORE)
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using System.Reflection.Emit;
+#if !NETCORE
 using System.Security.Permissions;
+#endif
 public delegate int GetKeyIndex(string key, int length);
 namespace NFinal.Collections
 {
@@ -134,7 +136,16 @@ namespace NFinal.Collections
         public GetKeyIndex Generate(CodeNode rootNode)
         {
             AssemblyName assamblyName = new AssemblyName("GenerateAssembly");
-            AssemblyBuilder assambly = AppDomain.CurrentDomain.DefineDynamicAssembly(assamblyName, AssemblyBuilderAccess.Run);
+
+            AssemblyBuilder assambly =
+#if NETCORE
+                AssemblyBuilder
+#else
+                AppDomain.CurrentDomain
+#endif
+                .DefineDynamicAssembly(assamblyName, AssemblyBuilderAccess.Run);
+            ModuleBuilder dynamicModule = assambly.DefineDynamicModule(assamblyName.Name);
+#if !NETCORE
             //设置/unsafe选项
             //[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
             Type securityPermissionType = typeof(System.Security.Permissions.SecurityPermissionAttribute);
@@ -142,13 +153,13 @@ namespace NFinal.Collections
             PropertyInfo skipVerificationPropertyInfo = securityPermissionType.GetProperty("SkipVerification");
             CustomAttributeBuilder securityPermissionAttributeBuilder = new CustomAttributeBuilder(securityPermissionConstructor, new object[] { SecurityAction.RequestMinimum }, new PropertyInfo[] { skipVerificationPropertyInfo }, new object[] { true });
             assambly.SetCustomAttribute(securityPermissionAttributeBuilder);
+            
             //[module: UnverifiableCode]
             Type unverifiableCodeType = typeof(System.Security.UnverifiableCodeAttribute);
             ConstructorInfo unverifiableCodeConstructor = unverifiableCodeType.GetConstructor(Type.EmptyTypes);
             CustomAttributeBuilder unverifiableCodeAttributeBuilder = new CustomAttributeBuilder(unverifiableCodeConstructor, new object[] { });
-            ModuleBuilder dynamicModule = assambly.DefineDynamicModule(assamblyName.Name);
             dynamicModule.SetCustomAttribute(unverifiableCodeAttributeBuilder);
-
+#endif
             //class GenerateType
             TypeBuilder dynamicType = dynamicModule.DefineType("GenerateType" + Guid.NewGuid(),
                 TypeAttributes.Public | TypeAttributes.Class | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit | TypeAttributes.AutoLayout);
@@ -215,11 +226,18 @@ namespace NFinal.Collections
             //return i;
             iLGenerator.Emit(OpCodes.Ldloc_0);
             iLGenerator.Emit(OpCodes.Ret);
+#if !NET40
+            TypeInfo t = dynamicType.CreateTypeInfo();
+#else
             Type t = dynamicType.CreateType();
-
+#endif
             //assambly.Save("GenerateAssembly.dll");
             MethodInfo GM = t.GetMethod("GetIndex");
+#if !NET40
+            GetKeyIndex delete = (GetKeyIndex)GM.CreateDelegate(typeof(GetKeyIndex));
+#else
             GetKeyIndex delete = (GetKeyIndex)Delegate.CreateDelegate(typeof(GetKeyIndex), GM);
+#endif
             return delete;
         }
         public void WriteCode(ref ILGenerator iLGenerator, LocalBuilder pt, ref CodeNode codeNode)

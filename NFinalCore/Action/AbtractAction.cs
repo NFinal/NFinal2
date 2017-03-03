@@ -47,11 +47,12 @@ namespace NFinal
         /// 请求参数信息
         /// </summary>
         public NameValueCollection parameters;
+        public Owin.HttpMultipart.HttpFile[] files=null;
         public string contentType = "text/html; charset=utf-8";
         protected Stream writeStream;
         public virtual TMasterPage MasterPage { get; set; }
         public ServerType _serverType = ServerType.UnKnown;
-        public ICookie<IDictionary<string, object>> Cookie;
+        public ICookie<IDictionary<string, string>> Cookie;
         public ISession Session;
         private TUser _user;
         private string _methodName;

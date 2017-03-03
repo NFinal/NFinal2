@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace NFinalCoreServer
 {

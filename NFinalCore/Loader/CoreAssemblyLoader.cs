@@ -59,9 +59,10 @@ namespace NFinal.Loader
         // Not exactly sure about this
         protected override Assembly Load(AssemblyName assemblyName)
         {
-            var deps = DependencyContext.Default;
-            var res = deps.CompileLibraries.Where(d => d.Name.Contains(assemblyName.Name)).ToList();
-            var assembly = Assembly.Load(new AssemblyName(res.First().Name));
+            //var deps = DependencyContext.Default;
+            //var res = deps.CompileLibraries.Where(d => d.Name.Contains(assemblyName.Name)).ToList();
+            //var assembly = Assembly.Load(new AssemblyName(res.First().Name));
+            var assembly = Assembly.Load(assemblyName);
             return assembly;
         }
     }

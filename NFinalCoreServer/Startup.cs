@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel;
+using Microsoft.Extensions.FileProviders;
 
 namespace NFinalCoreServer
 {
@@ -23,7 +25,10 @@ namespace NFinalCoreServer
             options.defaultDocument = "Index.html";
             options.urlRouteRule = NFinal.Middleware.UrlRouteRule.AreaControllerCustomActionUrl;
             app.UseMiddleware<NFinal.Middleware.CoreMiddleware>(options);
-           
+            string root = AppContext.BaseDirectory;
+            app.UseStaticFiles(new StaticFileOptions() {
+                FileProvider = new PhysicalFileProvider(root),
+            });
         }
     }
 }

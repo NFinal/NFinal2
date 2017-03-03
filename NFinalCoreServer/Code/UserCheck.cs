@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NFinal.Owin;
+using Microsoft.AspNetCore.Http;
 
 namespace NFinalCoreServer.Code
 {
@@ -10,9 +11,9 @@ namespace NFinalCoreServer.Code
     /// 用户自定义过滤器
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
-    public class UserCheckAttribute : Attribute, NFinal.Filter.IRequestFilter<NFinal.Owin.Request>
+    public class UserCheckAttribute : Attribute, NFinal.Filter.IRequestFilter<HttpRequest>
     {
-        public bool RequestFilter(Request request)
+        public bool RequestFilter(HttpRequest request)
         {
             return true;
         }

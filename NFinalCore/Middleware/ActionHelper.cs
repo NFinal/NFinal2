@@ -17,6 +17,7 @@ namespace NFinal.Middleware
         public string actionUrl;
         public Type viewBagType;
         public ActionExecute<TContext,TRequest> actionExecute;
+
         public System.Reflection.ICustomAttributeProvider methodProvider;
         public NFinal.Filter.IBaseFilter<TContext>[] IBaseFilters;
         public NFinal.Filter.IRequestFilter<TRequest>[] IRequestFilters;

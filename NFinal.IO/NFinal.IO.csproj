@@ -34,46 +34,44 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\NFinal\Action\System\ViewBagMemberAttribute.cs">
+    <Compile Include="..\NFinalCore\Action\System\ViewBagMemberAttribute.cs">
       <Link>System\ViewBagMemberAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Constant.cs">
+    <Compile Include="..\NFinalCore\Constant.cs">
       <Link>Constant.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\IO\FileWriter.cs">
+    <Compile Include="..\NFinalCore\IO\FileWriter.cs">
       <Link>FileWriter.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\IO\IWriter.cs">
+    <Compile Include="..\NFinalCore\IO\IWriter.cs">
       <Link>IWriter.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\IO\StreamWriter.cs">
+    <Compile Include="..\NFinalCore\IO\StreamWriter.cs">
       <Link>StreamWriter.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\IO\StringWriter.cs">
+    <Compile Include="..\NFinalCore\IO\StringWriter.cs">
       <Link>StringWriter.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\IO\Writer.cs">
+    <Compile Include="..\NFinalCore\IO\Writer.cs">
       <Link>Writer.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Razor\BasePage.cs">
+    <Compile Include="..\NFinalCore\Razor\BasePage.cs">
       <Link>Razor\BasePage.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Utility.cs">
+    <Compile Include="..\NFinalCore\Utility.cs">
       <Link>Utility.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\View\System\ViewAttribute.cs">
+    <Compile Include="..\NFinalCore\View\System\ViewAttribute.cs">
       <Link>System\ViewAttribute.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="key.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,7 +6,7 @@ namespace NFinal
     /// <summary>
     /// Cookie设置
     /// </summary>
-    public class OwinCookie : NFinal.ICookie<IDictionary<string,object>>
+    public class OwinCookie : NFinal.ICookie<IDictionary<string,string>>
     {
         private IDictionary<string, string> requestCookies = null;
         public IDictionary<string, string> responseCookies  = null;
@@ -15,7 +15,7 @@ namespace NFinal
         /// <summary>
         /// action
         /// </summary>
-        public NFinal.IAction<IDictionary<string,object>,Owin.Request> action = null;
+        public NFinal.IAction<IDictionary<string,string>,Owin.Request> action = null;
         public OwinCookie()
         {
             this.isStatic = true;
@@ -36,7 +36,7 @@ namespace NFinal
         /// 初始化
         /// </summary>
         /// <param name="action"></param>
-        public OwinCookie(NFinal.IAction<IDictionary<string,object>,Owin.Request> action)
+        public OwinCookie(NFinal.IAction<IDictionary<string,string>,Owin.Request> action)
         {
             this.isStatic = false;
             this.action = action;

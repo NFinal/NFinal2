@@ -10,6 +10,74 @@ namespace NFinal
 {
     public class CoreAction<TMasterPage, TUser> : AbstractAction<HttpContext, HttpRequest, TUser, TMasterPage> where TMasterPage : MasterPageModel
     {
+        #region 初始化函数
+        public CoreAction() { }
+        public override void BaseInitialization(HttpContext context, string methodName)
+        {
+            base.BaseInitialization(context, methodName);
+            this.request = context.Request;
+            this.parameters = new NFinal.NameValueCollection();
+            foreach (var query in request.Query)
+            {
+                this.parameters.Add(query.Key, query.Value);
+            }
+            if (context.Request.HasFormContentType)
+            {
+                foreach (var form in context.Request.Form)
+                {
+                    this.parameters.Add(form.Key,form.Value);
+                }
+            }
+            IDictionary<string, string> requestCookie = new Dictionary<string, string>();
+            foreach (var cookie in this.request.Cookies)
+            {
+                requestCookie.Add(cookie.Key, cookie.Value);
+            }
+
+            this.Cookie = new OwinCookie(requestCookie);
+            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.MemoryCache(30));
+            this.outputStream = context.Response.Body;
+        }
+        /// <summary>
+        /// 流输出初始化函数
+        /// </summary>
+        /// <param name="enviroment">Owin中间件</param>
+        /// <param name="outputStream">输出流</param>
+        /// <param name="request"></param>
+        /// <param name="compressMode"></param>
+        public override void Initialization(HttpContext context, string methodName, Stream outputStream, HttpRequest request, CompressMode compressMode)
+        {
+            base.Initialization(context, methodName, outputStream, request, compressMode);
+            this.parameters = new NFinal.NameValueCollection();
+            foreach (var query in request.Query)
+            {
+                this.parameters.Add(query.Key, query.Value);
+            }
+            if (context.Request.HasFormContentType)
+            {
+                foreach (var form in context.Request.Form)
+                {
+                    this.parameters.Add(form.Key, form.Value);
+                }
+            }
+            IDictionary<string, string> requestCookie = new Dictionary<string, string>();
+            foreach (var cookie in this.request.Cookies)
+            {
+                requestCookie.Add(cookie.Key, cookie.Value);
+            }
+
+            this.Cookie = new OwinCookie(requestCookie);
+            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.MemoryCache(30));
+            if (outputStream == null)
+            {
+                this.outputStream = context.Response.Body;
+            }
+            else
+            {
+                this.outputStream = outputStream;
+            }
+        }
+        #endregion
         public override void After()
         {
             

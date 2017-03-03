@@ -9,10 +9,10 @@
         "define": [ "NET40" ]
       },
       "dependencies": {
-        "Microsoft.Owin.Hosting": "2.1.0",
         "Microsoft.Owin": "2.1.0",
-        "Owin": "1.0.0",
+        "Microsoft.Owin.Hosting": "2.1.0",
         "Newtonsoft.Json": "9.0.1",
+        "Owin": "1.0.0",
         "protobuf-net": "2.1.0",
         "StackExchange.Redis": "1.2.1"
       }
@@ -26,13 +26,13 @@
         "Microsoft.Extensions.Caching.Memory": "1.1.0",
         "Microsoft.Extensions.DependencyModel": "1.1.0",
         "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
-        "System.Data.Common": "4.3.0",
-        "microsoft.owin.Hosting": "3.0.0",
         "Microsoft.Owin": "3.0.0",
-        "Owin": "1.0.0",
+        "microsoft.owin.Hosting": "3.0.0",
         "Newtonsoft.Json": "9.0.1",
+        "Owin": "1.0.0",
         "protobuf-net": "2.1.0",
-        "StackExchange.Redis": "1.2.1"
+        "StackExchange.Redis": "1.2.1",
+        "System.Data.Common": "4.3.0"
       }
     },
     "net461": {
@@ -80,6 +80,7 @@
   },
   "sharedExclude": [ "lib/*.cs", "lib/*/*.cs", "lib/*/*/*.cs" ],
   "buildOptions": {
-    "allowUnsafe": true
+    "allowUnsafe": true,
+    "define": []
   }
 }

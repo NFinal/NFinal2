@@ -1,4 +1,4 @@
-﻿#if (NET40 || NET451 || NET461)
+﻿#if (NET40 || NET451 || NET461 || NETCORE)
 using System;
 using System.Collections.Generic;
 using System.Text;
