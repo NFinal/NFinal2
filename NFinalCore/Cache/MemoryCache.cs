@@ -1,86 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
-
+#if (NETCORE || CORE)
+using Microsoft.Extensions.Caching.Memory;
+#endif
 namespace NFinal.Cache
 {
-    /// <summary>
-    /// 内存缓存类
-    /// </summary>
-    public struct MemoryCacheValue
-    {
-        /// <summary>
-        /// 过期时间点
-        /// </summary>
-        public DateTimeOffset expires;
-        /// <summary>
-        /// 缓存内容
-        /// </summary>
-        public byte[] value;
-    }
     /// <summary>
     /// 内存缓存
     /// </summary>
     public class MemoryCache : Cache
     {
-        private System.Threading.Timer timer = null;
+        //private System.Threading.Timer timer = null;
         //private System.Timers.Timer timer = null;
-        public static IDictionary<string, MemoryCacheValue> cacheStore = null;
+        //public static IDictionary<string, MemoryCacheValue> cacheStore = null;
+        public int minutes;
+#if !(NETCORE || CORE)
+        System.Runtime.Caching.MemoryCache _memoryCache = null;
+        System.Runtime.Caching.CacheItemPolicy _cacheItemPolicy = null;
+#else
+        Microsoft.Extensions.Caching.Memory.MemoryCache _memoryCache = null;
+#endif
         public MemoryCache(int minutes) : base(minutes)
         {
-            cacheStore = new System.Collections.Concurrent.ConcurrentDictionary<string, MemoryCacheValue>(StringComparer.Ordinal);
-            timer = new System.Threading.Timer(Timer_Elapsed, this, 5000, 0); 
-        }
-
-        private void Timer_Elapsed(object sender)
-        {
-            foreach (var cacheItem in cacheStore)
+            this.minutes = minutes;
+            if (_memoryCache == null)
             {
-                if (cacheItem.Value.expires < DateTimeOffset.Now)
+#if !(NETCORE || CORE)
+                _memoryCache = System.Runtime.Caching.MemoryCache.Default;
+                _cacheItemPolicy = new System.Runtime.Caching.CacheItemPolicy();
+                _cacheItemPolicy.SlidingExpiration = TimeSpan.FromMinutes(this.minutes);
+#else
+                _memoryCache = new Microsoft.Extensions.Caching.Memory.MemoryCache(new Microsoft.Extensions.Caching.Memory.MemoryCacheOptions()
                 {
-                    cacheStore.Remove(cacheItem);
-                }
+                });
+#endif
             }
         }
         public override bool HasKey(string key)
         {
-            return cacheStore.ContainsKey(key);
+#if !(NETCORE || CORE)
+            return _memoryCache.Contains(key);
+#else
+            object obj;
+            return _memoryCache.TryGetValue(key, out obj);
+#endif
         }
         public override void Remove(string key)
         {
-            if (cacheStore.ContainsKey(key))
-            {
-                cacheStore.Remove(key);
-            }
+#if !(NETCORE || CORE)
+            _memoryCache.Remove(key);
+#else
+            _memoryCache.Remove(key);
+#endif
         }
         public override byte[] Get(string key)
         {
-            if (cacheStore.ContainsKey(key) && cacheStore[key].expires >= DateTimeOffset.Now)
+#if !(NETCORE || CORE)
+            object obj =_memoryCache.Get(key);
+            if (obj != null)
             {
-                if (cacheStore[key].expires >= DateTimeOffset.Now)
-                {
-                    return cacheStore[key].value;
-                }
-                else
-                {
-                    cacheStore.Remove(key);
-                }
-            }
-            return null;
-        }
-        public override void Set(string key, byte[] value, int minutes)
-        {
-            MemoryCacheValue CacheValue;
-            CacheValue.expires = DateTimeOffset.Now.AddMinutes(minutes);
-            if (cacheStore.ContainsKey(key) && value != null)
-            {
-                CacheValue.value = value;
-                cacheStore[key] = CacheValue;
+                return (byte[])obj;
             }
             else
             {
-                CacheValue.value = value;
-                cacheStore.Add(key, CacheValue);
+                return null;
             }
+#else
+            object obj;
+            bool success= _memoryCache.TryGetValue(key, out obj);
+            if (success && obj != null)
+            {
+                return (byte[])obj;
+            }
+            else
+            {
+                return null;
+            }
+#endif
+        }
+        public override void Set(string key, byte[] value, int minutes)
+        {
+#if !(NETCORE || CORE)
+            _memoryCache.Set(key, value, _cacheItemPolicy);
+#else
+            Microsoft.Extensions.Caching.Memory.ICacheEntry cacheEntry= _memoryCache.CreateEntry(key);
+            cacheEntry.SlidingExpiration = TimeSpan.FromMinutes(this.minutes);
+            cacheEntry.Value = value;
+#endif
         }
     }
 }

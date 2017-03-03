@@ -34,8 +34,8 @@ namespace NFinal
                 requestCookie.Add(cookie.Key, cookie.Value);
             }
 
-            this.Cookie = new OwinCookie(requestCookie);
-            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.MemoryCache(30));
+            this.Cookie = new Cookie(requestCookie);
+            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
             this.outputStream = context.Response.Body;
         }
         /// <summary>
@@ -66,8 +66,8 @@ namespace NFinal
                 requestCookie.Add(cookie.Key, cookie.Value);
             }
 
-            this.Cookie = new OwinCookie(requestCookie);
-            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.MemoryCache(30));
+            this.Cookie = new Cookie(requestCookie);
+            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
             if (outputStream == null)
             {
                 this.outputStream = context.Response.Body;
@@ -92,6 +92,7 @@ namespace NFinal
         {
             if (_serverType != ServerType.IsStatic)
             {
+            
                 if (context.Response.Headers.ContainsKey(NFinal.Constant.HeaderContentType))
                 {
                     context.Response.ContentType = contentType;
@@ -100,15 +101,21 @@ namespace NFinal
                 {
                     context.Response.Headers.Add(NFinal.Constant.HeaderContentType, new string[] { this.contentType });
                 }
+                foreach (var responseCookie in Cookie.ResponseCookies)
+                {
+                    context.Response.Headers.Add(NFinal.Constant.HeaderSetCookie, responseCookie.Value);
+                }
                 foreach (var header in this.response.headers)
                 {
-                    context.Response.Headers.AddValue(header.Key, header.Value);
+                    context.Response.Headers.Add(header.Key, header.Value);
                 }
             }
             this.writeStream.Flush();
             this.writeStream.Dispose();
             this.response.stream.Seek(0,SeekOrigin.Begin);
             this.response.stream.CopyTo(this.outputStream);
+            this.response.stream.Dispose();
+            this.outputStream.Dispose();
             this.Dispose();
         }
 
@@ -116,10 +123,8 @@ namespace NFinal
         {
             this.writeStream?.Dispose();
             this.response.stream?.Dispose();
-            if (this.request.Body != null)
-            {
-                this.request.Body.Dispose();
-            }
+            this.outputStream?.Dispose();
+            this.request.Body?.Dispose();
         }
 
         public override string GetRemoteIpAddress()

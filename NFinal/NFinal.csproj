@@ -95,6 +95,7 @@
       <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
       <Private>True</Private>
@@ -414,6 +415,9 @@
     <Compile Include="..\NFinalCore\Owin\Builder\NotFound.cs">
       <Link>Owin\Builder\NotFound.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Owin\Cookie.cs">
+      <Link>Owin\Cookie.cs</Link>
+    </Compile>
     <Compile Include="..\NFinalCore\Owin\Filter.cs">
       <Link>Owin\Filter.cs</Link>
     </Compile>
@@ -437,9 +441,6 @@
     </Compile>
     <Compile Include="..\NFinalCore\Owin\ICookie.cs">
       <Link>Owin\ICookie.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Owin\OwinCookie.cs">
-      <Link>Owin\OwinCookie.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Owin\OwinHelper.cs">
       <Link>Owin\OwinHelper.cs</Link>

@@ -52,7 +52,7 @@ namespace NFinal
         protected Stream writeStream;
         public virtual TMasterPage MasterPage { get; set; }
         public ServerType _serverType = ServerType.UnKnown;
-        public ICookie<IDictionary<string, string>> Cookie;
+        public ICookie Cookie;
         public ISession Session;
         private TUser _user;
         private string _methodName;

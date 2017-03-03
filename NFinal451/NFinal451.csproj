@@ -56,6 +56,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
@@ -66,8 +67,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -385,6 +387,9 @@
     <Compile Include="..\nfinalcore\owin\builder\NotFound.cs">
       <Link>Core\Owin\Builder\NotFound.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Owin\Cookie.cs">
+      <Link>Core\Owin\Cookie.cs</Link>
+    </Compile>
     <Compile Include="..\nfinalcore\owin\Filter.cs">
       <Link>Core\Owin\Filter.cs</Link>
     </Compile>
@@ -408,9 +413,6 @@
     </Compile>
     <Compile Include="..\nfinalcore\owin\ICookie.cs">
       <Link>Core\Owin\ICookie.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\owin\OwinCookie.cs">
-      <Link>Core\Owin\OwinCookie.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\owin\OwinHelper.cs">
       <Link>Core\Owin\OwinHelper.cs</Link>

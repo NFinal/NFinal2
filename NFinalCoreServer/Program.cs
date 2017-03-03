@@ -23,8 +23,6 @@ namespace NFinalCoreServer
             {
                 url = "http://localhost:80";
             }
-            Code.User user = new Code.User();
-            var attr= user.GetType().GetTypeInfo().GetCustomAttributes(typeof(ViewAttribute));
             var host = new WebHostBuilder()
                .UseStartup<Startup>()
                .UseContentRoot(AppContext.BaseDirectory)

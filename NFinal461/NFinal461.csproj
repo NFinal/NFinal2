@@ -55,13 +55,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Extensions.dll</HintPath>
       <Private>True</Private>
@@ -74,6 +71,8 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -393,6 +392,9 @@
     <Compile Include="..\nfinalcore\owin\builder\NotFound.cs">
       <Link>Core\Owin\Builder\NotFound.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Owin\Cookie.cs">
+      <Link>Core\Owin\Cookie.cs</Link>
+    </Compile>
     <Compile Include="..\nfinalcore\owin\Filter.cs">
       <Link>Core\Owin\Filter.cs</Link>
     </Compile>
@@ -416,9 +418,6 @@
     </Compile>
     <Compile Include="..\nfinalcore\owin\ICookie.cs">
       <Link>Core\Owin\ICookie.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\owin\OwinCookie.cs">
-      <Link>Core\Owin\OwinCookie.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\owin\OwinHelper.cs">
       <Link>Core\Owin\OwinHelper.cs</Link>
@@ -527,6 +526,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

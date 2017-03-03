@@ -15,8 +15,8 @@ namespace NFinal
             base.BaseInitialization(enviroment, methodName);
             this.request = enviroment.GetRequest();
             this.parameters = request.parameters;
-            this.Cookie = new OwinCookie(this.request.cookies);
-            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.MemoryCache(30));
+            this.Cookie = new Cookie(this.request.cookies);
+            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
             this.outputStream = enviroment.GetResponseBody();
         }
         /// <summary>
@@ -30,8 +30,8 @@ namespace NFinal
         {
             base.Initialization(enviroment, methodName, outputStream, request, compressMode);
             this.parameters = request.parameters;
-            this.Cookie = new OwinCookie(this.request.cookies);
-            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.MemoryCache(30));
+            this.Cookie = new Cookie(this.request.cookies);
+            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
             if (outputStream == null)
             {
                 this.outputStream = enviroment.GetResponseBody();
@@ -115,6 +115,10 @@ namespace NFinal
                 else
                 {
                     headers.Add(NFinal.Constant.HeaderContentType, new string[] { this.contentType });
+                }
+                foreach (var responseCookie in Cookie.ResponseCookies)
+                {
+                    headers.Add(NFinal.Constant.HeaderSetCookie,new string[] { responseCookie.Value });
                 }
                 foreach (var header in this.response.headers)
                 {

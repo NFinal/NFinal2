@@ -16,11 +16,12 @@ namespace NFinalControllerGeneratorTest.Action
         {
             this.ViewBag.a = 1;
             ViewBag.b = "2";
-            this.ViewBag.e = 2;
+            this.ViewBag.e = 2;    
         }
         private void This()
         {
 
         }
     }
+
 }

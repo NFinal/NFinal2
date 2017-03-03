@@ -8,12 +8,13 @@ namespace NFinal
     /// <summary>
     /// Cookie接口
     /// </summary>
-    public interface ICookie<TContext>
+    public interface ICookie
     {
         string SessionId
         {
             get;
         }
+        IDictionary<string, string> ResponseCookies { get; }
         string this[string key]
         {
             get;
