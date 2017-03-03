@@ -12,7 +12,7 @@ namespace NFinal.Middleware
 		//PMC命令为：Install-Package NFinal
 		public static void Render(this NFinal.IO.IWriter writer,NFinal.Middleware.DebugData Model)
 		{
-			writer.Write("");
+			writer.Write("");//
 			writer.Write("﻿<!DOCTYPE html>\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n<head>\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n    <meta http-equiv=\"pragma\" content=\"no-cache\">\r\n    <meta http-equiv=\"Cache-Control\" content=\"no-cache, must-revalidate\">\r\n    <meta http-equiv=\"expires\" content=\"Wed, 26 Feb 1997 08:21:57 GMT\">\r\n    <title></title>\r\n    <script src=\"");
 			writer.Write(Model.debugUrl);
 			writer.Write("/Scripts/Url.js\"></script>\r\n</head>\r\n<body>\r\n    此文件负责跳转到 ");
