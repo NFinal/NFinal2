@@ -12,8 +12,8 @@
         /// <summary>
         /// 缓存类
         /// </summary>
-        private Cache.ICache cache = null;
-        public Session(string sessionId, Cache.ICache cache)
+        private Cache.ICache<string> cache = null;
+        public Session(string sessionId, Cache.ICache<string> cache)
         {
             this.sessionId = sessionId;
             this.cache = cache;

@@ -172,6 +172,9 @@
     <Compile Include="..\NFinalCore\Cache\RedisCache.cs">
       <Link>Cache\RedisCache.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Cache\SimpleCache.cs">
+      <Link>Cache\SimpleCache.cs</Link>
+    </Compile>
     <Compile Include="..\NFinalCore\Cache\System\Browser.cs">
       <Link>Cache\System\Browser.cs</Link>
     </Compile>

@@ -9,7 +9,7 @@ namespace NFinal.Cache
     /// <summary>
     /// 缓存
     /// </summary>
-    public abstract class Cache : ICache
+    public abstract class Cache<TKey> : ICache<TKey>
     {
         /// <summary>
         /// 缓存时间
@@ -64,35 +64,35 @@ namespace NFinal.Cache
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public abstract byte[] Get(string key);
+        public abstract byte[] Get(TKey key);
         /// <summary>
         /// 设置缓存
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="minutes"></param>
-        public abstract void Set(string key, byte[] value, int minutes);
+        public abstract void Set(TKey key, byte[] value, int minutes);
         /// <summary>
         /// 是否有该缓存
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public abstract bool HasKey(string key);
+        public abstract bool HasKey(TKey key);
         /// <summary>
         /// 删除缓存
         /// </summary>
         /// <param name="key"></param>
-        public abstract void Remove(string key);
+        public abstract void Remove(TKey key);
         /// <summary>
         /// 设置缓存
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public void Set(string key, byte[] value)
+        public void Set(TKey key, byte[] value)
         {
             this.Set(key, value, this.minutes);
         }
-        public void Set<T>(string key, T t, int minutes)
+        public void Set<T>(TKey key, T t, int minutes)
         {
             Set(key, serialize.Serialize<T>(t), minutes);
         }
@@ -102,7 +102,7 @@ namespace NFinal.Cache
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public T Get<T>(string key)
+        public T Get<T>(TKey key)
         {
             return serialize.Deserialize<T>(this.Get(key));
         }
@@ -111,7 +111,7 @@ namespace NFinal.Cache
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public string GetString(string key)
+        public string GetString(TKey key)
         {
             byte[] buffer= Get(key);
             if (buffer != null)
@@ -125,7 +125,7 @@ namespace NFinal.Cache
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public void SetString(string key, string value)
+        public void SetString(TKey key, string value)
         {
             if (value != null)
             {
@@ -142,7 +142,7 @@ namespace NFinal.Cache
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        public void Set<T>(string key, T value)
+        public void Set<T>(TKey key, T value)
         {
             this.Set(key, serialize.Serialize<T>(value),this.minutes);
         }

@@ -8,7 +8,7 @@ namespace NFinal.Cache
     /// <summary>
     /// 内存缓存
     /// </summary>
-    public class MemoryCache : Cache
+    public class MemoryCache : Cache<string>
     {
         //private System.Threading.Timer timer = null;
         //private System.Timers.Timer timer = null;

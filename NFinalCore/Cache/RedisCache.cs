@@ -8,11 +8,12 @@ namespace NFinal.Cache
     /// <summary>
     /// Redis缓存类
     /// </summary>
-    public class RedisCache : Cache
+    public class RedisCache : Cache<string>
     {
         private string configuration = null;
         public static Dictionary<string, IDatabase> databasePool = new Dictionary<string, IDatabase>(StringComparer.Ordinal);
         public IDatabase database = null;
+        
         public RedisCache(string configuration, int minutes):base(CacheType.SlidingExpiration,minutes)
         {
             this.configuration = configuration;
