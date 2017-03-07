@@ -41,6 +41,11 @@ namespace NFinal
             throw new NotImplementedException();
         }
 
+        public override Stream GetRequestBody()
+        {
+            throw new NotImplementedException();
+        }
+
         public override string GetRequestHeader(string key)
         {
             throw new NotImplementedException();

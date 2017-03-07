@@ -157,9 +157,6 @@
     <Compile Include="..\nfinalcore\cache\ICache.cs">
       <Link>Core\Cache\ICache.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\cache\MemoryCache.cs">
-      <Link>Core\Cache\MemoryCache.cs</Link>
-    </Compile>
     <Compile Include="..\nfinalcore\cache\RedisCache.cs">
       <Link>Core\Cache\RedisCache.cs</Link>
     </Compile>

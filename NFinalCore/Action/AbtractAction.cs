@@ -130,6 +130,8 @@ namespace NFinal
 
         public abstract string GetRequestHeader(string key);
 
+        public abstract Stream GetRequestBody();
+
         public abstract void SetResponseHeader(string key, string value);
 
         public abstract void SetResponseHeader(string key, string[] value);
@@ -224,6 +226,18 @@ namespace NFinal
                 NFinal.Json.JsonHelper.GetJson(model, sw, Json.DateTimeFormat.LocalTimeNumber);
                 return sw.ToString();
             }
+        }
+        /// <summary>
+        /// 从请求参数中解析出Json类
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <returns></returns>
+        public T GetJson<T>()
+        {
+            Stream stream = GetRequestBody();
+            StreamReader sr = new StreamReader(stream, NFinal.Constant.encoding);
+            string content = sr.ReadToEnd();
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(content);
         }
         /// <summary>
         /// 返回数据库实体类对应的json对象{code:[code状态码],msg:[msg消息],result:[json对象]}
@@ -403,6 +417,8 @@ namespace NFinal
                 this.RenderModel(masterPagePath,this.MasterPage);
             }
         }
+
+        
         #endregion
     }
 }

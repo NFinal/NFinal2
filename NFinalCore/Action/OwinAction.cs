@@ -172,6 +172,11 @@ namespace NFinal
                 return null;
             }
         }
+
+        public override Stream GetRequestBody()
+        {
+            return context.GetRequestBody();
+        }
         #endregion
     }
 }

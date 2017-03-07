@@ -44,6 +44,7 @@ namespace NFinal
         /// <param name="key"></param>
         /// <returns></returns>
         string GetRequestHeader(string key);
+        Stream GetRequestBody();
         void Redirect(string url);
         string GetSubDomain(TContext context);
         /// <summary>
