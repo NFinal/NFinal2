@@ -19,6 +19,12 @@
   <ItemGroup>
     <ProjectReference Include="..\NFinalCore\NFinalCore.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Views\Index\Default.cshtml">
+      <Generator>NFinalRazorGenerator</Generator>
+    </None>
+  </ItemGroup>
  <PropertyGroup>
       <RuntimeIdentifiers>win7-x64;win7-x86;win10-x64;win10-x86;centos.7-x64</RuntimeIdentifiers>
  </PropertyGroup>

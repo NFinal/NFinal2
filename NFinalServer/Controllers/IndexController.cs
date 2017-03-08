@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NFinalServer.Controllers
 {
-    public class Index:BaseController<NFinal.EmptyMasterPageModel>
+    public class IndexController:BaseController<NFinal.EmptyMasterPageModel>
     {
         [Code.UserCheck]
         public void Default()
@@ -18,6 +18,7 @@ namespace NFinalServer.Controllers
         {
             this.ViewBag.Message = "Hello Json!";
             this.ViewBag.id = 2;
+            
             this.ViewBag.time = DateTime.Now;
             this.AjaxReturn();
         }

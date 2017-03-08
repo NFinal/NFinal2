@@ -121,15 +121,7 @@
     <Compile Include="BaseController.cs" />
     <Compile Include="Code\User.cs" />
     <Compile Include="Code\UserCheck.cs" />
-    <Compile Include="Controllers\Index.cs">
-      <Generator>NFinalControllerGenerator</Generator>
-      <LastGenOutput>IndexModel.cs</LastGenOutput>
-    </Compile>
-    <Compile Include="Controllers\IndexModel.cs">
-      <DependentUpon>Index.cs</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\Startup.cs" />
