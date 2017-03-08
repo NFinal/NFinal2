@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_4;NFinalIO</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\NFinalCore\Action\System\ViewBagMemberAttribute.cs" Link="System\ViewBagMemberAttribute.cs" />
+    <Compile Include="..\NFinalCore\Constant.cs" Link="Constant.cs" />
+    <Compile Include="..\NFinalCore\IO\FileWriter.cs" Link="FileWriter.cs" />
+    <Compile Include="..\NFinalCore\IO\IWriter.cs" Link="IWriter.cs" />
+    <Compile Include="..\NFinalCore\IO\StreamWriter.cs" Link="StreamWriter.cs" />
+    <Compile Include="..\NFinalCore\IO\StringWriter.cs" Link="StringWriter.cs" />
+    <Compile Include="..\NFinalCore\IO\Writer.cs" Link="Writer.cs" />
+    <Compile Include="..\NFinalCore\Razor\BasePage.cs" Link="Razor\BasePage.cs" />
+    <Compile Include="..\NFinalCore\Utility.cs" Link="Utility.cs" />
+    <Compile Include="..\NFinalCore\View\System\ViewAttribute.cs" Link="System\ViewAttribute.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Razor\" />
+    <Folder Include="System\" />
+  </ItemGroup>
+
+</Project>

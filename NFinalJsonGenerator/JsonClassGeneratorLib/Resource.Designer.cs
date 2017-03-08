@@ -61,10 +61,7 @@ namespace NFinalJsonGenerator.JsonClassGeneratorLib {
         }
         
         /// <summary>
-        ///   查找类似 // JSON C# Class Generator
-        ///// http://www.xamasoft.com/json-class-generator
-        ///
-        ///using System;
+        ///   查找类似 using System;
         ///using System.Collections.Generic;
         ///using System.Linq;
         ///using System.Text;
@@ -79,7 +76,10 @@ namespace NFinalJsonGenerator.JsonClassGeneratorLib {
         ///        {
         ///            JToken value;
         ///            if (obj.TryGetValue(field, out value)) return GetJToken&lt;T&gt;(value);
-        ///            else retu [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///            else return null;
+        ///        }
+        ///
+        ///        private static T GetJToken&lt;T&gt;(JToken token) wher [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string JsonClassHelper {
             get {

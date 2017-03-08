@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;NETCORE;CORE;</DefineConstants>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Emit\FastReflection.cs" />
+    <Compile Remove="Extension\System\ObjectContainerExtension.cs" />
+    <Compile Remove="Extension\System\WithDBNullExtension.cs" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+    <Compile Remove="System\System\ObjectContainer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Extension\System\ObjectContainerExtension.tt" />
+    <None Remove="Extension\System\WithDBNullExtension.tt" />
+    <None Remove="System\System\ObjectContainer.tt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="protobuf-net" Version="2.1.0" />
+    <PackageReference Include="StackExchange.Redis" Version="1.2.1" />
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Extension\System\ConvertExtension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConvertExtension.cs</LastGenOutput>
+    </None>
+    <None Update="Extension\System\TryParseExtension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TryParseExtension.cs</LastGenOutput>
+    </None>
+    <None Update="Middleware\Debug.cshtml">
+      <Generator>NFinalRazorGenerator</Generator>
+      <CustomToolNamespace></CustomToolNamespace>
+    </None>
+    <None Update="System\System\StringContainer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>StringContainer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Extension\System\ConvertExtension.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ConvertExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Extension\System\TryParseExtension.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TryParseExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Update="System\System\StringContainer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StringContainer.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>

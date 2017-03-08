@@ -5,6 +5,9 @@ using System.Text;
 
 namespace System
 {
+    /// <summary>
+    /// 配置文件加载类
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
     public class ConfigAttribute:Attribute
     {

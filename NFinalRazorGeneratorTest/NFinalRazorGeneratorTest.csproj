@@ -151,9 +151,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NFinal.IO\NFinal.IO.csproj">
-      <Project>{7fb75120-9005-418e-a270-877ddfc5151d}</Project>
-      <Name>NFinal.IO</Name>
+    <ProjectReference Include="..\NFinalVSExtension\NFinalVSExtension.csproj">
+      <Project>{04fb0b85-b2fc-41cf-be2d-b7b28eb607ff}</Project>
+      <Name>NFinalVSExtension</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

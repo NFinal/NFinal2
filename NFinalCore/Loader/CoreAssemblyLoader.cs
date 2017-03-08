@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.IO;
 #if NETCORE
-using Microsoft.Extensions.PlatformAbstractions;
+//using Microsoft.Extensions.PlatformAbstractions;
 using System.Runtime.Loader;
-using Microsoft.Extensions.DependencyModel;
+//using Microsoft.Extensions.DependencyModel;
 #endif
 namespace NFinal.Loader
 {

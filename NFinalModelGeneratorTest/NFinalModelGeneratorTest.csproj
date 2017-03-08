@@ -102,12 +102,6 @@
     </Content>
     <Content Include="Test.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NFinal.IO\NFinal.IO.csproj">
-      <Project>{7fb75120-9005-418e-a270-877ddfc5151d}</Project>
-      <Name>NFinal.IO</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.101.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.101.0\build\net46\System.Data.SQLite.Core.targets')" />
