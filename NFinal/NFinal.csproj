@@ -104,37 +104,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\NFinalCore\Action\AbtractAction.cs">
-      <Link>Action\System\AbtractAction.cs</Link>
+      <Link>Action\AbtractAction.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\Actuator.cs">
-      <Link>Action\System\Actuator.cs</Link>
+      <Link>Action\Actuator.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\CompressMode.cs">
-      <Link>Action\System\CompressMode.cs</Link>
+      <Link>Action\CompressMode.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\ContentType.cs">
-      <Link>Action\System\ContentType.cs</Link>
+      <Link>Action\ContentType.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\ContextAction.cs">
-      <Link>Action\System\ContextAction.cs</Link>
+      <Link>Action\ContextAction.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\CoreAction.cs">
-      <Link>Action\System\CoreAction.cs</Link>
+      <Link>Action\CoreAction.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\IAction.cs">
-      <Link>Action\System\IAction.cs</Link>
+      <Link>Action\IAction.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\MasterPageModel.cs">
-      <Link>Action\System\MasterPageModel.cs</Link>
+      <Link>Action\MasterPageModel.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\MethodType.cs">
-      <Link>Action\System\MethodType.cs</Link>
+      <Link>Action\MethodType.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\OwinAction.cs">
-      <Link>Action\System\OwinAction.cs</Link>
+      <Link>Action\OwinAction.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\ServerType.cs">
-      <Link>Action\System\ServerType.cs</Link>
+      <Link>Action\ServerType.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\System\ActionAttribute.cs">
       <Link>Action\System\ActionAttribute.cs</Link>
@@ -149,7 +149,7 @@
       <Link>Action\System\ViewBagMemberAttribute.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Action\ViewData.cs">
-      <Link>Action\System\ViewData.cs</Link>
+      <Link>Action\ViewData.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Attribute\html5Validate.cs">
       <Link>Attribute\html5Validate.cs</Link>
