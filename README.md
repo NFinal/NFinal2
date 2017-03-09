@@ -1,5 +1,5 @@
 #NFinal2
-此项目自带自定义Visual Studio开发插件。
+此项目自带自定义Visual Studio开发插件,支持vs2013,vs2015,vs2017.
 开发效率及运行效率，均已超越微软官方的.net mvc.
 
 支持.net 4.0+,.net core 1.4+
