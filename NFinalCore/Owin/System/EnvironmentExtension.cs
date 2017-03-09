@@ -101,6 +101,7 @@ namespace System
                     while (i < len)
                     {
                         cookie.Add(tempArray[i << 1], Uri.UnescapeDataString(tempArray[(i << 1) + 1]));
+                        i++;
                     }
                 }
             }

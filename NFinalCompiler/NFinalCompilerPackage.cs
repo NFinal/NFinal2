@@ -61,7 +61,8 @@ namespace NFinalCompiler
         public static Package Package;
         public static NFinalCompilerPackage _instance;
         public static MSBuildWorkspace msbw = null;
-        public static VisualStudioWorkspace workspace;
+        public static IComponentModel componentModel = null;
+        public VisualStudioWorkspace workspace;
         public static EnvDTE.SolutionEvents _solutionEvents;
         public static EnvDTE.DocumentEvents _documentEvents;
         /// <summary>
@@ -93,29 +94,35 @@ namespace NFinalCompiler
             _documentEvents.DocumentSaved += DocumentEvents_DocumentSaved;
             _solutionEvents.AfterClosing += _solutionEvents_AfterClosing;
             _solutionEvents.ProjectRemoved += _solutionEvents_ProjectRemoved;
-            IComponentModel componentModel =
+            componentModel =
         (IComponentModel)Microsoft.VisualStudio.Shell.Package.GetGlobalService(typeof(SComponentModel));
-            workspace = componentModel.GetService<VisualStudioWorkspace>();
+            
             base.Initialize();
         }
 
         private void _solutionEvents_ProjectRemoved(EnvDTE.Project Project)
         {
-            throw new NotImplementedException();
+           
         }
 
         private void _solutionEvents_AfterClosing()
         {
-            throw new NotImplementedException();
+            
         }
 
         private void DocumentEvents_DocumentSaved(EnvDTE.Document Document)
         {
             EnvDTE.Project project;
             Microsoft.CodeAnalysis.Project proj;
-            if (Document.Name.EndsWith("Controller.cs"))
+            //string fileName = null;
+            if (Document.Name.EndsWith("Controller.cs",StringComparison.OrdinalIgnoreCase))
             {
                 project = Document.ProjectItem.ContainingProject;
+                string parentName = Document.ProjectItem.Name;
+                string parentFileName = Document.ProjectItem.FileNames[0];
+                string parentPath = Path.GetDirectoryName(parentFileName);
+
+                workspace = componentModel.GetService<VisualStudioWorkspace>();
                 proj = workspace.CurrentSolution.Projects.Where(doc => doc.FilePath == project.FileName).FirstOrDefault();
                 CSharpCompilation cSharpCompilation = null;
                 Compilation compilation = null;
@@ -130,12 +137,12 @@ namespace NFinalCompiler
                         cSharpCompilation = (CSharpCompilation)proj.GetCompilationAsync().Result;
                     }
                 }
-                string structFileName = Path.Combine(Document.Path, Path.GetFileNameWithoutExtension(Document.Name) + ".model.cs");
+                string structFileName = Path.Combine(parentPath, Path.GetFileNameWithoutExtension(parentName) + ".model.cs");
                 ProjectItem projectItem = Helper.ProjectHelpers.FindInProject(structFileName);
                 projectItem?.Document?.Close(vsSaveChanges.vsSaveChangesNo);
                 using (StreamWriter sw = new StreamWriter(structFileName, false, System.Text.Encoding.UTF8))
                 {
-                    var document = proj.Documents.Single(doc => { return doc.FilePath == Document.FullName; });
+                    var document = proj.Documents.Single(doc => { return doc.FilePath == parentFileName; });
                     Controller.StructModel model = new Controller.StructModel();
                     var tree = document.GetSyntaxTreeAsync().Result;
                     SyntaxNode root = tree.GetRoot();
@@ -145,25 +152,26 @@ namespace NFinalCompiler
                 }
                 if (File.Exists(structFileName))
                 {
-                    if (projectItem == null)
-                    {
-                        Helper.ProjectHelpers.AddNestedFile(Document.FullName, structFileName, "Compile", true);
-                    }
+                    Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, structFileName, "Compile", false);
                 }
             }
             else if (Document.Name.EndsWith(".cshtml"))
             {
                 project = Document.ProjectItem.ContainingProject;
+                string parentName = Document.ProjectItem.Name;
+                string parentFileName = Document.ProjectItem.FileNames[0];
+                string parentPath = Path.GetDirectoryName(parentFileName);
+
+                workspace = componentModel.GetService<VisualStudioWorkspace>();
                 proj = workspace.CurrentSolution.Projects.Where(doc => doc.FilePath == project.FileName).FirstOrDefault();
-                string fileName = Path.Combine(Document.Path, Path.GetFileNameWithoutExtension(Document.Name)+".template.cs");
+                string fileName = Path.Combine(parentPath,Path.GetFileNameWithoutExtension(parentName) + ".template.cs");
                 ProjectItem projectItem = Helper.ProjectHelpers.FindInProject(fileName);
-                projectItem?.Document?.Close();
+                projectItem?.Document?.Close(vsSaveChanges.vsSaveChangesNo);
                 using (StreamWriter sw = new StreamWriter(fileName, false, System.Text.Encoding.UTF8))
                 {
                     string nameSpace = GetNameSpace(Document);
-                    string className = Path.GetFileNameWithoutExtension(Document.Name);
-
-                    Razor.RazorWriter writer = new Razor.RazorWriter(Document.FullName);
+                    string className = Path.GetFileNameWithoutExtension(parentName);
+                    Razor.RazorWriter writer = new Razor.RazorWriter(parentFileName);
                     writer.WriteTemplate(sw, nameSpace, className);
                     sw.Close();
                 }
@@ -171,10 +179,11 @@ namespace NFinalCompiler
                 {
                     if (projectItem == null)
                     {
-                        Helper.ProjectHelpers.AddNestedFile(Document.FullName, fileName, "Compile", true);
+                        projectItem= Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, fileName, "Compile", false);
                     }
                     //代码结构
                     projectItem?.Document?.NewWindow();
+                    workspace = componentModel.GetService<VisualStudioWorkspace>();
                     proj = workspace.CurrentSolution.Projects.Where(x => x.FilePath == project.FileName).FirstOrDefault();
                     Microsoft.CodeAnalysis.Document codeDocument = proj.Documents.FirstOrDefault((doc => { if (doc.FilePath == fileName) { return true; } else { return false; } }));
                     //格式化
@@ -187,16 +196,18 @@ namespace NFinalCompiler
             else if (Document.Name.EndsWith(".nf.json"))
             {
                 project = Document.ProjectItem.ContainingProject;
+                string parentName = Document.ProjectItem.Name;
+                string parentFileName = Document.ProjectItem.FileNames[0];
                 string inputFileContent=null;
-                using (StreamReader sr = new StreamReader(Document.FullName, System.Text.Encoding.UTF8))
+                using (StreamReader sr = new StreamReader(parentFileName, System.Text.Encoding.UTF8))
                 {
                     inputFileContent = sr.ReadToEnd();
                 }
                 string nameSpace = GetNameSpace(Document);
-                string className = Document.Name.TrimSuffix(".nf.json").Replace('-','_');
-                string outPutFileName = Document.FullName.TrimSuffix(".nf.json")+".cs";
+                string className = parentName.TrimSuffix(".nf.json").Replace('-','_');
+                string outPutFileName = parentFileName.TrimSuffix(".nf.json")+".cs";
                 ProjectItem projectItem = Helper.ProjectHelpers.FindInProject(outPutFileName);
-                projectItem?.Document?.Close();
+                projectItem?.Document?.Close(vsSaveChanges.vsSaveChangesNo);
                 if (inputFileContent != null)
                 {
                     using (StreamWriter sw = new StreamWriter(outPutFileName, false, System.Text.Encoding.UTF8))
@@ -225,25 +236,27 @@ namespace NFinalCompiler
                 {
                     if (projectItem == null)
                     {
-                        Helper.ProjectHelpers.AddNestedFile(Document.FullName, outPutFileName, "Compile", true);
+                        Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, outPutFileName, "Compile", true);
                     }
                 }
             }
             else if (Document.Name.EndsWith(".nf.sql"))
             {
+                string parentName = Document.ProjectItem.Name;
+                string parentFileName = Document.ProjectItem.FileNames[0];
                 string nameSpace = GetNameSpace(Document);
                 string fileContent = null;
-                using (StreamReader sr = new StreamReader(Document.FullName, System.Text.Encoding.UTF8))
+                using (StreamReader sr = new StreamReader(parentFileName, System.Text.Encoding.UTF8))
                 {
                     fileContent = sr.ReadToEnd();
                 }
                 if (fileContent != null)
                 {
-                    Sql.SqlDocument sqlDocument = new Sql.SqlDocument(Document.FullName, nameSpace, fileContent);
+                    Sql.SqlDocument sqlDocument = new Sql.SqlDocument(parentFileName, nameSpace, fileContent);
                     foreach (var model in sqlDocument.modelFileDataList)
                     {
                         ProjectItem projectItem = Helper.ProjectHelpers.FindInProject(model.fileName);
-                        projectItem?.Document?.Close();
+                        projectItem?.Document?.Close(vsSaveChanges.vsSaveChangesNo);
                         using (StreamWriter sw = new StreamWriter(model.fileName, false, System.Text.Encoding.UTF8))
                         {
                             sw.Write(model.content);
@@ -253,7 +266,7 @@ namespace NFinalCompiler
                         {
                             if (projectItem == null)
                             {
-                                Helper.ProjectHelpers.AddNestedFile(Document.FullName, model.fileName, "Compile", true);
+                                Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, model.fileName, "Compile", true);
                             }
                         }
                     }
@@ -264,7 +277,8 @@ namespace NFinalCompiler
         public static string GetNameSpace(EnvDTE.Document Document)
         {
             var project = Document.ProjectItem.ContainingProject;
-            return Path.Combine(project.Name) + "." + string.Join(".", Document.Path.Substring(Path.GetDirectoryName(project.FullName).Length).Split(Path.DirectorySeparatorChar)).Trim('.');
+            return Path.Combine(project.Name) + "." + 
+                string.Join(".", Path.GetDirectoryName(Document.ProjectItem.FileNames[0]).Substring(Path.GetDirectoryName(project.FullName).Length).Split(Path.DirectorySeparatorChar)).Trim('.');
         }
         #endregion
     }

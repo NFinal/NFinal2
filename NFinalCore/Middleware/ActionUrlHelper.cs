@@ -386,7 +386,7 @@ namespace NFinal.Middleware
             string webApplicationRoot = NFinal.Utility.GetWebApplicationRoot();
             foreach (var controller in formatControllerDictionary)
             {
-                direcotyName ="/" +options.debugDirectory.TrimStart('/')+"/"+ controller.Key.Namespace.Replace('.','/') + "/" + controller.Key.Name;
+                direcotyName ="/" +options.debugDirectory.TrimStart('/')+"/"+ controller.Key.Namespace.Replace('.','/') + "/" + ActionHelper.GetControllerName(controller.Key);
                 string[] directoryTemp= direcotyName.Split('/');
                 string[] directoryList = new string[directoryTemp.Length+1];
                 directoryList[0] = webApplicationRoot;

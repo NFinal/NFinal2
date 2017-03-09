@@ -185,7 +185,7 @@ namespace NFinal.Middleware
                     {
                         actionData.actionExecute(context, actionData, request, parameters);
                     }
-                    catch(Exception e)
+                    catch(Exception)
                     {
                         hasError = true;
                         if (customErrors.mode == Mode.Off)

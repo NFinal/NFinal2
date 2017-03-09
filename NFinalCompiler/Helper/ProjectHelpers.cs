@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.VisualStudio.Shell;
 
 namespace NFinalCompiler.Helper
 {
@@ -120,33 +121,99 @@ namespace NFinalCompiler.Helper
                 Logger.Log(ex);
             }
         }
-
-        public static void AddNestedFile(string parentFile, string newFile,string itemType, bool force = false)
+        public static bool ContainsProperty(this ProjectItem projectItem, string propertyName)
         {
-            ProjectItem item = _dte.Solution.FindProjectItem(parentFile);
+            if (projectItem.Properties != null)
+            {
+                foreach (Property item in projectItem.Properties)
+                {
+                    if (item != null && item.Name == propertyName)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+        public static ProjectItem AddNestedFile(ProjectItem item, string newFile,string itemType, bool force = false)
+        {
 
             try
             {
                 if (item == null
-                    || item.ContainingProject == null
-                    || item.ContainingProject.IsKind(ProjectTypes.ASPNET_5))
-                    return;
-
-                if (item.ProjectItems == null || item.ContainingProject.IsKind(ProjectTypes.UNIVERSAL_APP))
+                    || item.ContainingProject == null)
+                    return null;
+                ProjectItem newItem = null;
+                bool mayNeedAttributeSet = item.ContainingProject.IsKind(ProjectTypes.DOTNET_Core, ProjectTypes.UNIVERSAL_APP);
+                
+                if (item.ProjectItems == null)
                 {
                     item.ContainingProject.AddFileToProject(newFile, itemType);
                 }
                 else if (_dte.Solution.FindProjectItem(newFile) == null || force)
                 {
-                    item.ProjectItems.AddFromFile(newFile);
+                    newItem= item.ProjectItems.AddFromFile(newFile);
+                    if (mayNeedAttributeSet)
+                    {
+                        if (newItem.ContainsProperty("DependentUpon"))
+                        {
+                            newItem.Properties.Item("DependentUpon").Value = item.FileNames[0];
+                        }
+                    }
                 }
+                return newItem;
             }
             catch (Exception ex)
             {
                 Logger.Log(ex);
+                return null;
             }
         }
 
+        public static ProjectItem FindFileInProject(this Project project,string fileName)
+        {
+            int iFound = 0;
+            uint itemId = 0;
+            EnvDTE.ProjectItem item=null;
+            Microsoft.VisualStudio.Shell.Interop.VSDOCUMENTPRIORITY[] pdwPriority = new Microsoft.VisualStudio.Shell.Interop.VSDOCUMENTPRIORITY[1];
+
+            // obtain a reference to the current project as an IVsProject type
+            Microsoft.VisualStudio.Shell.Interop.IVsProject VsProject = VsHelper.ToVsProject(project);
+            // this locates, and returns a handle to our source file, as a ProjectItem
+            VsProject.IsDocumentInProject(fileName, out iFound, pdwPriority, out itemId);
+
+            // if our source file was found in the project (which it should have been)
+            if (iFound != 0 && itemId != 0)
+            {
+                Microsoft.VisualStudio.OLE.Interop.IServiceProvider oleSp = null;
+                VsProject.GetItemContext(itemId, out oleSp);
+                if (oleSp != null)
+                {
+                    ServiceProvider sp = new ServiceProvider(oleSp);
+                    // convert our handle to a ProjectItem
+                    item = sp.GetService(typeof(EnvDTE.ProjectItem)) as EnvDTE.ProjectItem;
+                }
+                else
+                    throw new ApplicationException("Unable to retrieve Visual Studio ProjectItem");
+            }
+            else
+                throw new ApplicationException("Unable to retrieve Visual Studio ProjectItem");
+            return item;
+        }
+        public static void AddNestedFile(this Project project, string parentFile, string newFile, string ItemType, bool force = false)
+        {
+            ProjectItem parentItem= project.FindFileInProject(parentFile);
+            if (parentItem != null)
+            {
+                ProjectItem newItem = project.FindFileInProject(newFile);
+                if (newItem == null)
+                {
+                    newItem = parentItem.ProjectItems.AddFromFile(newFile);
+                }
+                newItem.Properties.Item("ItemType").Value = ItemType;
+            }
+        }
         public static bool IsKind(this Project project, params string[] kindGuids)
         {
             foreach (var guid in kindGuids)

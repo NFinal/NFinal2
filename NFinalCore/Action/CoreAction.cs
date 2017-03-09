@@ -10,7 +10,7 @@ namespace NFinal
 {
     public class CoreAction<TMasterPage, TUser> : AbstractAction<HttpContext, HttpRequest, TUser, TMasterPage> where TMasterPage : MasterPageModel
     {
-        #region 初始化函数
+#region 初始化函数
         public CoreAction() { }
         public override void BaseInitialization(HttpContext context, string methodName)
         {
@@ -77,7 +77,7 @@ namespace NFinal
                 this.outputStream = outputStream;
             }
         }
-        #endregion
+#endregion
         public override void After()
         {
             
@@ -160,6 +160,11 @@ namespace NFinal
         public override void SetResponseStatusCode(int statusCode)
         {
             response.statusCode = statusCode;
+        }
+
+        public override Stream GetRequestBody()
+        {
+            return request.Body;
         }
     }
 }

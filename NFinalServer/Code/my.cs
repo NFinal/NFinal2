@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Code
+namespace NFinalServer.Code
 {
 
     public class my

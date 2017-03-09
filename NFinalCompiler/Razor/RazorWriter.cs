@@ -13,7 +13,6 @@ namespace NFinalCompiler.Razor
         public List<string> usings;
         public string modelType = "dynamic";
         public string renderContent;
-        private bool isFirstBlock = true;
         public RazorWriter(string fileName)
         {
             this.usings = new List<string>();
@@ -69,8 +68,16 @@ namespace NFinalCompiler.Razor
             sw.WriteLine("\t\t//PMC命令为：Install-Package NFinal");
             sw.Write("\t\tpublic static void Render(");
             sw.Write("NFinal.IO.Writer writer,");
-            sw.Write(modelType);
-            sw.WriteLine(" Model)");
+            if (modelType == "dynamic")
+            {
+                sw.Write(modelType);
+                sw.WriteLine(" ViewBag");
+            }
+            else
+            {
+                sw.Write(modelType);
+                sw.WriteLine(" Model)");
+            }
             sw.WriteLine("\t\t{");
             sw.Write(renderContent);
             sw.WriteLine("\t\t}");
@@ -233,12 +240,12 @@ namespace NFinalCompiler.Razor
             else if (span.Kind == SpanKind.Markup)
             {
                 bool isFirst = ((span.Previous != null) && span.Previous.Kind != SpanKind.Markup) || span.Previous == null;
-                bool isMid = false;
+                //bool isMid = false;
                 bool isLast = (span.Next != null && span.Next.Kind != SpanKind.Markup) || (span.Next == null);
                 //<html><html><html>
                 if (isLast == true && isFirst == true)
                 {
-                    isMid = true;
+                    //isMid = true;
                     tw.Write("\t\t\twriter.Write(\"");
                     if (!string.IsNullOrEmpty(span.Content))
                     {
@@ -248,7 +255,7 @@ namespace NFinalCompiler.Razor
                 }
                 else if (isFirst == false && isLast == false)
                 {
-                    isMid = true;
+                    //isMid = true;
                     if (!string.IsNullOrEmpty(span.Content))
                     {
                         tw.Write(ReserveString(span.Content));

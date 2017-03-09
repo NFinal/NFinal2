@@ -21,7 +21,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET40</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET40;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -42,11 +42,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>key.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -101,6 +100,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\NFinalCore\Action\AbtractAction.cs">
@@ -241,6 +241,141 @@
     <Compile Include="..\NFinalCore\Constant.cs">
       <Link>Constant.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Dapper\CommandDefinition.cs">
+      <Link>Dapper\CommandDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\CommandFlags.cs">
+      <Link>Dapper\CommandFlags.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\CustomPropertyTypeMap.cs">
+      <Link>Dapper\CustomPropertyTypeMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DataTableHandler.cs">
+      <Link>Dapper\DataTableHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DbString.cs">
+      <Link>Dapper\DbString.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DefaultTypeMap.cs">
+      <Link>Dapper\DefaultTypeMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.CachedOutputSetters.cs">
+      <Link>Dapper\DynamicParameters.CachedOutputSetters.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.cs">
+      <Link>Dapper\DynamicParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.ParamInfo.cs">
+      <Link>Dapper\DynamicParameters.ParamInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\ExplicitConstructorAttribute.cs">
+      <Link>Dapper\ExplicitConstructorAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\FeatureSupport.cs">
+      <Link>Dapper\FeatureSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SimpleMemberMap.cs">
+      <Link>Dapper\SimpleMemberMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlDataRecordHandler.cs">
+      <Link>Dapper\SqlDataRecordHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlDataRecordListTVPParameter.cs">
+      <Link>Dapper\SqlDataRecordListTVPParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Async.cs">
+      <Link>Dapper\SqlMapper.Async.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.CacheInfo.cs">
+      <Link>Dapper\SqlMapper.CacheInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.cs">
+      <Link>Dapper\SqlMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperRow.cs">
+      <Link>Dapper\SqlMapper.DapperRow.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperRowMetaObject.cs">
+      <Link>Dapper\SqlMapper.DapperRowMetaObject.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperTable.cs">
+      <Link>Dapper\SqlMapper.DapperTable.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DeserializerState.cs">
+      <Link>Dapper\SqlMapper.DeserializerState.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DontMap.cs">
+      <Link>Dapper\SqlMapper.DontMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.GridReader.Async.cs">
+      <Link>Dapper\SqlMapper.GridReader.Async.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.GridReader.cs">
+      <Link>Dapper\SqlMapper.GridReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ICustomQueryParameter.cs">
+      <Link>Dapper\SqlMapper.ICustomQueryParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IDataReader.cs">
+      <Link>Dapper\SqlMapper.IDataReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Identity.cs">
+      <Link>Dapper\SqlMapper.Identity.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IDynamicParameters.cs">
+      <Link>Dapper\SqlMapper.IDynamicParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IMemberMap.cs">
+      <Link>Dapper\SqlMapper.IMemberMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IParameterCallbacks.cs">
+      <Link>Dapper\SqlMapper.IParameterCallbacks.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IParameterLookup.cs">
+      <Link>Dapper\SqlMapper.IParameterLookup.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ITypeHandler.cs">
+      <Link>Dapper\SqlMapper.ITypeHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ITypeMap.cs">
+      <Link>Dapper\SqlMapper.ITypeMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Link.cs">
+      <Link>Dapper\SqlMapper.Link.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.LiteralToken.cs">
+      <Link>Dapper\SqlMapper.LiteralToken.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Settings.cs">
+      <Link>Dapper\SqlMapper.Settings.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeDeserializerCache.cs">
+      <Link>Dapper\SqlMapper.TypeDeserializerCache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeHandler.cs">
+      <Link>Dapper\SqlMapper.TypeHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeHandlerCache.cs">
+      <Link>Dapper\SqlMapper.TypeHandlerCache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\TableValuedParameter.cs">
+      <Link>Dapper\TableValuedParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\TypeExtensions.cs">
+      <Link>Dapper\TypeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\UdtTypeHandler.cs">
+      <Link>Dapper\UdtTypeHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\WrappedDataReader.cs">
+      <Link>Dapper\WrappedDataReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\WrappedReader.cs">
+      <Link>Dapper\WrappedReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\XmlHandlers.cs">
+      <Link>Dapper\XmlHandlers.cs</Link>
+    </Compile>
     <Compile Include="..\NFinalCore\Emit\CopyHelper.cs">
       <Link>Emit\CopyHelper.cs</Link>
     </Compile>
@@ -252,6 +387,9 @@
     </Compile>
     <Compile Include="..\NFinalCore\Exceptions\DuplicateViewUrlException.cs">
       <Link>Exceptions\DuplicateViewUrlException.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Exceptions\InvalidControllerNameException.cs">
+      <Link>Exceptions\InvalidControllerNameException.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Exceptions\ModelNotFoundException.cs">
       <Link>Exceptions\ModelNotFoundException.cs</Link>
@@ -415,9 +553,6 @@
     <Compile Include="..\NFinalCore\Owin\Cookie.cs">
       <Link>Owin\Cookie.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Owin\Filter.cs">
-      <Link>Owin\Filter.cs</Link>
-    </Compile>
     <Compile Include="..\NFinalCore\Owin\HtmlWriter.cs">
       <Link>Owin\HtmlWriter.cs</Link>
     </Compile>
@@ -534,9 +669,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WithDBNullExtension.tt</DependentUpon>
     </Compile>
-    <Compile Include="Middleware\Debug.template.cs">
-      <DependentUpon>Debug.cshtml</DependentUpon>
-    </Compile>
+    <Compile Include="Middleware\Debug.template.cs" />
     <Compile Include="Middleware\UrlRouteJs.template.cs">
       <DependentUpon>UrlRouteJs.cshtml</DependentUpon>
     </Compile>
@@ -571,9 +704,8 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>WithDBNullExtension.cs</LastGenOutput>
     </Content>
-    <Content Include="Middleware\Debug.cshtml">
-      <Generator>NFinalRazorGenerator</Generator>
-    </Content>
+    <Content Include="Middleware\Debug.cshtml" />
+    <None Include="key.pfx" />
     <None Include="Middleware\UrlRouteJs.cshtml">
       <Generator>NFinalRazorGenerator</Generator>
     </None>

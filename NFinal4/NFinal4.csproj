@@ -30,6 +30,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net40\Microsoft.Owin.dll</HintPath>
@@ -232,6 +238,141 @@
     <Compile Include="..\NFinalCore\Constant.cs">
       <Link>Core\Constant.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Dapper\CommandDefinition.cs">
+      <Link>Core\Dapper\CommandDefinition.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\CommandFlags.cs">
+      <Link>Core\Dapper\CommandFlags.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\CustomPropertyTypeMap.cs">
+      <Link>Core\Dapper\CustomPropertyTypeMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DataTableHandler.cs">
+      <Link>Core\Dapper\DataTableHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DbString.cs">
+      <Link>Core\Dapper\DbString.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DefaultTypeMap.cs">
+      <Link>Core\Dapper\DefaultTypeMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.CachedOutputSetters.cs">
+      <Link>Core\Dapper\DynamicParameters.CachedOutputSetters.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.cs">
+      <Link>Core\Dapper\DynamicParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.ParamInfo.cs">
+      <Link>Core\Dapper\DynamicParameters.ParamInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\ExplicitConstructorAttribute.cs">
+      <Link>Core\Dapper\ExplicitConstructorAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\FeatureSupport.cs">
+      <Link>Core\Dapper\FeatureSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SimpleMemberMap.cs">
+      <Link>Core\Dapper\SimpleMemberMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlDataRecordHandler.cs">
+      <Link>Core\Dapper\SqlDataRecordHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlDataRecordListTVPParameter.cs">
+      <Link>Core\Dapper\SqlDataRecordListTVPParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Async.cs">
+      <Link>Core\Dapper\SqlMapper.Async.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.CacheInfo.cs">
+      <Link>Core\Dapper\SqlMapper.CacheInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.cs">
+      <Link>Core\Dapper\SqlMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperRow.cs">
+      <Link>Core\Dapper\SqlMapper.DapperRow.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperRowMetaObject.cs">
+      <Link>Core\Dapper\SqlMapper.DapperRowMetaObject.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperTable.cs">
+      <Link>Core\Dapper\SqlMapper.DapperTable.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DeserializerState.cs">
+      <Link>Core\Dapper\SqlMapper.DeserializerState.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DontMap.cs">
+      <Link>Core\Dapper\SqlMapper.DontMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.GridReader.Async.cs">
+      <Link>Core\Dapper\SqlMapper.GridReader.Async.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.GridReader.cs">
+      <Link>Core\Dapper\SqlMapper.GridReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ICustomQueryParameter.cs">
+      <Link>Core\Dapper\SqlMapper.ICustomQueryParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IDataReader.cs">
+      <Link>Core\Dapper\SqlMapper.IDataReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Identity.cs">
+      <Link>Core\Dapper\SqlMapper.Identity.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IDynamicParameters.cs">
+      <Link>Core\Dapper\SqlMapper.IDynamicParameters.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IMemberMap.cs">
+      <Link>Core\Dapper\SqlMapper.IMemberMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IParameterCallbacks.cs">
+      <Link>Core\Dapper\SqlMapper.IParameterCallbacks.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IParameterLookup.cs">
+      <Link>Core\Dapper\SqlMapper.IParameterLookup.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ITypeHandler.cs">
+      <Link>Core\Dapper\SqlMapper.ITypeHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ITypeMap.cs">
+      <Link>Core\Dapper\SqlMapper.ITypeMap.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Link.cs">
+      <Link>Core\Dapper\SqlMapper.Link.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.LiteralToken.cs">
+      <Link>Core\Dapper\SqlMapper.LiteralToken.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Settings.cs">
+      <Link>Core\Dapper\SqlMapper.Settings.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeDeserializerCache.cs">
+      <Link>Core\Dapper\SqlMapper.TypeDeserializerCache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeHandler.cs">
+      <Link>Core\Dapper\SqlMapper.TypeHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeHandlerCache.cs">
+      <Link>Core\Dapper\SqlMapper.TypeHandlerCache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\TableValuedParameter.cs">
+      <Link>Core\Dapper\TableValuedParameter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\TypeExtensions.cs">
+      <Link>Core\Dapper\TypeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\UdtTypeHandler.cs">
+      <Link>Core\Dapper\UdtTypeHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\WrappedDataReader.cs">
+      <Link>Core\Dapper\WrappedDataReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\WrappedReader.cs">
+      <Link>Core\Dapper\WrappedReader.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Dapper\XmlHandlers.cs">
+      <Link>Core\Dapper\XmlHandlers.cs</Link>
+    </Compile>
     <Compile Include="..\nfinalcore\emit\CopyHelper.cs">
       <Link>Core\Emit\CopyHelper.cs</Link>
     </Compile>
@@ -243,6 +384,9 @@
     </Compile>
     <Compile Include="..\nfinalcore\exceptions\DuplicateViewUrlException.cs">
       <Link>Core\Exceptions\DuplicateViewUrlException.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Exceptions\InvalidControllerNameException.cs">
+      <Link>Core\Exceptions\InvalidControllerNameException.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\exceptions\ModelNotFoundException.cs">
       <Link>Core\Exceptions\ModelNotFoundException.cs</Link>
@@ -406,9 +550,6 @@
     <Compile Include="..\NFinalCore\Owin\Cookie.cs">
       <Link>Core\Owin\Cookie.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\owin\Filter.cs">
-      <Link>Core\Owin\Filter.cs</Link>
-    </Compile>
     <Compile Include="..\nfinalcore\owin\HtmlWriter.cs">
       <Link>Core\Owin\HtmlWriter.cs</Link>
     </Compile>
@@ -550,6 +691,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="key.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

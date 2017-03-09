@@ -235,11 +235,18 @@ namespace NFinal.Middleware
                 .GetCustomAttributes(typeof(ControllerAttribute), true);
             if (controllerAttributes.Length > 0)
             {
-                controllerName = controllerAttributes[0].Name;
+                if (!string.IsNullOrEmpty(controllerAttributes[0].Name))
+                {
+                    controllerName = controllerAttributes[0].Name;
+                }
+                else
+                {
+                    controllerName =GetControllerName(controller);
+                }
             }
             else
             {
-                controllerName = controller.Name;
+                controllerName = GetControllerName(controller);
             }
             areaAttributes = (AreaAttribute[])
 #if (NET40 || NET451 || NET461)
@@ -433,6 +440,20 @@ namespace NFinal.Middleware
             methodIL.Emit(OpCodes.Ret);
             ActionExecute<TContext,TRequest> methodDelegate = (ActionExecute<TContext,TRequest>)method.CreateDelegate(typeof(ActionExecute<TContext,TRequest>));
             return methodDelegate;
+        }
+        public static string GetControllerName(Type controller)
+        {
+            int SuffixLength = "Controller".Length;
+            int NameLength = controller.Name.Length;
+            if (NameLength > SuffixLength)
+            {
+                string suffix = controller.Name.Substring(controller.Name.Length - SuffixLength, SuffixLength);
+                if (suffix.Equals("Controller", StringComparison.OrdinalIgnoreCase))
+                {
+                    return controller.Name.Substring(0, controller.Name.Length - SuffixLength);
+                }
+            }
+            throw new Exceptions.InvalidControllerNameException(controller.Namespace, controller.Name);
         }
     }
 }

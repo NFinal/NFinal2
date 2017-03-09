@@ -384,7 +384,7 @@ namespace NFinal
                     }
                 }
                 sw.Write("/");
-                sw.Write(controllerType.Name);
+                sw.Write(Middleware.ActionHelper.GetControllerName(controllerType));
                 sw.Write("/");
                 sw.Write(this.methodName);
                 sw.Write(".cshtml"); sw.Dispose();
