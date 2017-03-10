@@ -155,22 +155,30 @@ namespace NFinalCompiler.Helper
                 {
                     newItem= item.ProjectItems.AddFromFile(newFile);
                 }
+                bool isVisualStudioRTM = false;
                 if (mayNeedAttributeSet)
                 {
                     if (newItem != null)
                     {
                         if (newItem.ContainsProperty("DependentUpon"))
                         {
+                            isVisualStudioRTM = true;
                             newItem.Properties.Item("DependentUpon").Value = item.FileNames[0];
                         }
                     }
-                    Helper.NestedHelper helper = new NestedHelper();
-                    string parentItemType = item.Properties.Item("ItemType").Value.ToString();
-                    if (string.IsNullOrEmpty(parentItemType))
+                    //如果是免费版VS，则要手动修改项目文件。
+                    if (!isVisualStudioRTM)
                     {
-                        parentItemType = "None";
+                        Helper.NestedHelper helper = new NestedHelper();
+                        string parentItemType = item.Properties.Item("ItemType").Value.ToString();
+                        if (string.IsNullOrEmpty(parentItemType))
+                        {
+                            parentItemType = "None";
+                        }
+                        //防止项目未保存，而本地的项目文件却已经修改。
+                        item.ContainingProject.Save();
+                        helper.NestedFile(item, parentItemType, newFile, itemType);
                     }
-                    helper.NestedFile(item, parentItemType, newFile, itemType);
                 }
                 return newItem;
             }
