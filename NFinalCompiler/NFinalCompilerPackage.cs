@@ -177,10 +177,7 @@ namespace NFinalCompiler
                 }
                 if (File.Exists(fileName))
                 {
-                    if (projectItem == null)
-                    {
-                        projectItem= Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, fileName, "Compile", false);
-                    }
+                    projectItem= Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, fileName, "Compile", false);
                     //代码结构
                     projectItem?.Document?.NewWindow();
                     workspace = componentModel.GetService<VisualStudioWorkspace>();
@@ -234,10 +231,8 @@ namespace NFinalCompiler
                 }
                 if (File.Exists(outPutFileName))
                 {
-                    if (projectItem == null)
-                    {
-                        Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, outPutFileName, "Compile", true);
-                    }
+
+                    Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, outPutFileName, "Compile", false);
                 }
             }
             else if (Document.Name.EndsWith(".nf.sql"))
@@ -264,10 +259,7 @@ namespace NFinalCompiler
                         }
                         if (File.Exists(model.fileName))
                         {
-                            if (projectItem == null)
-                            {
-                                Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, model.fileName, "Compile", true);
-                            }
+                            Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, model.fileName, "Compile", false);
                         }
                     }
                 }

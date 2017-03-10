@@ -190,6 +190,7 @@
     <Compile Include="Controller\DeclareData.cs" />
     <Compile Include="Controller\GetFieldsUtility.cs" />
     <Compile Include="Controller\StructModel.cs" />
+    <Compile Include="Helper\NestedHelper.cs" />
     <Compile Include="Helper\VsHelper.cs" />
     <Compile Include="Sql\Data\DataUtility.cs" />
     <Compile Include="Sql\ModelFileData.cs" />

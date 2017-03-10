@@ -151,16 +151,26 @@ namespace NFinalCompiler.Helper
                 {
                     item.ContainingProject.AddFileToProject(newFile, itemType);
                 }
-                else if (_dte.Solution.FindProjectItem(newFile) == null || force)
+                else if ((newItem=_dte.Solution.FindProjectItem(newFile)) == null || force)
                 {
                     newItem= item.ProjectItems.AddFromFile(newFile);
-                    if (mayNeedAttributeSet)
+                }
+                if (mayNeedAttributeSet)
+                {
+                    if (newItem != null)
                     {
                         if (newItem.ContainsProperty("DependentUpon"))
                         {
                             newItem.Properties.Item("DependentUpon").Value = item.FileNames[0];
                         }
                     }
+                    Helper.NestedHelper helper = new NestedHelper();
+                    string parentItemType = item.Properties.Item("ItemType").Value.ToString();
+                    if (string.IsNullOrEmpty(parentItemType))
+                    {
+                        parentItemType = "None";
+                    }
+                    helper.NestedFile(item, parentItemType, newFile, itemType);
                 }
                 return newItem;
             }
