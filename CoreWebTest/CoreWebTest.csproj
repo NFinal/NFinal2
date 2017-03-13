@@ -73,6 +73,9 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
@@ -121,14 +124,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\Index.cs">
-      <Generator>NFinalControllerGenerator</Generator>
-      <LastGenOutput>Index._Model.cs</LastGenOutput>
+    <Compile Include="Controllers\IndexController.cs">
+      <LastGenOutput>IndexController1.cs</LastGenOutput>
     </Compile>
-    <Compile Include="Controllers\Index._Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Index.cs</DependentUpon>
+    <Compile Include="Controllers\IndexController.model.cs">
+      <DependentUpon>IndexController.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleMiddleware.cs" />
@@ -140,7 +140,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Views\Index.cshtml">
-      <Generator>NFinalRazorGenerator</Generator>
+      <BrowseToURL>~/Debug/CoreWebtest/Controllers/Index/INN.html</BrowseToURL>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

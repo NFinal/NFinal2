@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>DEBUG;NETCORE;CORE;COREFX;ASYNC;NETCOREAPP1_1;</DefineConstants>
+    <DefineConstants>DEBUG;NETCORE;CORE;COREFX;ASYNC;FILESYSTEM;NETCOREAPP1_1</DefineConstants>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -52,6 +52,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TryParseExtension.cs</LastGenOutput>
     </None>
+    <None Update="ImageSharp\Formats\Jepg\Components\Block8x8F.Generated.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Block8x8F.Generated.cs</LastGenOutput>
+    </None>
     <None Update="Middleware\Debug.cshtml">
       <Generator>NFinalRazorGenerator</Generator>
       <CustomToolNamespace></CustomToolNamespace>
@@ -77,6 +81,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>TryParseExtension.tt</DependentUpon>
     </Compile>
+    <Compile Update="ImageSharp\Formats\Jepg\Components\Block8x8F.Generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Block8x8F.Generated.tt</DependentUpon>
+    </Compile>
     <Compile Update="System\System\StringContainer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -86,6 +95,7 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="新文件夹\" />
   </ItemGroup>
 
 </Project>
