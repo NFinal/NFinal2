@@ -100,547 +100,547 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\nfinalcore\action\AbtractAction.cs">
+    <Compile Include="..\NFinal\Action\AbtractAction.cs">
       <Link>Core\Action\AbtractAction.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Action\ActionHelper.cs">
+    <Compile Include="..\NFinal\Action\ActionHelper.cs">
       <Link>Core\Action\ActionHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\Actuator.cs">
+    <Compile Include="..\NFinal\Action\Actuator.cs">
       <Link>Core\Action\Actuator.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\ContextAction.cs">
+    <Compile Include="..\NFinal\Action\ContextAction.cs">
       <Link>Core\Action\ContextAction.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\CoreAction.cs">
+    <Compile Include="..\NFinal\Action\CoreAction.cs">
       <Link>Core\Action\CoreAction.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\IAction.cs">
+    <Compile Include="..\NFinal\Action\IAction.cs">
       <Link>Core\Action\IAction.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\OwinAction.cs">
+    <Compile Include="..\NFinal\Action\OwinAction.cs">
       <Link>Core\Action\OwinAction.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Attribute\ActionAttribute.cs">
+    <Compile Include="..\NFinal\Attribute\ActionAttribute.cs">
       <Link>Core\Attribute\ActionAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Attribute\AreaAttribute.cs">
+    <Compile Include="..\NFinal\Attribute\AreaAttribute.cs">
       <Link>Core\Attribute\AreaAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Attribute\ConfigAttribute.cs">
+    <Compile Include="..\NFinal\Attribute\ConfigAttribute.cs">
       <Link>Core\Attribute\ConfigAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Attribute\ControllerAttribute.cs">
+    <Compile Include="..\NFinal\Attribute\ControllerAttribute.cs">
       <Link>Core\Attribute\ControllerAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Attribute\FilterAttribute.cs">
+    <Compile Include="..\NFinal\Attribute\FilterAttribute.cs">
       <Link>Core\Attribute\FilterAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Attribute\IndexAttribute.cs">
+    <Compile Include="..\NFinal\Attribute\IndexAttribute.cs">
       <Link>Core\Attribute\IndexAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Attribute\SubDomainAttribute.cs">
+    <Compile Include="..\NFinal\Attribute\SubDomainAttribute.cs">
       <Link>Core\Attribute\SubDomainAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Attribute\UrlAttribute.cs">
+    <Compile Include="..\NFinal\Attribute\UrlAttribute.cs">
       <Link>Core\Attribute\UrlAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Attribute\ViewAttribute.cs">
+    <Compile Include="..\NFinal\Attribute\ViewAttribute.cs">
       <Link>Core\Attribute\ViewAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Attribute\ViewBagMemberAttribute.cs">
+    <Compile Include="..\NFinal\Attribute\ViewBagMemberAttribute.cs">
       <Link>Core\Attribute\ViewBagMemberAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\cache\Cache.cs">
+    <Compile Include="..\NFinal\cache\Cache.cs">
       <Link>Core\Cache\Cache.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\cache\CacheType.cs">
+    <Compile Include="..\NFinal\cache\CacheType.cs">
       <Link>Core\Cache\CacheType.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\cache\ICache.cs">
+    <Compile Include="..\NFinal\cache\ICache.cs">
       <Link>Core\Cache\ICache.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\cache\RedisCache.cs">
+    <Compile Include="..\NFinal\cache\RedisCache.cs">
       <Link>Core\Cache\RedisCache.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Cache\SimpleCache.cs">
+    <Compile Include="..\NFinal\Cache\SimpleCache.cs">
       <Link>Core\Cache\SimpleCache.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\cache\system\Browser.cs">
+    <Compile Include="..\NFinal\cache\system\Browser.cs">
       <Link>Core\Cache\System\Browser.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\cache\system\CacheAttribute.cs">
+    <Compile Include="..\NFinal\cache\system\CacheAttribute.cs">
       <Link>Core\Cache\System\CacheAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\cache\system\Server.cs">
+    <Compile Include="..\NFinal\cache\system\Server.cs">
       <Link>Core\Cache\System\Server.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\cache\system\Standard.cs">
+    <Compile Include="..\NFinal\cache\system\Standard.cs">
       <Link>Core\Cache\System\Standard.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\fastdictionary\CodeNode.cs">
+    <Compile Include="..\NFinal\collections\fastdictionary\CodeNode.cs">
       <Link>Core\Collections\FastDictionary\CodeNode.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\fastdictionary\CodeNodeType.cs">
+    <Compile Include="..\NFinal\collections\fastdictionary\CodeNodeType.cs">
       <Link>Core\Collections\FastDictionary\CodeNodeType.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\fastdictionary\ColumnCompareData.cs">
+    <Compile Include="..\NFinal\collections\fastdictionary\ColumnCompareData.cs">
       <Link>Core\Collections\FastDictionary\ColumnCompareData.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\fastdictionary\CoreFastDictionary.cs">
+    <Compile Include="..\NFinal\collections\fastdictionary\CoreFastDictionary.cs">
       <Link>Core\Collections\FastDictionary\CoreFastDictionary.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\fastdictionary\FastDictionary.cs">
+    <Compile Include="..\NFinal\collections\fastdictionary\FastDictionary.cs">
       <Link>Core\Collections\FastDictionary\FastDictionary.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\fastdictionary\FastDictionaryUtility.cs">
+    <Compile Include="..\NFinal\collections\fastdictionary\FastDictionaryUtility.cs">
       <Link>Core\Collections\FastDictionary\FastDictionaryUtility.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\fastdictionary\ILWriter.cs">
+    <Compile Include="..\NFinal\collections\fastdictionary\ILWriter.cs">
       <Link>Core\Collections\FastDictionary\ILWriter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\fastdictionary\KeyLongArrayCompare.cs">
+    <Compile Include="..\NFinal\collections\fastdictionary\KeyLongArrayCompare.cs">
       <Link>Core\Collections\FastDictionary\KeyLongArrayCompare.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\fastdictionary\LongCompare.cs">
+    <Compile Include="..\NFinal\collections\fastdictionary\LongCompare.cs">
       <Link>Core\Collections\FastDictionary\LongCompare.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\fastdictionary\SharpWriter.cs">
+    <Compile Include="..\NFinal\collections\fastdictionary\SharpWriter.cs">
       <Link>Core\Collections\FastDictionary\SharpWriter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\NameValueCollection.cs">
+    <Compile Include="..\NFinal\collections\NameValueCollection.cs">
       <Link>Core\Collections\NameValueCollection.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\NameValueDynamicCollection.cs">
+    <Compile Include="..\NFinal\collections\NameValueDynamicCollection.cs">
       <Link>Core\Collections\NameValueDynamicCollection.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\config\common\CommonConfig.cs">
+    <Compile Include="..\NFinal\config\common\CommonConfig.cs">
       <Link>Core\Config\Common\CommonConfig.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\config\Configration.cs">
+    <Compile Include="..\NFinal\config\Configration.cs">
       <Link>Core\Config\Configration.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\config\ConnectionString.cs">
+    <Compile Include="..\NFinal\config\ConnectionString.cs">
       <Link>Core\Config\ConnectionString.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Constant.cs">
+    <Compile Include="..\NFinal\Constant.cs">
       <Link>Core\Constant.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\CommandDefinition.cs">
+    <Compile Include="..\NFinal\Dapper\CommandDefinition.cs">
       <Link>Core\Dapper\CommandDefinition.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\CommandFlags.cs">
+    <Compile Include="..\NFinal\Dapper\CommandFlags.cs">
       <Link>Core\Dapper\CommandFlags.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\CustomPropertyTypeMap.cs">
+    <Compile Include="..\NFinal\Dapper\CustomPropertyTypeMap.cs">
       <Link>Core\Dapper\CustomPropertyTypeMap.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DataTableHandler.cs">
+    <Compile Include="..\NFinal\Dapper\DataTableHandler.cs">
       <Link>Core\Dapper\DataTableHandler.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DbString.cs">
+    <Compile Include="..\NFinal\Dapper\DbString.cs">
       <Link>Core\Dapper\DbString.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DefaultTypeMap.cs">
+    <Compile Include="..\NFinal\Dapper\DefaultTypeMap.cs">
       <Link>Core\Dapper\DefaultTypeMap.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.CachedOutputSetters.cs">
+    <Compile Include="..\NFinal\Dapper\DynamicParameters.CachedOutputSetters.cs">
       <Link>Core\Dapper\DynamicParameters.CachedOutputSetters.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.cs">
+    <Compile Include="..\NFinal\Dapper\DynamicParameters.cs">
       <Link>Core\Dapper\DynamicParameters.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.ParamInfo.cs">
+    <Compile Include="..\NFinal\Dapper\DynamicParameters.ParamInfo.cs">
       <Link>Core\Dapper\DynamicParameters.ParamInfo.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\ExplicitConstructorAttribute.cs">
+    <Compile Include="..\NFinal\Dapper\ExplicitConstructorAttribute.cs">
       <Link>Core\Dapper\ExplicitConstructorAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\FeatureSupport.cs">
+    <Compile Include="..\NFinal\Dapper\FeatureSupport.cs">
       <Link>Core\Dapper\FeatureSupport.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SimpleMemberMap.cs">
+    <Compile Include="..\NFinal\Dapper\SimpleMemberMap.cs">
       <Link>Core\Dapper\SimpleMemberMap.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlDataRecordHandler.cs">
+    <Compile Include="..\NFinal\Dapper\SqlDataRecordHandler.cs">
       <Link>Core\Dapper\SqlDataRecordHandler.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlDataRecordListTVPParameter.cs">
+    <Compile Include="..\NFinal\Dapper\SqlDataRecordListTVPParameter.cs">
       <Link>Core\Dapper\SqlDataRecordListTVPParameter.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Async.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.Async.cs">
       <Link>Core\Dapper\SqlMapper.Async.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.CacheInfo.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.CacheInfo.cs">
       <Link>Core\Dapper\SqlMapper.CacheInfo.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.cs">
       <Link>Core\Dapper\SqlMapper.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperRow.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.DapperRow.cs">
       <Link>Core\Dapper\SqlMapper.DapperRow.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperRowMetaObject.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.DapperRowMetaObject.cs">
       <Link>Core\Dapper\SqlMapper.DapperRowMetaObject.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperTable.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.DapperTable.cs">
       <Link>Core\Dapper\SqlMapper.DapperTable.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DeserializerState.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.DeserializerState.cs">
       <Link>Core\Dapper\SqlMapper.DeserializerState.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DontMap.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.DontMap.cs">
       <Link>Core\Dapper\SqlMapper.DontMap.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.GridReader.Async.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.GridReader.Async.cs">
       <Link>Core\Dapper\SqlMapper.GridReader.Async.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.GridReader.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.GridReader.cs">
       <Link>Core\Dapper\SqlMapper.GridReader.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ICustomQueryParameter.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.ICustomQueryParameter.cs">
       <Link>Core\Dapper\SqlMapper.ICustomQueryParameter.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IDataReader.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.IDataReader.cs">
       <Link>Core\Dapper\SqlMapper.IDataReader.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Identity.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.Identity.cs">
       <Link>Core\Dapper\SqlMapper.Identity.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IDynamicParameters.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.IDynamicParameters.cs">
       <Link>Core\Dapper\SqlMapper.IDynamicParameters.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IMemberMap.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.IMemberMap.cs">
       <Link>Core\Dapper\SqlMapper.IMemberMap.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IParameterCallbacks.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.IParameterCallbacks.cs">
       <Link>Core\Dapper\SqlMapper.IParameterCallbacks.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IParameterLookup.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.IParameterLookup.cs">
       <Link>Core\Dapper\SqlMapper.IParameterLookup.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ITypeHandler.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.ITypeHandler.cs">
       <Link>Core\Dapper\SqlMapper.ITypeHandler.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ITypeMap.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.ITypeMap.cs">
       <Link>Core\Dapper\SqlMapper.ITypeMap.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Link.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.Link.cs">
       <Link>Core\Dapper\SqlMapper.Link.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.LiteralToken.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.LiteralToken.cs">
       <Link>Core\Dapper\SqlMapper.LiteralToken.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Settings.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.Settings.cs">
       <Link>Core\Dapper\SqlMapper.Settings.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeDeserializerCache.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.TypeDeserializerCache.cs">
       <Link>Core\Dapper\SqlMapper.TypeDeserializerCache.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeHandler.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.TypeHandler.cs">
       <Link>Core\Dapper\SqlMapper.TypeHandler.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeHandlerCache.cs">
+    <Compile Include="..\NFinal\Dapper\SqlMapper.TypeHandlerCache.cs">
       <Link>Core\Dapper\SqlMapper.TypeHandlerCache.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\TableValuedParameter.cs">
+    <Compile Include="..\NFinal\Dapper\TableValuedParameter.cs">
       <Link>Core\Dapper\TableValuedParameter.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\TypeExtensions.cs">
+    <Compile Include="..\NFinal\Dapper\TypeExtensions.cs">
       <Link>Core\Dapper\TypeExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\UdtTypeHandler.cs">
+    <Compile Include="..\NFinal\Dapper\UdtTypeHandler.cs">
       <Link>Core\Dapper\UdtTypeHandler.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\WrappedDataReader.cs">
+    <Compile Include="..\NFinal\Dapper\WrappedDataReader.cs">
       <Link>Core\Dapper\WrappedDataReader.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\WrappedReader.cs">
+    <Compile Include="..\NFinal\Dapper\WrappedReader.cs">
       <Link>Core\Dapper\WrappedReader.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Dapper\XmlHandlers.cs">
+    <Compile Include="..\NFinal\Dapper\XmlHandlers.cs">
       <Link>Core\Dapper\XmlHandlers.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\emit\CopyHelper.cs">
+    <Compile Include="..\NFinal\emit\CopyHelper.cs">
       <Link>Core\Emit\CopyHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\emit\StructHelper.cs">
+    <Compile Include="..\NFinal\emit\StructHelper.cs">
       <Link>Core\Emit\StructHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\exceptions\DuplicateActionUrlException.cs">
+    <Compile Include="..\NFinal\exceptions\DuplicateActionUrlException.cs">
       <Link>Core\Exceptions\DuplicateActionUrlException.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\exceptions\DuplicateViewUrlException.cs">
+    <Compile Include="..\NFinal\exceptions\DuplicateViewUrlException.cs">
       <Link>Core\Exceptions\DuplicateViewUrlException.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Exceptions\InvalidControllerNameException.cs">
+    <Compile Include="..\NFinal\Exceptions\InvalidControllerNameException.cs">
       <Link>Core\Exceptions\InvalidControllerNameException.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\exceptions\ModelNotFoundException.cs">
+    <Compile Include="..\NFinal\exceptions\ModelNotFoundException.cs">
       <Link>Core\Exceptions\ModelNotFoundException.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\exceptions\ViewModelTypeUnMatched.cs">
+    <Compile Include="..\NFinal\exceptions\ViewModelTypeUnMatched.cs">
       <Link>Core\Exceptions\ViewModelTypeUnMatched.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\exceptions\ViewNotFoundException.cs">
+    <Compile Include="..\NFinal\exceptions\ViewNotFoundException.cs">
       <Link>Core\Exceptions\ViewNotFoundException.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Extension\EnvironmentExtension.cs">
+    <Compile Include="..\NFinal\Extension\EnvironmentExtension.cs">
       <Link>Core\Extension\EnvironmentExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\Int32Extension.cs">
+    <Compile Include="..\NFinal\extension\Int32Extension.cs">
       <Link>Core\Extension\Int32Extension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\JsonConvertExtension.cs">
+    <Compile Include="..\NFinal\extension\JsonConvertExtension.cs">
       <Link>Core\Extension\JsonConvertExtension.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Extension\ModelExtension.cs">
+    <Compile Include="..\NFinal\Extension\ModelExtension.cs">
       <Link>Core\Extension\ModelExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\StreamAndByteExtension.cs">
+    <Compile Include="..\NFinal\extension\StreamAndByteExtension.cs">
       <Link>Core\Extension\StreamAndByteExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\StringContainerExtension.cs">
+    <Compile Include="..\NFinal\extension\StringContainerExtension.cs">
       <Link>Core\Extension\StringContainerExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\StringExtension.cs">
+    <Compile Include="..\NFinal\extension\StringExtension.cs">
       <Link>Core\Extension\StringExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\TryParseExtension.cs">
+    <Compile Include="..\NFinal\extension\TryParseExtension.cs">
       <Link>Core\Extension\TryParseExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\UniqueKeyDictionayExtension.cs">
+    <Compile Include="..\NFinal\extension\UniqueKeyDictionayExtension.cs">
       <Link>Core\Extension\UniqueKeyDictionayExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\filter\FilterEvent.cs">
+    <Compile Include="..\NFinal\filter\FilterEvent.cs">
       <Link>Core\Filter\FilterEvent.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\filter\FilterHelper.cs">
+    <Compile Include="..\NFinal\filter\FilterHelper.cs">
       <Link>Core\Filter\FilterHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\filter\IBaseFilter.cs">
+    <Compile Include="..\NFinal\filter\IBaseFilter.cs">
       <Link>Core\Filter\IBaseFilter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\filter\IContextFilter.cs">
+    <Compile Include="..\NFinal\filter\IContextFilter.cs">
       <Link>Core\Filter\IContextFilter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\filter\IEnvironmentFilter.cs">
+    <Compile Include="..\NFinal\filter\IEnvironmentFilter.cs">
       <Link>Core\Filter\IEnvironmentFilter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\filter\IRequestFilter.cs">
+    <Compile Include="..\NFinal\filter\IRequestFilter.cs">
       <Link>Core\Filter\IRequestFilter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\filter\IResponseFilter.cs">
+    <Compile Include="..\NFinal\filter\IResponseFilter.cs">
       <Link>Core\Filter\IResponseFilter.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\CompressMode.cs">
+    <Compile Include="..\NFinal\Http\CompressMode.cs">
       <Link>Core\Http\CompressMode.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\ContentType.cs">
+    <Compile Include="..\NFinal\Http\ContentType.cs">
       <Link>Core\Http\ContentType.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\Cookie.cs">
+    <Compile Include="..\NFinal\Http\Cookie.cs">
       <Link>Core\Http\Cookie.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpFile.cs">
+    <Compile Include="..\NFinal\Http\HttpMultipart\HttpFile.cs">
       <Link>Core\Http\HttpMultipart\HttpFile.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipart.cs">
+    <Compile Include="..\NFinal\Http\HttpMultipart\HttpMultipart.cs">
       <Link>Core\Http\HttpMultipart\HttpMultipart.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipartBoundary.cs">
+    <Compile Include="..\NFinal\Http\HttpMultipart\HttpMultipartBoundary.cs">
       <Link>Core\Http\HttpMultipart\HttpMultipartBoundary.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipartBuffer.cs">
+    <Compile Include="..\NFinal\Http\HttpMultipart\HttpMultipartBuffer.cs">
       <Link>Core\Http\HttpMultipart\HttpMultipartBuffer.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipartSubStream.cs">
+    <Compile Include="..\NFinal\Http\HttpMultipart\HttpMultipartSubStream.cs">
       <Link>Core\Http\HttpMultipart\HttpMultipartSubStream.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\ICookie.cs">
+    <Compile Include="..\NFinal\Http\ICookie.cs">
       <Link>Core\Http\ICookie.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\MethodType.cs">
+    <Compile Include="..\NFinal\Http\MethodType.cs">
       <Link>Core\Http\MethodType.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\Response.cs">
+    <Compile Include="..\NFinal\Http\Response.cs">
       <Link>Core\Http\Response.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\ServerType.cs">
+    <Compile Include="..\NFinal\Http\ServerType.cs">
       <Link>Core\Http\ServerType.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\Session\ISession.cs">
+    <Compile Include="..\NFinal\Http\Session\ISession.cs">
       <Link>Core\Http\Session\ISession.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Http\Session\Session.cs">
+    <Compile Include="..\NFinal\Http\Session\Session.cs">
       <Link>Core\Http\Session\Session.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\icon\Favicon.cs">
+    <Compile Include="..\NFinal\icon\Favicon.cs">
       <Link>Core\Icon\Favicon.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\io\FileWriter.cs">
+    <Compile Include="..\NFinal\io\FileWriter.cs">
       <Link>Core\IO\FileWriter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\io\IWriter.cs">
+    <Compile Include="..\NFinal\io\IWriter.cs">
       <Link>Core\IO\IWriter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\io\StreamWriter.cs">
+    <Compile Include="..\NFinal\io\StreamWriter.cs">
       <Link>Core\IO\StreamWriter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\io\StringWriter.cs">
+    <Compile Include="..\NFinal\io\StringWriter.cs">
       <Link>Core\IO\StringWriter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\io\system\WriterExtension.cs">
+    <Compile Include="..\NFinal\io\system\WriterExtension.cs">
       <Link>Core\IO\System\WriterExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\io\Writer.cs">
+    <Compile Include="..\NFinal\io\Writer.cs">
       <Link>Core\IO\Writer.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\json\IJson.cs">
+    <Compile Include="..\NFinal\json\IJson.cs">
       <Link>Core\Json\IJson.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\json\IJsonSerialize.cs">
+    <Compile Include="..\NFinal\json\IJsonSerialize.cs">
       <Link>Core\Json\IJsonSerialize.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\json\JilJsonSerialize.cs">
+    <Compile Include="..\NFinal\json\JilJsonSerialize.cs">
       <Link>Core\Json\JilJsonSerialize.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\json\JsonHelper.cs">
+    <Compile Include="..\NFinal\json\JsonHelper.cs">
       <Link>Core\Json\JsonHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\json\NewtonsoftJsonSerialize.cs">
+    <Compile Include="..\NFinal\json\NewtonsoftJsonSerialize.cs">
       <Link>Core\Json\NewtonsoftJsonSerialize.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\logs\ConsoleLogger.cs">
+    <Compile Include="..\NFinal\logs\ConsoleLogger.cs">
       <Link>Core\Logs\ConsoleLogger.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\logs\ILogger.cs">
+    <Compile Include="..\NFinal\logs\ILogger.cs">
       <Link>Core\Logs\ILogger.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\logs\RequestLogs.cs">
+    <Compile Include="..\NFinal\logs\RequestLogs.cs">
       <Link>Core\Logs\RequestLogs.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Builder\Completed.cs">
+    <Compile Include="..\NFinal\Middleware\Builder\Completed.cs">
       <Link>Core\Middleware\Builder\Completed.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Builder\NotFound.cs">
+    <Compile Include="..\NFinal\Middleware\Builder\NotFound.cs">
       <Link>Core\Middleware\Builder\NotFound.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Config\CustomErrors.cs">
+    <Compile Include="..\NFinal\Middleware\Config\CustomErrors.cs">
       <Link>Core\Middleware\Config\CustomErrors.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Config\MiddlewareConfigOptions.cs">
+    <Compile Include="..\NFinal\Middleware\Config\MiddlewareConfigOptions.cs">
       <Link>Core\Middleware\Config\MiddlewareConfigOptions.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Config\UrlRouteRule.cs">
+    <Compile Include="..\NFinal\Middleware\Config\UrlRouteRule.cs">
       <Link>Core\Middleware\Config\UrlRouteRule.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\middleware\ContextMiddleware.cs">
+    <Compile Include="..\NFinal\middleware\ContextMiddleware.cs">
       <Link>Core\Middleware\ContextMiddleware.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\middleware\CoreMiddleware.cs">
+    <Compile Include="..\NFinal\middleware\CoreMiddleware.cs">
       <Link>Core\Middleware\CoreMiddleware.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\middleware\Middleware.cs">
+    <Compile Include="..\NFinal\middleware\Middleware.cs">
       <Link>Core\Middleware\Middleware.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\middleware\OwinMiddleware.cs">
+    <Compile Include="..\NFinal\middleware\OwinMiddleware.cs">
       <Link>Core\Middleware\OwinMiddleware.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\model\ModelHelper.cs">
+    <Compile Include="..\NFinal\model\ModelHelper.cs">
       <Link>Core\Model\ModelHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\owin\HtmlWriter.cs">
+    <Compile Include="..\NFinal\owin\HtmlWriter.cs">
       <Link>Core\Owin\HtmlWriter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\owin\OwinHelper.cs">
+    <Compile Include="..\NFinal\owin\OwinHelper.cs">
       <Link>Core\Owin\OwinHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\owin\OwinKeys.cs">
+    <Compile Include="..\NFinal\owin\OwinKeys.cs">
       <Link>Core\Owin\OwinKeys.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\owin\OwinModel.cs">
+    <Compile Include="..\NFinal\owin\OwinModel.cs">
       <Link>Core\Owin\OwinModel.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\owin\Request.cs">
+    <Compile Include="..\NFinal\owin\Request.cs">
       <Link>Core\Owin\Request.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Plugs\Loader\AssemblyLoader.cs">
+    <Compile Include="..\NFinal\Plugs\Loader\AssemblyLoader.cs">
       <Link>Core\Plugs\Loader\AssemblyLoader.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Plugs\Loader\CoreAssemblyLoader.cs">
+    <Compile Include="..\NFinal\Plugs\Loader\CoreAssemblyLoader.cs">
       <Link>Core\Plugs\Loader\CoreAssemblyLoader.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Plugs\Loader\IAssemblyLoader.cs">
+    <Compile Include="..\NFinal\Plugs\Loader\IAssemblyLoader.cs">
       <Link>Core\Plugs\Loader\IAssemblyLoader.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Plugs\Plug.cs">
+    <Compile Include="..\NFinal\Plugs\Plug.cs">
       <Link>Core\Plugs\Plug.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\serialize\BinarySerialize.cs">
+    <Compile Include="..\NFinal\serialize\BinarySerialize.cs">
       <Link>Core\Serialize\BinarySerialize.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\serialize\ISerializable.cs">
+    <Compile Include="..\NFinal\serialize\ISerializable.cs">
       <Link>Core\Serialize\ISerializable.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\serialize\ProtobufSerialize.cs">
+    <Compile Include="..\NFinal\serialize\ProtobufSerialize.cs">
       <Link>Core\Serialize\ProtobufSerialize.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\system\BitConstant.cs">
+    <Compile Include="..\NFinal\system\BitConstant.cs">
       <Link>Core\System\BitConstant.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\system\DynamicDictionary.cs">
+    <Compile Include="..\NFinal\system\DynamicDictionary.cs">
       <Link>Core\System\DynamicDictionary.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\System\StringBuilderCache.cs">
+    <Compile Include="..\NFinal\System\StringBuilderCache.cs">
       <Link>Core\System\StringBuilderCache.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\system\StringContainer.cs">
+    <Compile Include="..\NFinal\system\StringContainer.cs">
       <Link>Core\System\StringContainer.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Url\ActionKey.cs">
+    <Compile Include="..\NFinal\Url\ActionKey.cs">
       <Link>Core\Url\ActionKey.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Url\ActionUrlHelper.cs">
+    <Compile Include="..\NFinal\Url\ActionUrlHelper.cs">
       <Link>Core\Url\ActionUrlHelper.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Url\DebugData.cs">
+    <Compile Include="..\NFinal\Url\DebugData.cs">
       <Link>Core\Url\DebugData.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Url\UrlRouteJsModel.cs">
+    <Compile Include="..\NFinal\Url\UrlRouteJsModel.cs">
       <Link>Core\Url\UrlRouteJsModel.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Url\UrlSegment.cs">
+    <Compile Include="..\NFinal\Url\UrlSegment.cs">
       <Link>Core\Url\UrlSegment.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Utility.cs">
+    <Compile Include="..\NFinal\Utility.cs">
       <Link>Core\Utility.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\validation\Pattern.cs">
+    <Compile Include="..\NFinal\validation\Pattern.cs">
       <Link>Core\Validation\Pattern.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\validation\ValidObject.cs">
+    <Compile Include="..\NFinal\validation\ValidObject.cs">
       <Link>Core\Validation\ValidObject.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\validation\ValidObjectExtension.cs">
+    <Compile Include="..\NFinal\validation\ValidObjectExtension.cs">
       <Link>Core\Validation\ValidObjectExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\validation\ValidResult.cs">
+    <Compile Include="..\NFinal\validation\ValidResult.cs">
       <Link>Core\Validation\ValidResult.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\validation\ValidStatus.cs">
+    <Compile Include="..\NFinal\validation\ValidStatus.cs">
       <Link>Core\Validation\ValidStatus.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\View\MasterPageModel.cs">
+    <Compile Include="..\NFinal\View\MasterPageModel.cs">
       <Link>Core\View\MasterPageModel.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\View\Razor\BasePage.cs">
+    <Compile Include="..\NFinal\View\Razor\BasePage.cs">
       <Link>Core\View\Razor\BasePage.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\View\ViewData.cs">
+    <Compile Include="..\NFinal\View\ViewData.cs">
       <Link>Core\View\ViewData.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\view\ViewHelper.cs">
+    <Compile Include="..\NFinal\view\ViewHelper.cs">
       <Link>Core\View\ViewHelper.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Url\Debug.template.cs">

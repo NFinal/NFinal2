@@ -11,16 +11,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\NFinalCore\Attribute\ViewAttribute.cs" Link="Attribute\ViewAttribute.cs" />
-    <Compile Include="..\NFinalCore\Attribute\ViewBagMemberAttribute.cs" Link="Attribute\ViewBagMemberAttribute.cs" />
-    <Compile Include="..\NFinalCore\Constant.cs" Link="Constant.cs" />
-    <Compile Include="..\NFinalCore\IO\FileWriter.cs" Link="FileWriter.cs" />
-    <Compile Include="..\NFinalCore\IO\IWriter.cs" Link="IWriter.cs" />
-    <Compile Include="..\NFinalCore\IO\StreamWriter.cs" Link="StreamWriter.cs" />
-    <Compile Include="..\NFinalCore\IO\StringWriter.cs" Link="StringWriter.cs" />
-    <Compile Include="..\NFinalCore\IO\Writer.cs" Link="Writer.cs" />
-    <Compile Include="..\NFinalCore\Utility.cs" Link="Utility.cs" />
-    <Compile Include="..\NFinalCore\View\Razor\BasePage.cs" Link="View\Razor\BasePage.cs" />
+    <Compile Include="..\NFinal\Attribute\ViewAttribute.cs" Link="Attribute\ViewAttribute.cs" />
+    <Compile Include="..\NFinal\Attribute\ViewBagMemberAttribute.cs" Link="Attribute\ViewBagMemberAttribute.cs" />
+    <Compile Include="..\NFinal\Constant.cs" Link="Constant.cs" />
+    <Compile Include="..\NFinal\IO\FileWriter.cs" Link="FileWriter.cs" />
+    <Compile Include="..\NFinal\IO\IWriter.cs" Link="IWriter.cs" />
+    <Compile Include="..\NFinal\IO\StreamWriter.cs" Link="StreamWriter.cs" />
+    <Compile Include="..\NFinal\IO\StringWriter.cs" Link="StringWriter.cs" />
+    <Compile Include="..\NFinal\IO\Writer.cs" Link="Writer.cs" />
+    <Compile Include="..\NFinal\Utility.cs" Link="Utility.cs" />
+    <Compile Include="..\NFinal\View\Razor\BasePage.cs" Link="View\Razor\BasePage.cs" />
   </ItemGroup>
 
   <ItemGroup>

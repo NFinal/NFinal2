@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp1.1</TargetFramework>
@@ -14,7 +14,7 @@
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NFinalCore\NFinalCore.csproj" />
+    <ProjectReference Include="..\NFinal\NFinal.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Controllers\IndexController.cs">

@@ -1,690 +1,80 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{26B51552-007D-42EA-9EB8-5B57308427E1}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NFinal</RootNamespace>
-    <AssemblyName>NFinal</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET40;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>
-    </DocumentationFile>
-    <CodeAnalysisRuleSet />
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet />
-    <Prefer32Bit>false</Prefer32Bit>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>key.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;NETCORE;CORE;COREFX;ASYNC;FILESYSTEM;NETCOREAPP1_1</DefineConstants>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net40\Microsoft.Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="protobuf-net, Version=2.1.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.2.1.0\lib\net40\protobuf-net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="StackExchange.Redis, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StackExchange.Redis.1.1.603\lib\net40\StackExchange.Redis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.XML" />
-    <Reference Include="System.Xml.Linq" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\NFinalCore\Action\AbtractAction.cs">
-      <Link>Action\AbtractAction.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Action\ActionHelper.cs">
-      <Link>Action\ActionHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Action\Actuator.cs">
-      <Link>Action\Actuator.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Action\ContextAction.cs">
-      <Link>Action\ContextAction.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Action\CoreAction.cs">
-      <Link>Action\CoreAction.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Action\IAction.cs">
-      <Link>Action\IAction.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Action\OwinAction.cs">
-      <Link>Action\OwinAction.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Attribute\ActionAttribute.cs">
-      <Link>Attribute\ActionAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Attribute\AreaAttribute.cs">
-      <Link>Attribute\AreaAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Attribute\ConfigAttribute.cs">
-      <Link>Attribute\ConfigAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Attribute\ControllerAttribute.cs">
-      <Link>Attribute\ControllerAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Attribute\FilterAttribute.cs">
-      <Link>Attribute\FilterAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Attribute\IndexAttribute.cs">
-      <Link>Attribute\IndexAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Attribute\SubDomainAttribute.cs">
-      <Link>Attribute\SubDomainAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Attribute\UrlAttribute.cs">
-      <Link>Attribute\UrlAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Attribute\ViewAttribute.cs">
-      <Link>Attribute\ViewAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Attribute\ViewBagMemberAttribute.cs">
-      <Link>Attribute\ViewBagMemberAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Cache\Cache.cs">
-      <Link>Cache\Cache.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Cache\CacheType.cs">
-      <Link>Cache\CacheType.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Cache\ICache.cs">
-      <Link>Cache\ICache.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Cache\RedisCache.cs">
-      <Link>Cache\RedisCache.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Cache\SimpleCache.cs">
-      <Link>Cache\SimpleCache.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Cache\System\Browser.cs">
-      <Link>Cache\System\Browser.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Cache\System\CacheAttribute.cs">
-      <Link>Cache\System\CacheAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Cache\System\Server.cs">
-      <Link>Cache\System\Server.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Cache\System\Standard.cs">
-      <Link>Cache\System\Standard.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\FastDictionary\CodeNode.cs">
-      <Link>Collections\FastDictionary\CodeNode.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\FastDictionary\CodeNodeType.cs">
-      <Link>Collections\FastDictionary\CodeNodeType.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\FastDictionary\ColumnCompareData.cs">
-      <Link>Collections\FastDictionary\ColumnCompareData.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\FastDictionary\CoreFastDictionary.cs">
-      <Link>Collections\FastDictionary\CoreFastDictionary.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\FastDictionary\FastDictionary.cs">
-      <Link>Collections\FastDictionary\FastDictionary.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\FastDictionary\FastDictionaryUtility.cs">
-      <Link>Collections\FastDictionary\FastDictionaryUtility.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\FastDictionary\ILWriter.cs">
-      <Link>Collections\FastDictionary\ILWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\FastDictionary\KeyLongArrayCompare.cs">
-      <Link>Collections\FastDictionary\KeyLongArrayCompare.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\FastDictionary\LongCompare.cs">
-      <Link>Collections\FastDictionary\LongCompare.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\FastDictionary\SharpWriter.cs">
-      <Link>Collections\FastDictionary\SharpWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\NameValueCollection.cs">
-      <Link>Collections\NameValueCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Collections\NameValueDynamicCollection.cs">
-      <Link>Collections\NameValueDynamicCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Config\Common\CommonConfig.cs">
-      <Link>Config\Common\CommonConfig.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Config\Configration.cs">
-      <Link>Config\Configration.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Config\ConnectionString.cs">
-      <Link>Config\ConnectionString.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Constant.cs">
-      <Link>Constant.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\CommandDefinition.cs">
-      <Link>Dapper\CommandDefinition.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\CommandFlags.cs">
-      <Link>Dapper\CommandFlags.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\CustomPropertyTypeMap.cs">
-      <Link>Dapper\CustomPropertyTypeMap.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DataTableHandler.cs">
-      <Link>Dapper\DataTableHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DbString.cs">
-      <Link>Dapper\DbString.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DefaultTypeMap.cs">
-      <Link>Dapper\DefaultTypeMap.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.CachedOutputSetters.cs">
-      <Link>Dapper\DynamicParameters.CachedOutputSetters.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.cs">
-      <Link>Dapper\DynamicParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\DynamicParameters.ParamInfo.cs">
-      <Link>Dapper\DynamicParameters.ParamInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\ExplicitConstructorAttribute.cs">
-      <Link>Dapper\ExplicitConstructorAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\FeatureSupport.cs">
-      <Link>Dapper\FeatureSupport.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SimpleMemberMap.cs">
-      <Link>Dapper\SimpleMemberMap.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlDataRecordHandler.cs">
-      <Link>Dapper\SqlDataRecordHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlDataRecordListTVPParameter.cs">
-      <Link>Dapper\SqlDataRecordListTVPParameter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Async.cs">
-      <Link>Dapper\SqlMapper.Async.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.CacheInfo.cs">
-      <Link>Dapper\SqlMapper.CacheInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.cs">
-      <Link>Dapper\SqlMapper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperRow.cs">
-      <Link>Dapper\SqlMapper.DapperRow.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperRowMetaObject.cs">
-      <Link>Dapper\SqlMapper.DapperRowMetaObject.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DapperTable.cs">
-      <Link>Dapper\SqlMapper.DapperTable.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DeserializerState.cs">
-      <Link>Dapper\SqlMapper.DeserializerState.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.DontMap.cs">
-      <Link>Dapper\SqlMapper.DontMap.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.GridReader.Async.cs">
-      <Link>Dapper\SqlMapper.GridReader.Async.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.GridReader.cs">
-      <Link>Dapper\SqlMapper.GridReader.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ICustomQueryParameter.cs">
-      <Link>Dapper\SqlMapper.ICustomQueryParameter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IDataReader.cs">
-      <Link>Dapper\SqlMapper.IDataReader.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Identity.cs">
-      <Link>Dapper\SqlMapper.Identity.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IDynamicParameters.cs">
-      <Link>Dapper\SqlMapper.IDynamicParameters.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IMemberMap.cs">
-      <Link>Dapper\SqlMapper.IMemberMap.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IParameterCallbacks.cs">
-      <Link>Dapper\SqlMapper.IParameterCallbacks.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.IParameterLookup.cs">
-      <Link>Dapper\SqlMapper.IParameterLookup.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ITypeHandler.cs">
-      <Link>Dapper\SqlMapper.ITypeHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.ITypeMap.cs">
-      <Link>Dapper\SqlMapper.ITypeMap.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Link.cs">
-      <Link>Dapper\SqlMapper.Link.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.LiteralToken.cs">
-      <Link>Dapper\SqlMapper.LiteralToken.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.Settings.cs">
-      <Link>Dapper\SqlMapper.Settings.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeDeserializerCache.cs">
-      <Link>Dapper\SqlMapper.TypeDeserializerCache.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeHandler.cs">
-      <Link>Dapper\SqlMapper.TypeHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\SqlMapper.TypeHandlerCache.cs">
-      <Link>Dapper\SqlMapper.TypeHandlerCache.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\TableValuedParameter.cs">
-      <Link>Dapper\TableValuedParameter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\TypeExtensions.cs">
-      <Link>Dapper\TypeExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\UdtTypeHandler.cs">
-      <Link>Dapper\UdtTypeHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\WrappedDataReader.cs">
-      <Link>Dapper\WrappedDataReader.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\WrappedReader.cs">
-      <Link>Dapper\WrappedReader.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Dapper\XmlHandlers.cs">
-      <Link>Dapper\XmlHandlers.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Emit\CopyHelper.cs">
-      <Link>Emit\CopyHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Emit\StructHelper.cs">
-      <Link>Emit\StructHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Exceptions\DuplicateActionUrlException.cs">
-      <Link>Exceptions\DuplicateActionUrlException.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Exceptions\DuplicateViewUrlException.cs">
-      <Link>Exceptions\DuplicateViewUrlException.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Exceptions\InvalidControllerNameException.cs">
-      <Link>Exceptions\InvalidControllerNameException.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Exceptions\ModelNotFoundException.cs">
-      <Link>Exceptions\ModelNotFoundException.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Exceptions\ViewModelTypeUnMatched.cs">
-      <Link>Exceptions\ViewModelTypeUnMatched.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Exceptions\ViewNotFoundException.cs">
-      <Link>Exceptions\ViewNotFoundException.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Extension\EnvironmentExtension.cs">
-      <Link>Extension\EnvironmentExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Extension\Int32Extension.cs">
-      <Link>Extension\Int32Extension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Extension\JsonConvertExtension.cs">
-      <Link>Extension\JsonConvertExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Extension\ModelExtension.cs">
-      <Link>Extension\ModelExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Extension\StreamAndByteExtension.cs">
-      <Link>Extension\StreamAndByteExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Extension\StringContainerExtension.cs">
-      <Link>Extension\StringContainerExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Extension\StringExtension.cs">
-      <Link>Extension\StringExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Extension\TryParseExtension.cs">
-      <Link>Extension\TryParseExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Extension\UniqueKeyDictionayExtension.cs">
-      <Link>Extension\UniqueKeyDictionayExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Filter\FilterEvent.cs">
-      <Link>Filter\FilterEvent.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Filter\FilterHelper.cs">
-      <Link>Filter\FilterHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Filter\IBaseFilter.cs">
-      <Link>Filter\IBaseFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Filter\IContextFilter.cs">
-      <Link>Filter\IContextFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Filter\IEnvironmentFilter.cs">
-      <Link>Filter\IEnvironmentFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Filter\IRequestFilter.cs">
-      <Link>Filter\IRequestFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Filter\IResponseFilter.cs">
-      <Link>Filter\IResponseFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\CompressMode.cs">
-      <Link>Http\CompressMode.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\ContentType.cs">
-      <Link>Http\ContentType.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\Cookie.cs">
-      <Link>Http\Cookie.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpFile.cs">
-      <Link>Http\HttpMultipart\HttpFile.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipart.cs">
-      <Link>Http\HttpMultipart\HttpMultipart.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipartBoundary.cs">
-      <Link>Http\HttpMultipart\HttpMultipartBoundary.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipartBuffer.cs">
-      <Link>Http\HttpMultipart\HttpMultipartBuffer.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipartSubStream.cs">
-      <Link>Http\HttpMultipart\HttpMultipartSubStream.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\ICookie.cs">
-      <Link>Http\ICookie.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\MethodType.cs">
-      <Link>Http\MethodType.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\Response.cs">
-      <Link>Http\Response.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\ServerType.cs">
-      <Link>Http\ServerType.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\Session\ISession.cs">
-      <Link>Http\Session\ISession.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Http\Session\Session.cs">
-      <Link>Http\Session\Session.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Icon\Favicon.cs">
-      <Link>Icon\Favicon.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\IO\FileWriter.cs">
-      <Link>IO\FileWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\IO\IWriter.cs">
-      <Link>IO\IWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\IO\StreamWriter.cs">
-      <Link>IO\StreamWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\IO\StringWriter.cs">
-      <Link>IO\StringWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\IO\System\WriterExtension.cs">
-      <Link>IO\System\WriterExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\IO\Writer.cs">
-      <Link>IO\Writer.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Json\IJson.cs">
-      <Link>Json\IJson.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Json\IJsonSerialize.cs">
-      <Link>Json\IJsonSerialize.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Json\JilJsonSerialize.cs">
-      <Link>Json\JilJsonSerialize.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Json\JsonHelper.cs">
-      <Link>Json\JsonHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Json\NewtonsoftJsonSerialize.cs">
-      <Link>Json\NewtonsoftJsonSerialize.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Logs\ConsoleLogger.cs">
-      <Link>Logs\ConsoleLogger.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Logs\ILogger.cs">
-      <Link>Logs\ILogger.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Logs\RequestLogs.cs">
-      <Link>Logs\RequestLogs.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Builder\Completed.cs">
-      <Link>Middleware\Builder\Completed.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Builder\NotFound.cs">
-      <Link>Middleware\Builder\NotFound.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Config\CustomErrors.cs">
-      <Link>Middleware\Config\CustomErrors.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Config\MiddlewareConfigOptions.cs">
-      <Link>Middleware\Config\MiddlewareConfigOptions.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Config\UrlRouteRule.cs">
-      <Link>Middleware\Config\UrlRouteRule.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Middleware\ContextMiddleware.cs">
-      <Link>Middleware\ContextMiddleware.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Middleware\CoreMiddleware.cs">
-      <Link>Middleware\CoreMiddleware.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Middleware\Middleware.cs">
-      <Link>Middleware\Middleware.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Middleware\OwinMiddleware.cs">
-      <Link>Middleware\OwinMiddleware.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Model\ModelHelper.cs">
-      <Link>Model\ModelHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Owin\HtmlWriter.cs">
-      <Link>Owin\HtmlWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Owin\OwinHelper.cs">
-      <Link>Owin\OwinHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Owin\OwinKeys.cs">
-      <Link>Owin\OwinKeys.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Owin\OwinModel.cs">
-      <Link>Owin\OwinModel.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Owin\Request.cs">
-      <Link>Owin\Request.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Plugs\Loader\AssemblyLoader.cs">
-      <Link>Plugs\Loader\AssemblyLoader.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Plugs\Loader\CoreAssemblyLoader.cs">
-      <Link>Plugs\Loader\CoreAssemblyLoader.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Plugs\Loader\IAssemblyLoader.cs">
-      <Link>Plugs\Loader\IAssemblyLoader.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Plugs\Plug.cs">
-      <Link>Plugs\Plug.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Serialize\BinarySerialize.cs">
-      <Link>Serialize\BinarySerialize.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Serialize\ISerializable.cs">
-      <Link>Serialize\ISerializable.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Serialize\ProtobufSerialize.cs">
-      <Link>Serialize\ProtobufSerialize.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\System\BitConstant.cs">
-      <Link>System\BitConstant.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\System\DynamicDictionary.cs">
-      <Link>System\DynamicDictionary.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\System\StringBuilderCache.cs">
-      <Link>System\StringBuilderCache.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\System\StringContainer.cs">
-      <Link>System\StringContainer.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Url\ActionKey.cs">
-      <Link>Url\ActionKey.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Url\ActionUrlHelper.cs">
-      <Link>Url\ActionUrlHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Url\DebugData.cs">
-      <Link>Url\DebugData.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Url\UrlRouteJsModel.cs">
-      <Link>Url\UrlRouteJsModel.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Url\UrlSegment.cs">
-      <Link>Url\UrlSegment.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Utility.cs">
-      <Link>Utility.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Validation\Pattern.cs">
-      <Link>Validation\Pattern.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Validation\ValidObject.cs">
-      <Link>Validation\ValidObject.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Validation\ValidObjectExtension.cs">
-      <Link>Validation\ValidObjectExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Validation\ValidResult.cs">
-      <Link>Validation\ValidResult.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Validation\ValidStatus.cs">
-      <Link>Validation\ValidStatus.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\View\MasterPageModel.cs">
-      <Link>View\MasterPageModel.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\View\Razor\BasePage.cs">
-      <Link>View\Razor\BasePage.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\View\ViewData.cs">
-      <Link>View\ViewData.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\View\ViewHelper.cs">
-      <Link>View\ViewHelper.cs</Link>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Url\Debug.template.cs">
+    <Compile Remove="Dapper\**" />
+    <Compile Remove="ImageSharp\**" />
+    <EmbeddedResource Remove="Dapper\**" />
+    <EmbeddedResource Remove="ImageSharp\**" />
+    <None Remove="Dapper\**" />
+    <None Remove="ImageSharp\**" />
+    <None Update="Url\Debug.cshtml">
+      <Generator />
+    </None>
+    <Compile Update="Url\Debug.template.cs">
       <DependentUpon>Debug.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Url\UrlRouteJs.template.cs">
+    <None Update="Url\UrlRouteJs.cshtml">
+      <Generator />
+    </None>
+    <Compile Update="Url\UrlRouteJs.template.cs">
       <DependentUpon>UrlRouteJs.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Action.cd" />
-    <None Include="key.pfx" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Url\Debug.cshtml">
-      <Generator>NFinalRazorGenerator</Generator>
-      <CustomToolNamespace>
-      </CustomToolNamespace>
-    </None>
-    <None Include="Url\UrlRouteJs.cshtml" />
+    <Compile Remove="Attribute\html5Validate.cs" />
+    <Compile Remove="Attribute\pattern.cs" />
+    <Compile Remove="Cache\MemoryCache.cs" />
+    <Compile Remove="Emit\FastReflection.cs" />
+    <Compile Remove="Middleware\StringBuilderCache.cs" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+    <Compile Remove="Url\UrlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="protobuf-net" Version="2.1.0" />
+    <PackageReference Include="StackExchange.Redis" Version="1.2.1" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="favicon.ico" />
+    <None Update="Extension\TryParseExtension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TryParseExtension.cs</LastGenOutput>
+    </None>
+    <None Update="System\StringContainer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>StringContainer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Extension\TryParseExtension.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TryParseExtension.tt</DependentUpon>
+    </Compile>
+    <Compile Update="System\StringContainer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StringContainer.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
 </Project>
