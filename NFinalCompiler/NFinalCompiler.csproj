@@ -51,139 +51,139 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\nfinalcore\dapper\CommandDefinition.cs">
+    <Compile Include="..\NFinal\dapper\CommandDefinition.cs">
       <Link>Sql\Dapper\CommandDefinition.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\CommandFlags.cs">
+    <Compile Include="..\NFinal\dapper\CommandFlags.cs">
       <Link>Sql\Dapper\CommandFlags.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\CustomPropertyTypeMap.cs">
+    <Compile Include="..\NFinal\dapper\CustomPropertyTypeMap.cs">
       <Link>Sql\Dapper\CustomPropertyTypeMap.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\DataTableHandler.cs">
+    <Compile Include="..\NFinal\dapper\DataTableHandler.cs">
       <Link>Sql\Dapper\DataTableHandler.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\DbString.cs">
+    <Compile Include="..\NFinal\dapper\DbString.cs">
       <Link>Sql\Dapper\DbString.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\DefaultTypeMap.cs">
+    <Compile Include="..\NFinal\dapper\DefaultTypeMap.cs">
       <Link>Sql\Dapper\DefaultTypeMap.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\DynamicParameters.CachedOutputSetters.cs">
+    <Compile Include="..\NFinal\dapper\DynamicParameters.CachedOutputSetters.cs">
       <Link>Sql\Dapper\DynamicParameters.CachedOutputSetters.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\DynamicParameters.cs">
+    <Compile Include="..\NFinal\dapper\DynamicParameters.cs">
       <Link>Sql\Dapper\DynamicParameters.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\DynamicParameters.ParamInfo.cs">
+    <Compile Include="..\NFinal\dapper\DynamicParameters.ParamInfo.cs">
       <Link>Sql\Dapper\DynamicParameters.ParamInfo.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\ExplicitConstructorAttribute.cs">
+    <Compile Include="..\NFinal\dapper\ExplicitConstructorAttribute.cs">
       <Link>Sql\Dapper\ExplicitConstructorAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\FeatureSupport.cs">
+    <Compile Include="..\NFinal\dapper\FeatureSupport.cs">
       <Link>Sql\Dapper\FeatureSupport.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SimpleMemberMap.cs">
+    <Compile Include="..\NFinal\dapper\SimpleMemberMap.cs">
       <Link>Sql\Dapper\SimpleMemberMap.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlDataRecordHandler.cs">
+    <Compile Include="..\NFinal\dapper\SqlDataRecordHandler.cs">
       <Link>Sql\Dapper\SqlDataRecordHandler.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlDataRecordListTVPParameter.cs">
+    <Compile Include="..\NFinal\dapper\SqlDataRecordListTVPParameter.cs">
       <Link>Sql\Dapper\SqlDataRecordListTVPParameter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.Async.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.Async.cs">
       <Link>Sql\Dapper\SqlMapper.Async.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.CacheInfo.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.CacheInfo.cs">
       <Link>Sql\Dapper\SqlMapper.CacheInfo.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.cs">
       <Link>Sql\Dapper\SqlMapper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.DapperRow.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.DapperRow.cs">
       <Link>Sql\Dapper\SqlMapper.DapperRow.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.DapperRowMetaObject.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.DapperRowMetaObject.cs">
       <Link>Sql\Dapper\SqlMapper.DapperRowMetaObject.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.DapperTable.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.DapperTable.cs">
       <Link>Sql\Dapper\SqlMapper.DapperTable.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.DeserializerState.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.DeserializerState.cs">
       <Link>Sql\Dapper\SqlMapper.DeserializerState.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.DontMap.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.DontMap.cs">
       <Link>Sql\Dapper\SqlMapper.DontMap.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.GridReader.Async.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.GridReader.Async.cs">
       <Link>Sql\Dapper\SqlMapper.GridReader.Async.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.GridReader.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.GridReader.cs">
       <Link>Sql\Dapper\SqlMapper.GridReader.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.ICustomQueryParameter.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.ICustomQueryParameter.cs">
       <Link>Sql\Dapper\SqlMapper.ICustomQueryParameter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.IDataReader.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.IDataReader.cs">
       <Link>Sql\Dapper\SqlMapper.IDataReader.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.Identity.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.Identity.cs">
       <Link>Sql\Dapper\SqlMapper.Identity.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.IDynamicParameters.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.IDynamicParameters.cs">
       <Link>Sql\Dapper\SqlMapper.IDynamicParameters.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.IMemberMap.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.IMemberMap.cs">
       <Link>Sql\Dapper\SqlMapper.IMemberMap.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.IParameterCallbacks.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.IParameterCallbacks.cs">
       <Link>Sql\Dapper\SqlMapper.IParameterCallbacks.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.IParameterLookup.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.IParameterLookup.cs">
       <Link>Sql\Dapper\SqlMapper.IParameterLookup.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.ITypeHandler.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.ITypeHandler.cs">
       <Link>Sql\Dapper\SqlMapper.ITypeHandler.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.ITypeMap.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.ITypeMap.cs">
       <Link>Sql\Dapper\SqlMapper.ITypeMap.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.Link.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.Link.cs">
       <Link>Sql\Dapper\SqlMapper.Link.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.LiteralToken.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.LiteralToken.cs">
       <Link>Sql\Dapper\SqlMapper.LiteralToken.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.Settings.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.Settings.cs">
       <Link>Sql\Dapper\SqlMapper.Settings.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.TypeDeserializerCache.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.TypeDeserializerCache.cs">
       <Link>Sql\Dapper\SqlMapper.TypeDeserializerCache.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.TypeHandler.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.TypeHandler.cs">
       <Link>Sql\Dapper\SqlMapper.TypeHandler.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\SqlMapper.TypeHandlerCache.cs">
+    <Compile Include="..\NFinal\dapper\SqlMapper.TypeHandlerCache.cs">
       <Link>Sql\Dapper\SqlMapper.TypeHandlerCache.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\TableValuedParameter.cs">
+    <Compile Include="..\NFinal\dapper\TableValuedParameter.cs">
       <Link>Sql\Dapper\TableValuedParameter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\TypeExtensions.cs">
+    <Compile Include="..\NFinal\dapper\TypeExtensions.cs">
       <Link>Sql\Dapper\TypeExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\UdtTypeHandler.cs">
+    <Compile Include="..\NFinal\dapper\UdtTypeHandler.cs">
       <Link>Sql\Dapper\UdtTypeHandler.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\WrappedDataReader.cs">
+    <Compile Include="..\NFinal\dapper\WrappedDataReader.cs">
       <Link>Sql\Dapper\WrappedDataReader.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\WrappedReader.cs">
+    <Compile Include="..\NFinal\dapper\WrappedReader.cs">
       <Link>Sql\Dapper\WrappedReader.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\dapper\XmlHandlers.cs">
+    <Compile Include="..\NFinal\dapper\XmlHandlers.cs">
       <Link>Sql\Dapper\XmlHandlers.cs</Link>
     </Compile>
     <Compile Include="Constants.cs" />
