@@ -106,6 +106,9 @@
     <Compile Include="..\NFinalCore\Action\AbtractAction.cs">
       <Link>Action\AbtractAction.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Action\ActionHelper.cs">
+      <Link>Action\ActionHelper.cs</Link>
+    </Compile>
     <Compile Include="..\NFinalCore\Action\Actuator.cs">
       <Link>Action\Actuator.cs</Link>
     </Compile>
@@ -124,6 +127,9 @@
     <Compile Include="..\NFinalCore\Attribute\ActionAttribute.cs">
       <Link>Attribute\ActionAttribute.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Attribute\AreaAttribute.cs">
+      <Link>Attribute\AreaAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\NFinalCore\Attribute\ConfigAttribute.cs">
       <Link>Attribute\ConfigAttribute.cs</Link>
     </Compile>
@@ -135,6 +141,9 @@
     </Compile>
     <Compile Include="..\NFinalCore\Attribute\IndexAttribute.cs">
       <Link>Attribute\IndexAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Attribute\SubDomainAttribute.cs">
+      <Link>Attribute\SubDomainAttribute.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Attribute\UrlAttribute.cs">
       <Link>Attribute\UrlAttribute.cs</Link>
@@ -388,6 +397,9 @@
     <Compile Include="..\NFinalCore\Extension\JsonConvertExtension.cs">
       <Link>Extension\JsonConvertExtension.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Extension\ModelExtension.cs">
+      <Link>Extension\ModelExtension.cs</Link>
+    </Compile>
     <Compile Include="..\NFinalCore\Extension\StreamAndByteExtension.cs">
       <Link>Extension\StreamAndByteExtension.cs</Link>
     </Compile>
@@ -511,14 +523,20 @@
     <Compile Include="..\NFinalCore\Logs\RequestLogs.cs">
       <Link>Logs\RequestLogs.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Middleware\ActionHelper.cs">
-      <Link>Middleware\ActionHelper.cs</Link>
-    </Compile>
     <Compile Include="..\NFinalCore\Middleware\Builder\Completed.cs">
       <Link>Middleware\Builder\Completed.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Middleware\Builder\NotFound.cs">
       <Link>Middleware\Builder\NotFound.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\Config\CustomErrors.cs">
+      <Link>Middleware\Config\CustomErrors.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\Config\MiddlewareConfigOptions.cs">
+      <Link>Middleware\Config\MiddlewareConfigOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\Config\UrlRouteRule.cs">
+      <Link>Middleware\Config\UrlRouteRule.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Middleware\ContextMiddleware.cs">
       <Link>Middleware\ContextMiddleware.cs</Link>
@@ -529,17 +547,11 @@
     <Compile Include="..\NFinalCore\Middleware\Middleware.cs">
       <Link>Middleware\Middleware.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Middleware\MiddlewareConfigOptions.cs">
-      <Link>Middleware\MiddlewareConfigOptions.cs</Link>
-    </Compile>
     <Compile Include="..\NFinalCore\Middleware\OwinMiddleware.cs">
       <Link>Middleware\OwinMiddleware.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Model\ModelHelper.cs">
       <Link>Model\ModelHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Model\System\ModelExtension.cs">
-      <Link>Model\System\ModelExtension.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Owin\HtmlWriter.cs">
       <Link>Owin\HtmlWriter.cs</Link>
@@ -595,14 +607,8 @@
     <Compile Include="..\NFinalCore\Url\ActionUrlHelper.cs">
       <Link>Url\ActionUrlHelper.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Url\Debug.template.cs">
-      <Link>Url\Debug.template.cs</Link>
-    </Compile>
     <Compile Include="..\NFinalCore\Url\DebugData.cs">
       <Link>Url\DebugData.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Url\UrlRouteJs.template.cs">
-      <Link>Url\UrlRouteJs.template.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Url\UrlRouteJsModel.cs">
       <Link>Url\UrlRouteJsModel.cs</Link>
@@ -640,23 +646,27 @@
     <Compile Include="..\NFinalCore\View\ViewHelper.cs">
       <Link>View\ViewHelper.cs</Link>
     </Compile>
-    <Compile Include="Middleware\Debug.template.cs" />
-    <Compile Include="Middleware\UrlRouteJs.template.cs">
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Url\Debug.template.cs">
+      <DependentUpon>Debug.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Url\UrlRouteJs.template.cs">
       <DependentUpon>UrlRouteJs.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Action.cd" />
-    <Content Include="Middleware\Debug.cshtml" />
     <None Include="key.pfx" />
-    <None Include="Middleware\UrlRouteJs.cshtml">
-      <Generator>NFinalRazorGenerator</Generator>
-    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Url\Debug.cshtml">
+      <Generator>NFinalRazorGenerator</Generator>
+      <CustomToolNamespace>
+      </CustomToolNamespace>
+    </None>
+    <None Include="Url\UrlRouteJs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

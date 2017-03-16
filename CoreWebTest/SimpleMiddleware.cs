@@ -10,7 +10,7 @@ namespace CoreWebTest
 {
     public class SimpleMiddleware : NFinal.Middleware.OwinMiddleware
     {
-        public SimpleMiddleware(NFinal.Middleware.InvokeDelegate<IDictionary<string, object>> next, MiddlewareConfigOptions options) : base(next, options)
+        public SimpleMiddleware(NFinal.Middleware.InvokeDelegate<IDictionary<string, object>> next, NFinal.Middleware.Config.MiddlewareConfigOptions options) : base(next, options)
         {
         }
     }

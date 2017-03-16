@@ -19,7 +19,7 @@ namespace NFinal
         public static bool isInit = false;
         //public static Dictionary<string, NFinal.ViewDelegateData>  dicViews = new Dictionary<string, NFinal.ViewDelegateData>();
         public static NFinal.Collections.FastDictionary<NFinal.ViewDelegateData> viewFastDic = null;
-        public static void Init(Middleware.MiddlewareConfigOptions options)
+        public static void Init(NFinal.Middleware.Config.MiddlewareConfigOptions options)
         {
             NFinal.Plugs.Plug plug = null;
             Assembly assembly = null;

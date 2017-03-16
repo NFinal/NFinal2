@@ -370,10 +370,10 @@ namespace NFinal.Url
             }
             
             NFinal.IO.FileWriter fileWriter = new IO.FileWriter(System.IO.Path.Combine(directory, "Url.js"));
-            NFinal.Middleware.UrlRouteJs.Render(fileWriter, model);
+            NFinal.Url.UrlRouteJs.Render(fileWriter, model);
             fileWriter.Dispose();
         }
-        public static void GenerateActionDebugHtml(NFinal.Middleware.MiddlewareConfigOptions options)
+        public static void GenerateActionDebugHtml(NFinal.Middleware.Config.MiddlewareConfigOptions options)
         {
             NFinal.IO.FileWriter fileWriter;
             DebugData debugData;
@@ -408,7 +408,7 @@ namespace NFinal.Url
                         debugData.debugUrl = options.debugUrl;
                         using (fileWriter = new IO.FileWriter(fileName))
                         {
-                            NFinal.Middleware.Debug.Render(fileWriter, debugData);
+                            NFinal.Url.Debug.Render(fileWriter, debugData);
                         }
                     }
 

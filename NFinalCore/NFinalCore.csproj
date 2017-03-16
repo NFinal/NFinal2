@@ -15,12 +15,6 @@
     <EmbeddedResource Remove="ImageSharp\**" />
     <None Remove="Dapper\**" />
     <None Remove="ImageSharp\**" />
-    <None Update="Url\UrlRouteJs.cshtml">
-      <Generator />
-    </None>
-    <Compile Update="Url\UrlRouteJs.template.cs">
-      <DependentUpon>UrlRouteJs.cshtml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Attribute\html5Validate.cs" />
@@ -29,13 +23,6 @@
     <Compile Remove="Middleware\StringBuilderCache.cs" />
     <Compile Remove="Properties\AssemblyInfo.cs" />
     <Compile Remove="Url\UrlHelper.cs" />
-    <Compile Update="Url\Debug.template.cs">
-      <DependentUpon>Debug.cshtml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\NFinal\Middleware\Debug.template.cs" />
-    <Compile Include="..\NFinal\Middleware\UrlRouteJs.template.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
@@ -53,11 +40,6 @@
     <None Update="Extension\TryParseExtension.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TryParseExtension.cs</LastGenOutput>
-    </None>
-    <None Update="Url\Debug.cshtml">
-      <Generator>NFinalRazorGenerator</Generator>
-      <CustomToolNamespace>
-      </CustomToolNamespace>
     </None>
     <None Update="System\StringContainer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -13,11 +13,11 @@ namespace NFinal.Action
     //public delegate void RunActionDelegate<TContext>(TContext context,NFinal.Middleware.ActionData<TContext> actionData);
     public class Actuator
     {
-        public static FieldInfo actionDataEnvironmentFilters = typeof(NFinal.Middleware.ActionData<,>).GetField("IEnvironmentFilters");
+        public static FieldInfo actionDataEnvironmentFilters = typeof(NFinal.Action.ActionData<,>).GetField("IEnvironmentFilters");
         public static MethodInfo BaseFiltersMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("BaseFilter");//, new Type[] { typeof(NFinal.Filter.IEnvironmentFilter[]), typeof(IDictionary<string, object>) });
-        public static FieldInfo actionDataRequestFilters = typeof(NFinal.Middleware.ActionData<,>).GetField("IRequestFilters");
+        public static FieldInfo actionDataRequestFilters = typeof(NFinal.Action.ActionData<,>).GetField("IRequestFilters");
         public static MethodInfo RequestFiltersMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("RequestFilter");//, new Type[] { typeof(NFinal.Filter.IRequestFilter[]), typeof(IDictionary<string, object>), typeof(NFinal.Owin.Request) });
-        public static FieldInfo actionDataResponseFilters = typeof(NFinal.Middleware.ActionData<,>).GetField("IResponseFilters");
+        public static FieldInfo actionDataResponseFilters = typeof(NFinal.Action.ActionData<,>).GetField("IResponseFilters");
         public static MethodInfo ResponseFiltersMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("ResponseFilter");//, new Type[] { typeof(NFinal.Filter.IResponseFilter[]), typeof(NFinal.Owin.Response) });
         public static ConstructorInfo MemoryStreamConstructorInfo = typeof(System.IO.MemoryStream).GetConstructor(Type.EmptyTypes);
         //public static MethodInfo OwinActionInitializationMethodInfo = typeof(NFinal.OwinAction<,>).GetMethod("Initialization");//, new Type[] { typeof(IDictionary<string, object>), typeof(System.IO.Stream), typeof(NFinal.Owin.Request), typeof(NFinal.CompressMode) });
@@ -43,7 +43,7 @@ namespace NFinal.Action
                     }
                 }
             }
-            DynamicMethod method = new DynamicMethod("RunActionX", typeof(void), new Type[] { typeof(TContext),typeof(NFinal.Middleware.ActionData<TContext,TRequest>),typeof(TRequest),typeof(NameValueCollection)});
+            DynamicMethod method = new DynamicMethod("RunActionX", typeof(void), new Type[] { typeof(TContext),typeof(NFinal.Action.ActionData<TContext,TRequest>),typeof(TRequest),typeof(NameValueCollection)});
             ILGenerator methodIL = method.GetILGenerator();
             var methodEnd = methodIL.DefineLabel();
             var request= methodIL.DeclareLocal(typeof(TRequest));
@@ -277,7 +277,7 @@ namespace NFinal.Action
                 //actionData
                 methodIL.Emit(OpCodes.Ldarg_1);
                 //actionData.IResponseFilters
-                methodIL.Emit(OpCodes.Ldfld, typeof(NFinal.Middleware.ActionData<TContext,TRequest>).GetField("IResponseFilters"));
+                methodIL.Emit(OpCodes.Ldfld, typeof(NFinal.Action.ActionData<TContext,TRequest>).GetField("IResponseFilters"));
                 //actionData.IResponseFilters,controller
                 methodIL.Emit(OpCodes.Ldloc, controller);
                 //actionData.IResponseFilters,controller.response

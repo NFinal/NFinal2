@@ -10,7 +10,7 @@ namespace NFinal.Middleware
 {
     public class OwinMiddleware : Middleware<IDictionary<string, object>,Owin.Request>
     {
-        public OwinMiddleware(InvokeDelegate<IDictionary<string, object>> next,MiddlewareConfigOptions options) : base(next,options)
+        public OwinMiddleware(InvokeDelegate<IDictionary<string, object>> next,NFinal.Middleware.Config.MiddlewareConfigOptions options) : base(next,options)
         {  
         }
 

@@ -3,9 +3,9 @@ using NFinal;
 
 //此代码由NFinalRazorGenerator生成。
 //http://bbs.nfinal.com
-namespace NFinalCore.Url
+namespace NFinal.Url
 {
-	[View("/NFinalCore/Url/Debug.cshtml")]
+	[View("/NFinal/Url/Debug.cshtml")]
 	public static class Debug
 	{
 		//如果此处报错，请添加NFinal引用

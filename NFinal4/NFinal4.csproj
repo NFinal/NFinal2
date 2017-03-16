@@ -103,6 +103,9 @@
     <Compile Include="..\nfinalcore\action\AbtractAction.cs">
       <Link>Core\Action\AbtractAction.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Action\ActionHelper.cs">
+      <Link>Core\Action\ActionHelper.cs</Link>
+    </Compile>
     <Compile Include="..\nfinalcore\action\Actuator.cs">
       <Link>Core\Action\Actuator.cs</Link>
     </Compile>
@@ -121,6 +124,9 @@
     <Compile Include="..\NFinalCore\Attribute\ActionAttribute.cs">
       <Link>Core\Attribute\ActionAttribute.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Attribute\AreaAttribute.cs">
+      <Link>Core\Attribute\AreaAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\NFinalCore\Attribute\ConfigAttribute.cs">
       <Link>Core\Attribute\ConfigAttribute.cs</Link>
     </Compile>
@@ -132,6 +138,9 @@
     </Compile>
     <Compile Include="..\NFinalCore\Attribute\IndexAttribute.cs">
       <Link>Core\Attribute\IndexAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Attribute\SubDomainAttribute.cs">
+      <Link>Core\Attribute\SubDomainAttribute.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Attribute\UrlAttribute.cs">
       <Link>Core\Attribute\UrlAttribute.cs</Link>
@@ -385,6 +394,9 @@
     <Compile Include="..\nfinalcore\extension\JsonConvertExtension.cs">
       <Link>Core\Extension\JsonConvertExtension.cs</Link>
     </Compile>
+    <Compile Include="..\NFinalCore\Extension\ModelExtension.cs">
+      <Link>Core\Extension\ModelExtension.cs</Link>
+    </Compile>
     <Compile Include="..\nfinalcore\extension\StreamAndByteExtension.cs">
       <Link>Core\Extension\StreamAndByteExtension.cs</Link>
     </Compile>
@@ -508,14 +520,20 @@
     <Compile Include="..\nfinalcore\logs\RequestLogs.cs">
       <Link>Core\Logs\RequestLogs.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\middleware\ActionHelper.cs">
-      <Link>Core\Middleware\ActionHelper.cs</Link>
-    </Compile>
     <Compile Include="..\NFinalCore\Middleware\Builder\Completed.cs">
       <Link>Core\Middleware\Builder\Completed.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Middleware\Builder\NotFound.cs">
       <Link>Core\Middleware\Builder\NotFound.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\Config\CustomErrors.cs">
+      <Link>Core\Middleware\Config\CustomErrors.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\Config\MiddlewareConfigOptions.cs">
+      <Link>Core\Middleware\Config\MiddlewareConfigOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Middleware\Config\UrlRouteRule.cs">
+      <Link>Core\Middleware\Config\UrlRouteRule.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\middleware\ContextMiddleware.cs">
       <Link>Core\Middleware\ContextMiddleware.cs</Link>
@@ -526,17 +544,11 @@
     <Compile Include="..\nfinalcore\middleware\Middleware.cs">
       <Link>Core\Middleware\Middleware.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\middleware\MiddlewareConfigOptions.cs">
-      <Link>Core\Middleware\MiddlewareConfigOptions.cs</Link>
-    </Compile>
     <Compile Include="..\nfinalcore\middleware\OwinMiddleware.cs">
       <Link>Core\Middleware\OwinMiddleware.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\model\ModelHelper.cs">
       <Link>Core\Model\ModelHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Model\System\ModelExtension.cs">
-      <Link>Core\Model\System\ModelExtension.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\owin\HtmlWriter.cs">
       <Link>Core\Owin\HtmlWriter.cs</Link>
@@ -592,14 +604,8 @@
     <Compile Include="..\NFinalCore\Url\ActionUrlHelper.cs">
       <Link>Core\Url\ActionUrlHelper.cs</Link>
     </Compile>
-    <Compile Include="..\NFinalCore\Url\Debug.template.cs">
-      <Link>Core\Url\Debug.template.cs</Link>
-    </Compile>
     <Compile Include="..\NFinalCore\Url\DebugData.cs">
       <Link>Core\Url\DebugData.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Url\UrlRouteJs.template.cs">
-      <Link>Core\Url\UrlRouteJs.template.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Url\UrlRouteJsModel.cs">
       <Link>Core\Url\UrlRouteJsModel.cs</Link>
@@ -637,11 +643,11 @@
     <Compile Include="..\nfinalcore\view\ViewHelper.cs">
       <Link>Core\View\ViewHelper.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Middleware\Debug.template.cs">
-      <Link>Core\Middleware\Debug.template.cs</Link>
+    <Compile Include="..\NFinal\Url\Debug.template.cs">
+      <Link>Core\Url\Debug.template.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Middleware\UrlRouteJs.template.cs">
-      <Link>Core\Middleware\UrlRouteJs.template.cs</Link>
+    <Compile Include="..\NFinal\Url\UrlRouteJs.template.cs">
+      <Link>Core\Url\UrlRouteJs.template.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,8 +6,8 @@ using System.Reflection;
 using System.Reflection.Emit;
 using NFinal.Http;
 
-public delegate void ActionExecute<TContext, TResquest>(TContext context,NFinal.Middleware.ActionData<TContext,TResquest> actionData,TResquest request,NFinal.NameValueCollection parameters);
-namespace NFinal.Middleware
+public delegate void ActionExecute<TContext, TResquest>(TContext context,NFinal.Action.ActionData<TContext,TResquest> actionData,TResquest request,NFinal.NameValueCollection parameters);
+namespace NFinal.Action
 {
     public class ControllerData
     {
@@ -40,7 +40,7 @@ namespace NFinal.Middleware
         //public static Dictionary<string, ActionExecute> actionDic = new Dictionary<string, ActionExecute>();
         //public static NFinal.Collections.FastDictionary<ActionData> actionFastDic;
         public static bool isInit = false;
-        public static void Init<TContext, TRequest>(MiddlewareConfigOptions options)
+        public static void Init<TContext, TRequest>(NFinal.Middleware.Config.MiddlewareConfigOptions options)
         {
             Module[] modules = null;
             Type[] types = null;
@@ -137,7 +137,7 @@ namespace NFinal.Middleware
         }
         public static void AddActionData<TContext, TRequest>(Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
             Dictionary<string, NFinal.Url.FormatData> formatMethodDictionary,
-            Assembly assembly,Type controller, NFinal.Middleware.MiddlewareConfigOptions options)
+            Assembly assembly,Type controller, NFinal.Middleware.Config.MiddlewareConfigOptions options)
         {
             Type viewBagType = null;
             MethodInfo methodInfo = null;
@@ -221,7 +221,7 @@ namespace NFinal.Middleware
                 }
             }
         }
-        public static void GetControllerUrl(out string controllerName, out string areaName, out string subDomain, Type controller, NFinal.Middleware.MiddlewareConfigOptions options)
+        public static void GetControllerUrl(out string controllerName, out string areaName, out string subDomain, Type controller, NFinal.Middleware.Config.MiddlewareConfigOptions options)
         {
             ControllerAttribute[] controllerAttributes = null;
             AreaAttribute[] areaAttributes = null;
@@ -285,7 +285,7 @@ namespace NFinal.Middleware
         public static string[] GetActionKeys(string controllerName, string areaName, string subDomain,
             out string actionUrl, out string actionName, out string[] method,
             out UrlAttribute urlAttribute,out NFinal.Url.ActionUrlData actionUrlData,
-            MethodInfo methodInfo, NFinal.Middleware.MiddlewareConfigOptions options)
+            MethodInfo methodInfo, NFinal.Middleware.Config.MiddlewareConfigOptions options)
         {
             
             List<string> actionKeys = new List<string>();
@@ -294,7 +294,7 @@ namespace NFinal.Middleware
             urlAttribute = null;
             actionUrl = null;
             actionName = null;
-            if (options.urlRouteRule == UrlRouteRule.AreaControllerActionParameters)
+            if (options.urlRouteRule == NFinal.Middleware.Config.UrlRouteRule.AreaControllerActionParameters)
             {
                 if (!string.IsNullOrEmpty(areaName))
                 {
@@ -319,7 +319,7 @@ namespace NFinal.Middleware
                     actionUrl += "/" + actionName + options.defaultSuffix;
                 }
             }
-            else if (options.urlRouteRule == UrlRouteRule.AreaControllerCustomActionUrl)
+            else if (options.urlRouteRule == NFinal.Middleware.Config.UrlRouteRule.AreaControllerCustomActionUrl)
             {
                 if (!string.IsNullOrEmpty(areaName))
                 {

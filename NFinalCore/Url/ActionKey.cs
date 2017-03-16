@@ -12,9 +12,9 @@ namespace NFinal.Url
         /// </summary>
         /// <param name="requestedPath"></param>
         /// <returns></returns>
-        public unsafe static string GetActionKey(string subDomain, string method, string requestedPath,out int shortActionKeyLength,NFinal.Middleware.UrlRouteRule urlRouteRule)
+        public unsafe static string GetActionKey(string subDomain, string method, string requestedPath,out int shortActionKeyLength,NFinal.Middleware.Config.UrlRouteRule urlRouteRule)
         {
-            if (urlRouteRule ==NFinal.Middleware.UrlRouteRule.AreaControllerCustomActionUrl)
+            if (urlRouteRule ==NFinal.Middleware.Config.UrlRouteRule.AreaControllerCustomActionUrl)
             {
                 string actionKeyString;
                 //找到最后一个.的位置

@@ -10,7 +10,7 @@ namespace NFinal.Icon
     {
         public static bool hasInit = false;
         private static System.IO.FileStream fs = null;
-        public static void Init<TContext,TResquest>(List<KeyValuePair<string,NFinal.Middleware.ActionData<TContext, TResquest>>> actionDataList)
+        public static void Init<TContext,TResquest>(List<KeyValuePair<string,NFinal.Action.ActionData<TContext, TResquest>>> actionDataList)
         {
             //hasInit = true;
             //string iconPath = NFinal.Utility.MapPath("/favicon.ico");
@@ -22,7 +22,7 @@ namespace NFinal.Icon
             //    actionDataList.Add(new KeyValuePair<string, NFinal.Middleware.ActionData<TContext, TResquest>>("/favicon.ico", actionData));
             //}
         }
-        public static void Execute<TContext,TResquest>(TContext context,NFinal.Middleware.ActionData<TContext, TResquest> actionData,NFinal.Owin.Request request)
+        public static void Execute<TContext,TResquest>(TContext context,NFinal.Action.ActionData<TContext, TResquest> actionData,NFinal.Owin.Request request)
         {
             var environment = context as IDictionary<string,object>;
             if (environment != null)

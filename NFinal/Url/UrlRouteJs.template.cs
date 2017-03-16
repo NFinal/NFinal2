@@ -4,9 +4,9 @@ using NFinal;
 
 //此代码由NFinalRazorGenerator生成。
 //http://bbs.nfinal.com
-namespace NFinal.Middleware
+namespace NFinal.Url
 {
-    [View("/NFinal/Middleware/UrlRouteJs.cshtml")]
+    [View("/NFinal/Url/UrlRouteJs.cshtml")]
     public static class UrlRouteJs
     {
         //如果此处报错，请添加NFinal引用
@@ -18,7 +18,7 @@ namespace NFinal.Middleware
             bool isFirst = true; writer.Write("\r\n");
             foreach (KeyValuePair<Type, Dictionary<string, NFinal.Url.FormatData>> formatController in Model.formatControllerDictionary)
             {
-                string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + NFinal.Url.ActionUrlHelper.GetControllerName(formatController.Key);
+                string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + formatController.Key.Name;
                 isFirst = true;
                 writer.Write("    ");
                 writer.Write("\"");

@@ -30,7 +30,7 @@ namespace NFinal.Config
             CommonConfig config = Newtonsoft.Json.JsonConvert.DeserializeObject<CommonConfig>(configJson);
             return config;
         }
-        public static void Init(Middleware.MiddlewareConfigOptions options)
+        public static void Init(Middleware.Config.MiddlewareConfigOptions options)
         {
             Configration.isInit = true;
             Assembly assembly = null;

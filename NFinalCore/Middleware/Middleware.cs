@@ -28,9 +28,9 @@ namespace NFinal.Middleware
         private static bool debug;
         public static string defaultUrl = null;
         public static string defaultSubDomain=null;
-        public static CustomErrors customErrors = null;
-        public static UrlRouteRule urlRouteRule;
-        public Middleware(InvokeDelegate<TContext> next, MiddlewareConfigOptions options)
+        public static Config.CustomErrors customErrors = null;
+        public static Config.UrlRouteRule urlRouteRule;
+        public Middleware(InvokeDelegate<TContext> next,NFinal.Middleware.Config.MiddlewareConfigOptions options)
         {
             customErrors = options.customErrors;
             defaultSubDomain = options.defaultSubDomain;
@@ -113,7 +113,7 @@ namespace NFinal.Middleware
                 rootDir = NFinal.Utility.rootPath;
             }
             bool hasError = false;
-            NFinal.Middleware.ActionData<TContext,TRequest> actionData;
+            NFinal.Action.ActionData<TContext,TRequest> actionData;
             if (actionFastDic.TryGetValue(actionKey, out actionData))
             {
                 //if (actionData.method != null)
@@ -142,7 +142,7 @@ namespace NFinal.Middleware
                 catch
                 {
                     hasError = true;
-                    if (customErrors.mode == Mode.Off)
+                    if (customErrors.mode ==NFinal.Middleware.Config.Mode.Off)
                     {
                         using (IAction<TContext, TRequest> controller = GetAction(context))
                         {
@@ -166,7 +166,7 @@ namespace NFinal.Middleware
                 }
                 NameValueCollection parameters = GetParameters(request);
                 //获取Url中的参数
-                if (urlRouteRule == UrlRouteRule.AreaControllerCustomActionUrl)
+                if (urlRouteRule ==NFinal.Middleware.Config.UrlRouteRule.AreaControllerCustomActionUrl)
                 {
                     if (actionData.actionUrlData != null && !actionData.actionUrlData.hasNoParamsInUrl)
                     {
@@ -190,7 +190,7 @@ namespace NFinal.Middleware
                     catch(Exception)
                     {
                         hasError = true;
-                        if (customErrors.mode == Mode.Off)
+                        if (customErrors.mode == NFinal.Middleware.Config.Mode.Off)
                         {
                             using (IAction<TContext, TRequest> controller = GetAction(context))
                             {

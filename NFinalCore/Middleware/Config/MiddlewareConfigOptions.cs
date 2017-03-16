@@ -3,30 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NFinal.Middleware
+namespace NFinal.Middleware.Config
 {
-    public enum UrlRouteRule
-    {
-        /// <summary>
-        /// /Area/Controller/CustomActionUrl;
-        /// </summary>
-        AreaControllerCustomActionUrl,
-        /// <summary>
-        /// /Area/Controller/Action/parameter1/parameter2/.....(.html|.php|.asp|.aspx|.cshtml)
-        /// </summary>
-        AreaControllerActionParameters
-    }
-    public enum Mode
-    {
-        On,
-        Off
-    }
-    public class CustomErrors
-    {
-        public Mode mode = Mode.Off;
-        public string defaultRedirect = string.Empty;
-    }
-    
     public class MiddlewareConfigOptions
     {
         public string debugUrl;
