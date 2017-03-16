@@ -11,20 +11,20 @@ namespace NFinal.Middleware
     {
         //如果此处报错，请添加NFinal引用
         //PMC命令为：Install-Package NFinal
-        public static void Render(NFinal.IO.Writer writer, NFinal.Middleware.UrlRouteJsModel Model)
+        public static void Render(NFinal.IO.Writer writer, NFinal.Url.UrlRouteJsModel Model)
         {
             writer.Write("");
             writer.Write("function StringFormat() {\r\n    if (arguments.length == 0)\r\n        return null;\r\n    var str = arguments[0];\r\n    for (var i = 1; i < arguments.length; i++) {\r\n        var re = new RegExp(\'\\\\{\' + (i - 1) + \'\\\\}\', \'gm\');\r\n        str = str.replace(re, arguments[i]);\r\n    }\r\n    return str;\r\n}\r\nvar Url={\r\n");
             bool isFirst = true; writer.Write("\r\n");
-            foreach (KeyValuePair<Type, Dictionary<string, NFinal.Middleware.FormatData>> formatController in Model.formatControllerDictionary)
+            foreach (KeyValuePair<Type, Dictionary<string, NFinal.Url.FormatData>> formatController in Model.formatControllerDictionary)
             {
-                string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + formatController.Key.Name;
+                string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + NFinal.Url.ActionUrlHelper.GetControllerName(formatController.Key);
                 isFirst = true;
                 writer.Write("    ");
                 writer.Write("\"");
                 writer.Write(controllerName);
                 writer.Write("\":{\r\n");
-                foreach (KeyValuePair<string, NFinal.Middleware.FormatData> formatMethod in formatController.Value)
+                foreach (KeyValuePair<string, NFinal.Url.FormatData> formatMethod in formatController.Value)
                 {
                     if (isFirst)
                     {

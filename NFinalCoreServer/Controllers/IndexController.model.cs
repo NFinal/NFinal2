@@ -14,7 +14,7 @@ namespace NFinalCoreServer.Controllers.IndexController_Model
 		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig;
+		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
 		public string Message;
 		public string Title;
 	}
@@ -25,7 +25,7 @@ namespace NFinalCoreServer.Controllers.IndexController_Model
 		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig;
+		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
 		public string Message;
 		public int id;
 		public System.DateTime time;

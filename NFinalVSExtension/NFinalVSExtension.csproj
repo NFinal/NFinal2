@@ -11,21 +11,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\NFinalCore\Action\System\ViewBagMemberAttribute.cs" Link="System\ViewBagMemberAttribute.cs" />
+    <Compile Include="..\NFinalCore\Attribute\ViewAttribute.cs" Link="Attribute\ViewAttribute.cs" />
+    <Compile Include="..\NFinalCore\Attribute\ViewBagMemberAttribute.cs" Link="Attribute\ViewBagMemberAttribute.cs" />
     <Compile Include="..\NFinalCore\Constant.cs" Link="Constant.cs" />
     <Compile Include="..\NFinalCore\IO\FileWriter.cs" Link="FileWriter.cs" />
     <Compile Include="..\NFinalCore\IO\IWriter.cs" Link="IWriter.cs" />
     <Compile Include="..\NFinalCore\IO\StreamWriter.cs" Link="StreamWriter.cs" />
     <Compile Include="..\NFinalCore\IO\StringWriter.cs" Link="StringWriter.cs" />
     <Compile Include="..\NFinalCore\IO\Writer.cs" Link="Writer.cs" />
-    <Compile Include="..\NFinalCore\Razor\BasePage.cs" Link="Razor\BasePage.cs" />
     <Compile Include="..\NFinalCore\Utility.cs" Link="Utility.cs" />
-    <Compile Include="..\NFinalCore\View\System\ViewAttribute.cs" Link="System\ViewAttribute.cs" />
+    <Compile Include="..\NFinalCore\View\Razor\BasePage.cs" Link="View\Razor\BasePage.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Razor\" />
-    <Folder Include="System\" />
+    <Folder Include="View\Razor\" />
+    <Folder Include="Attribute\" />
+    <Folder Include="View\" />
   </ItemGroup>
 
 </Project>

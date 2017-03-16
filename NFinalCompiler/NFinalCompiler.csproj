@@ -192,6 +192,7 @@
     <Compile Include="Controller\StructModel.cs" />
     <Compile Include="Helper\NestedHelper.cs" />
     <Compile Include="Helper\VsHelper.cs" />
+    <Compile Include="Razor\RazorPropertyHelper.cs" />
     <Compile Include="Sql\Data\DataUtility.cs" />
     <Compile Include="Sql\ModelFileData.cs" />
     <Compile Include="Sql\Data\MySqlDataUtility.cs" />

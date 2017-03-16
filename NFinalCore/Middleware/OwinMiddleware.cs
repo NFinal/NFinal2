@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using NFinal.Owin;
+using NFinal.Action;
 
 namespace NFinal.Middleware
 {

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Threading.Tasks;
+using NFinal.Action;
+using NFinal.Http;
 
 namespace NFinal.Middleware
 {
@@ -88,22 +90,22 @@ namespace NFinal.Middleware
             {
                 if (debug)
                 {
-                    actionKey = ActionKey.GetActionKey(defaultSubDomain, GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
+                    actionKey = NFinal.Url.ActionKey.GetActionKey(defaultSubDomain, GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
                 }
                 else
                 {
-                    actionKey = ActionKey.GetActionKey(GetSubDomain(context), GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
+                    actionKey = NFinal.Url.ActionKey.GetActionKey(GetSubDomain(context), GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
                 }
             }
             else
             {
                 if (debug)
                 {
-                    actionKey = ActionKey.GetActionKey(null, GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
+                    actionKey = NFinal.Url.ActionKey.GetActionKey(null, GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
                 }
                 else
                 {
-                    actionKey = ActionKey.GetActionKey(null, GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
+                    actionKey = NFinal.Url.ActionKey.GetActionKey(null, GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
                 }
             }
             if (rootDir == null)
@@ -170,11 +172,11 @@ namespace NFinal.Middleware
                     {
                         if (actionData.actionUrlData.isSimpleUrl)
                         {
-                            ActionUrlHelper.SimpleParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames, shortActionKeyLength, actionData.actionUrlData.extensionLength);
+                            NFinal.Url.ActionUrlHelper.SimpleParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames, shortActionKeyLength, actionData.actionUrlData.extensionLength);
                         }
                         else
                         {
-                            ActionUrlHelper.RegexParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames,actionData.actionUrlData.parameterRegex);
+                            NFinal.Url.ActionUrlHelper.RegexParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames,actionData.actionUrlData.parameterRegex);
                         }
                     }
                 }

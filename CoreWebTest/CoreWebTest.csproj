@@ -140,7 +140,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Views\Index.cshtml">
-      <BrowseToURL>~/Debug/CoreWebtest/Controllers/Index/INN.html</BrowseToURL>
+      <BrowseToURL>~/Debug/CoreWebtest/Controllers/Index/Show.html</BrowseToURL>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

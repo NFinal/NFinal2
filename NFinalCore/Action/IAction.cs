@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-namespace NFinal
+using NFinal.Http;
+
+namespace NFinal.Action
 {
     /// <summary>
     /// Action接口类

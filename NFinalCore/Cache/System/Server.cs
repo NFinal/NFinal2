@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace System
+namespace NFinal.Cache
 {
     /// <summary>
     /// 服务器端缓存类型

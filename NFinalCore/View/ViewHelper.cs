@@ -21,13 +21,13 @@ namespace NFinal
         public static NFinal.Collections.FastDictionary<NFinal.ViewDelegateData> viewFastDic = null;
         public static void Init(Middleware.MiddlewareConfigOptions options)
         {
-            Middleware.Plug plug = null;
+            NFinal.Plugs.Plug plug = null;
             Assembly assembly = null;
             Module[] modules= null;
             NFinal.ViewDelegateData dele;
             ViewAttribute viewAttr;
             Dictionary<string, ViewDelegateData> viewDataDictionary = new Dictionary<string, NFinal.ViewDelegateData>();
-            NFinal.Loader.IAssemblyLoader assemblyLoader = new NFinal.Loader.AssemblyLoader();
+            NFinal.Plugs.Loader.IAssemblyLoader assemblyLoader = new NFinal.Plugs.Loader.AssemblyLoader();
             for (int i = 0; i < options.plugs.Length; i++)
             {
                 plug = options.plugs[i];

@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.Owin;
 using NFinal.Owin;
+using NFinal.Http;
 
 namespace NFinal
 {
-    public class ContextAction<TMasterPage, TUser> : AbstractAction<IOwinContext, IOwinRequest, TUser, TMasterPage> where TMasterPage : NFinal.MasterPageModel
+    public class ContextAction<TMasterPage, TUser> : NFinal.Action.AbstractAction<IOwinContext, IOwinRequest, TUser, TMasterPage> where TMasterPage : NFinal.MasterPageModel
     {
         public override void After()
         {

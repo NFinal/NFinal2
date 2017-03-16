@@ -17,6 +17,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.Win32;
 using EnvDTE;
 using EnvDTE80;
+using EnvDTE90;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
@@ -178,6 +179,8 @@ namespace NFinalCompiler
                 if (File.Exists(fileName))
                 {
                     projectItem= Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, fileName, "Compile", false);
+                    //添加<Content Include="Views\Index.cshtml">BrowseToURL
+                    
                     //代码结构
                     projectItem?.Document?.NewWindow();
                     workspace = componentModel.GetService<VisualStudioWorkspace>();

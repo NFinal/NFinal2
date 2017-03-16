@@ -1,35 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>key.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>DEBUG;NETCORE;CORE;COREFX;ASYNC;FILESYSTEM;NETCOREAPP1_1</DefineConstants>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <ItemGroup>
+    <Compile Remove="Dapper\**" />
+    <Compile Remove="ImageSharp\**" />
+    <EmbeddedResource Remove="Dapper\**" />
+    <EmbeddedResource Remove="ImageSharp\**" />
+    <None Remove="Dapper\**" />
+    <None Remove="ImageSharp\**" />
+    <None Update="Url\UrlRouteJs.cshtml">
+      <Generator />
+    </None>
+    <Compile Update="Url\UrlRouteJs.template.cs">
+      <DependentUpon>UrlRouteJs.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Attribute\html5Validate.cs" />
+    <Compile Remove="Attribute\pattern.cs" />
     <Compile Remove="Emit\FastReflection.cs" />
-    <Compile Remove="Extension\System\ObjectContainerExtension.cs" />
-    <Compile Remove="Extension\System\WithDBNullExtension.cs" />
+    <Compile Remove="Middleware\StringBuilderCache.cs" />
     <Compile Remove="Properties\AssemblyInfo.cs" />
-    <Compile Remove="System\System\ObjectContainer.cs" />
+    <Compile Remove="Url\UrlHelper.cs" />
+    <Compile Update="Url\Debug.template.cs">
+      <DependentUpon>Debug.cshtml</DependentUpon>
+    </Compile>
   </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Extension\System\ObjectContainerExtension.tt" />
-    <None Remove="Extension\System\WithDBNullExtension.tt" />
-    <None Remove="System\System\ObjectContainer.tt" />
-  </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\NFinal\Middleware\Debug.template.cs" />
     <Compile Include="..\NFinal\Middleware\UrlRouteJs.template.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
@@ -42,60 +49,37 @@
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
     <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <None Update="Extension\System\ConvertExtension.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ConvertExtension.cs</LastGenOutput>
-    </None>
-    <None Update="Extension\System\TryParseExtension.tt">
+    <None Update="Extension\TryParseExtension.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TryParseExtension.cs</LastGenOutput>
     </None>
-    <None Update="ImageSharp\Formats\Jepg\Components\Block8x8F.Generated.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Block8x8F.Generated.cs</LastGenOutput>
-    </None>
-    <None Update="Middleware\Debug.cshtml">
+    <None Update="Url\Debug.cshtml">
       <Generator>NFinalRazorGenerator</Generator>
-      <CustomToolNamespace></CustomToolNamespace>
+      <CustomToolNamespace>
+      </CustomToolNamespace>
     </None>
-    <None Update="System\System\StringContainer.tt">
+    <None Update="System\StringContainer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>StringContainer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup>
-    <Compile Update="Extension\System\ConvertExtension.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ConvertExtension.tt</DependentUpon>
-    </Compile>
-    <Compile Update="Extension\System\TryParseExtension.cs">
+    <Compile Update="Extension\TryParseExtension.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>TryParseExtension.tt</DependentUpon>
     </Compile>
-    <Compile Update="ImageSharp\Formats\Jepg\Components\Block8x8F.Generated.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Block8x8F.Generated.tt</DependentUpon>
-    </Compile>
-    <Compile Update="System\System\StringContainer.cs">
+    <Compile Update="System\StringContainer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>StringContainer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Properties\" />
-    <Folder Include="新文件夹\" />
   </ItemGroup>
-
 </Project>

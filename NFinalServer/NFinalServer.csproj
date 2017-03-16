@@ -131,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseController.cs" />
+    <Compile Include="BaseController.model.cs">
+      <DependentUpon>BaseController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Code\my.cs">
       <DependentUpon>my.nf.json</DependentUpon>
     </Compile>

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace System
+namespace NFinal.Cache
 {
     /// <summary>
     /// 页面缓存
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class CacheAttribute:Attribute
+    public class CacheAttribute: System.Attribute
     {
         /// <summary>
         /// 页面缓存
@@ -35,7 +35,7 @@ namespace System
     /// 静态文件缓存
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class CacheFileAttribute : Attribute
+    public class CacheFileAttribute : System.Attribute
     {
         /// <summary>
         /// 静态文件缓存
@@ -48,7 +48,7 @@ namespace System
     /// 内存缓存
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class CacheNormalAttribute : Attribute
+    public class CacheNormalAttribute : System.Attribute
     {
         /// <summary>
         /// 内存缓存

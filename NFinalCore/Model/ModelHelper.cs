@@ -326,7 +326,7 @@ namespace NFinal.Model
                     //methodIL.Emit(OpCodes.Pop);
                 }
             }
-            else if (fieldType == typeof(NFinal.Owin.HttpMultipart.HttpFile))
+            else if (fieldType == typeof(NFinal.Http.HttpMultipart.HttpFile))
             {
 
             }

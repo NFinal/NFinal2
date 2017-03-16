@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Owin;
 using NFinal.Owin;
+using NFinal.Action;
 
 namespace NFinal.Middleware
 {

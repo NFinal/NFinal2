@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using NFinal.Http;
 
 namespace NFinal
 {
-    public class CoreAction<TMasterPage, TUser> : AbstractAction<HttpContext, HttpRequest, TUser, TMasterPage> where TMasterPage : MasterPageModel
+    public class CoreAction<TMasterPage, TUser> : NFinal.Action.AbstractAction<HttpContext, HttpRequest, TUser, TMasterPage> where TMasterPage : MasterPageModel
     {
 #region 初始化函数
         public CoreAction() { }
@@ -35,7 +36,7 @@ namespace NFinal
             }
 
             this.Cookie = new Cookie(requestCookie);
-            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
+            this.Session = new NFinal.Http.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
             this.outputStream = context.Response.Body;
         }
         /// <summary>
@@ -67,7 +68,7 @@ namespace NFinal
             }
 
             this.Cookie = new Cookie(requestCookie);
-            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
+            this.Session = new NFinal.Http.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
             if (outputStream == null)
             {
                 this.outputStream = context.Response.Body;

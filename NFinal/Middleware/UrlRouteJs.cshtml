@@ -14,7 +14,7 @@ var Url={
 @{bool isFirst = true; }
 @foreach (KeyValuePair<Type, Dictionary<string, NFinal.Middleware.FormatData>> formatController in Model.formatControllerDictionary)
 {
-    string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + formatController.Key.Name;
+    string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + NFinal.Middleware.ActionHelper.GetControllerName(formatController.Key);
     isFirst = true;
     @:"@controllerName":{
     foreach (KeyValuePair<string, NFinal.Middleware.FormatData> formatMethod in formatController.Value)

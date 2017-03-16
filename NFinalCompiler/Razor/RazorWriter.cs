@@ -71,7 +71,7 @@ namespace NFinalCompiler.Razor
             if (modelType == "dynamic")
             {
                 sw.Write(modelType);
-                sw.WriteLine(" ViewBag");
+                sw.WriteLine(" ViewBag)");
             }
             else
             {

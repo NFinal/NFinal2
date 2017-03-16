@@ -6,6 +6,7 @@ using System.Dynamic;
 using NFinal.Owin;
 using System.Reflection;
 using System.Reflection.Emit;
+using NFinal.Http;
 
 namespace NFinal.Action
 {
@@ -98,13 +99,13 @@ namespace NFinal.Action
                 //controller,environment,"methodName",null,Request
                 methodIL.Emit(OpCodes.Ldarg_2);
                 //controller,environment,"methodName",null,Request,CompressMode
-                methodIL.Emit(OpCodes.Ldc_I4, (int)NFinal.CompressMode.Deflate);
+                methodIL.Emit(OpCodes.Ldc_I4, (int)CompressMode.Deflate);
                 methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("Initialization",
                     new Type[] { typeof(TContext),
                         typeof(string),
                         typeof(System.IO.Stream),
                         typeof(TRequest),
-                        typeof(NFinal.CompressMode) }));
+                        typeof(CompressMode) }));
                 
                 //controller
                 methodIL.Emit(OpCodes.Ldloc, controller);
@@ -320,6 +321,7 @@ namespace NFinal.Action
             return getRunActionDelegate;
         }
     }
+#if EMITDEBUG
     public class ViewBag
     {
         public string a;
@@ -484,4 +486,5 @@ namespace NFinal.Action
         public int a;
         public string b;
     }
+#endif
 }

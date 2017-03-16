@@ -16,8 +16,8 @@ namespace NFinalCoreServer
         public void Configure(IApplicationBuilder app)
         {
             NFinal.Middleware.MiddlewareConfigOptions options = new NFinal.Middleware.MiddlewareConfigOptions();
-            options.plugs = new NFinal.Middleware.Plug[] {
-                new NFinal.Middleware.Plug { filePath = System.Reflection.Assembly.GetEntryAssembly().Location ,subDomain="www"} };
+            options.plugs = new NFinal.Plugs.Plug[] {
+                new NFinal.Plugs.Plug { filePath = System.Reflection.Assembly.GetEntryAssembly().Location ,subDomain="www"} };
             options.debug = true;
             options.debugUrl = "http://localhost:8083";
             options.customErrors = new NFinal.Middleware.CustomErrors();

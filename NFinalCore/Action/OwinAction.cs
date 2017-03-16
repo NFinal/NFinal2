@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using NFinal.Http;
 
 namespace NFinal
 {
     /// <summary>
     /// NFinal的控制器基类，MasterPage为母模板，ViewBag为视图数据,User为用户数据
     /// </summary>
-    public class OwinAction<TMasterPage,TUser> : AbstractAction<IDictionary<string,object>,Owin.Request,TUser,TMasterPage> where TMasterPage : NFinal.MasterPageModel
+    public class OwinAction<TMasterPage,TUser> : NFinal.Action.AbstractAction<IDictionary<string,object>,Owin.Request,TUser,TMasterPage> where TMasterPage : NFinal.MasterPageModel
     {
         #region 初始化函数
         public OwinAction() { }
@@ -16,7 +17,7 @@ namespace NFinal
             this.request = enviroment.GetRequest();
             this.parameters = request.parameters;
             this.Cookie = new Cookie(this.request.cookies);
-            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
+            this.Session = new NFinal.Http.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
             this.outputStream = enviroment.GetResponseBody();
         }
         /// <summary>
@@ -31,7 +32,7 @@ namespace NFinal
             base.Initialization(enviroment, methodName, outputStream, request, compressMode);
             this.parameters = request.parameters;
             this.Cookie = new Cookie(this.request.cookies);
-            this.Session = new NFinal.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
+            this.Session = new NFinal.Http.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
             if (outputStream == null)
             {
                 this.outputStream = enviroment.GetResponseBody();
@@ -146,7 +147,11 @@ namespace NFinal
                 }
             }
         }
-
+        /// <summary>
+        /// 获取二级域名
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override string GetSubDomain(IDictionary<string, object> context)
         {
             string host= ((IDictionary<string,string[]>)(context[Owin.OwinKeys.RequestHeaders]))[NFinal.Constant.HeaderHost][0];
@@ -172,7 +177,10 @@ namespace NFinal
                 return null;
             }
         }
-
+        /// <summary>
+        /// 获取请求流
+        /// </summary>
+        /// <returns></returns>
         public override Stream GetRequestBody()
         {
             return context.GetRequestBody();

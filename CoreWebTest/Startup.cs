@@ -12,8 +12,8 @@ namespace CoreWebTest
         public void Configuration(IAppBuilder appBuilder)
         {
             NFinal.Middleware.MiddlewareConfigOptions options = new NFinal.Middleware.MiddlewareConfigOptions();
-            options.plugs =  new NFinal.Middleware.Plug[] {
-                new NFinal.Middleware.Plug { filePath = @"E:\work\NFinal2\NFinal2\CoreWebTest\bin\CoreWebTest.dll" ,subDomain="www"} };
+            options.plugs =  new NFinal.Plugs.Plug[] {
+                new NFinal.Plugs.Plug { filePath = @"E:\work\NFinal2\NFinal2\CoreWebTest\bin\CoreWebTest.dll" ,subDomain="www"} };
             options.debug = true;
             options.customErrors = new NFinal.Middleware.CustomErrors();
             options.customErrors.mode = NFinal.Middleware.Mode.Off;

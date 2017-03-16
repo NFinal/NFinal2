@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Reflection.Emit;
+using NFinal.Http;
 
 public delegate void ActionExecute<TContext, TResquest>(TContext context,NFinal.Middleware.ActionData<TContext,TResquest> actionData,TResquest request,NFinal.NameValueCollection parameters);
 namespace NFinal.Middleware
@@ -31,8 +32,8 @@ namespace NFinal.Middleware
         public string areaName;
         public string[] method;
         public string contentType;
-        public NFinal.CompressMode compressMode;
-        public ActionUrlData actionUrlData;
+        public CompressMode compressMode;
+        public NFinal.Url.ActionUrlData actionUrlData;
     }
     public class ActionHelper
     {
@@ -46,7 +47,7 @@ namespace NFinal.Middleware
 
             Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary = new Dictionary<string, ActionData<TContext, TRequest>>();
             //List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList = new List<KeyValuePair<string, ActionData<TContext, TRequest>>>();
-            Dictionary<Type, Dictionary<string, FormatData>> formatControllerDictionary = new Dictionary<Type, Dictionary<string, FormatData>>();
+            Dictionary<Type, Dictionary<string, NFinal.Url.FormatData>> formatControllerDictionary = new Dictionary<Type, Dictionary<string, NFinal.Url.FormatData>>();
             Type controller = null;
 
 
@@ -77,7 +78,7 @@ namespace NFinal.Middleware
             //}
             //else
             //{
-            NFinal.Loader.IAssemblyLoader assemblyLoader = new NFinal.Loader.AssemblyLoader();
+            NFinal.Plugs.Loader.IAssemblyLoader assemblyLoader = new NFinal.Plugs.Loader.AssemblyLoader();
             for (int i = 0; i < options.plugs.Length; i++)
             {
                 /////////////////////////////////////////////////////////////////////
@@ -106,17 +107,17 @@ namespace NFinal.Middleware
                         controller = types[k];
                         //该类型继承自IAction并且其泛不是dynamic类型
 #if (NET40 || NET451 || NET461)
-                        if (typeof(NFinal.IAction<TContext, TRequest>).IsAssignableFrom(controller))
+                        if (typeof(NFinal.Action.IAction<TContext, TRequest>).IsAssignableFrom(controller))
                         {
                             if (!controller.IsGenericType)
 #endif
 #if NETCORE
-                        if (typeof(NFinal.IAction<TContext, TRequest>).IsAssignableFrom(controller))
+                        if (typeof(NFinal.Action.IAction<TContext, TRequest>).IsAssignableFrom(controller))
                         {
                             if (!controller.GetTypeInfo().IsGenericType)
 #endif
                             {
-                                Dictionary<string, FormatData> formatMethodDic = new Dictionary<string, FormatData>();
+                                Dictionary<string, NFinal.Url.FormatData> formatMethodDic = new Dictionary<string, NFinal.Url.FormatData>();
                                 AddActionData(actionDataDictionary, formatMethodDic, assembly, controller, options);
                                 formatControllerDictionary.Add(controller, formatMethodDic);
                             }
@@ -125,9 +126,9 @@ namespace NFinal.Middleware
                     }
                 }
             }
-            Middleware.ActionUrlHelper.formatControllerDictionary=formatControllerDictionary;
-            Middleware.ActionUrlHelper.GetUrlRouteJsContent();
-            Middleware.ActionUrlHelper.GenerateActionDebugHtml(options);
+            NFinal.Url.ActionUrlHelper.formatControllerDictionary= formatControllerDictionary;
+            NFinal.Url.ActionUrlHelper.GetUrlRouteJsContent();
+            NFinal.Url.ActionUrlHelper.GenerateActionDebugHtml(options);
             //}
             //添加图标响应
             //Icon.Favicon.Init(actionDataList);
@@ -135,7 +136,7 @@ namespace NFinal.Middleware
             actionDataDictionary.Clear();
         }
         public static void AddActionData<TContext, TRequest>(Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
-            Dictionary<string, FormatData> formatMethodDictionary,
+            Dictionary<string, NFinal.Url.FormatData> formatMethodDictionary,
             Assembly assembly,Type controller, NFinal.Middleware.MiddlewareConfigOptions options)
         {
             Type viewBagType = null;
@@ -152,7 +153,7 @@ namespace NFinal.Middleware
                 string actionName;
                 string[] method;
                 UrlAttribute urlAttribute;
-                NFinal.Middleware.ActionUrlData actionUrlData;
+                NFinal.Url.ActionUrlData actionUrlData;
                 ActionData<TContext, TRequest> actionData;
                 GetControllerUrl(out controllerName, out areaName, out subDomain, controller, options);
                 actions = controller.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public);
@@ -191,11 +192,11 @@ namespace NFinal.Middleware
                     actionData.method = method;
                     if (actionData.actionUrlData != null)
                     {
-                        formatMethodDictionary.Add(actions[m].Name, new FormatData(actionData.actionUrlData.formatUrl, actionData.actionUrlData.actionUrlNames));
+                        formatMethodDictionary.Add(actions[m].Name, new NFinal.Url.FormatData(actionData.actionUrlData.formatUrl, actionData.actionUrlData.actionUrlNames));
                     }
                     else
                     {
-                        formatMethodDictionary.Add(actions[m].Name, new FormatData(actionData.actionUrl,null));
+                        formatMethodDictionary.Add(actions[m].Name, new NFinal.Url.FormatData(actionData.actionUrl,null));
                     }
                     methodInfo = actions[m];
                     actionData.IBaseFilters = GetFilters<NFinal.Filter.IBaseFilter<TContext>>(
@@ -241,12 +242,12 @@ namespace NFinal.Middleware
                 }
                 else
                 {
-                    controllerName =GetControllerName(controller);
+                    controllerName =NFinal.Url.ActionUrlHelper.GetControllerName(controller);
                 }
             }
             else
             {
-                controllerName = GetControllerName(controller);
+                controllerName = NFinal.Url.ActionUrlHelper.GetControllerName(controller);
             }
             areaAttributes = (AreaAttribute[])
 #if (NET40 || NET451 || NET461)
@@ -283,7 +284,7 @@ namespace NFinal.Middleware
         }
         public static string[] GetActionKeys(string controllerName, string areaName, string subDomain,
             out string actionUrl, out string actionName, out string[] method,
-            out UrlAttribute urlAttribute,out NFinal.Middleware.ActionUrlData actionUrlData,
+            out UrlAttribute urlAttribute,out NFinal.Url.ActionUrlData actionUrlData,
             MethodInfo methodInfo, NFinal.Middleware.MiddlewareConfigOptions options)
         {
             
@@ -344,7 +345,7 @@ namespace NFinal.Middleware
                     {
                         hasUrlAttribute = true;
                         urlAttribute = (UrlAttribute)attr;
-                        actionUrlData = NFinal.Middleware.ActionUrlHelper.GetActionUrlData(urlAttribute.urlString);
+                        actionUrlData = NFinal.Url.ActionUrlHelper.GetActionUrlData(urlAttribute.urlString);
                         actionUrl = actionUrlData.actionKey;
                         break;
                     } 
@@ -440,20 +441,6 @@ namespace NFinal.Middleware
             methodIL.Emit(OpCodes.Ret);
             ActionExecute<TContext,TRequest> methodDelegate = (ActionExecute<TContext,TRequest>)method.CreateDelegate(typeof(ActionExecute<TContext,TRequest>));
             return methodDelegate;
-        }
-        public static string GetControllerName(Type controller)
-        {
-            int SuffixLength = "Controller".Length;
-            int NameLength = controller.Name.Length;
-            if (NameLength > SuffixLength)
-            {
-                string suffix = controller.Name.Substring(controller.Name.Length - SuffixLength, SuffixLength);
-                if (suffix.Equals("Controller", StringComparison.OrdinalIgnoreCase))
-                {
-                    return controller.Name.Substring(0, controller.Name.Length - SuffixLength);
-                }
-            }
-            throw new Exceptions.InvalidControllerNameException(controller.Namespace, controller.Name);
         }
     }
 }

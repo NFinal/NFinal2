@@ -26,11 +26,11 @@ namespace NFinal.Owin
         /// <summary>
         /// 请求方法
         /// </summary>
-        public NFinal.MethodType methodType;
+        public NFinal.Http.MethodType methodType;
         /// <summary>
         /// Post请求中包含的文件流
         /// </summary>
-        public IDictionary<string, NFinal.Owin.HttpMultipart.HttpFile> files;
+        public IDictionary<string, NFinal.Http.HttpMultipart.HttpFile> files;
         /// <summary>
         /// 请求的绝对路径,例：/Index.html
         /// </summary>

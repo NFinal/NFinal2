@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp1.1</TargetFramework>
@@ -24,17 +24,25 @@
     <Compile Update="Controllers\IndexController.model.cs">
       <DependentUpon>IndexController.cs</DependentUpon>
     </Compile>
-    <None Update="Views\Index\Default.cshtml">
-      <Generator />
-    </None>
     <Compile Update="Views\Index\Default.template.cs">
       <DependentUpon>Default.cshtml</DependentUpon>
     </Compile>
+    <None Update="Views\Index\Default.cshtml">
+      <Generator>
+      </Generator>
+      <BrowseToURL>~/Debug/CoreWebtest/Controllers/Index/Show.html</BrowseToURL>
+    </None>
     <Compile Update="Controllers\UserController.cs">
       <Generator />
     </Compile>
     <Compile Update="Controllers\UserController.model.cs">
       <DependentUpon>UserController.cs</DependentUpon>
+    </Compile>
+    <Compile Update="BaseController.cs">
+      <Generator />
+    </Compile>
+    <Compile Update="BaseController.model.cs">
+      <DependentUpon>BaseController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <PropertyGroup>

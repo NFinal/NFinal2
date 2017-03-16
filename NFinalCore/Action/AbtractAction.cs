@@ -16,8 +16,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using NFinal.Owin;
+using NFinal.Http;
 
-namespace NFinal
+namespace NFinal.Action
 {
     /// <summary>
     /// 用户实体类
@@ -47,16 +48,43 @@ namespace NFinal
         /// 请求参数信息
         /// </summary>
         public NameValueCollection parameters;
-        public Owin.HttpMultipart.HttpFile[] files=null;
+        /// <summary>
+        /// 请求的文件
+        /// </summary>
+        public NFinal.Http.HttpMultipart.HttpFile[] files=null;
+        /// <summary>
+        /// 输出类型
+        /// </summary>
         public string contentType = "text/html; charset=utf-8";
+        /// <summary>
+        /// 内容
+        /// </summary>
         protected Stream writeStream;
+        /// <summary>
+        /// 母模板
+        /// </summary>
         public virtual TMasterPage MasterPage { get; set; }
+        /// <summary>
+        /// 服务器类型
+        /// </summary>
         public ServerType _serverType = ServerType.UnKnown;
+        /// <summary>
+        /// Cookie
+        /// </summary>
         public ICookie Cookie;
+        /// <summary>
+        /// Session
+        /// </summary>
         public ISession Session;
         private TUser _user;
         private string _methodName;
+        /// <summary>
+        /// 方法名，只读
+        /// </summary>
         public string methodName { get { return _methodName; } }
+        /// <summary>
+        /// 用户
+        /// </summary>
         public TUser user
         {
             get
@@ -315,7 +343,7 @@ namespace NFinal
         /// <returns></returns>
         public static string Url<TController>(string methodName, params StringContainer[] urlParameters)
         {
-            return NFinal.Middleware.ActionUrlHelper.Format(Middleware.ActionUrlHelper.formatControllerDictionary[typeof(TController)][methodName].formatUrl, urlParameters);
+            return NFinal.Url.ActionUrlHelper.Format(NFinal.Url.ActionUrlHelper.formatControllerDictionary[typeof(TController)][methodName].formatUrl, urlParameters);
         }
         /// <summary>
         /// 获取Url
@@ -325,7 +353,7 @@ namespace NFinal
         /// <returns></returns>
         public string Url(string methodName, params StringContainer[] urlParameters)
         {
-            return NFinal.Middleware.ActionUrlHelper.Format(Middleware.ActionUrlHelper.formatControllerDictionary[this.GetType()][methodName].formatUrl, urlParameters);
+            return NFinal.Url.ActionUrlHelper.Format(NFinal.Url.ActionUrlHelper.formatControllerDictionary[this.GetType()][methodName].formatUrl, urlParameters);
         }
         /// <summary>
         /// 模板渲染函数
@@ -384,7 +412,7 @@ namespace NFinal
                     }
                 }
                 sw.Write("/");
-                sw.Write(Middleware.ActionHelper.GetControllerName(controllerType));
+                sw.Write(NFinal.Url.ActionUrlHelper.GetControllerName(controllerType));
                 sw.Write("/");
                 sw.Write(this.methodName);
                 sw.Write(".cshtml"); sw.Dispose();

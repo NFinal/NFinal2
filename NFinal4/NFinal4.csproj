@@ -101,58 +101,46 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\nfinalcore\action\AbtractAction.cs">
-      <Link>Core\Action\System\AbtractAction.cs</Link>
+      <Link>Core\Action\AbtractAction.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\action\Actuator.cs">
-      <Link>Core\Action\System\Actuator.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\action\CompressMode.cs">
-      <Link>Core\Action\System\CompressMode.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\action\ContentType.cs">
-      <Link>Core\Action\System\ContentType.cs</Link>
+      <Link>Core\Action\Actuator.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\action\ContextAction.cs">
-      <Link>Core\Action\System\ContextAction.cs</Link>
+      <Link>Core\Action\ContextAction.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\action\CoreAction.cs">
-      <Link>Core\Action\System\CoreAction.cs</Link>
+      <Link>Core\Action\CoreAction.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\action\IAction.cs">
-      <Link>Core\Action\System\IAction.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\action\MasterPageModel.cs">
-      <Link>Core\Action\System\MasterPageModel.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\action\MethodType.cs">
-      <Link>Core\Action\System\MethodType.cs</Link>
+      <Link>Core\Action\IAction.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\action\OwinAction.cs">
-      <Link>Core\Action\System\OwinAction.cs</Link>
+      <Link>Core\Action\OwinAction.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\ServerType.cs">
-      <Link>Core\Action\System\ServerType.cs</Link>
+    <Compile Include="..\NFinalCore\Attribute\ActionAttribute.cs">
+      <Link>Core\Attribute\ActionAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\system\ActionAttribute.cs">
-      <Link>Core\Action\System\ActionAttribute.cs</Link>
+    <Compile Include="..\NFinalCore\Attribute\ConfigAttribute.cs">
+      <Link>Core\Attribute\ConfigAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\system\ControllerAttribute.cs">
-      <Link>Core\Action\System\ControllerAttribute.cs</Link>
+    <Compile Include="..\NFinalCore\Attribute\ControllerAttribute.cs">
+      <Link>Core\Attribute\ControllerAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\system\UrlAttribute.cs">
-      <Link>Core\Action\System\UrlAttribute.cs</Link>
+    <Compile Include="..\NFinalCore\Attribute\FilterAttribute.cs">
+      <Link>Core\Attribute\FilterAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\system\ViewBagMemberAttribute.cs">
-      <Link>Core\Action\System\ViewBagMemberAttribute.cs</Link>
+    <Compile Include="..\NFinalCore\Attribute\IndexAttribute.cs">
+      <Link>Core\Attribute\IndexAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\action\ViewData.cs">
-      <Link>Core\Action\System\ViewData.cs</Link>
+    <Compile Include="..\NFinalCore\Attribute\UrlAttribute.cs">
+      <Link>Core\Attribute\UrlAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\attribute\html5Validate.cs">
-      <Link>Core\Attribute\html5Validate.cs</Link>
+    <Compile Include="..\NFinalCore\Attribute\ViewAttribute.cs">
+      <Link>Core\Attribute\ViewAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\attribute\pattern.cs">
-      <Link>Core\Attribute\pattern.cs</Link>
+    <Compile Include="..\NFinalCore\Attribute\ViewBagMemberAttribute.cs">
+      <Link>Core\Attribute\ViewBagMemberAttribute.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\cache\Cache.cs">
       <Link>Core\Cache\Cache.cs</Link>
@@ -217,17 +205,8 @@
     <Compile Include="..\nfinalcore\collections\NameValueDynamicCollection.cs">
       <Link>Core\Collections\NameValueDynamicCollection.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\collections\NameVarCollection.cs">
-      <Link>Core\Collections\NameVarCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\collections\system\NameVarCollection.cs">
-      <Link>Core\Collections\System\NameVarCollection.cs</Link>
-    </Compile>
     <Compile Include="..\nfinalcore\config\common\CommonConfig.cs">
       <Link>Core\Config\Common\CommonConfig.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\config\ConfigAttribute.cs">
-      <Link>Core\Config\ConfigAttribute.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\config\Configration.cs">
       <Link>Core\Config\Configration.cs</Link>
@@ -397,23 +376,29 @@
     <Compile Include="..\nfinalcore\exceptions\ViewNotFoundException.cs">
       <Link>Core\Exceptions\ViewNotFoundException.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\BitConstant.cs">
-      <Link>Core\Extension\BitConstant.cs</Link>
+    <Compile Include="..\NFinalCore\Extension\EnvironmentExtension.cs">
+      <Link>Core\Extension\EnvironmentExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\JsonConvert.cs">
-      <Link>Core\Extension\JsonConvert.cs</Link>
+    <Compile Include="..\nfinalcore\extension\Int32Extension.cs">
+      <Link>Core\Extension\Int32Extension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\system\Int32Extension.cs">
-      <Link>Core\Extension\System\Int32Extension.cs</Link>
+    <Compile Include="..\nfinalcore\extension\JsonConvertExtension.cs">
+      <Link>Core\Extension\JsonConvertExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\system\StreamAndByteExtension.cs">
-      <Link>Core\Extension\System\StreamAndByteExtension.cs</Link>
+    <Compile Include="..\nfinalcore\extension\StreamAndByteExtension.cs">
+      <Link>Core\Extension\StreamAndByteExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\system\StringContainerExtension.cs">
-      <Link>Core\Extension\System\StringContainerExtension.cs</Link>
+    <Compile Include="..\nfinalcore\extension\StringContainerExtension.cs">
+      <Link>Core\Extension\StringContainerExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\extension\system\UniqueKeyDictionayExtension.cs">
-      <Link>Core\Extension\System\UniqueKeyDictionayExtension.cs</Link>
+    <Compile Include="..\nfinalcore\extension\StringExtension.cs">
+      <Link>Core\Extension\StringExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinalcore\extension\TryParseExtension.cs">
+      <Link>Core\Extension\TryParseExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinalcore\extension\UniqueKeyDictionayExtension.cs">
+      <Link>Core\Extension\UniqueKeyDictionayExtension.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\filter\FilterEvent.cs">
       <Link>Core\Filter\FilterEvent.cs</Link>
@@ -436,8 +421,47 @@
     <Compile Include="..\nfinalcore\filter\IResponseFilter.cs">
       <Link>Core\Filter\IResponseFilter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\filter\system\FilterAttribute.cs">
-      <Link>Core\Filter\System\FilterAttribute.cs</Link>
+    <Compile Include="..\NFinalCore\Http\CompressMode.cs">
+      <Link>Core\Http\CompressMode.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\ContentType.cs">
+      <Link>Core\Http\ContentType.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\Cookie.cs">
+      <Link>Core\Http\Cookie.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpFile.cs">
+      <Link>Core\Http\HttpMultipart\HttpFile.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipart.cs">
+      <Link>Core\Http\HttpMultipart\HttpMultipart.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipartBoundary.cs">
+      <Link>Core\Http\HttpMultipart\HttpMultipartBoundary.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipartBuffer.cs">
+      <Link>Core\Http\HttpMultipart\HttpMultipartBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\HttpMultipart\HttpMultipartSubStream.cs">
+      <Link>Core\Http\HttpMultipart\HttpMultipartSubStream.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\ICookie.cs">
+      <Link>Core\Http\ICookie.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\MethodType.cs">
+      <Link>Core\Http\MethodType.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\Response.cs">
+      <Link>Core\Http\Response.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\ServerType.cs">
+      <Link>Core\Http\ServerType.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\Session\ISession.cs">
+      <Link>Core\Http\Session\ISession.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Http\Session\Session.cs">
+      <Link>Core\Http\Session\Session.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\icon\Favicon.cs">
       <Link>Core\Icon\Favicon.cs</Link>
@@ -475,18 +499,6 @@
     <Compile Include="..\nfinalcore\json\NewtonsoftJsonSerialize.cs">
       <Link>Core\Json\NewtonsoftJsonSerialize.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\json\system\List.cs">
-      <Link>Core\Json\System\List.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\loader\AssemblyLoader.cs">
-      <Link>Core\Loader\AssemblyLoader.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\loader\CoreAssemblyLoader.cs">
-      <Link>Core\Loader\CoreAssemblyLoader.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\loader\IAssemblyLoader.cs">
-      <Link>Core\Loader\IAssemblyLoader.cs</Link>
-    </Compile>
     <Compile Include="..\nfinalcore\logs\ConsoleLogger.cs">
       <Link>Core\Logs\ConsoleLogger.cs</Link>
     </Compile>
@@ -499,20 +511,17 @@
     <Compile Include="..\nfinalcore\middleware\ActionHelper.cs">
       <Link>Core\Middleware\ActionHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\middleware\ActionKey.cs">
-      <Link>Core\Middleware\ActionKey.cs</Link>
+    <Compile Include="..\NFinalCore\Middleware\Builder\Completed.cs">
+      <Link>Core\Middleware\Builder\Completed.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\middleware\ActionUrlHelper.cs">
-      <Link>Core\Middleware\ActionUrlHelper.cs</Link>
+    <Compile Include="..\NFinalCore\Middleware\Builder\NotFound.cs">
+      <Link>Core\Middleware\Builder\NotFound.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\middleware\ContextMiddleware.cs">
       <Link>Core\Middleware\ContextMiddleware.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\middleware\CoreMiddleware.cs">
       <Link>Core\Middleware\CoreMiddleware.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\middleware\DebugData.cs">
-      <Link>Core\Middleware\DebugData.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\middleware\Middleware.cs">
       <Link>Core\Middleware\Middleware.cs</Link>
@@ -523,53 +532,14 @@
     <Compile Include="..\nfinalcore\middleware\OwinMiddleware.cs">
       <Link>Core\Middleware\OwinMiddleware.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\middleware\StringBuilderCache.cs">
-      <Link>Core\Middleware\StringBuilderCache.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\middleware\UrlRouteJsModel.cs">
-      <Link>Core\Middleware\UrlRouteJsModel.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\middleware\UrlSegment.cs">
-      <Link>Core\Middleware\UrlSegment.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\model\IModel.cs">
-      <Link>Core\Model\IModel.cs</Link>
-    </Compile>
     <Compile Include="..\nfinalcore\model\ModelHelper.cs">
       <Link>Core\Model\ModelHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\model\system\IModelExtension.cs">
-      <Link>Core\Model\System\IModelExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\owin\builder\Completed.cs">
-      <Link>Core\Owin\Builder\Completed.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\owin\builder\NotFound.cs">
-      <Link>Core\Owin\Builder\NotFound.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinalCore\Owin\Cookie.cs">
-      <Link>Core\Owin\Cookie.cs</Link>
+    <Compile Include="..\NFinalCore\Model\System\ModelExtension.cs">
+      <Link>Core\Model\System\ModelExtension.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\owin\HtmlWriter.cs">
       <Link>Core\Owin\HtmlWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\owin\httpmultipart\HttpFile.cs">
-      <Link>Core\Owin\HttpMultipart\HttpFile.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\owin\httpmultipart\HttpMultipart.cs">
-      <Link>Core\Owin\HttpMultipart\HttpMultipart.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\owin\httpmultipart\HttpMultipartBoundary.cs">
-      <Link>Core\Owin\HttpMultipart\HttpMultipartBoundary.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\owin\httpmultipart\HttpMultipartBuffer.cs">
-      <Link>Core\Owin\HttpMultipart\HttpMultipartBuffer.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\owin\httpmultipart\HttpMultipartSubStream.cs">
-      <Link>Core\Owin\HttpMultipart\HttpMultipartSubStream.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinalcore\owin\ICookie.cs">
-      <Link>Core\Owin\ICookie.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\owin\OwinHelper.cs">
       <Link>Core\Owin\OwinHelper.cs</Link>
@@ -583,17 +553,17 @@
     <Compile Include="..\nfinalcore\owin\Request.cs">
       <Link>Core\Owin\Request.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\owin\Response.cs">
-      <Link>Core\Owin\Response.cs</Link>
+    <Compile Include="..\NFinalCore\Plugs\Loader\AssemblyLoader.cs">
+      <Link>Core\Plugs\Loader\AssemblyLoader.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\owin\system\EnvironmentExtension.cs">
-      <Link>Core\Owin\System\EnvironmentExtension.cs</Link>
+    <Compile Include="..\NFinalCore\Plugs\Loader\CoreAssemblyLoader.cs">
+      <Link>Core\Plugs\Loader\CoreAssemblyLoader.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\plugs\IPlug.cs">
-      <Link>Core\Plugs\IPlug.cs</Link>
+    <Compile Include="..\NFinalCore\Plugs\Loader\IAssemblyLoader.cs">
+      <Link>Core\Plugs\Loader\IAssemblyLoader.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\razor\BasePage.cs">
-      <Link>Core\Razor\BasePage.cs</Link>
+    <Compile Include="..\NFinalCore\Plugs\Plug.cs">
+      <Link>Core\Plugs\Plug.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\serialize\BinarySerialize.cs">
       <Link>Core\Serialize\BinarySerialize.cs</Link>
@@ -604,23 +574,38 @@
     <Compile Include="..\nfinalcore\serialize\ProtobufSerialize.cs">
       <Link>Core\Serialize\ProtobufSerialize.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\session\ISession.cs">
-      <Link>Core\Session\ISession.cs</Link>
+    <Compile Include="..\nfinalcore\system\BitConstant.cs">
+      <Link>Core\System\BitConstant.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\session\Session.cs">
-      <Link>Core\Session\Session.cs</Link>
+    <Compile Include="..\nfinalcore\system\DynamicDictionary.cs">
+      <Link>Core\System\DynamicDictionary.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\system\system\DynamicDictionary.cs">
-      <Link>Core\System\System\DynamicDictionary.cs</Link>
+    <Compile Include="..\NFinalCore\System\StringBuilderCache.cs">
+      <Link>Core\System\StringBuilderCache.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\system\system\INullable.cs">
-      <Link>Core\System\System\INullable.cs</Link>
+    <Compile Include="..\nfinalcore\system\StringContainer.cs">
+      <Link>Core\System\StringContainer.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\system\system\StringExtension.cs">
-      <Link>Core\System\System\StringExtension.cs</Link>
+    <Compile Include="..\NFinalCore\Url\ActionKey.cs">
+      <Link>Core\Url\ActionKey.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\url\UrlHelper.cs">
-      <Link>Core\Url\UrlHelper.cs</Link>
+    <Compile Include="..\NFinalCore\Url\ActionUrlHelper.cs">
+      <Link>Core\Url\ActionUrlHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Url\Debug.template.cs">
+      <Link>Core\Url\Debug.template.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Url\DebugData.cs">
+      <Link>Core\Url\DebugData.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Url\UrlRouteJs.template.cs">
+      <Link>Core\Url\UrlRouteJs.template.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Url\UrlRouteJsModel.cs">
+      <Link>Core\Url\UrlRouteJsModel.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\Url\UrlSegment.cs">
+      <Link>Core\Url\UrlSegment.cs</Link>
     </Compile>
     <Compile Include="..\NFinalCore\Utility.cs">
       <Link>Core\Utility.cs</Link>
@@ -640,23 +625,17 @@
     <Compile Include="..\nfinalcore\validation\ValidStatus.cs">
       <Link>Core\Validation\ValidStatus.cs</Link>
     </Compile>
-    <Compile Include="..\nfinalcore\view\system\ViewAttribute.cs">
-      <Link>Core\View\System\ViewAttribute.cs</Link>
+    <Compile Include="..\NFinalCore\View\MasterPageModel.cs">
+      <Link>Core\View\MasterPageModel.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\View\Razor\BasePage.cs">
+      <Link>Core\View\Razor\BasePage.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinalCore\View\ViewData.cs">
+      <Link>Core\View\ViewData.cs</Link>
     </Compile>
     <Compile Include="..\nfinalcore\view\ViewHelper.cs">
       <Link>Core\View\ViewHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Extension\System\ConvertExtension.cs">
-      <Link>Core\Extension\System\ConvertExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Extension\System\ObjectContainerExtension.cs">
-      <Link>Core\Extension\System\ObjectContainerExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Extension\System\TryParseExtension.cs">
-      <Link>Core\Extension\System\TryParseExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Extension\System\WithDBNullExtension.cs">
-      <Link>Core\Extension\System\WithDBNullExtension.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Middleware\Debug.template.cs">
       <Link>Core\Middleware\Debug.template.cs</Link>
@@ -664,30 +643,12 @@
     <Compile Include="..\NFinal\Middleware\UrlRouteJs.template.cs">
       <Link>Core\Middleware\UrlRouteJs.template.cs</Link>
     </Compile>
-    <Compile Include="Core\System\System\ObjectContainer.cs">
-      <DependentUpon>ObjectContainer.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Core\System\System\StringContainer.cs">
-      <DependentUpon>StringContainer.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\System\System\ObjectContainer.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ObjectContainer.cs</LastGenOutput>
-    </Content>
-    <Content Include="Core\System\System\StringContainer.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>StringContainer.cs</LastGenOutput>
-    </Content>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>

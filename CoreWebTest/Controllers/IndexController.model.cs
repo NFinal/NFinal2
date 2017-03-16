@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using NFinal.Owin;
+using NFinal;
 //此代码由NFinalControllerGenerator生成。
 //http://bbs.nfinal.com
 namespace CoreWebTest.Controllers.IndexController_Model
@@ -13,7 +13,7 @@ namespace CoreWebTest.Controllers.IndexController_Model
 		public string a;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig;
+		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
 		public string ab;
 		public int ac;
 	}
@@ -23,7 +23,7 @@ namespace CoreWebTest.Controllers.IndexController_Model
 		public string a;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<System.StringContainer> systemConfig;
+		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
 		public System.DateTime cc2;
 	}
 }

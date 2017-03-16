@@ -26,24 +26,14 @@ namespace NFinal.Middleware
         public Mode mode = Mode.Off;
         public string defaultRedirect = string.Empty;
     }
-    public class Plug
-    {
-        /// <summary>
-        /// dll文件路径
-        /// </summary>
-        public string filePath;
-        /// <summary>
-        /// 二级域名
-        /// </summary>
-        public string subDomain;
-    }
+    
     public class MiddlewareConfigOptions
     {
         public string debugUrl;
         /// <summary>
         /// 插件集合
         /// </summary>
-        public Plug[] plugs;
+        public NFinal.Plugs.Plug[] plugs;
         /// <summary>
         /// 是否是调试状态
         /// </summary>

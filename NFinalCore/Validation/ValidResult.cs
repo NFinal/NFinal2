@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NFinal.Extension;
 
 namespace NFinal.Validation
 {
@@ -46,7 +45,7 @@ namespace NFinal.Validation
             }
             return result;
         }
-        public void Write<TContext,TRequest>(NFinal.IAction<TContext, TRequest> action)
+        public void Write<TContext,TRequest>(NFinal.Action.IAction<TContext, TRequest> action)
         {
             if (this.isDirty)
             {

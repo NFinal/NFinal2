@@ -17,7 +17,7 @@ namespace CoreWebTest.Views
 			writer.Write(Model.a);
 			writer.Write(";\r\n    ");
 			writer.Write(Model.cc2);
-			writer.Write(";\r\n</body>\r\n</html>");
+			writer.Write(";\r\n    你在哪？ffff\r\n</body>\r\n</html>");
 		}
 	}
 }

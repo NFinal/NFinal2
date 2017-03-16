@@ -39,7 +39,7 @@ namespace NFinal.Config
             Type[] types = null;
             configDic = new Dictionary<string, CommonConfig>(StringComparer.Ordinal);
             CommonConfig commonConfig;
-            NFinal.Loader.IAssemblyLoader assemblyLoader = new NFinal.Loader.AssemblyLoader();
+            NFinal.Plugs.Loader.IAssemblyLoader assemblyLoader = new NFinal.Plugs.Loader.AssemblyLoader();
             for (int i = 0; i < options.plugs.Length; i++)
             {
                 assemblyLoader.Load(options.plugs[i].filePath);

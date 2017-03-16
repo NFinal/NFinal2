@@ -10,7 +10,7 @@ function StringFormat() {
 }
 var Url={
 
-    "CoreWebTest_Controllers_IndexController":{
+    "CoreWebTest_Controllers_Index":{
             "INN":function(a)
             {
             return StringFormat("/Index-{0}07.html",a);

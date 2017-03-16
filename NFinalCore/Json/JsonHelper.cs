@@ -68,7 +68,7 @@ namespace NFinal.Json
         public static Dictionary<Type, GetJsonDelegateData> GetJsonDictionary = new Dictionary<Type, GetJsonDelegateData>();
         public static readonly System.Reflection.MethodInfo toBase64StringMethodInfo = typeof(System.Convert).GetMethod("ToBase64String",new Type[] { typeof(byte[])});
         public static readonly System.Reflection.MethodInfo writeMethodInfo = typeof(NFinal.IO.IWriter).GetMethod("Write", new Type[] { typeof(string) });
-        public static readonly System.Reflection.MethodInfo WriteJsonReverseStringMethodInfo = typeof(System.WriterExtension).GetMethod("WriteJsonReverseString", new Type[] {typeof(NFinal.IO.IWriter), typeof(string) });
+        public static readonly System.Reflection.MethodInfo WriteJsonReverseStringMethodInfo = typeof(NFinal.WriterExtension).GetMethod("WriteJsonReverseString", new Type[] {typeof(NFinal.IO.IWriter), typeof(string) });
         public static void GetJson<TModel>(TModel model,NFinal.IO.IWriter writer, DateTimeFormat format)
         {
             GetJsonDelegateData getJsonDelegateData;
@@ -850,6 +850,7 @@ namespace NFinal.Json
             }
         }
     }
+#if EMITDEBUG
     public class Model
     {
         public string a { get; set; }
@@ -947,4 +948,5 @@ namespace NFinal.Json
             writer.Write("}");
         }
     }
+#endif
 }
