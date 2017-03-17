@@ -1,0 +1,12 @@
+﻿Provide help information for commands.
+
+RBuild  [-s] [-o] [-p]
+
+        -s —— Solution Path, required. 
+                Use: -s "C:\work\CRM\CRM.VS2015.sln"
+        -o —— Output Directory, required. 
+                Use: -o "E:\work\CRM\Build\WebAPI\bin"
+        -p —— Build Properties, required. 
+                Use: -p Configuration=Release;FrameworkPathOverride=C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2;key=value
+        -l —— Output Log Path, not required. 
+                Use: -l "log.txt"

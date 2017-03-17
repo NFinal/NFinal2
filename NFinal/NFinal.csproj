@@ -77,5 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="Build\" />
   </ItemGroup>
 </Project>
