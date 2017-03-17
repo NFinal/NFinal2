@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NFinal;
 using NFinal.Middleware;
 
-namespace CoreWebTest
+namespace NFinalWebSample
 {
     public class SimpleMiddleware : NFinal.Middleware.OwinMiddleware
     {

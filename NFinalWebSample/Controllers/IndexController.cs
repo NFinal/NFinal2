@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using NFinal;
 
-namespace CoreWebTest.Controllers
+namespace NFinalWebSample.Controllers
 {
     
     [SubDomain("www")]
@@ -14,7 +14,7 @@ namespace CoreWebTest.Controllers
         public void INN(int ac)
         {
             this.ViewBag.ab = "2";
-            ViewBag.ddd = "sd";
+            this.ViewBag.ddd = "sd";
             Write(a.ToString());
         }
         [ViewBagMember]
@@ -24,7 +24,7 @@ namespace CoreWebTest.Controllers
         {
             ViewBag.cc2 = DateTime.Now;
             ViewBag.a = "23";
-            this.Render("/CoreWebTest/Views/Index.cshtml");
+            this.Render("/NFinalWebSample/Views/Index.cshtml");
         }
     }
     public class parameterModel

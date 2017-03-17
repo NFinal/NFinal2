@@ -11,17 +11,26 @@ function StringFormat() {
     return str;
 }
 var Url={
-@{bool isFirst = true; }
+@{bool isFirstAction = true; bool isFirstController = true; }
 @foreach (KeyValuePair<Type, Dictionary<string, NFinal.Url.FormatData>> formatController in Model.formatControllerDictionary)
 {
     string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + formatController.Key.Name;
-    isFirst = true;
+    
+    if (isFirstController)
+    {
+        isFirstController = false;
+    }
+    else
+    {
+        @:,
+    }
+    isFirstAction = true;
     @:"@controllerName":{
     foreach (KeyValuePair<string, NFinal.Url.FormatData> formatMethod in formatController.Value)
     {
-        @if (isFirst)
+        @if (isFirstAction)
         {
-            isFirst = false;
+            isFirstAction = false;
         }
         else
         {

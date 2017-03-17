@@ -10,15 +10,22 @@ function StringFormat() {
 }
 var Url={
 
-    "NFinalWebSample_Controllers_IndexController":{
-            "INN":function(a)
+    "NFinalCoreWebSample_Controllers_IndexController":{
+            "Default":function()
             {
-            return StringFormat("/Index-{0}07.html",a);
+            return "/Index/Default.html";
             }
             ,
-            "Show":function()
+            "Ajax":function()
             {
-            return "/Index/Show.html";
+            return "/Index/Ajax.html";
+            }
+    }
+        ,
+    "NFinalCoreWebSample_Controllers_UserController":{
+            "Login":function()
+            {
+            return "/User/Login.html";
             }
     }
 };

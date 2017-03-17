@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CoreWebTest</RootNamespace>
-    <AssemblyName>CoreWebTest</AssemblyName>
+    <AssemblyName>NFinalWebSample</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -117,8 +117,8 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Debug\CoreWebTest\Controllers\Index\INN.html" />
-    <Content Include="Debug\CoreWebTest\Controllers\Index\Show.html" />
+    <Content Include="Debug\NFinalWebSample\Controllers\Index\INN.html" />
+    <Content Include="Debug\NFinalWebSample\Controllers\Index\Show.html" />
     <Content Include="Index.html" />
     <Content Include="Scripts\Url.js" />
     <Content Include="Web.config" />
@@ -157,6 +157,9 @@
       <Project>{7413203c-3df5-49e2-b678-de2fbd174993}</Project>
       <Name>NFinal4</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

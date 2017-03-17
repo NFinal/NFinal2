@@ -1,31 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
 using NFinal;
 //此代码由NFinalControllerGenerator生成。
 //http://bbs.nfinal.com
-namespace NFinalWebSample.Controllers.IndexController_Model
+namespace NFinalCoreWebSample.Controllers.IndexController_Model
 {
-	public class INN
+	public class Default
 	{
 		[ViewBagMember]
-		public string a;
+		[Newtonsoft.Json.JsonIgnore]
+		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
 		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
-		public string ab;
-		public string ddd;
-		public int ac;
+		public string Message;
+		public string Title;
 	}
-	public class Show
+	public class Ajax
 	{
 		[ViewBagMember]
-		public string a;
+		[Newtonsoft.Json.JsonIgnore]
+		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
 		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
-		public System.DateTime cc2;
-		public NFinalWebSample.Controllers.parameterModel model;
+		public string Message;
+		public int id;
+		public System.DateTime time;
 	}
 }

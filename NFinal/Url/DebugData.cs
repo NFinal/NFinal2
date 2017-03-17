@@ -15,7 +15,7 @@ namespace NFinal.Url
         /// <summary>
         /// 类名
         /// </summary>
-        public string className;
+        public string classFullName;
         /// <summary>
         /// 方法名
         /// </summary>

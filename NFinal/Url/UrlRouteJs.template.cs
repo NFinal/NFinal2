@@ -15,20 +15,30 @@ namespace NFinal.Url
 		{
 			writer.Write("");
 			writer.Write("function StringFormat() {\r\n    if (arguments.length == 0)\r\n        return null;\r\n    var str = arguments[0];\r\n    for (var i = 1; i < arguments.length; i++) {\r\n        var re = new RegExp(\'\\\\{\' + (i - 1) + \'\\\\}\', \'gm\');\r\n        str = str.replace(re, arguments[i]);\r\n    }\r\n    return str;\r\n}\r\nvar Url={\r\n");
-bool isFirst = true; 			writer.Write("\r\n");
+bool isFirstAction = true; bool isFirstController = true; 			writer.Write("\r\n");
 foreach (KeyValuePair<Type, Dictionary<string, NFinal.Url.FormatData>> formatController in Model.formatControllerDictionary)
 {
     string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + formatController.Key.Name;
-    isFirst = true;
+    
+    if (isFirstController)
+    {
+        isFirstController = false;
+    }
+    else
+    {
+			writer.Write("        ");
+			writer.Write(",\r\n");
+    }
+    isFirstAction = true;
 			writer.Write("    ");
 			writer.Write("\"");
 			writer.Write(controllerName);
 			writer.Write("\":{\r\n");
     foreach (KeyValuePair<string, NFinal.Url.FormatData> formatMethod in formatController.Value)
     {
-        if (isFirst)
+        if (isFirstAction)
         {
-            isFirst = false;
+            isFirstAction = false;
         }
         else
         {

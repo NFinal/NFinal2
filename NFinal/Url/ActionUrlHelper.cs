@@ -368,8 +368,15 @@ namespace NFinal.Url
             {
                 System.IO.Directory.CreateDirectory(directory);
             }
-            
             NFinal.IO.FileWriter fileWriter = new IO.FileWriter(System.IO.Path.Combine(directory, "Url.js"));
+            NFinal.Url.UrlRouteJs.Render(fileWriter, model);
+            fileWriter.Dispose();
+            directory = System.IO.Path.Combine(NFinal.Utility.GetWebApplicationRoot(), "Scripts");
+            if (!System.IO.Directory.Exists(directory))
+            {
+                System.IO.Directory.CreateDirectory(directory);
+            }
+            fileWriter = new IO.FileWriter(System.IO.Path.Combine(directory, "Url.js"));
             NFinal.Url.UrlRouteJs.Render(fileWriter, model);
             fileWriter.Dispose();
         }
@@ -383,6 +390,7 @@ namespace NFinal.Url
             {
                 options.debugDirectory = "Debug";
             }
+
             string webApplicationRoot = NFinal.Utility.GetWebApplicationRoot();
             foreach (var controller in formatControllerDictionary)
             {
@@ -402,7 +410,7 @@ namespace NFinal.Url
                     if (!System.IO.File.Exists(fileName))
                     {
                         debugData = new NFinal.Url.DebugData();
-                        debugData.className = controller.Key.FullName;
+                        debugData.classFullName = controller.Key.FullName;
                         debugData.methodName = method.Key;
                         debugData.formatData = method.Value;
                         debugData.debugUrl = options.debugUrl;

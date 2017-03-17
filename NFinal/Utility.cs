@@ -26,18 +26,17 @@ namespace NFinal
         {
             string dirName = Path.GetFileName(rootPath);
             string dirName2 = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(rootPath)));
-            if (dirName == "Debug" || dirName == "Release")
+            var rootPathArray= rootPath.Split(Path.DirectorySeparatorChar);
+            string Root = rootPath;
+            for (int i = 0; i < rootPathArray.Length-1; i++)
             {
-                return Path.GetDirectoryName(Path.GetDirectoryName(rootPath));
+                if (rootPathArray[i] == "bin" && rootPathArray[i + 1] == "Debug" || rootPathArray[i + 1] == "Release")
+                {
+                    Root = string.Join(Path.DirectorySeparatorChar.ToString(), rootPathArray, 0, i);
+                    break;
+                }
             }
-            else if (dirName2 == "Debug" || dirName2 == "Release")
-            {
-                return Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(rootPath))));
-            }
-            else
-            {
-                return rootPath;
-            }
+            return Root;
         }
         /// <summary>
         /// 获得当前绝对路径，同时兼容windows和linux（系统自带的都不兼容）。

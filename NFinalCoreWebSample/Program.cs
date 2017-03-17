@@ -13,6 +13,7 @@ namespace NFinalCoreWebSample
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
+                .UseUrls("localhost:8083")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

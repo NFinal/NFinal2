@@ -69,6 +69,10 @@ namespace NFinalCompiler.Controller
                                 data.Name = memberAccessExpressionSyntax.Name.Identifier.Text;
                                 typeInfo = model.GetTypeInfo(assignment.Right);
                                 data.Type = typeInfo.Type.ToString();
+                                if (declares.ContainsKey(data.Name))
+                                {
+                                    declares.Remove(data.Name);
+                                }
                                 declares.Add(data.Name, data);
                             }
                         }
@@ -80,9 +84,14 @@ namespace NFinalCompiler.Controller
                             if (leftIdentifierNameSyntax.Identifier.Text == "ViewBag")
                             {
                                 data = new DeclareData();
+                                data.IsAttribute = false;
                                 data.Name = memberAccessExpressionSyntax.Name.Identifier.Text;
                                 typeInfo = model.GetTypeInfo(assignment.Right);
                                 data.Type = typeInfo.Type.ToString();
+                                if (declares.ContainsKey(data.Name))
+                                {
+                                    declares.Remove(data.Name);
+                                }
                                 declares.Add(data.Name, data);
                             }
                         }
@@ -91,9 +100,14 @@ namespace NFinalCompiler.Controller
             }
             foreach (var par in methodSy.Parameters)
             {
+                data = new DeclareData();
                 data.IsAttribute = false;
                 data.Type = par.Type.ToString();
                 data.Name = par.Name;
+                if (!declares.ContainsKey(data.Name))
+                { 
+                    declares.Add(data.Name,data);
+                }
             }
         }
 
@@ -118,6 +132,7 @@ namespace NFinalCompiler.Controller
                             if (nameTypeSymbol.Name == "ViewBagMemberAttribute")
                             {
                                 hasViewBagAttribute = true;
+                                data = new DeclareData();
                                 data.IsAttribute = false;
                                 data.Type = filed.Type.ToString();
                                 data.Name = filed.Name;
@@ -159,6 +174,7 @@ namespace NFinalCompiler.Controller
                         if (nameTypeSymbol.Name == "ViewBagMemberAttribute")
                         {
                             hasViewBagAttribute = true;
+                            data = new DeclareData();
                             data.IsAttribute = true;
                             data.Type = property.Type.ToString();
                             data.Name = property.Name;
