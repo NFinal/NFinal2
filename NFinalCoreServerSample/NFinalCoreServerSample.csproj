@@ -14,7 +14,7 @@
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NFinal\NFinal.csproj" />
+    <ProjectReference Include="..\NFinal\NFinalCore.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Controllers\IndexController.cs">

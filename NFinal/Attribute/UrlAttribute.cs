@@ -344,605 +344,605 @@ namespace NFinal
     //    public PostJsonDeflateAttribute(string path)
     //    { }
     //}
- //   /// <summary>
- //   /// 请求后返回javascript
- //   /// </summary>
- //   public class JavaScriptAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public JavaScriptAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回javascript
- //   /// </summary>
- //   public class GetJavaScriptAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetJavaScriptAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回javascript
- //   /// </summary>
- //   public class PostJavaScriptAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostJavaScriptAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回zip压缩的javascript
- //   /// </summary>
- //   public class JavaScriptZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public JavaScriptZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回zip压缩的javascript
- //   /// </summary>
- //   public class GetJavaScriptZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetJavaScriptZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回zip压缩的javascript
- //   /// </summary>
- //   public class PostJavaScriptZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostJavaScriptZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回deflate压缩的javascript
- //   /// </summary>
- //   public class JavaScriptDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public JavaScriptDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回deflate压缩的javascript
- //   /// </summary>
- //   public class GetJavaScriptDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetJavaScriptDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回deflate压缩的javascript
- //   /// </summary>
- //   public class PostJavaScriptDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostJavaScriptDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回css样式
- //   /// </summary>
- //   public class CssAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public CssAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回css样式
- //   /// </summary>
- //   public class GetCssAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetCssAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回css样式
- //   /// </summary>
- //   public class PostCssAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostCssAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回zip压缩的css样式
- //   /// </summary>
- //   public class CssZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public CssZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回zip压缩的css样式
- //   /// </summary>
- //   public class GetCssZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetCssZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回zip压缩的css样式
- //   /// </summary>
- //   public class PostCssZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostCssZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回deflate压缩的css样式
- //   /// </summary>
- //   public class CssDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public CssDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回deflate压缩的css样式
- //   /// </summary>
- //   public class GetCssDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetCssDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回deflate压缩的css样式
- //   /// </summary>
- //   public class PostCssDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostCssDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回二进制文件
- //   /// </summary>
- //   public class FileAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public FileAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回二进制文件
- //   /// </summary>
- //   public class GetFileAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetFileAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回二进制文件
- //   /// </summary>
- //   public class PostFileAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostFileAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回jpeg图片
- //   /// </summary>
- //   public class JpegAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public JpegAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回jpeg图片
- //   /// </summary>
-	//public class GetJpegAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
-	//	public GetJpegAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回jpeg图片
- //   /// </summary>
-	//public class PostJpegAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
-	//	public PostJpegAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回gif图片
- //   /// </summary>
-	//public class GifAttribute : UrlAttribute
-	//{
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
-	//	public GifAttribute(string path)
-	//	{ }
-	//}
- //   /// <summary>
- //   /// get请求后返回gif图片
- //   /// </summary>
-	//public class GetGifAttribute : UrlAttribute
-	//{
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
-	//	public GetGifAttribute(string path)
-	//	{ }
-	//}
- //   /// <summary>
- //   /// post请求后返回gif图片
- //   /// </summary>
-	//public class PostGifAttribute : UrlAttribute
-	//{
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
-	//	public PostGifAttribute(string path)
-	//	{ }
-	//}
- //   /// <summary>
- //   /// 请求后返回png图片
- //   /// </summary>
-	//public class PngAttribute : UrlAttribute
-	//{
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
-	//	public PngAttribute(string path)
-	//	{ }
-	//}
- //   /// <summary>
- //   /// get请求后返回png图片
- //   /// </summary>
-	//public class GetPngAttribute : UrlAttribute
-	//{
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
-	//	public GetPngAttribute(string path)
-	//	{ }
-	//}
- //   /// <summary>
- //   /// post请求后返回png图片
- //   /// </summary>
-	//public class PostPngAttribute : UrlAttribute
-	//{
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
-	//	public PostPngAttribute(string path)
-	//	{ }
-	//}
- //   /// <summary>
- //   /// 请求后返回xml文本
- //   /// </summary>
- //   public class XmlAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public XmlAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回xml文本
- //   /// </summary>
- //   public class GetXmlAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetXmlAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回xml文本
- //   /// </summary>
- //   public class PostXmlAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostXmlAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回zip压缩的xml文本
- //   /// </summary>
- //   public class XmlZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public XmlZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回zip压缩的xml文本
- //   /// </summary>
- //   public class GetXmlZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetXmlZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回zip压缩的xml文本
- //   /// </summary>
- //   public class PostXmlZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostXmlZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回deflate压缩的xml文本
- //   /// </summary>
- //   public class XmlDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public XmlDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回deflate压缩的xml文本
- //   /// </summary>
- //   public class GetXmlDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetXmlDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回deflate压缩的xml文本
- //   /// </summary>
- //   public class PostXmlDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostXmlDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回文本
- //   /// </summary>
- //   public class TextAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public TextAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回文本
- //   /// </summary>
- //   public class GetTextAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetTextAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回文本
- //   /// </summary>
- //   public class PostTextAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostTextAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回zip压缩的文本
- //   /// </summary>
- //   public class TextZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public TextZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回zip压缩的文本
- //   /// </summary>
- //   public class GetTextZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetTextZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回zip压缩的文本
- //   /// </summary>
- //   public class PostTextZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostTextZipAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// 请求后返回deflate压缩的文本
- //   /// </summary>
- //   public class TextDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public TextDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回deflate压缩的文本
- //   /// </summary>
- //   public class GetTextDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetTextDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// post请求后返回deflate压缩的文本
- //   /// </summary>
- //   public class PostTextDeflateAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public PostTextDeflateAttribute(string path)
- //       { }
- //   }
- //   /// <summary>
- //   /// get请求后返回svg图像
- //   /// </summary>
- //   public class GetSvgAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetSvgAttribute(string path)
- //       {
- //       }
- //   }
- //   /// <summary>
- //   /// get请求后返回压缩后的svg图像
- //   /// </summary>
- //   public class GetSvgZipAttribute : UrlAttribute
- //   {
- //       /// <summary>
- //       /// 定义URL请求路径
- //       /// </summary>
- //       /// <param name="path">URL请求路径</param>
- //       public GetSvgZipAttribute(string path)
- //       { }
- //   }
+    //   /// <summary>
+    //   /// 请求后返回javascript
+    //   /// </summary>
+    //   public class JavaScriptAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public JavaScriptAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回javascript
+    //   /// </summary>
+    //   public class GetJavaScriptAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetJavaScriptAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回javascript
+    //   /// </summary>
+    //   public class PostJavaScriptAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostJavaScriptAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回zip压缩的javascript
+    //   /// </summary>
+    //   public class JavaScriptZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public JavaScriptZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回zip压缩的javascript
+    //   /// </summary>
+    //   public class GetJavaScriptZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetJavaScriptZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回zip压缩的javascript
+    //   /// </summary>
+    //   public class PostJavaScriptZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostJavaScriptZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回deflate压缩的javascript
+    //   /// </summary>
+    //   public class JavaScriptDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public JavaScriptDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回deflate压缩的javascript
+    //   /// </summary>
+    //   public class GetJavaScriptDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetJavaScriptDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回deflate压缩的javascript
+    //   /// </summary>
+    //   public class PostJavaScriptDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostJavaScriptDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回css样式
+    //   /// </summary>
+    //   public class CssAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public CssAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回css样式
+    //   /// </summary>
+    //   public class GetCssAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetCssAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回css样式
+    //   /// </summary>
+    //   public class PostCssAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostCssAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回zip压缩的css样式
+    //   /// </summary>
+    //   public class CssZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public CssZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回zip压缩的css样式
+    //   /// </summary>
+    //   public class GetCssZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetCssZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回zip压缩的css样式
+    //   /// </summary>
+    //   public class PostCssZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostCssZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回deflate压缩的css样式
+    //   /// </summary>
+    //   public class CssDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public CssDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回deflate压缩的css样式
+    //   /// </summary>
+    //   public class GetCssDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetCssDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回deflate压缩的css样式
+    //   /// </summary>
+    //   public class PostCssDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostCssDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回二进制文件
+    //   /// </summary>
+    //   public class FileAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public FileAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回二进制文件
+    //   /// </summary>
+    //   public class GetFileAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetFileAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回二进制文件
+    //   /// </summary>
+    //   public class PostFileAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostFileAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回jpeg图片
+    //   /// </summary>
+    //   public class JpegAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public JpegAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回jpeg图片
+    //   /// </summary>
+    //public class GetJpegAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //	public GetJpegAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回jpeg图片
+    //   /// </summary>
+    //public class PostJpegAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //	public PostJpegAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回gif图片
+    //   /// </summary>
+    //public class GifAttribute : UrlAttribute
+    //{
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //	public GifAttribute(string path)
+    //	{ }
+    //}
+    //   /// <summary>
+    //   /// get请求后返回gif图片
+    //   /// </summary>
+    //public class GetGifAttribute : UrlAttribute
+    //{
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //	public GetGifAttribute(string path)
+    //	{ }
+    //}
+    //   /// <summary>
+    //   /// post请求后返回gif图片
+    //   /// </summary>
+    //public class PostGifAttribute : UrlAttribute
+    //{
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //	public PostGifAttribute(string path)
+    //	{ }
+    //}
+    //   /// <summary>
+    //   /// 请求后返回png图片
+    //   /// </summary>
+    //public class PngAttribute : UrlAttribute
+    //{
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //	public PngAttribute(string path)
+    //	{ }
+    //}
+    //   /// <summary>
+    //   /// get请求后返回png图片
+    //   /// </summary>
+    //public class GetPngAttribute : UrlAttribute
+    //{
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //	public GetPngAttribute(string path)
+    //	{ }
+    //}
+    //   /// <summary>
+    //   /// post请求后返回png图片
+    //   /// </summary>
+    //public class PostPngAttribute : UrlAttribute
+    //{
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //	public PostPngAttribute(string path)
+    //	{ }
+    //}
+    //   /// <summary>
+    //   /// 请求后返回xml文本
+    //   /// </summary>
+    //   public class XmlAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public XmlAttribute(string path)
+    //       { }
+    //   }
+    /// <summary>
+    /// get请求后返回xml文本
+    /// </summary>
+    public class GetXmlAttribute : UrlAttribute
+    {
+        /// <summary>
+        /// 定义URL请求路径
+        /// </summary>
+        /// <param name="path">URL请求路径</param>
+        public GetXmlAttribute(string urlString,params string[] queryString):base(urlString, queryString)
+        { }
+    }
+    /// <summary>
+    /// post请求后返回xml文本
+    /// </summary>
+    public class PostXmlAttribute : UrlAttribute
+    {
+        /// <summary>
+        /// 定义URL请求路径
+        /// </summary>
+        /// <param name="path">URL请求路径</param>
+        public PostXmlAttribute(string urlString,params string[] queryString):base(urlString,queryString)
+        { }
+    }
+    //   /// <summary>
+    //   /// 请求后返回zip压缩的xml文本
+    //   /// </summary>
+    //   public class XmlZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public XmlZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回zip压缩的xml文本
+    //   /// </summary>
+    //   public class GetXmlZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetXmlZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回zip压缩的xml文本
+    //   /// </summary>
+    //   public class PostXmlZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostXmlZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回deflate压缩的xml文本
+    //   /// </summary>
+    //   public class XmlDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public XmlDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回deflate压缩的xml文本
+    //   /// </summary>
+    //   public class GetXmlDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetXmlDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回deflate压缩的xml文本
+    //   /// </summary>
+    //   public class PostXmlDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostXmlDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回文本
+    //   /// </summary>
+    //   public class TextAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public TextAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回文本
+    //   /// </summary>
+    //   public class GetTextAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetTextAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回文本
+    //   /// </summary>
+    //   public class PostTextAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostTextAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回zip压缩的文本
+    //   /// </summary>
+    //   public class TextZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public TextZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回zip压缩的文本
+    //   /// </summary>
+    //   public class GetTextZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetTextZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回zip压缩的文本
+    //   /// </summary>
+    //   public class PostTextZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostTextZipAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// 请求后返回deflate压缩的文本
+    //   /// </summary>
+    //   public class TextDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public TextDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回deflate压缩的文本
+    //   /// </summary>
+    //   public class GetTextDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetTextDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// post请求后返回deflate压缩的文本
+    //   /// </summary>
+    //   public class PostTextDeflateAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public PostTextDeflateAttribute(string path)
+    //       { }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回svg图像
+    //   /// </summary>
+    //   public class GetSvgAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetSvgAttribute(string path)
+    //       {
+    //       }
+    //   }
+    //   /// <summary>
+    //   /// get请求后返回压缩后的svg图像
+    //   /// </summary>
+    //   public class GetSvgZipAttribute : UrlAttribute
+    //   {
+    //       /// <summary>
+    //       /// 定义URL请求路径
+    //       /// </summary>
+    //       /// <param name="path">URL请求路径</param>
+    //       public GetSvgZipAttribute(string path)
+    //       { }
+    //   }
 }

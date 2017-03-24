@@ -5,7 +5,7 @@ using NFinal;
 
 namespace NFinalCoreWebSample.Controllers
 {
-    public class UserController:BaseController<NFinal.EmptyMasterPageModel>
+    public class UserController:BaseController
     {
         public void Login()
         {

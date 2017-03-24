@@ -8,7 +8,7 @@ namespace NFinalWebSample.Controllers
 {
     
     [SubDomain("www")]
-    public class IndexController : NFinal.OwinAction<NFinal.EmptyMasterPageModel, dynamic>
+    public class IndexController : NFinal.OwinAction<NFinal.User.User>
     {
         [GetHtml("/Index-{a}.html")]
         public void INN(int ac)

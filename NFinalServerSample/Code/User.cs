@@ -10,17 +10,15 @@ namespace NFinalServer.Code
     /// 用于缓存的用户数据
     /// </summary>
     [ProtoContract]
-    public class User
+    public class User : NFinal.User.AbstractUser
     {
-        /// <summary>
-        /// protobuf专用属性
-        /// </summary>
         [ProtoMember(1)]
-        public int userId;
-        /// <summary>
-        /// protobuf专用属性
-        /// </summary>
+        public override string Id { get; set; }
         [ProtoMember(2)]
-        public string userName;
+        public override string Name { get; set; }
+        [ProtoMember(3)]
+        public override string Password { get; set; }
+        [ProtoMember(4)]
+        public override string Account { get; set; }
     }
 }

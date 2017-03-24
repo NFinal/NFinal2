@@ -21,14 +21,6 @@ using NFinal.Http;
 namespace NFinal.Action
 {
     /// <summary>
-    /// 用户实体类
-    /// </summary>
-    /// <typeparam name="TUser"></typeparam>
-    public interface IUser<TUser>
-    {
-        TUser user { get; set; }
-    }
-    /// <summary>
     /// NFinal的控制器基类，核心类，类似于asp.net中的page类
     /// </summary>
     /// <typeparam name="TContext">上下文IOwinContext,Enviroment,Context</typeparam>
@@ -36,7 +28,7 @@ namespace NFinal.Action
     /// <typeparam name="TUser">用户相关数据类型</typeparam>
     /// <typeparam name="TMasterPage">母页模板</typeparam>
     /// <typeparam name="TViewBag">ViewBag视图,不需要实例化</typeparam>
-    public abstract class AbstractAction<TContext,TRequest,TUser,TMasterPage> :NFinal.IO.Writer, IAction<TContext, TRequest> ,IUser<TUser> where TMasterPage : NFinal.MasterPageModel
+    public abstract class AbstractAction<TContext,TRequest,TUser> :NFinal.IO.Writer, IAction<TContext, TRequest>  where TUser: NFinal.User.AbstractUser
     {
         /// <summary>
         /// 常用系统变量
@@ -60,10 +52,6 @@ namespace NFinal.Action
         /// 内容
         /// </summary>
         protected Stream writeStream;
-        /// <summary>
-        /// 母模板
-        /// </summary>
-        public virtual TMasterPage MasterPage { get; set; }
         /// <summary>
         /// 服务器类型
         /// </summary>
@@ -433,18 +421,18 @@ namespace NFinal.Action
         /// </summary>
         /// <param name="masterPagePath"></param>
         /// <param name="templateUrl"></param>
-        public void Render(string masterPagePath, string templateUrl)
-        {
-            if (this.MasterPage.GetType() == typeof(object))
-            {
-                this.Write("MasterPage必须为非dynamic以及object类型");
-            }
-            else
-            {
-                this.MasterPage.ViewData = new ViewData(templateUrl, this.ViewBag);
-                this.RenderModel(masterPagePath,this.MasterPage);
-            }
-        }
+        //public void Render(string masterPagePath, string templateUrl)
+        //{
+        //    if (this.MasterPage.GetType() == typeof(object))
+        //    {
+        //        this.Write("MasterPage必须为非dynamic以及object类型");
+        //    }
+        //    else
+        //    {
+        //        this.MasterPage.ViewData = new ViewData(templateUrl, this.ViewBag);
+        //        this.RenderModel(masterPagePath,this.MasterPage);
+        //    }
+        //}
 
         
         #endregion

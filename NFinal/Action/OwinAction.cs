@@ -8,7 +8,7 @@ namespace NFinal
     /// <summary>
     /// NFinal的控制器基类，MasterPage为母模板，ViewBag为视图数据,User为用户数据
     /// </summary>
-    public class OwinAction<TMasterPage,TUser> : NFinal.Action.AbstractAction<IDictionary<string,object>,Owin.Request,TUser,TMasterPage> where TMasterPage : NFinal.MasterPageModel
+    public class OwinAction<TUser> : NFinal.Action.AbstractAction<IDictionary<string,object>,Owin.Request,TUser> where TUser : NFinal.User.AbstractUser
     {
         #region 初始化函数
         public OwinAction() { }

@@ -17,7 +17,7 @@ namespace NFinal.Middleware
         public override IAction<IDictionary<string, object>,Owin.Request> GetAction(IDictionary<string, object> context)
         {
             NFinal.Owin.Request request = context.GetRequest();
-            NFinal.OwinAction<EmptyMasterPageModel, object> controller = new OwinAction<EmptyMasterPageModel, object>();
+            NFinal.OwinAction<NFinal.User.User> controller = new OwinAction<NFinal.User.User>();
             controller.BaseInitialization(context,null);
             return controller;
         }

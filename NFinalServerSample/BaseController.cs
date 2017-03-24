@@ -10,7 +10,7 @@ namespace NFinalServer
     /// 控制器的父类必须是泛型
     /// </summary>
     /// <typeparam name="TMasterPage">母页模板数据</typeparam>
-    public class BaseController<TMasterPage>:NFinal.OwinAction<TMasterPage,Code.User> where TMasterPage :NFinal.MasterPageModel
+    public class BaseController:NFinal.OwinAction<Code.User>
     {
         /// <summary>
         /// 此字段加上ViewBagMember属性将会自动添加到ViewBag中。
@@ -26,7 +26,7 @@ namespace NFinalServer
                 Dictionary<string, StringContainer> systemConfigDictionary = new Dictionary<string, StringContainer>();
                 systemConfigDictionary.Add("siteName", "站点名称");
                 systemConfigDictionary.Add("mobile","联系电话");
-                BaseController<TMasterPage>.systemConfig = new NFinal.Collections.FastDictionary<StringContainer>(systemConfigDictionary, systemConfigDictionary.Count);
+                BaseController.systemConfig = new NFinal.Collections.FastDictionary<StringContainer>(systemConfigDictionary, systemConfigDictionary.Count);
                 systemConfigDictionary.Clear();
             }
             return true;

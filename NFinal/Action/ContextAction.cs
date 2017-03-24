@@ -10,7 +10,7 @@ using NFinal.Http;
 
 namespace NFinal
 {
-    public class ContextAction<TMasterPage, TUser> : NFinal.Action.AbstractAction<IOwinContext, IOwinRequest, TUser, TMasterPage> where TMasterPage : NFinal.MasterPageModel
+    public class ContextAction<TUser> : NFinal.Action.AbstractAction<IOwinContext, IOwinRequest, TUser> where TUser : NFinal.User.AbstractUser
     {
         public override void After()
         {

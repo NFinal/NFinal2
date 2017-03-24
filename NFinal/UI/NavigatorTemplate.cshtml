@@ -1,0 +1,44 @@
+﻿@inherits NFinal.Razor.BasePage<NFinal.UI.Navigator>
+<link href="<%=ViewBag.bucketImageUrl%>/App/Content/css/navigator.css" rel="stylesheet" />
+
+<div class="pageDiv">
+    <a href="@Model.GetUrlFunction(1)" class="currentpage">首页</a>
+    @{ bool isFirst = Model.index <= 1;}
+    @{
+        string UrlPre = isFirst ? " #" : Model.GetUrlFunction(Model.index - 1);
+    }
+    
+    @if (isFirst)
+    {
+        <a href="@UrlPre" class="currentpage">上一页</a>
+    }
+    else
+    {
+        <a href="@UrlPre" class="currentpage">上一页</a>
+    }
+    <a href="@UrlPre" style="@Model.index <= 1 ? "display: inline-block;padding: 4px 8px;margin: 0 2px;color: #bfbfbf;background: #f2f2f2;border: 1px solid #ddd;vertical-align: middle;cursor:default;":""%>" class="currentpage">上一页</a>
+    @for (int i = ((Model.index - 1) / Model.navigatorSize) * Model.navigatorSize + 1; i <= Model.count && i <= ((Model.index - 1) / Model.navigatorSize + 1) * Model.navigatorSize; i++)
+    {
+        if (i == Model.index)
+        {
+            <span class="current" style="width:30px;"> @i</span>
+        }
+        else
+        {
+            <a href="@Model.GetUrlFunction(i)" class="currentpage" style="width:30px;">@i</a>
+        }
+    }
+    @{ bool isLast = Model.index >= Model.count;}
+    @{ string UrlNext = isLast ? " #" : Model.GetUrlFunction(Model.index + 1);}
+   
+    @if (isLast)
+    {
+        <a href="@UrlNext" class="currentpage">下一页</a>
+    }
+    else
+    {
+        <a href="@UrlNext" class="currentpage">下一页</a>
+    }
+    <a href="@Model.GetUrlFunction(Model.count)" class="currentpage">末页</a>
+    <span class="pagecount">共@Model.count页</span>
+</div>

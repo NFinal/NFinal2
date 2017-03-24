@@ -11,12 +11,18 @@ namespace NFinalServer.Controllers.IndexController_Model
 	{
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
+		public string imageServerUrl;
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
 		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
 		public string Message;
 		public string Title;
 	}
 	public class Ajax
 	{
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
+		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
 		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;

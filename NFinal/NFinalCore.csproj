@@ -34,6 +34,12 @@
     <Compile Update="Url\UrlRouteJs.template.cs">
       <DependentUpon>UrlRouteJs.cshtml</DependentUpon>
     </Compile>
+    <Compile Update="UI\NavigatorTemplate.template.cs">
+      <DependentUpon>NavigatorTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Content Update="UI\NavigatorTemplate.cshtml">
+      <Generator />
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Attribute\html5Validate.cs" />
@@ -43,6 +49,14 @@
     <Compile Remove="Middleware\StringBuilderCache.cs" />
     <Compile Remove="Properties\AssemblyInfo.cs" />
     <Compile Remove="Url\UrlHelper.cs" />
+    <Compile Remove="View\MasterPageModel.cs" />
+    <Compile Remove="View\ViewData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UI\NavigatorTemplate.cshtml">
+      <Generator>
+      </Generator>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />

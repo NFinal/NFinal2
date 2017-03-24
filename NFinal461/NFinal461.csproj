@@ -584,6 +584,15 @@
     <Compile Include="..\nfinal\system\StringContainer.cs">
       <Link>Core\System\StringContainer.cs</Link>
     </Compile>
+    <Compile Include="..\nfinal\ui\BaseControll.cs">
+      <Link>Core\UI\BaseControll.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinal\ui\Navigator.cs">
+      <Link>Core\UI\Navigator.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinal\ui\NavigatorTemplate.template.cs">
+      <Link>Core\UI\NavigatorTemplate.template.cs</Link>
+    </Compile>
     <Compile Include="..\nfinal\url\ActionKey.cs">
       <Link>Core\Url\ActionKey.cs</Link>
     </Compile>
@@ -604,6 +613,12 @@
     </Compile>
     <Compile Include="..\nfinal\url\UrlSegment.cs">
       <Link>Core\Url\UrlSegment.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinal\user\IUser.cs">
+      <Link>Core\User\IUser.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinal\user\UserRole.cs">
+      <Link>Core\User\UserRole.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\Utility.cs">
       <Link>Core\Utility.cs</Link>

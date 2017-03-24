@@ -9,7 +9,7 @@ using NFinal.Http;
 
 namespace NFinal
 {
-    public class CoreAction<TMasterPage, TUser> : NFinal.Action.AbstractAction<HttpContext, HttpRequest, TUser, TMasterPage> where TMasterPage : MasterPageModel
+    public class CoreAction<TUser> : NFinal.Action.AbstractAction<HttpContext, HttpRequest, TUser> where TUser: NFinal.User.AbstractUser
     {
 #region 初始化函数
         public CoreAction() { }

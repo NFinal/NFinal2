@@ -18,7 +18,7 @@ namespace NFinal.Middleware
         
         public override IAction<IOwinContext,IOwinRequest> GetAction(IOwinContext context)
         {
-            ContextAction<NFinal.EmptyMasterPageModel,object> controller= new ContextAction<NFinal.EmptyMasterPageModel, object>();
+            ContextAction<NFinal.User.User> controller= new ContextAction<NFinal.User.User>();
             controller.BaseInitialization(context,null);
             return controller;
         }

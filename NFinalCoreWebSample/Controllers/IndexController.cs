@@ -6,7 +6,7 @@ using NFinal;
 
 namespace NFinalCoreWebSample.Controllers
 {
-    public class IndexController:BaseController<NFinal.EmptyMasterPageModel>
+    public class IndexController:BaseController
     {
         public void Default()
         {

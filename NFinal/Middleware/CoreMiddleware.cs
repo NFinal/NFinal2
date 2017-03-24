@@ -15,7 +15,7 @@ namespace NFinal.Middleware
         }
         public override IAction<HttpContext, HttpRequest> GetAction(HttpContext context)
         {
-            return new NFinal.CoreAction<EmptyMasterPageModel, object>();
+            return new NFinal.CoreAction<NFinal.User.User>();
         }
 
         public override NameValueCollection GetParameters(HttpRequest request)
