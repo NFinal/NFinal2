@@ -16,7 +16,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using NFinal.Owin;
+using System.Data.Common;
 using NFinal.Http;
+using Dapper;
+using Dapper.Contrib.Extensions;
 
 namespace NFinal.Action
 {
@@ -26,13 +29,62 @@ namespace NFinal.Action
     /// <typeparam name="TContext">上下文IOwinContext,Enviroment,Context</typeparam>
     /// <typeparam name="TRequest">请求信息</typeparam>
     /// <typeparam name="TUser">用户相关数据类型</typeparam>
-    /// <typeparam name="TMasterPage">母页模板</typeparam>
     /// <typeparam name="TViewBag">ViewBag视图,不需要实例化</typeparam>
     public abstract class AbstractAction<TContext,TRequest,TUser> :NFinal.IO.Writer, IAction<TContext, TRequest>  where TUser: NFinal.User.AbstractUser
     {
+		/// <summary>
+        /// 获取数据库连接
+        /// </summary>
+		private DbConnection con=null;
+		public DbConnection Con
+		{
+			get 
+			{
+				if(con==null)
+				{
+					con=GetDbConnection();
+                    con.Open();
+                }
+				return con;
+			}
+		}
+		public int Insert<TModel>() where TModel : class
+		{
+			TModel model =this.GetModel<TModel>();
+            return (int)Con.Insert(model);
+		}
+		public int InsertKeyInt<TModel>() where TModel : class
+		{
+			TModel model =this.GetModel<TModel>();
+			return (int)Con.Insert(model);
+		}
+		public long InsertKeyLong<TModel>() where TModel : class
+		{
+            TModel model = this.GetModel<TModel>();
+            return Con.Insert(model);
+        }
+		
+		public bool Update<TModel>() where TModel : class
+		{
+			TModel model=this.GetModel<TModel>();
+			return Con.Update(model);
+		}
+		public bool Delete<TKey,TModel>(TKey id) where TModel : class
+		{
+            TModel model = this.GetModel<TModel>();
+            return Con.Delete(model);
+		}
+        private void CloseConnection()
+        {
+            if (con != null && con.State == System.Data.ConnectionState.Open)
+            {
+                con.Close();
+            }
+        }
         /// <summary>
         /// 常用系统变量
         /// </summary>
+		public abstract DbConnection GetDbConnection();
         [ViewBagMember]
         [Newtonsoft.Json.JsonIgnore]
         public static NFinal.Collections.FastDictionary<StringContainer> systemConfig = null;
@@ -195,12 +247,14 @@ namespace NFinal.Action
         /// <param name="url"></param>
         public void Redirect(string url)
         {
+            CloseConnection();
             this.SetResponseStatusCode(302);
             this.SetResponseHeader(NFinal.Constant.HeaderContentType, NFinal.Constant.ResponseContentType_Text_html);
             this.SetResponseHeader(NFinal.Constant.HeaderLocation, url);
         }
         public void AjaxReturn()
         {
+            CloseConnection();
             this.contentType = "application/json; charset=utf-8";
             this.Write(Newtonsoft.Json.JsonConvert.SerializeObject(this.ViewBag, new Newtonsoft.Json.Converters.JavaScriptDateTimeConverter()));
         }
@@ -210,6 +264,7 @@ namespace NFinal.Action
         /// <param name="json">json字符串</param>
         public void AjaxReturn(string json)
         {
+            CloseConnection();
             this.SetResponseHeader(NFinal.Constant.HeaderContentType, NFinal.Constant.ResponseContentType_Application_json);
             this.Write(json);
         }
@@ -219,6 +274,7 @@ namespace NFinal.Action
         /// <param name="obj">bool变量</param>
         public  void AjaxReturn(bool obj)
         {
+            CloseConnection();
             this.SetResponseHeader(NFinal.Constant.HeaderContentType, NFinal.Constant.ResponseContentType_Application_json);
             this.Write(obj ? NFinal.Constant.trueString : NFinal.Constant.falseString);
         }
@@ -280,6 +336,7 @@ namespace NFinal.Action
         /// <param name="msg">消息</param>
         public void AjaxReturn(string json, int code, string msg)
         {
+            CloseConnection();
             this.SetResponseHeader(Constant.HeaderContentType, NFinal.Constant.ResponseContentType_Application_json);
             this.Write(Constant.AjaxReturnJson_Code);
             this.Write(code);
@@ -352,6 +409,7 @@ namespace NFinal.Action
         /// <param name="t"></param>
         public bool RenderModel<T>(string url, T t)
         {
+            CloseConnection();
             NFinal.ViewDelegateData dele;
             if (NFinal.ViewHelper.viewFastDic != null)
             {
