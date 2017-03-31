@@ -7,11 +7,8 @@ namespace NFinal.Exceptions
 {
     public class DataBaseNotSupportException:Exception
     {
-        private string message = null;
-        public override string Message { get { return message; } }
-        public DataBaseNotSupportException(string database)
+        public DataBaseNotSupportException(string database):base(string.Format("数据库{0}不支持！", database))
         {
-            message = string.Format("数据库{0}不支持！", database);
         }
     }
 }

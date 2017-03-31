@@ -214,6 +214,9 @@
     <Compile Include="..\nfinal\config\global\Plug.cs">
       <Link>Core\Config\Global\Plug.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Config\Global\ProjectType.cs">
+      <Link>Core\Config\Global\ProjectType.cs</Link>
+    </Compile>
     <Compile Include="..\nfinal\config\plug\ConnectionString.cs">
       <Link>Core\Config\Plug\ConnectionString.cs</Link>
     </Compile>

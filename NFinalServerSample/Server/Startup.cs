@@ -9,16 +9,7 @@ namespace NFinalServer
     {
         public void Configuration(IAppBuilder appBuilder)
         {
-            NFinal.Middleware.Config.MiddlewareConfigOptions options = new NFinal.Middleware.Config.MiddlewareConfigOptions();
-            options.plugs = new NFinal.Plugs.Plug[] {
-                new NFinal.Plugs.Plug { filePath = System.Reflection.Assembly.GetEntryAssembly().Location ,subDomain="www"} };
-            options.debug = true;
-            options.debugUrl = "http://localhost:8083";
-            options.customErrors = new NFinal.Middleware.Config.CustomErrors();
-            options.customErrors.mode = NFinal.Middleware.Config.Mode.Off;
-            options.defaultDocument = "Index.html";
-            options.urlRouteRule = NFinal.Middleware.Config.UrlRouteRule.AreaControllerCustomActionUrl;
-            appBuilder.Use<NFinal.Middleware.OwinMiddleware>(options);
+            appBuilder.Use<NFinal.Middleware.OwinMiddleware>();
             appBuilder.UseStaticFiles();
         }
     }

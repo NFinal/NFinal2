@@ -1,0 +1,31 @@
+﻿{
+  //插件设置
+  "plugs": [
+    {
+      "enable": true,
+      "name": "NFinalServerSample",
+      "urlPrefix": null,
+      "description": "NFinalServerSample测试网站",
+      "assemblyPath": "/bin/NFinalWebSample.dll",
+      "configPath": "/NFinalWebSample.plug.json"
+    },
+    {
+      "enable": true,
+      "name": "NFinalPlug",
+      "urlPrefix": null,
+      "description": "NFinal插件测试",
+      "assemblyPath": "../../NFinalPlug/bin/Debug/NFinalPlug.dll",
+      "configPath": "../../NFinalPlug/bin/Debug/NFinalPlug.plug.json"
+    }
+  ],
+  //调试设置
+  "debug": {
+    "enable": true,
+    "url": "http:\/\/localhost:55642/",
+    "directory": "/Debug"
+  },
+  //项目类型
+  "projectType": "Console",
+  //首页设置
+  "indexDocument": "/Index.html"
+}

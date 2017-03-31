@@ -134,9 +134,6 @@
     <Compile Include="BaseController.model.cs">
       <DependentUpon>BaseController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Code\my.cs">
-      <DependentUpon>my.nf.json</DependentUpon>
-    </Compile>
     <Compile Include="Code\User.cs" />
     <Compile Include="Code\UserCheck.cs" />
     <Compile Include="Controllers\IndexController.cs" />
@@ -350,10 +347,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Code\my.nf.json" />
+    <None Include="bin\Debug\nfinal.json" />
+    <None Include="bin\Debug\NFinalServer.plug.json" />
     <None Include="packages.config" />
-    <Content Include="Debug\NFinalServer\Controllers\Index\Ajax.html" />
-    <Content Include="Debug\NFinalServer\Controllers\Index\Default.html" />
     <Content Include="Entity\Data.nf.sql" />
     <Content Include="Views\Index\Default.cshtml" />
   </ItemGroup>

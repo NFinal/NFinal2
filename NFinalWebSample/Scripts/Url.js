@@ -10,7 +10,7 @@ function StringFormat() {
 }
 var Url={
 
-    "NFinalWebSample_Controllers_IndexController":{
+    "NFinalPlug_Controllers_IndexController":{
             "INN":function(a)
             {
             return StringFormat("/Index-{0}07.html",a);

@@ -54,8 +54,8 @@ namespace NFinal.Config
                             else
                             {
                                 throw new FileNotFoundException("找不到NFinal插件配置文件："
-                                    + globalConfig.plugs[i].configPath,
-                                    globalConfig.plugs[i].configPath);
+                                    + plugConfigPath,
+                                    plugConfigPath);
                             }
                         }
                     }

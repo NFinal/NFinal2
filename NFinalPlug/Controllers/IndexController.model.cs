@@ -5,7 +5,7 @@ using System.Web;
 using NFinal;
 //此代码由NFinalControllerGenerator生成。
 //http://bbs.nfinal.com
-namespace NFinalWebSample.Controllers.IndexController_Model
+namespace NFinalPlug.Controllers.IndexController_Model
 {
 	public class INN
 	{
@@ -26,6 +26,6 @@ namespace NFinalWebSample.Controllers.IndexController_Model
 		[Newtonsoft.Json.JsonIgnore]
 		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
 		public System.DateTime cc2;
-		public NFinalWebSample.Controllers.parameterModel model;
+		public NFinalPlug.Controllers.parameterModel model;
 	}
 }

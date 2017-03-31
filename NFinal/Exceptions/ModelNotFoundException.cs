@@ -7,11 +7,9 @@ namespace NFinal.Exceptions
 {
     public class ModelNotFoundException: System.Exception
     {
-        private string message = null;
-        public override string Message { get { return message; } }
         public ModelNotFoundException(string fullName)
+            :base("ViewBag实体类未找到！\r\n实体类型为:" + fullName)
         {
-            message = "ViewBag实体类未找到！\r\n实体类型为:" + fullName;
         }
     }
 }

@@ -33,6 +33,9 @@ namespace NFinal.IO
             return absolutePath;
         }
         public static string rootPath =
+#if (NFinalIO)
+                AppContext.BaseDirectory;
+#endif
 #if (NET40 || NET451 || NET461)
                 (AppDomain.CurrentDomain.GetData(".appPath") as string) ?? Environment.CurrentDirectory;
 #endif

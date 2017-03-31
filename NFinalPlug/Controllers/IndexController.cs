@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using NFinal;
 
-namespace NFinalWebSample.Controllers
+namespace NFinalPlug.Controllers
 {
     
     [SubDomain("www")]
@@ -24,7 +24,7 @@ namespace NFinalWebSample.Controllers
         {
             ViewBag.cc2 = DateTime.Now;
             ViewBag.a = "23";
-            this.Render("/NFinalWebSample/Views/Index.cshtml");
+            this.Render("/NFinalPlug/Views/Index.cshtml");
         }
     }
     public class parameterModel

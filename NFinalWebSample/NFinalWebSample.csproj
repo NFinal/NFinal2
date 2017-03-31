@@ -117,31 +117,17 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Debug\NFinalWebSample\Controllers\Index\INN.html" />
-    <Content Include="Debug\NFinalWebSample\Controllers\Index\Show.html" />
-    <Content Include="Index.html" />
-    <Content Include="Scripts\Url.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\IndexController.cs">
-      <LastGenOutput>IndexController1.cs</LastGenOutput>
-    </Compile>
-    <Compile Include="Controllers\IndexController.model.cs">
-      <DependentUpon>IndexController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleMiddleware.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Views\Index.template.cs">
-      <DependentUpon>Index.cshtml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Views\Index.cshtml">
-      <BrowseToURL>~/Debug/CoreWebtest/Controllers/Index/Show.html</BrowseToURL>
-    </Content>
+    <Content Include="nfinal.json" />
+    <Content Include="NFinalWebSample.plug.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

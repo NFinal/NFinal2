@@ -8,25 +8,30 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;NETSTANDARD1_4;NFinalIO</DefineConstants>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\NFinal\Attribute\ViewAttribute.cs" Link="Attribute\ViewAttribute.cs" />
     <Compile Include="..\NFinal\Attribute\ViewBagMemberAttribute.cs" Link="Attribute\ViewBagMemberAttribute.cs" />
+    <Compile Include="..\NFinal\Config\Global\ProjectType.cs" Link="Config\Global\ProjectType.cs" />
     <Compile Include="..\NFinal\Constant.cs" Link="Constant.cs" />
+    <Compile Include="..\NFinal\Extension\StringExtension.cs" Link="Extension\StringExtension.cs" />
     <Compile Include="..\NFinal\IO\FileWriter.cs" Link="FileWriter.cs" />
     <Compile Include="..\NFinal\IO\IWriter.cs" Link="IWriter.cs" />
+    <Compile Include="..\NFinal\IO\Path.cs" Link="Path.cs" />
     <Compile Include="..\NFinal\IO\StreamWriter.cs" Link="StreamWriter.cs" />
     <Compile Include="..\NFinal\IO\StringWriter.cs" Link="StringWriter.cs" />
     <Compile Include="..\NFinal\IO\Writer.cs" Link="Writer.cs" />
-    <Compile Include="..\NFinal\Utility.cs" Link="Utility.cs" />
     <Compile Include="..\NFinal\View\Razor\BasePage.cs" Link="View\Razor\BasePage.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Config\Global\" />
     <Folder Include="View\Razor\" />
     <Folder Include="Attribute\" />
     <Folder Include="View\" />
+    <Folder Include="Extension\" />
   </ItemGroup>
 
 </Project>
