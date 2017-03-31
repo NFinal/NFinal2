@@ -7,7 +7,7 @@
       "urlPrefix": null,
       "description": "NFinalCore测试网站",
       "assemblyPath": "NFinalCoreServerSample.dll",
-      "configPath": "NFinalCoreServerSample.json"
+      "configPath": "NFinalCoreServerSample.plug.json"
     },
     {
       "enable": true,
@@ -15,7 +15,7 @@
       "urlPrefix": null,
       "description": "NFinalCore插件，带控制器和视图",
       "assemblyPath": "../../../../NFinalCorePlug/bin/Debug/netstandard1.5/NFinalCorePlug.dll",
-      "configPath": "../../../../NFinalCorePlug/bin/Debug/netstandard1.5/NFinalCorePlug.json"
+      "configPath": "../../../../NFinalCorePlug/bin/Debug/netstandard1.5/NFinalCorePlug.plug.json"
     }
   ],
   //调试设置
