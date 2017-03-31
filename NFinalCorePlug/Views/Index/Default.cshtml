@@ -1,0 +1,15 @@
+﻿@inherits NFinal.Razor.BasePage<NFinalCorePlug.Controllers.IndexController_Model.Default>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+	<meta http-equiv="Cache-Control" content="no-cache">
+</head>
+<body>
+    <h2>Message:@Model.Message</h2>
+    <h2>siteName：@Model.systemConfig["siteName"].value</h2>
+    <h2>mobile:@Model.systemConfig["mobile"].value</h2>dd
+</body>
+</html>

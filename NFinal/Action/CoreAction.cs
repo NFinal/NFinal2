@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using NFinal.Http;
+using System.Data;
 
 namespace NFinal
 {

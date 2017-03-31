@@ -44,11 +44,16 @@
   <ItemGroup>
     <Compile Remove="Attribute\html5Validate.cs" />
     <Compile Remove="Attribute\pattern.cs" />
+    <Compile Remove="Attribute\SubDomainAttribute.cs" />
     <Compile Remove="Cache\MemoryCache.cs" />
     <Compile Remove="Emit\FastReflection.cs" />
+    <Compile Remove="Middleware\Config\CustomErrors.cs" />
+    <Compile Remove="Middleware\Config\MiddlewareConfigOptions.cs" />
+    <Compile Remove="Middleware\Config\UrlRouteRule.cs" />
     <Compile Remove="Middleware\StringBuilderCache.cs" />
     <Compile Remove="Properties\AssemblyInfo.cs" />
     <Compile Remove="Url\UrlHelper.cs" />
+    <Compile Remove="Utility.cs" />
     <Compile Remove="View\MasterPageModel.cs" />
     <Compile Remove="View\ViewData.cs" />
   </ItemGroup>
@@ -98,7 +103,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Middleware\Config\" />
     <Folder Include="Properties\" />
     <Folder Include="Build\" />
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>

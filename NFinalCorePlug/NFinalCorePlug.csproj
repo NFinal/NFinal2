@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\netstandard1.5\NFinalCorePlug.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="protobuf-net" Version="2.1.0" />
+    <PackageReference Include="StackExchange.Redis" Version="1.2.1" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NFinal\NFinalCore.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="BaseController.model.cs">
+      <DependentUpon>BaseController.cs</DependentUpon>
+    </Compile>
+    <Compile Update="BaseTableController.model.cs">
+      <DependentUpon>BaseTableController.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Controllers\IndexController.cs">
+      <Generator>
+      </Generator>
+    </Compile>
+    <Compile Update="Controllers\IndexController.model.cs">
+      <DependentUpon>IndexController.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Controllers\UserController.model.cs">
+      <DependentUpon>UserController.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Index\Default.template.cs">
+      <DependentUpon>Default.cshtml</DependentUpon>
+    </Compile>
+    <Compile Update="Controllers\UserController.cs">
+      <Generator />
+    </Compile>
+    <Compile Update="BaseController.cs">
+      <Generator />
+    </Compile>
+    <Compile Update="BaseTableController.cs">
+      <Generator />
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Views\Index\Default.cshtml">
+      <BrowseToURL>~/Debug/CoreWebtest/Controllers/Index/Show.html</BrowseToURL>
+      <Generator>
+      </Generator>
+    </None>
+  </ItemGroup>
+</Project>

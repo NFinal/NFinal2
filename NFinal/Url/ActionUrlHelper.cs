@@ -359,11 +359,11 @@ namespace NFinal.Url
                 }
             }
         }
-        public static void GetUrlRouteJsContent()
+        public static void GetUrlRouteJsContent(NFinal.Config.Global.GlobalConfig globalConfig)
         {
             UrlRouteJsModel model = new UrlRouteJsModel();
             model.formatControllerDictionary = formatControllerDictionary;
-            string directory = NFinal.Utility.MapPath("/Scripts");
+            string directory = NFinal.IO.Path.MapPath(globalConfig.projectType,"/Scripts");
             if (!System.IO.Directory.Exists(directory))
             {
                 System.IO.Directory.CreateDirectory(directory);
@@ -371,49 +371,37 @@ namespace NFinal.Url
             NFinal.IO.FileWriter fileWriter = new IO.FileWriter(System.IO.Path.Combine(directory, "Url.js"));
             NFinal.Url.UrlRouteJs.Render(fileWriter, model);
             fileWriter.Dispose();
-            directory = System.IO.Path.Combine(NFinal.Utility.GetWebApplicationRoot(), "Scripts");
-            if (!System.IO.Directory.Exists(directory))
-            {
-                System.IO.Directory.CreateDirectory(directory);
-            }
-            fileWriter = new IO.FileWriter(System.IO.Path.Combine(directory, "Url.js"));
-            NFinal.Url.UrlRouteJs.Render(fileWriter, model);
-            fileWriter.Dispose();
         }
-        public static void GenerateActionDebugHtml(NFinal.Middleware.Config.MiddlewareConfigOptions options)
+        public static void GenerateActionDebugHtml(NFinal.Config.Global.GlobalConfig globalConfig)
         {
             NFinal.IO.FileWriter fileWriter;
             DebugData debugData;
             string fileName;
-            string direcotyName;
-            if (options.debugDirectory == null)
+            string relativePath;
+            string absolutePath;
+            if (globalConfig.debug.directory == null)
             {
-                options.debugDirectory = "Debug";
+                globalConfig.debug.directory = "Debug";
             }
-
-            string webApplicationRoot = NFinal.Utility.GetWebApplicationRoot();
             foreach (var controller in formatControllerDictionary)
             {
-                direcotyName ="/" +options.debugDirectory.TrimStart('/')+"/"+ controller.Key.Namespace.Replace('.','/') + "/" + ActionUrlHelper.GetControllerName(controller.Key);
-                string[] directoryTemp= direcotyName.Split('/');
-                string[] directoryList = new string[directoryTemp.Length+1];
-                directoryList[0] = webApplicationRoot;
-                directoryTemp.CopyTo(directoryList, 1);
-                direcotyName =System.IO.Path.Combine(directoryList);
-                if (!System.IO.Directory.Exists(direcotyName))
+                relativePath = "/" + globalConfig.debug.directory.TrimStart('/')+"/"+ controller.Key.Namespace.Replace('.','/') + "/" + ActionUrlHelper.GetControllerName(controller.Key);
+                absolutePath = NFinal.IO.Path.GetProjectPath(relativePath);
+
+                if (!System.IO.Directory.Exists(absolutePath))
                 {
-                    System.IO.Directory.CreateDirectory(direcotyName);
+                    System.IO.Directory.CreateDirectory(absolutePath);
                 }
                 foreach (var method in controller.Value)
                 {
-                    fileName = System.IO.Path.Combine(direcotyName, method.Key + ".html");
+                    fileName = System.IO.Path.Combine(absolutePath, method.Key + ".html");
                     if (!System.IO.File.Exists(fileName))
                     {
                         debugData = new NFinal.Url.DebugData();
                         debugData.classFullName = controller.Key.FullName;
                         debugData.methodName = method.Key;
                         debugData.formatData = method.Value;
-                        debugData.debugUrl = options.debugUrl;
+                        debugData.debugUrl = globalConfig.debug.url;
                         using (fileWriter = new IO.FileWriter(fileName))
                         {
                             NFinal.Url.Debug.Render(fileWriter, debugData);

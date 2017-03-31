@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
+using NFinal;
 
 namespace NFinal
 {
@@ -72,7 +73,7 @@ namespace NFinal
                 }
                 sw.Write(item.Key);
                 sw.Write("=");
-                sw.Write(NFinal.Utility.UrlEncode(item.Value));
+                sw.Write(item.Value.value.UrlEncode());
             }
             return sw.ToString();
         }

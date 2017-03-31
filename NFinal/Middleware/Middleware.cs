@@ -24,34 +24,27 @@ namespace NFinal.Middleware
         public readonly InvokeDelegate<TContext> _next;
         public static NFinal.Collections.FastDictionary<ActionData<TContext,TRequest>> actionFastDic=null;
         public static Task<int> FinishedTask = FromResult(0);
-        private static string rootDir = null;
         private static bool debug;
         public static string defaultUrl = null;
-        public static string defaultSubDomain=null;
-        public static Config.CustomErrors customErrors = null;
-        public static Config.UrlRouteRule urlRouteRule;
-        public Middleware(InvokeDelegate<TContext> next,NFinal.Middleware.Config.MiddlewareConfigOptions options)
+        public Middleware(InvokeDelegate<TContext> next)
         {
-            customErrors = options.customErrors;
-            defaultSubDomain = options.defaultSubDomain;
-            defaultUrl ="/"+options.defaultDocument;
-            urlRouteRule = options.urlRouteRule;
+            ////初始化插件
+            if (!NFinal.Plugs.PlugManager.isInit)
+            {
+                NFinal.Plugs.PlugManager.Init();
+            }
+            defaultUrl = NFinal.Config.Configration.globalConfig.indexDocument;
+            debug = NFinal.Config.Configration.globalConfig.debug.enable;
             //初始化Action
             if (!ActionHelper.isInit)
             {
-                ActionHelper.Init<TContext, TRequest>(options);
+                ActionHelper.Init<TContext, TRequest>(NFinal.Config.Configration.globalConfig);
             }
             //初始化View
             if (!ViewHelper.isInit)
             {
-                ViewHelper.Init(options);
+                ViewHelper.Init(NFinal.Config.Configration.globalConfig);
             }
-            ////初始化Config
-            //if (!Config.Configration.isInit)
-            //{
-            //    Config.Configration.Init(options);
-            //}
-            debug = options.debug;
             this._next = next;
         }
         /// <summary>
@@ -86,31 +79,13 @@ namespace NFinal.Middleware
             string actionKey;
             int shortActionKeyLength;
             //获取actionKey
-            if (defaultSubDomain != null)
+            if (debug)
             {
-                if (debug)
-                {
-                    actionKey = NFinal.Url.ActionKey.GetActionKey(defaultSubDomain, GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
-                }
-                else
-                {
-                    actionKey = NFinal.Url.ActionKey.GetActionKey(GetSubDomain(context), GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
-                }
+                actionKey = NFinal.Url.ActionKey.GetActionKey(GetRequestMethod(context), requestPath,out shortActionKeyLength);
             }
             else
             {
-                if (debug)
-                {
-                    actionKey = NFinal.Url.ActionKey.GetActionKey(null, GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
-                }
-                else
-                {
-                    actionKey = NFinal.Url.ActionKey.GetActionKey(null, GetRequestMethod(context), requestPath,out shortActionKeyLength, urlRouteRule);
-                }
-            }
-            if (rootDir == null)
-            {
-                rootDir = NFinal.Utility.rootPath;
+                actionKey = NFinal.Url.ActionKey.GetActionKey(GetRequestMethod(context), requestPath,out shortActionKeyLength);
             }
             bool hasError = false;
             NFinal.Action.ActionData<TContext,TRequest> actionData;
@@ -142,7 +117,7 @@ namespace NFinal.Middleware
                 catch
                 {
                     hasError = true;
-                    if (customErrors.mode ==NFinal.Middleware.Config.Mode.Off)
+                    if (actionData.plugConfig.customErrors.mode ==Config.Plug.CustomErrorsMode.Off)
                     {
                         using (IAction<TContext, TRequest> controller = GetAction(context))
                         {
@@ -166,18 +141,15 @@ namespace NFinal.Middleware
                 }
                 NameValueCollection parameters = GetParameters(request);
                 //获取Url中的参数
-                if (urlRouteRule ==NFinal.Middleware.Config.UrlRouteRule.AreaControllerCustomActionUrl)
+                if (actionData.actionUrlData != null && !actionData.actionUrlData.hasNoParamsInUrl)
                 {
-                    if (actionData.actionUrlData != null && !actionData.actionUrlData.hasNoParamsInUrl)
+                    if (actionData.actionUrlData.isSimpleUrl)
                     {
-                        if (actionData.actionUrlData.isSimpleUrl)
-                        {
-                            NFinal.Url.ActionUrlHelper.SimpleParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames, shortActionKeyLength, actionData.actionUrlData.extensionLength);
-                        }
-                        else
-                        {
-                            NFinal.Url.ActionUrlHelper.RegexParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames,actionData.actionUrlData.parameterRegex);
-                        }
+                        NFinal.Url.ActionUrlHelper.SimpleParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames, shortActionKeyLength, actionData.actionUrlData.extensionLength);
+                    }
+                    else
+                    {
+                        NFinal.Url.ActionUrlHelper.RegexParse(requestPath, parameters, actionData.actionUrlData.actionUrlNames,actionData.actionUrlData.parameterRegex);
                     }
                 }
                 //生产环境下
@@ -190,7 +162,7 @@ namespace NFinal.Middleware
                     catch(Exception)
                     {
                         hasError = true;
-                        if (customErrors.mode == NFinal.Middleware.Config.Mode.Off)
+                        if (actionData.plugConfig.customErrors.mode == Config.Plug.CustomErrorsMode.Off)
                         {
                             using (IAction<TContext, TRequest> controller = GetAction(context))
                             {
@@ -207,7 +179,7 @@ namespace NFinal.Middleware
                         using (IAction<TContext, TRequest> controller = GetAction(context))
                         {
                             controller.Initialization(context,null, null, request, CompressMode.GZip);
-                            controller.Redirect(customErrors.defaultRedirect);
+                            controller.Redirect(actionData.plugConfig.customErrors.defaultRedirect);
                         }
                     }
                 }

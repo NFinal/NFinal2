@@ -323,7 +323,7 @@ namespace NFinal
                             {
                                 for (int i = 0; i < formArray.Length; i += 2)
                                 {
-                                    request.parameters.Add(formArray[i], NFinal.Utility.UrlDecode(formArray[i + 1]));
+                                    request.parameters.Add(formArray[i], formArray[i + 1].UrlDecode());
                                 }
                             }
                         }
@@ -392,7 +392,7 @@ namespace NFinal
                 {
                     for (int i = 0; i < queryArray.Length; i += 2)
                     {
-                        request.parameters.Add(queryArray[i], NFinal.Utility.UrlDecode(queryArray[i + 1]));
+                        request.parameters.Add(queryArray[i], queryArray[i + 1].UrlDecode());
                     }
                 }
             }

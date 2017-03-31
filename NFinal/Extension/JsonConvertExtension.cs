@@ -21,5 +21,9 @@ namespace NFinal
             DateTime dt = DateTime.ParseExact(datetime, fmtDate, ciDate);
             return dt;
         }
+        public static string ToJson(this bool obj)
+        {
+            return obj ? "true" : "false";
+        }
     }
 }

@@ -111,6 +111,9 @@
     <Compile Include="..\nfinal\action\IAction.cs">
       <Link>Core\Action\IAction.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Action\IConnection.cs">
+      <Link>Core\Action\IConnection.cs</Link>
+    </Compile>
     <Compile Include="..\nfinal\action\OwinAction.cs">
       <Link>Core\Action\OwinAction.cs</Link>
     </Compile>
@@ -230,6 +233,9 @@
     </Compile>
     <Compile Include="..\nfinal\exceptions\DuplicateViewUrlException.cs">
       <Link>Core\Exceptions\DuplicateViewUrlException.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Exceptions\IConnectionNotImplementedException.cs">
+      <Link>Core\Exceptions\IConnectionNotImplementedException.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\exceptions\InvalidControllerNameException.cs">
       <Link>Core\Exceptions\InvalidControllerNameException.cs</Link>
@@ -369,6 +375,9 @@
     <Compile Include="..\nfinal\json\NewtonsoftJsonSerialize.cs">
       <Link>Core\Json\NewtonsoftJsonSerialize.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Json\SimpleJson.cs">
+      <Link>Core\Json\SimpleJson.cs</Link>
+    </Compile>
     <Compile Include="..\nfinal\logs\ConsoleLogger.cs">
       <Link>Core\Logs\ConsoleLogger.cs</Link>
     </Compile>
@@ -404,6 +413,9 @@
     </Compile>
     <Compile Include="..\nfinal\middleware\OwinMiddleware.cs">
       <Link>Core\Middleware\OwinMiddleware.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Model\GRUDHelper.cs">
+      <Link>Core\Model\GRUDHelper.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\model\ModelHelper.cs">
       <Link>Core\Model\ModelHelper.cs</Link>

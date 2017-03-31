@@ -18,12 +18,11 @@ namespace NFinal.Action
         public string actionUrl;
         public Type viewBagType;
         public ActionExecute<TContext,TRequest> actionExecute;
-
+        public NFinal.Config.Plug.PlugConfig plugConfig;
         public System.Reflection.ICustomAttributeProvider methodProvider;
         public NFinal.Filter.IBaseFilter<TContext>[] IBaseFilters;
         public NFinal.Filter.IRequestFilter<TRequest>[] IRequestFilters;
         public NFinal.Filter.IResponseFilter[] IResponseFilters;
-        public string subDomain;
         public string urlString;
         public string className;
         public string methodName;
@@ -40,7 +39,7 @@ namespace NFinal.Action
         //public static Dictionary<string, ActionExecute> actionDic = new Dictionary<string, ActionExecute>();
         //public static NFinal.Collections.FastDictionary<ActionData> actionFastDic;
         public static bool isInit = false;
-        public static void Init<TContext, TRequest>(NFinal.Middleware.Config.MiddlewareConfigOptions options)
+        public static void Init<TContext, TRequest>(NFinal.Config.Global.GlobalConfig globalConfig)
         {
             Module[] modules = null;
             Type[] types = null;
@@ -49,37 +48,7 @@ namespace NFinal.Action
             //List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList = new List<KeyValuePair<string, ActionData<TContext, TRequest>>>();
             Dictionary<Type, Dictionary<string, NFinal.Url.FormatData>> formatControllerDictionary = new Dictionary<Type, Dictionary<string, NFinal.Url.FormatData>>();
             Type controller = null;
-
-
-
-            //if (options.plugs == null)
-            //{
-            //    subDomain = options.defaultSubDomain;
-            //    Assembly assembly = Assembly.GetExecutingAssembly();
-            //    modules = assembly.GetModules();
-            //    for (int j = 0; j < modules.Length; j++)
-            //    {
-            //        types = modules[j].GetTypes();
-            //        for (int k = 0; k < types.Length; k++)
-            //        {
-            //            controller = types[k];
-            //            //该类型继承自IAction并且其泛不是dynamic类型
-            //            if (typeof(NFinal.IAction<TContext, TRequest>).IsAssignableFrom(controller))
-            //            {
-            //                if (!controller.IsGenericType)
-            //                {
-            //                    actionData = new ActionData<TContext, TRequest>();
-            //                    actionData.subDomain = subDomain;
-            //                    AddActionData(actionDataList, actionData, controller, options);
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            NFinal.Plugs.Loader.IAssemblyLoader assemblyLoader = new NFinal.Plugs.Loader.AssemblyLoader();
-            for (int i = 0; i < options.plugs.Length; i++)
+            for (int i = 0; i < NFinal.Plugs.PlugManager.plugInfoList.Count; i++)
             {
                 /////////////////////////////////////////////////////////////////////
                 ///
@@ -95,8 +64,9 @@ namespace NFinal.Action
                 ///仅加载自己
                 ///
                 /////////////////////////////////////////////////////////////////////
-                assemblyLoader.Load(options.plugs[i].filePath);
-                Assembly assembly = assemblyLoader.assemblyDictionary[options.plugs[i].filePath];
+                NFinal.Plugs.PlugInfo plugInfo = NFinal.Plugs.PlugManager.plugInfoList[i];
+                Assembly assembly = plugInfo.assembly;
+               
                 modules = assembly.GetModules();
                 for (int j = 0; j < modules.Length; j++)
                 {
@@ -118,7 +88,7 @@ namespace NFinal.Action
 #endif
                             {
                                 Dictionary<string, NFinal.Url.FormatData> formatMethodDic = new Dictionary<string, NFinal.Url.FormatData>();
-                                AddActionData(actionDataDictionary, formatMethodDic, assembly, controller, options);
+                                AddActionData(actionDataDictionary, formatMethodDic, assembly, controller, globalConfig, plugInfo);
                                 formatControllerDictionary.Add(controller, formatMethodDic);
                             }
                         }
@@ -127,8 +97,11 @@ namespace NFinal.Action
                 }
             }
             NFinal.Url.ActionUrlHelper.formatControllerDictionary= formatControllerDictionary;
-            NFinal.Url.ActionUrlHelper.GetUrlRouteJsContent();
-            NFinal.Url.ActionUrlHelper.GenerateActionDebugHtml(options);
+            if (globalConfig.debug.enable)
+            {
+                NFinal.Url.ActionUrlHelper.GetUrlRouteJsContent(globalConfig);
+                NFinal.Url.ActionUrlHelper.GenerateActionDebugHtml(globalConfig);
+            }
             //}
             //添加图标响应
             //Icon.Favicon.Init(actionDataList);
@@ -137,7 +110,9 @@ namespace NFinal.Action
         }
         public static void AddActionData<TContext, TRequest>(Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
             Dictionary<string, NFinal.Url.FormatData> formatMethodDictionary,
-            Assembly assembly,Type controller, NFinal.Middleware.Config.MiddlewareConfigOptions options)
+            Assembly assembly,Type controller, 
+            NFinal.Config.Global.GlobalConfig globalConfig,
+            NFinal.Plugs.PlugInfo plugInfo)
         {
             Type viewBagType = null;
             MethodInfo methodInfo = null;
@@ -148,14 +123,13 @@ namespace NFinal.Action
                 string[] actionKeys;
                 string controllerName;
                 string areaName;
-                string subDomain;
                 string actionUrl;
                 string actionName;
                 string[] method;
                 UrlAttribute urlAttribute;
                 NFinal.Url.ActionUrlData actionUrlData;
                 ActionData<TContext, TRequest> actionData;
-                GetControllerUrl(out controllerName, out areaName, out subDomain, controller, options);
+                GetControllerUrl(out controllerName, out areaName, controller, globalConfig);
                 actions = controller.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public);
                 for (int m = 0; m < actions.Length; m++)
                 {
@@ -165,9 +139,9 @@ namespace NFinal.Action
                         continue;
                     }
                     
-                    actionKeys = GetActionKeys(controllerName, areaName, subDomain, out actionUrl, out actionName, out method,
+                    actionKeys = GetActionKeys(controllerName, areaName, out actionUrl, out actionName, out method,
                         out urlAttribute,out actionUrlData,
-                        actions[m], options);
+                        actions[m], globalConfig,plugInfo);
                     actionData = new ActionData<TContext, TRequest>();
                     if (urlAttribute == null)
                     {
@@ -186,10 +160,10 @@ namespace NFinal.Action
                     actionData.actionUrlData = actionUrlData;
                     actionData.controllerName = controllerName;
                     actionData.areaName = areaName;
-                    actionData.subDomain = subDomain;
                     actionData.actionUrl = actionUrl;
                     actionData.actionName = actionName;
                     actionData.method = method;
+                    actionData.plugConfig = plugInfo.config;
                     if (actionData.actionUrlData != null)
                     {
                         formatMethodDictionary.Add(actions[m].Name, new NFinal.Url.FormatData(actionData.actionUrlData.formatUrl, actionData.actionUrlData.actionUrlNames));
@@ -221,11 +195,10 @@ namespace NFinal.Action
                 }
             }
         }
-        public static void GetControllerUrl(out string controllerName, out string areaName, out string subDomain, Type controller, NFinal.Middleware.Config.MiddlewareConfigOptions options)
+        public static void GetControllerUrl(out string controllerName, out string areaName, Type controller, NFinal.Config.Global.GlobalConfig globalConfig)
         {
             ControllerAttribute[] controllerAttributes = null;
             AreaAttribute[] areaAttributes = null;
-            SubDomainAttribute[] subDomainAttributes = null;
             controllerAttributes = (ControllerAttribute[])
 #if (NET40 || NET451 || NET461)
                 controller
@@ -265,107 +238,69 @@ namespace NFinal.Action
             {
                 areaName = null;
             }
-            subDomainAttributes = (SubDomainAttribute[])
-#if (NET40 || NET451 || NET461)
-                controller
-#endif
-#if NETCORE
-                controller.GetTypeInfo()
-#endif   
-                .GetCustomAttributes(typeof(SubDomainAttribute), true);
-            if (subDomainAttributes.Length > 0)
-            {
-                subDomain = subDomainAttributes[0].Name;
-            }
-            else
-            {
-                subDomain = options.defaultSubDomain;
-            }
         }
-        public static string[] GetActionKeys(string controllerName, string areaName, string subDomain,
+        public static string[] GetActionKeys(string controllerName, string areaName,
             out string actionUrl, out string actionName, out string[] method,
             out UrlAttribute urlAttribute,out NFinal.Url.ActionUrlData actionUrlData,
-            MethodInfo methodInfo, NFinal.Middleware.Config.MiddlewareConfigOptions options)
+            MethodInfo methodInfo, NFinal.Config.Global.GlobalConfig globalConfig,
+            NFinal.Plugs.PlugInfo plugInfo)
         {
-            
+            string urlPrefix = null;
+            if (plugInfo.urlPrefix?.Length > 0)
+            {
+                urlPrefix = plugInfo.urlPrefix;
+            }
             List<string> actionKeys = new List<string>();
             actionUrlData = null;
             method = null;
             urlAttribute = null;
             actionUrl = null;
             actionName = null;
-            if (options.urlRouteRule == NFinal.Middleware.Config.UrlRouteRule.AreaControllerActionParameters)
-            {
-                if (!string.IsNullOrEmpty(areaName))
-                {
-                    actionUrl = "/" + areaName;
-                }
-                if (!string.IsNullOrEmpty(controllerName))
-                {
-                    actionUrl += "/" + controllerName;
-                }
-                ActionAttribute[] actionAttributes = null;
-                actionAttributes = (ActionAttribute[])methodInfo.GetCustomAttributes(typeof(ActionAttribute), true);
-                if (actionAttributes.Length > 0)
-                {
-                    actionName = actionAttributes[0].Name;
-                }
-                else
-                {
-                    actionName = methodInfo.Name;
-                }
-                if (!string.IsNullOrEmpty(actionName))
-                {
-                    actionUrl += "/" + actionName + options.defaultSuffix;
-                }
-            }
-            else if (options.urlRouteRule == NFinal.Middleware.Config.UrlRouteRule.AreaControllerCustomActionUrl)
-            {
-                if (!string.IsNullOrEmpty(areaName))
-                {
-                    actionUrl += "/" + areaName;
-                }
-                if (!string.IsNullOrEmpty(controllerName))
-                {
-                    actionUrl += "/" + controllerName;
-                }
 
-                bool hasUrlAttribute = false;
-                var attributes = methodInfo.GetCustomAttributes(true);
-                foreach (var attr in attributes)
-                {
-                    if (attr
+            if (!string.IsNullOrEmpty(areaName))
+            {
+                actionUrl += "/" + areaName;
+            }
+            if (!string.IsNullOrEmpty(controllerName))
+            {
+                actionUrl += "/" + controllerName;
+            }
+
+            bool hasUrlAttribute = false;
+            var attributes = methodInfo.GetCustomAttributes(true);
+            foreach (var attr in attributes)
+            {
+                if (attr
 #if (NET40 || NET451 || NET461)
-                        .GetType()
+                    .GetType()
 #endif
 #if NETCORE
-                        .GetType().GetTypeInfo()
+                    .GetType().GetTypeInfo()
 #endif
-                        .IsSubclassOf(typeof(UrlAttribute)))
-                    {
-                        hasUrlAttribute = true;
-                        urlAttribute = (UrlAttribute)attr;
-                        actionUrlData = NFinal.Url.ActionUrlHelper.GetActionUrlData(urlAttribute.urlString);
-                        actionUrl = actionUrlData.actionKey;
-                        break;
-                    } 
-                }
-                if (!hasUrlAttribute)
+                    .IsSubclassOf(typeof(UrlAttribute)))
                 {
-                    actionUrl += "/" + methodInfo.Name + options.defaultSuffix;
-                }
+                    hasUrlAttribute = true;
+                    urlAttribute = (UrlAttribute)attr;
+                    actionUrlData = NFinal.Url.ActionUrlHelper.GetActionUrlData(urlAttribute.urlString);
+                    actionUrl = actionUrlData.actionKey;
+                    break;
+                } 
+            }
+            if (!hasUrlAttribute)
+            {
+                actionUrl += "/" + methodInfo.Name + plugInfo.config.url.extension;
             }
             if (method == null)
             {
-                method = options.verbs;
+                method = plugInfo.config.verbs;
                 foreach (var m in method)
                 {
-                    actionKeys.Add(subDomain + ":" + m + ":" + actionUrl);
+                    actionKeys.Add( m + ":" + actionUrl);
                 }
             }
             else
             {
-                actionKeys.Add(subDomain + ":" + method + ":" + actionUrl);
+                actionKeys.Add(method + ":" + actionUrl);
             }
             
             return actionKeys.ToArray();

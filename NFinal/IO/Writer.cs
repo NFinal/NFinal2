@@ -26,8 +26,7 @@ namespace NFinal.IO
         /// <param name="value"></param>
         public void WriteJsonReverseString(string value)
         {
-            byte[] buffer = NFinal.Constant.encoding.GetBytes(value);
-            buffer = NFinal.Utility.GetJsonString(buffer, 0, buffer.Length);
+            byte[] buffer = value.JsonEncodeBytes();
             Write(buffer, 0, buffer.Length);
         }
         //public static void Write(this NFinal.IO.IWriter writer, dynamic value)

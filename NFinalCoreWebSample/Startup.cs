@@ -22,16 +22,7 @@ namespace NFinalCoreWebSample
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            NFinal.Middleware.Config.MiddlewareConfigOptions options = new NFinal.Middleware.Config.MiddlewareConfigOptions();
-            options.plugs = new NFinal.Plugs.Plug[] {
-                new NFinal.Plugs.Plug { filePath = System.Reflection.Assembly.GetEntryAssembly().Location ,subDomain="www"} };
-            options.debug = true;
-            options.debugUrl = "http://localhost:59893/";
-            options.customErrors = new NFinal.Middleware.Config.CustomErrors();
-            options.customErrors.mode = NFinal.Middleware.Config.Mode.Off;
-            options.defaultDocument = "Index.html";
-            options.urlRouteRule = NFinal.Middleware.Config.UrlRouteRule.AreaControllerCustomActionUrl;
-            app.UseMiddleware<NFinal.Middleware.CoreMiddleware>(options);
+            app.UseMiddleware<NFinal.Middleware.CoreMiddleware>();
             //app.Run(async (context) =>
             //{
             //    await context.Response.WriteAsync("Hello World!");

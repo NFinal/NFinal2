@@ -10,7 +10,7 @@ namespace NFinal.Action
     /// </summary>
     /// <typeparam name="TContext">上下文IOwinContext,Enviroment,Context</typeparam>
     /// <typeparam name="TRequest">Request</typeparam>
-    public interface IAction<TContext, TRequest> :IO.IWriter,IDisposable
+    public interface IAction<TContext, TRequest> : IO.IWriter,IDisposable
     {
         /// <summary>
         /// 初始化

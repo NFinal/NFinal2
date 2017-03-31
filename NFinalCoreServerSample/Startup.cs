@@ -15,16 +15,8 @@ namespace NFinalCoreServer
     {
         public void Configure(IApplicationBuilder app)
         {
-            NFinal.Middleware.Config.MiddlewareConfigOptions options = new NFinal.Middleware.Config.MiddlewareConfigOptions();
-            options.plugs = new NFinal.Plugs.Plug[] {
-                new NFinal.Plugs.Plug { filePath = System.Reflection.Assembly.GetEntryAssembly().Location ,subDomain="www"} };
-            options.debug = true;
-            options.debugUrl = "http://localhost:8083";
-            options.customErrors = new NFinal.Middleware.Config.CustomErrors();
-            options.customErrors.mode = NFinal.Middleware.Config.Mode.Off;
-            options.defaultDocument = "Index.html";
-            options.urlRouteRule = NFinal.Middleware.Config.UrlRouteRule.AreaControllerCustomActionUrl;
-            app.UseMiddleware<NFinal.Middleware.CoreMiddleware>(options);
+            string filePath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            app.UseMiddleware<NFinal.Middleware.CoreMiddleware>();
             //app.Run(async (context) =>
             //{
             //    await context.Response.WriteAsync("Hello World!");

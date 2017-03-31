@@ -4,6 +4,11 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="bin\Debug\netcoreapp1.1\nfinal.json" />
+    <None Include="bin\Debug\netcoreapp1.1\NFinalCoreServerSample.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.1" />
@@ -17,35 +22,17 @@
     <ProjectReference Include="..\NFinal\NFinalCore.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Controllers\IndexController.cs">
-      <Generator>
-      </Generator>
-    </Compile>
-    <Compile Update="Controllers\IndexController.model.cs">
-      <DependentUpon>IndexController.cs</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Index\Default.template.cs">
-      <DependentUpon>Default.cshtml</DependentUpon>
-    </Compile>
-    <None Update="Views\Index\Default.cshtml">
-      <Generator>
-      </Generator>
-      <BrowseToURL>~/Debug/CoreWebtest/Controllers/Index/Show.html</BrowseToURL>
-    </None>
-    <Compile Update="Controllers\UserController.cs">
+    <Compile Update="BaseTableController.cs">
       <Generator />
     </Compile>
-    <Compile Update="Controllers\UserController.model.cs">
-      <DependentUpon>UserController.cs</DependentUpon>
-    </Compile>
-    <Compile Update="BaseController.cs">
-      <Generator />
-    </Compile>
-    <Compile Update="BaseController.model.cs">
-      <DependentUpon>BaseController.cs</DependentUpon>
+    <Compile Update="BaseTableController.model.cs">
+      <DependentUpon>BaseTableController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <PropertyGroup>
     <RuntimeIdentifiers>win7-x64;win7-x86;win10-x64;win10-x86;centos.7-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
   </PropertyGroup>
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using NFinal.Http;
 
@@ -185,6 +186,7 @@ namespace NFinal
         {
             return context.GetRequestBody();
         }
+
         #endregion
     }
 }

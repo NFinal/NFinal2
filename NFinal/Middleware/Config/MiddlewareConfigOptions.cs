@@ -11,16 +11,16 @@ namespace NFinal.Middleware.Config
         /// <summary>
         /// 插件集合
         /// </summary>
-        public NFinal.Plugs.Plug[] plugs;
+        public NFinal.Plugs.PlugInfo[] plugs;
         /// <summary>
         /// 是否是调试状态
         /// </summary>
         public bool debug = true;
         public string debugDirectory = "Debug";
         /// <summary>
-        /// 默认文档
+        /// 首页文档
         /// </summary>
-        public string defaultDocument = "Index.html";
+        public string IndexDocument = "Index.html";
         /// <summary>
         /// 默认后缀
         /// </summary>
@@ -36,7 +36,7 @@ namespace NFinal.Middleware.Config
         /// <summary>
         /// 默认二级域名(当主机为localhost,需要一个默认的二级域名)。
         /// </summary>
-        public string defaultSubDomain = "www";
+        //public string defaultSubDomain = "www";
         /// <summary>
         /// 服务器可接受的请求类型
         /// </summary>

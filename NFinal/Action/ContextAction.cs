@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.Owin;
 using NFinal.Owin;
 using NFinal.Http;
+using System.Data;
 
 namespace NFinal
 {

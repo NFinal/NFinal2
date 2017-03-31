@@ -11,6 +11,9 @@ namespace NFinalCoreWebSample
     {
         public static void Main(string[] args)
         {
+            string a = NFinal.IO.Path.GetApplicationPath("/a");
+            string b = NFinal.IO.Path.GetProjectPath("/b");
+            string c = Directory.GetCurrentDirectory();
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseUrls("localhost:8083")

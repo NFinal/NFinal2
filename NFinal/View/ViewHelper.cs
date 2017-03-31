@@ -19,20 +19,18 @@ namespace NFinal
         public static bool isInit = false;
         //public static Dictionary<string, NFinal.ViewDelegateData>  dicViews = new Dictionary<string, NFinal.ViewDelegateData>();
         public static NFinal.Collections.FastDictionary<NFinal.ViewDelegateData> viewFastDic = null;
-        public static void Init(NFinal.Middleware.Config.MiddlewareConfigOptions options)
+        public static void Init(NFinal.Config.Global.GlobalConfig globalConfig)
         {
-            NFinal.Plugs.Plug plug = null;
+            NFinal.Plugs.PlugInfo plug = null;
             Assembly assembly = null;
             Module[] modules= null;
             NFinal.ViewDelegateData dele;
             ViewAttribute viewAttr;
             Dictionary<string, ViewDelegateData> viewDataDictionary = new Dictionary<string, NFinal.ViewDelegateData>();
-            NFinal.Plugs.Loader.IAssemblyLoader assemblyLoader = new NFinal.Plugs.Loader.AssemblyLoader();
-            for (int i = 0; i < options.plugs.Length; i++)
+            for (int i = 0; i < NFinal.Plugs.PlugManager.plugInfoList.Count; i++)
             {
-                plug = options.plugs[i];
-                assemblyLoader.Load(plug.filePath);
-                assembly = assemblyLoader.assemblyDictionary[plug.filePath];
+                plug = NFinal.Plugs.PlugManager.plugInfoList[i];
+                assembly = plug.assembly;
                 modules = assembly.GetModules();
                 for (int j = 0; j < modules.Length; j++)
                 {
@@ -54,7 +52,7 @@ namespace NFinal
                             }
                             dele = new ViewDelegateData();
                             dele.renderMethodInfo = types[k].GetMethod("Render");
-                            dele.renderMethod = null;// GetRenderDelegate(dele.renderMethodInfo);
+                            dele.renderMethod = null;//GetRenderDelegate(dele.renderMethodInfo);
                             dele.viewClassName = types[k].FullName;
                             //dicViews.Add(viewAttr.viewUrl, dele);
                             if (viewDataDictionary.ContainsKey(viewAttr.viewUrl))

@@ -7,6 +7,39 @@ namespace NFinal
 {
     public static class StringExtension
     {
+        public static string UrlEncode(this string url)
+        {
+            return Uri.EscapeDataString(url);
+        }
+        public static string UrlDecode(this string url)
+        {
+            return Uri.UnescapeDataString(url);
+        }
+        public static string HtmlEncode(this string html)
+        {
+            return System.Net.WebUtility.HtmlEncode(html);
+        }
+        public static string HtmlDecode(this string html)
+        {
+            return System.Net.WebUtility.HtmlDecode(html);
+        }
+        public static byte[] JsonEncodeBytes(this string json)
+        {
+            if (json == null)
+            {
+                return new byte[] { (byte)'n', (byte)'u', (byte)'l', (byte)'l' };            }
+            else if (json == string.Empty)
+            {
+                return new byte[] { (byte)'"', (byte)'"' };
+            }
+            byte[] buffer = NFinal.Constant.encoding.GetBytes(json);
+            byte[] result = GetJsonString(buffer, 0, buffer.Length);
+            return result;
+        }
+        public static string JsonEncodeString(this string json)
+        {
+            return NFinal.Constant.encoding.GetString(JsonEncodeBytes(json));
+        }
         public static int GetHashCodeEx(this string obj)
         {
             unsafe

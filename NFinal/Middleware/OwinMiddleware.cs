@@ -10,7 +10,7 @@ namespace NFinal.Middleware
 {
     public class OwinMiddleware : Middleware<IDictionary<string, object>,Owin.Request>
     {
-        public OwinMiddleware(InvokeDelegate<IDictionary<string, object>> next,NFinal.Middleware.Config.MiddlewareConfigOptions options) : base(next,options)
+        public OwinMiddleware(InvokeDelegate<IDictionary<string, object>> next) : base(next)
         {  
         }
 
@@ -45,10 +45,6 @@ namespace NFinal.Middleware
         public override string GetSubDomain(IDictionary<string, object> context)
         {
             string subDomain = context.GetSubDomain();
-            if (subDomain == null)
-            {
-                subDomain = defaultSubDomain;
-            }
             return subDomain;
         }
     }

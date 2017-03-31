@@ -11,9 +11,9 @@ namespace NFinal
     [AttributeUsage(AttributeTargets.Class)]
     public class ConfigAttribute: System.Attribute
     {
-        public ConfigAttribute()
+        public ConfigAttribute(string fileName)
         {
-
+            
         }
     }
 }

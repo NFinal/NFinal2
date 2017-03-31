@@ -4,19 +4,16 @@
 *.suo
 *.user
 *.sln.docstates
-
+*.dll
+!/*.json
 # Build results
 
 [Dd]ebug/
-!*.json
 [Rr]elease/
-!*.json
 x64/
 build/
 [Bb]in/
-!*.json
 [Oo]bj/
-!*.json
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
 

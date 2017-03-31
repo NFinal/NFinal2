@@ -10,7 +10,10 @@ function StringFormat() {
 }
 var Url={
 
-    "NFinalCoreWebSample_Controllers_IndexController":{
+    "NFinalCorePlug_BaseController":{
+    }
+        ,
+    "NFinalCorePlug_Controllers_IndexController":{
             "Default":function()
             {
             return "/Index/Default.html";
@@ -22,10 +25,6 @@ var Url={
             }
     }
         ,
-    "NFinalCoreWebSample_Controllers_UserController":{
-            "Login":function()
-            {
-            return "/User/Login.html";
-            }
+    "NFinalCorePlug_Controllers_UserController":{
     }
 };

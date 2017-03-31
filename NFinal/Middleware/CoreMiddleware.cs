@@ -10,7 +10,7 @@ namespace NFinal.Middleware
 {
     public class CoreMiddleware : Middleware<HttpContext, HttpRequest>
     {
-        public CoreMiddleware(RequestDelegate next, Config.MiddlewareConfigOptions options):base((context) => { return next.Invoke(context); },options)
+        public CoreMiddleware(RequestDelegate next):base((context) => { return next.Invoke(context); })
         {
         }
         public override IAction<HttpContext, HttpRequest> GetAction(HttpContext context)

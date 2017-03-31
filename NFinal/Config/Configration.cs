@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Reflection;
-using System.Reflection.Emit;
 using System.IO;
 
 namespace NFinal.Config
@@ -11,59 +9,64 @@ namespace NFinal.Config
     public class Configration
     {
         public static bool isInit=false;
-        public static IDictionary<string, CommonConfig> configDic = null;
-        public static T LoadConfig<T>(string folderSpace,string fileName)
+        public static IDictionary<string,NFinal.Config.Plug.PlugConfig> plugConfigDictionary = null;
+        public static NFinal.Config.Global.GlobalConfig globalConfig = null;
+        public static string DeleteComment(string source)
         {
-            string filePath = folderSpace.Replace('.', Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar + fileName;
-            var configReader = System.IO.File.OpenText(filePath);
-            var configJson = configReader.ReadToEnd();
-            configReader.Dispose();
-            T config = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(configJson);
-            return config;
+            System.Text.RegularExpressions.Regex commentRegex =
+                            new System.Text.RegularExpressions.Regex("//[^\r\n]*");
+            source = commentRegex.Replace(source, string.Empty);
+            return source;
         }
-        public static NFinal.Config.CommonConfig LoadCommonConfig(string folderSpace,string fileName)
-        {
-            string filePath = folderSpace.Replace('.', Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar + fileName;
-            var configReader = System.IO.File.OpenText(filePath);
-            var configJson = configReader.ReadToEnd();
-            configReader.Dispose();
-            CommonConfig config = Newtonsoft.Json.JsonConvert.DeserializeObject<CommonConfig>(configJson);
-            return config;
-        }
-        public static void Init(Middleware.Config.MiddlewareConfigOptions options)
+        public static void Init()
         {
             Configration.isInit = true;
-            Assembly assembly = null;
-            Module[] modules = null;
-            MethodInfo methodInfo = null;
-            Type[] types = null;
-            configDic = new Dictionary<string, CommonConfig>(StringComparer.Ordinal);
-            CommonConfig commonConfig;
-            NFinal.Plugs.Loader.IAssemblyLoader assemblyLoader = new NFinal.Plugs.Loader.AssemblyLoader();
-            for (int i = 0; i < options.plugs.Length; i++)
+            plugConfigDictionary = new Dictionary<string, NFinal.Config.Plug.PlugConfig>();
+            string fileName = Directory.GetCurrentDirectory();
+            string nfinalConfigPath= NFinal.IO.Path.GetApplicationPath("/nfinal.json");
+            if (File.Exists(nfinalConfigPath))
             {
-                assemblyLoader.Load(options.plugs[i].filePath);
-                assembly = assemblyLoader.assemblyDictionary[options.plugs[i].filePath];
-                modules = assembly.GetModules();
-                for (int j = 0; j < modules.Length; j++)
+                using (StreamReader nfinalConfigReader = System.IO.File.OpenText(nfinalConfigPath))
                 {
-                    types = modules[j].GetTypes();
-                    var attributes = types[j]
-#if (NET40 || NET451 || NET461)
-                        .GetCustomAttributes(typeof(ConfigAttribute),true);
-#endif
-#if NETCORE
-                    .GetTypeInfo().GetCustomAttributes(typeof(ConfigAttribute), true);
-#endif
-                    if (attributes.Count() > 0)
+                    string nfinalJsonText = nfinalConfigReader.ReadToEnd();
+                    nfinalConfigReader.Dispose();
+                    nfinalJsonText = DeleteComment(nfinalJsonText);
+                    Configration.globalConfig = Newtonsoft.Json.JsonConvert.DeserializeObject<NFinal.Config.Global.GlobalConfig>(nfinalJsonText);
+                    Configration.globalConfig.JsonObject = SimpleJSON.JSON.Parse(nfinalJsonText).AsObject;
+                    NFinal.Config.Plug.PlugConfig plugConfig = null;
+                    for (int i = 0; i < Configration.globalConfig.plugs.Length; i++)
                     {
-                        methodInfo= types[j].GetMethod("Init", BindingFlags.Static | BindingFlags.Public);
-                        //执行配置读取函数
-                        methodInfo.Invoke(null,null);
-                        commonConfig =(CommonConfig)types[j].GetField("Common").GetValue(null);
-                        configDic.Add(assembly.FullName, commonConfig);
+                        if (globalConfig.plugs[i].enable)
+                        {
+                            string plugConfigPath = NFinal.IO.Path.GetApplicationPath(globalConfig.plugs[i].configPath);
+                            if (File.Exists(plugConfigPath))
+                            {
+                                using (StreamReader streamReader = System.IO.File.OpenText(plugConfigPath))
+                                {
+                                    string plugJsonText = streamReader.ReadToEnd();
+                                    streamReader.Dispose();
+                                    plugJsonText = DeleteComment(plugJsonText);
+                                    plugConfig = Newtonsoft.Json.JsonConvert.DeserializeObject<NFinal.Config.Plug.PlugConfig>(plugJsonText);
+                                    plugConfig.JsonObject = SimpleJSON.JSON.Parse(nfinalJsonText).AsObject;
+                                    plugConfigDictionary.Add(globalConfig.plugs[i].name,plugConfig);
+                                }
+                            }
+                            else
+                            {
+                                throw new FileNotFoundException("找不到NFinal插件配置文件："
+                                    + globalConfig.plugs[i].configPath,
+                                    globalConfig.plugs[i].configPath);
+                            }
+                        }
                     }
+
                 }
+            }
+            else
+            {
+                throw new FileNotFoundException("找不到NFinal全局配置文件："
+                                    + nfinalConfigPath,
+                                    nfinalConfigPath);
             }
         }
     }

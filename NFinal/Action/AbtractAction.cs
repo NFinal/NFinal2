@@ -16,10 +16,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using NFinal.Owin;
-using System.Data.Common;
+using System.Data;
 using NFinal.Http;
 using Dapper;
-using Dapper.Contrib.Extensions;
 
 namespace NFinal.Action
 {
@@ -32,49 +31,153 @@ namespace NFinal.Action
     /// <typeparam name="TViewBag">ViewBag视图,不需要实例化</typeparam>
     public abstract class AbstractAction<TContext,TRequest,TUser> :NFinal.IO.Writer, IAction<TContext, TRequest>  where TUser: NFinal.User.AbstractUser
     {
-		/// <summary>
+        public Config.Plug.PlugConfig config=null;
+        #region 数据库相关
+        /// <summary>
         /// 获取数据库连接
         /// </summary>
-		private DbConnection con=null;
-		public DbConnection Con
+        private IDbConnection con=null;
+        /// <summary>
+        /// 获取并打开数据库连接
+        /// </summary>
+        public IDbConnection Con
 		{
 			get 
 			{
-				if(con==null)
-				{
-					con=GetDbConnection();
-                    con.Open();
+                if (this is NFinal.Model.IConnection)
+                {
+                    if (con == null)
+                    {
+                        con = GetDbConnection();
+                        con.Open();
+                    }
+                    return con;
                 }
-				return con;
+                else
+                {
+                    throw new NFinal.Exceptions.IConnectionNotImplementedException(this.GetType());
+                }
 			}
 		}
+        /// <summary>
+        /// 解析请求参数组成实体类并插入数据库中
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
 		public int Insert<TModel>() where TModel : class
 		{
-			TModel model =this.GetModel<TModel>();
-            return (int)Con.Insert(model);
+            TModel model = this.GetModel<TModel>();
+            return Con.SimpleInsert<int,TModel>(model);
 		}
+        public TKey Insert<TKey, TModel>() where TModel : class
+        {
+            TModel model = this.GetModel<TModel>();
+            return Con.SimpleInsert<TKey, TModel>(model);
+        }
+        /// <summary>
+        /// 解析请求参数组成实体类并插入数据库中
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
 		public int InsertKeyInt<TModel>() where TModel : class
 		{
 			TModel model =this.GetModel<TModel>();
-			return (int)Con.Insert(model);
+			return Con.SimpleInsert<int,TModel>(model);
 		}
+        /// <summary>
+        /// 解析请求参数组成实体类并插入数据库中
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
 		public long InsertKeyLong<TModel>() where TModel : class
 		{
             TModel model = this.GetModel<TModel>();
-            return Con.Insert(model);
+            return Con.SimpleInsert<long,TModel>(model);
         }
-		
-		public bool Update<TModel>() where TModel : class
+        public bool InsertOrUpdate<TModel>(string sqlWhere) where TModel : class
+        {
+            Type modelType = typeof(TModel);
+            TModel model = this.GetModel<TModel>();
+            int count= Con.ExecuteScalar<int>($"select count(*) from {modelType.Name} where "+sqlWhere);
+            if (count > 0)
+            {
+                return Con.SimpleUpdate(model,sqlWhere);
+            }
+            else
+            {
+                return Con.SimpleUpdate(model,sqlWhere);
+            }
+        }
+        /// <summary>
+        /// 解析请求参数组成实体类并更新数据
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="sqlWhere"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public bool Update<TModel>(string sqlWhere=null,object param=null) where TModel : class
 		{
 			TModel model=this.GetModel<TModel>();
-			return Con.Update(model);
+			return Con.SimpleUpdate(model,sqlWhere);
 		}
-		public bool Delete<TKey,TModel>(TKey id) where TModel : class
+        /// <summary>
+        /// 解析请求参数组中的id并放入实体中，然后删除该记录
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+		public bool Delete<TModel>(string strWhere) where TModel : class
 		{
             TModel model = this.GetModel<TModel>();
-            return Con.Delete(model);
+            return Con.SimpleDelete(model,strWhere);
 		}
-        private void CloseConnection()
+        /// <summary>
+        /// 解析请求参数组中的id并放入实体中，然后删除该记录
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
+        public bool Delete<TModel>() where TModel : class
+        {
+            TModel model = this.GetModel<TModel>();
+            return Con.SimpleDelete(model);
+        }
+        public TModel Get<TModel>() where TModel : class
+        {
+            TModel model = this.GetModel<TModel>();
+            return Con.SimpleGet(model);
+        }
+        /// <summary>
+        /// 根据Id获取实体
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public TModel Get<TModel>(string sqlWhere) where TModel : class
+        {
+            TModel model = this.GetModel<TModel>();
+            return Con.SimpleGet(model,sqlWhere);
+        }
+       
+        /// <summary>
+        /// 根据查询条件获取实体列表
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="strWhere"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public IEnumerable<TModel> GetAll<TModel>(string sqlWhere, object param = null) where TModel : class
+        {
+            TModel model = this.GetModel<TModel>();
+            return Con.SimpleGetAll(model,sqlWhere);
+        }
+        public IEnumerable<TModel> Page<TModel>(int pageIndex,int pageSize,out int count)
+        {
+            return Con.SimpleGetPage<TModel>(pageIndex, pageSize,out count);
+        }
+        /// <summary>
+        /// 关闭数据库连接
+        /// </summary>
+        public void CloseConnection()
         {
             if (con != null && con.State == System.Data.ConnectionState.Open)
             {
@@ -82,9 +185,19 @@ namespace NFinal.Action
             }
         }
         /// <summary>
+        /// 获取数据库接连，需要子类重写
+        /// </summary>
+        /// <returns></returns>
+        public virtual IDbConnection GetDbConnection()
+        {
+            Type currentType = this.GetType();
+            throw new NotImplementedException(string.Format("{0}.{1}必须重写GetDbConnection方法",
+                currentType.Namespace, currentType.Name));
+        }
+#endregion
+        /// <summary>
         /// 常用系统变量
         /// </summary>
-		public abstract DbConnection GetDbConnection();
         [ViewBagMember]
         [Newtonsoft.Json.JsonIgnore]
         public static NFinal.Collections.FastDictionary<StringContainer> systemConfig = null;
@@ -274,13 +387,16 @@ namespace NFinal.Action
         /// <param name="obj">bool变量</param>
         public  void AjaxReturn(bool obj)
         {
-            CloseConnection();
+            CloseConnection();obj.ToJson();
             this.SetResponseHeader(NFinal.Constant.HeaderContentType, NFinal.Constant.ResponseContentType_Application_json);
             this.Write(obj ? NFinal.Constant.trueString : NFinal.Constant.falseString);
         }
         public TModel GetModel<TModel>()
         {
-            return NFinal.Model.ModelHelper.GetModel<TModel>(this.parameters);
+            TModel model= NFinal.Model.ModelHelper.GetModel<TModel>(this.parameters);
+            System.Diagnostics.Debug.WriteLine(parameters.ToString());
+            System.Diagnostics.Debug.WriteLine(model);
+            return model;
         }
         /// <summary>
         /// 返回数据库实体类对应的json对象{code:1,msg:"",result:[json对象]}
@@ -377,7 +493,7 @@ namespace NFinal.Action
         /// <returns></returns>
         public static string MapPath(string path)
         {
-            return NFinal.Utility.MapPath(path);
+            return NFinal.IO.Path.MapPath(NFinal.Config.Configration.globalConfig.projectType,path);
         }
         /// <summary>
         /// 获取Url
