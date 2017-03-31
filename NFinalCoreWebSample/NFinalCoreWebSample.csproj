@@ -8,7 +8,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\netcoreapp1.1\nfinal.json" />
-    <None Include="bin\Debug\netcoreapp1.1\NFinalCoreWebSample.json" />
+    <None Include="bin\Debug\netcoreapp1.1\NFinalCoreWebSample.plug.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
@@ -16,6 +16,6 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NFinal\NFinalCore.csproj" />
+    <ProjectReference Include="..\NFinal\NFinal.csproj" />
   </ItemGroup>
 </Project>

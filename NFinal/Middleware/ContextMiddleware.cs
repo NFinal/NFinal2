@@ -11,7 +11,7 @@ namespace NFinal.Middleware
 {
     public class ContextMiddleware : Middleware<IOwinContext,IOwinRequest>
     {
-        public ContextMiddleware(InvokeDelegate<IOwinContext> next, NFinal.Middleware.Config.MiddlewareConfigOptions options) : base(next, options)
+        public ContextMiddleware(InvokeDelegate<IOwinContext> next) : base(next)
         {
             
         }

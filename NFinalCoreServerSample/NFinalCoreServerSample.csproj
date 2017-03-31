@@ -19,7 +19,7 @@
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NFinal\NFinalCore.csproj" />
+    <ProjectReference Include="..\NFinal\NFinal.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="BaseTableController.cs">

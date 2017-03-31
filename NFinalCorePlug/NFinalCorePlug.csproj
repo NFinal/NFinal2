@@ -3,16 +3,10 @@
     <TargetFramework>netstandard1.5</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="bin\Debug\netstandard1.5\NFinalCorePlug.json" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="protobuf-net" Version="2.1.0" />
     <PackageReference Include="StackExchange.Redis" Version="1.2.1" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NFinal\NFinalCore.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="BaseController.model.cs">
@@ -50,5 +44,11 @@
       <Generator>
       </Generator>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\netstandard1.5\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NFinal\NFinal.csproj" />
   </ItemGroup>
 </Project>

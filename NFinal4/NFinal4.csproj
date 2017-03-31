@@ -125,9 +125,6 @@
     <Compile Include="..\NFinal\Action\IAction.cs">
       <Link>Core\Action\IAction.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Action\IConnection.cs">
-      <Link>Core\Action\IConnection.cs</Link>
-    </Compile>
     <Compile Include="..\NFinal\Action\OwinAction.cs">
       <Link>Core\Action\OwinAction.cs</Link>
     </Compile>
@@ -224,14 +221,35 @@
     <Compile Include="..\NFinal\collections\NameValueDynamicCollection.cs">
       <Link>Core\Collections\NameValueDynamicCollection.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\config\common\CommonConfig.cs">
-      <Link>Core\Config\Common\CommonConfig.cs</Link>
-    </Compile>
     <Compile Include="..\NFinal\config\Configration.cs">
       <Link>Core\Config\Configration.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\config\ConnectionString.cs">
-      <Link>Core\Config\ConnectionString.cs</Link>
+    <Compile Include="..\NFinal\Config\Global\Debug.cs">
+      <Link>Core\Config\Global\Debug.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Config\Global\GlobalConfig.cs">
+      <Link>Core\Config\Global\GlobalConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Config\Global\Plug.cs">
+      <Link>Core\Config\Global\Plug.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Config\Plug\ConnectionString.cs">
+      <Link>Core\Config\Plug\ConnectionString.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Config\Plug\Cookie.cs">
+      <Link>Core\Config\Plug\Cookie.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Config\Plug\CustomErrors.cs">
+      <Link>Core\Config\Plug\CustomErrors.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Config\Plug\PlugConfig.cs">
+      <Link>Core\Config\Plug\PlugConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Config\Plug\SessionState.cs">
+      <Link>Core\Config\Plug\SessionState.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Config\Plug\Url.cs">
+      <Link>Core\Config\Plug\Url.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Constant.cs">
       <Link>Core\Constant.cs</Link>
@@ -241,6 +259,9 @@
     </Compile>
     <Compile Include="..\NFinal\emit\StructHelper.cs">
       <Link>Core\Emit\StructHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Exceptions\DataBaseNotSupportException.cs">
+      <Link>Core\Exceptions\DataBaseNotSupportException.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\exceptions\DuplicateActionUrlException.cs">
       <Link>Core\Exceptions\DuplicateActionUrlException.cs</Link>
@@ -362,6 +383,9 @@
     <Compile Include="..\NFinal\io\IWriter.cs">
       <Link>Core\IO\IWriter.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\IO\Path.cs">
+      <Link>Core\IO\Path.cs</Link>
+    </Compile>
     <Compile Include="..\NFinal\io\StreamWriter.cs">
       <Link>Core\IO\StreamWriter.cs</Link>
     </Compile>
@@ -407,15 +431,6 @@
     <Compile Include="..\NFinal\Middleware\Builder\NotFound.cs">
       <Link>Core\Middleware\Builder\NotFound.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Middleware\Config\CustomErrors.cs">
-      <Link>Core\Middleware\Config\CustomErrors.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Middleware\Config\MiddlewareConfigOptions.cs">
-      <Link>Core\Middleware\Config\MiddlewareConfigOptions.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Middleware\Config\UrlRouteRule.cs">
-      <Link>Core\Middleware\Config\UrlRouteRule.cs</Link>
-    </Compile>
     <Compile Include="..\NFinal\middleware\ContextMiddleware.cs">
       <Link>Core\Middleware\ContextMiddleware.cs</Link>
     </Compile>
@@ -428,8 +443,20 @@
     <Compile Include="..\NFinal\middleware\OwinMiddleware.cs">
       <Link>Core\Middleware\OwinMiddleware.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Model\DBInfoHelper.cs">
+      <Link>Core\Model\DBInfoHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Model\DBType.cs">
+      <Link>Core\Model\DBType.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Model\GRUDExtension.cs">
+      <Link>Core\Model\GRUDExtension.cs</Link>
+    </Compile>
     <Compile Include="..\NFinal\Model\GRUDHelper.cs">
       <Link>Core\Model\GRUDHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Model\IConnection.cs">
+      <Link>Core\Model\IConnection.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\model\ModelHelper.cs">
       <Link>Core\Model\ModelHelper.cs</Link>
@@ -458,8 +485,11 @@
     <Compile Include="..\NFinal\Plugs\Loader\IAssemblyLoader.cs">
       <Link>Core\Plugs\Loader\IAssemblyLoader.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Plugs\Plug.cs">
-      <Link>Core\Plugs\Plug.cs</Link>
+    <Compile Include="..\NFinal\Plugs\PlugInfo.cs">
+      <Link>Core\Plugs\PlugInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Plugs\PlugManager.cs">
+      <Link>Core\Plugs\PlugManager.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\serialize\BinarySerialize.cs">
       <Link>Core\Serialize\BinarySerialize.cs</Link>
@@ -511,9 +541,6 @@
     </Compile>
     <Compile Include="..\NFinal\User\UserRole.cs">
       <Link>Core\User\UserRole.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Utility.cs">
-      <Link>Core\Utility.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\validation\Pattern.cs">
       <Link>Core\Validation\Pattern.cs</Link>
