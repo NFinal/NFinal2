@@ -5,7 +5,8 @@
 *.user
 *.sln.docstates
 *.dll
-!/*.json
+!nfinal.json
+!*.plug.json
 # Build results
 
 [Dd]ebug/
