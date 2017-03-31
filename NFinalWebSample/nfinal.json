@@ -21,11 +21,14 @@
   //调试设置
   "debug": {
     "enable": true,
-    "url": "http:\/\/localhost:55642/",
+    "url": "http://localhost:55642",
     "directory": "/Debug"
   },
+  //服务器设置
+  "server": {
+    "url": "http://www.domain.com",
+    "indexDocument": "/Index.html"
+  },
   //项目类型
-  "projectType": "Console",
-  //首页设置
-  "indexDocument": "/Index.html"
+  "projectType": "Console"
 }

@@ -33,7 +33,7 @@ namespace NFinal.Middleware
             {
                 NFinal.Plugs.PlugManager.Init();
             }
-            defaultUrl = NFinal.Config.Configration.globalConfig.indexDocument;
+            defaultUrl = NFinal.Config.Configration.globalConfig.server.indexDocument;
             debug = NFinal.Config.Configration.globalConfig.debug.enable;
             //初始化Action
             if (!ActionHelper.isInit)

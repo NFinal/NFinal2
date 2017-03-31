@@ -10,7 +10,7 @@ namespace NFinal.Config.Global
     {
         public Plug[] plugs;
         public Debug debug;
-        public string indexDocument;
+        public Server server;
         public ProjectType projectType;
         [JsonIgnore]
         public SimpleJSON.JSONObject JsonObject;

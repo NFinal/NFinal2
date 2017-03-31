@@ -11,7 +11,7 @@ namespace NFinalWebSample
     {
         public void Configuration(IAppBuilder appBuilder)
         {
-            appBuilder.Use<SimpleMiddleware>();
+            appBuilder.Use<NFinal.Middleware.OwinMiddleware>();
             appBuilder.UseStaticFiles();
             appBuilder.UseStageMarker(PipelineStage.Authenticate);
         }

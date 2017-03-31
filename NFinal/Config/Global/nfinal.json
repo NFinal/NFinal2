@@ -18,6 +18,8 @@
   },
   //项目类型
   "projectType": "Web",
-  //首页设置
-  "indexDocument": "/Index.html"
+  "server": {
+    "url": "http://www.domain.com",
+    "indexDocument": "/Index.html"
+  }
 }

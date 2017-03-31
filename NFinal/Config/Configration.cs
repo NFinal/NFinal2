@@ -14,7 +14,7 @@ namespace NFinal.Config
         public static string DeleteComment(string source)
         {
             System.Text.RegularExpressions.Regex commentRegex =
-                            new System.Text.RegularExpressions.Regex("//[^\r\n]*");
+                            new System.Text.RegularExpressions.Regex("(^//[^\r\n]*|[^:]//[^\r\n]*)");
             source = commentRegex.Replace(source, string.Empty);
             return source;
         }
