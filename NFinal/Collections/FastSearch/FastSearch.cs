@@ -41,7 +41,8 @@ namespace NFinal.Collections.FastSearch
         public List<KV<TValue>> list;
     }
     /// <summary>
-    /// 快速查找类，速度是传统Dictionary的两倍以上。
+    /// 快速查找类，速度是传统Dictionary的两倍以上,
+    /// 当查找的字符串长度增加时速度也会相对传统的Dictionary成倍增加。
     /// </summary>
     /// <typeparam name="TValue"></typeparam>
     public class FastSearch<TValue>

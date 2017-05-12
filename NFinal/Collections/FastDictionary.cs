@@ -11,8 +11,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace NFinal.Collections
 {
+    /// <summary>
+    /// 微软.net core官方开发人员以MIT协议开源的快速字典类，比传统的Dictionary快30%-40%。
+    /// 此处做为借鉴。
+    /// </summary>
     internal static class DictionaryHelper
     {
         /// <summary>
