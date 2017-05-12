@@ -7,6 +7,6 @@ namespace NFinal.Url
 {
     public class UrlRouteJsModel
     {
-        public Dictionary<Type, Dictionary<string, FormatData>> formatControllerDictionary;
+        public NFinal.Collections.FastDictionary<Type, Dictionary<string, FormatData>> formatControllerDictionary;
     }
 }

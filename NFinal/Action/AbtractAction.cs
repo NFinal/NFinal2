@@ -28,7 +28,6 @@ namespace NFinal.Action
     /// <typeparam name="TContext">上下文IOwinContext,Enviroment,Context</typeparam>
     /// <typeparam name="TRequest">请求信息</typeparam>
     /// <typeparam name="TUser">用户相关数据类型</typeparam>
-    /// <typeparam name="TViewBag">ViewBag视图,不需要实例化</typeparam>
     public abstract class AbstractAction<TContext,TRequest,TUser> :NFinal.IO.Writer, IAction<TContext, TRequest>  where TUser: NFinal.User.AbstractUser
     {
         public Config.Plug.PlugConfig config=null;
@@ -94,6 +93,12 @@ namespace NFinal.Action
             TModel model = this.GetModel<TModel>();
             return Con.SimpleInsert<long,TModel>(model);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
         public bool InsertOrUpdate<TModel>(string sqlWhere) where TModel : class
         {
             Type modelType = typeof(TModel);
@@ -200,7 +205,7 @@ namespace NFinal.Action
         /// </summary>
         [ViewBagMember]
         [Newtonsoft.Json.JsonIgnore]
-        public static NFinal.Collections.FastDictionary<StringContainer> systemConfig = null;
+        public static NFinal.Collections.FastSearch.FastSearch<StringContainer> systemConfig = null;
         /// <summary>
         /// 请求参数信息
         /// </summary>

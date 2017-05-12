@@ -22,7 +22,7 @@ namespace NFinal.Middleware
     public abstract class Middleware<TContext,TRequest>:IMiddleware<TContext,TRequest>
     {
         public readonly InvokeDelegate<TContext> _next;
-        public static NFinal.Collections.FastDictionary<ActionData<TContext,TRequest>> actionFastDic=null;
+        public static NFinal.Collections.FastSearch.FastSearch<ActionData<TContext,TRequest>> actionFastDic=null;
         public static Task<int> FinishedTask = FromResult(0);
         private static bool debug;
         public static string defaultUrl = null;
@@ -89,7 +89,7 @@ namespace NFinal.Middleware
             }
             bool hasError = false;
             NFinal.Action.ActionData<TContext,TRequest> actionData;
-            if (actionFastDic.TryGetValue(actionKey, out actionData))
+            if (actionFastDic.TryGetValue(actionKey,actionKey.Length, out actionData))
             {
                 //if (actionData.method != null)
                 //{

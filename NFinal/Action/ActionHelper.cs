@@ -44,9 +44,9 @@ namespace NFinal.Action
             Module[] modules = null;
             Type[] types = null;
 
-            Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary = new Dictionary<string, ActionData<TContext, TRequest>>();
+            NFinal.Collections.FastDictionary<string,ActionData<TContext, TRequest>> actionDataDictionary = new NFinal.Collections.FastDictionary<string, ActionData<TContext, TRequest>>();
             //List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList = new List<KeyValuePair<string, ActionData<TContext, TRequest>>>();
-            Dictionary<Type, Dictionary<string, NFinal.Url.FormatData>> formatControllerDictionary = new Dictionary<Type, Dictionary<string, NFinal.Url.FormatData>>();
+            NFinal.Collections.FastDictionary<Type, Dictionary<string, NFinal.Url.FormatData>> formatControllerDictionary = new NFinal.Collections.FastDictionary<Type, Dictionary<string, NFinal.Url.FormatData>>();
             Type controller = null;
             for (int i = 0; i < NFinal.Plugs.PlugManager.plugInfoList.Count; i++)
             {
@@ -75,6 +75,11 @@ namespace NFinal.Action
                     for (int k = 0; k < types.Length; k++)
                     {
                         controller = types[k];
+                        //控制器必须以Controller结尾
+                        if (!controller.FullName.EndsWith("Controller", StringComparison.Ordinal))
+                        {
+                            continue;
+                        }
                         //该类型继承自IAction并且其泛不是dynamic类型
 #if (NET40 || NET451 || NET461)
                         if (typeof(NFinal.Action.IAction<TContext, TRequest>).IsAssignableFrom(controller))
@@ -102,13 +107,14 @@ namespace NFinal.Action
                 NFinal.Url.ActionUrlHelper.GetUrlRouteJsContent(globalConfig);
                 NFinal.Url.ActionUrlHelper.GenerateActionDebugHtml(globalConfig);
             }
+            
             //}
             //添加图标响应
             //Icon.Favicon.Init(actionDataList);
-            Middleware.Middleware<TContext, TRequest>.actionFastDic = new Collections.FastDictionary<ActionData<TContext, TRequest>>(actionDataDictionary, actionDataDictionary.Count);
+            Middleware.Middleware<TContext, TRequest>.actionFastDic =new Collections.FastSearch.FastSearch<ActionData<TContext, TRequest>>(actionDataDictionary);
             actionDataDictionary.Clear();
         }
-        public static void AddActionData<TContext, TRequest>(Dictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
+        public static void AddActionData<TContext, TRequest>(NFinal.Collections.FastDictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
             Dictionary<string, NFinal.Url.FormatData> formatMethodDictionary,
             Assembly assembly,Type controller, 
             NFinal.Config.Global.GlobalConfig globalConfig,

@@ -13,7 +13,7 @@ namespace NFinalCorePlug.BaseTableController_Model
 		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
 	}
 	public class Update
 	{
@@ -22,7 +22,7 @@ namespace NFinalCorePlug.BaseTableController_Model
 		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
 	}
 	public class Delete
 	{
@@ -31,7 +31,7 @@ namespace NFinalCorePlug.BaseTableController_Model
 		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
 	}
 	public class Page
 	{
@@ -40,7 +40,7 @@ namespace NFinalCorePlug.BaseTableController_Model
 		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
 		public int pageIndex;
 		public int pageSize;
 	}

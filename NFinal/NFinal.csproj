@@ -14,12 +14,16 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>DEBUG;NETCORE;CORE;COREFX;ASYNC;FILESYSTEM;NETCOREAPP1_1</DefineConstants>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\netstandard1.5\NFinal.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Collections\FastDictionary\**" />
     <Compile Remove="Dapper\**" />
     <Compile Remove="ImageSharp\**" />
+    <EmbeddedResource Remove="Collections\FastDictionary\**" />
     <EmbeddedResource Remove="Dapper\**" />
     <EmbeddedResource Remove="ImageSharp\**" />
+    <None Remove="Collections\FastDictionary\**" />
     <None Remove="Dapper\**" />
     <None Remove="ImageSharp\**" />
     <None Update="Url\Debug.cshtml">
@@ -62,16 +66,17 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.2" />
-    <PackageReference Include="Dapper.Contrib" Version="1.50.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="protobuf-net" Version="2.1.0" />
     <PackageReference Include="StackExchange.Redis" Version="1.2.1" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
     <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +105,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\Debug\netstandard1.5\" />
     <Folder Include="Properties\" />
     <Folder Include="Build\" />
   </ItemGroup>

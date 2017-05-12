@@ -69,6 +69,10 @@ namespace NFinal.IO
             Write(obj.ToString());
             Write(NFinal.Constant.Html_Br);
         }
+        public void Write(StringContainer value)
+        {
+            Write(value.value);
+        }
 
         public abstract void Write(byte[] buffer, int offset, int count);
 

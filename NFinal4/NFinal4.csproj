@@ -21,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\NFinal4.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -182,35 +183,32 @@
     <Compile Include="..\NFinal\cache\system\Standard.cs">
       <Link>Core\Cache\System\Standard.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\collections\fastdictionary\CodeNode.cs">
-      <Link>Core\Collections\FastDictionary\CodeNode.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastDictionary.cs">
+      <Link>Core\Collections\FastDictionary.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\collections\fastdictionary\CodeNodeType.cs">
-      <Link>Core\Collections\FastDictionary\CodeNodeType.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastSearch\CompareDelegateHelper.cs">
+      <Link>Core\Collections\FastSearch\CompareDelegateHelper.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\collections\fastdictionary\ColumnCompareData.cs">
-      <Link>Core\Collections\FastDictionary\ColumnCompareData.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastSearch\FastFindSameLengthStringHelper.cs">
+      <Link>Core\Collections\FastSearch\FastFindSameLengthStringHelper.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\collections\fastdictionary\CoreFastDictionary.cs">
-      <Link>Core\Collections\FastDictionary\CoreFastDictionary.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastSearch\FastSearch.cs">
+      <Link>Core\Collections\FastSearch\FastSearch.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\collections\fastdictionary\FastDictionary.cs">
-      <Link>Core\Collections\FastDictionary\FastDictionary.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastSearch\FindGroupIndexDelegateHelper.cs">
+      <Link>Core\Collections\FastSearch\FindGroupIndexDelegateHelper.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\collections\fastdictionary\FastDictionaryUtility.cs">
-      <Link>Core\Collections\FastDictionary\FastDictionaryUtility.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastSearch\ILWriter.cs">
+      <Link>Core\Collections\FastSearch\ILWriter.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\collections\fastdictionary\ILWriter.cs">
-      <Link>Core\Collections\FastDictionary\ILWriter.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastSearch\KeyLongArrayCompare.cs">
+      <Link>Core\Collections\FastSearch\KeyLongArrayCompare.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\collections\fastdictionary\KeyLongArrayCompare.cs">
-      <Link>Core\Collections\FastDictionary\KeyLongArrayCompare.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastSearch\KV.cs">
+      <Link>Core\Collections\FastSearch\KV.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\collections\fastdictionary\LongCompare.cs">
-      <Link>Core\Collections\FastDictionary\LongCompare.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\collections\fastdictionary\SharpWriter.cs">
-      <Link>Core\Collections\FastDictionary\SharpWriter.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastSearch\KVNode.cs">
+      <Link>Core\Collections\FastSearch\KVNode.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\collections\NameValueCollection.cs">
       <Link>Core\Collections\NameValueCollection.cs</Link>
@@ -262,6 +260,9 @@
     </Compile>
     <Compile Include="..\NFinal\emit\StructHelper.cs">
       <Link>Core\Emit\StructHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Emit\UnSafeHelper.cs">
+      <Link>Core\Emit\UnSafeHelper.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Exceptions\DataBaseNotSupportException.cs">
       <Link>Core\Exceptions\DataBaseNotSupportException.cs</Link>
@@ -379,6 +380,9 @@
     </Compile>
     <Compile Include="..\NFinal\icon\Favicon.cs">
       <Link>Core\Icon\Favicon.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Ioc\ClassManager.cs">
+      <Link>Core\Ioc\ClassManager.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\io\FileWriter.cs">
       <Link>Core\IO\FileWriter.cs</Link>

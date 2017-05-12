@@ -38,7 +38,7 @@ namespace NFinal.Url
     }
     public class ActionUrlHelper
     {
-        public static Dictionary<Type,Dictionary<string,FormatData>> formatControllerDictionary;
+        public static NFinal.Collections.FastDictionary<Type,Dictionary<string,FormatData>> formatControllerDictionary;
         /// <summary>
         /// 是否是URL分隔符
         /// </summary>

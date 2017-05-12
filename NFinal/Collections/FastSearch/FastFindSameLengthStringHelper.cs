@@ -1,173 +1,125 @@
-﻿#if (NET40 || NET451 || NET461 || NETCORE)
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NFinal.Collections
+namespace NFinal.Collections.FastSearch
 {
-
-    public class FastDictionary<TValue>
+    public class FastFindSameLengthStringHelper
     {
-        /// <summary>
-        /// 存储Key字符串的数组
-        /// </summary>
-        public string[] keyArray;
-        /// <summary>
-        /// Value的数组
-        /// </summary>
-        public TValue[] valueArray;
-        /// <summary>
-        /// 转换为Long数组之后列的最大长度
-        /// </summary>
-        private int maxColumnCount = 0;
-        /// <summary>
-        /// 二分节点,用于构造代码
-        /// </summary>
-        private CodeNode rootNode;
-        private GetKeyIndex getKeyIndex;
-
-        /// <summary>
-        /// 初始化函数
-        /// </summary>
-        /// <param name="kvList"></param>
-        /// <param name="count"></param>
-        public unsafe FastDictionary(IEnumerable<KeyValuePair<string, TValue>> kvList, int count)
+        public class Node
         {
-            int i = 0;
-            keyArray = new string[count];
-            valueArray = new TValue[count];
-            long[][] KeyLongArray = new long[count][];
-            foreach (var kv in kvList)
+            /// <summary>
+            /// 对比的数字
+            /// </summary>
+            public long compareValue;
+            /// <summary>
+            /// if 语句节点
+            /// </summary>
+            public Node ifCase;
+            /// <summary>
+            /// else语句节点
+            /// </summary>
+            public Node elseCase;
+            /// <summary>
+            /// 节点的类型
+            /// </summary>
+            public NodeType nodeType;
+            /// <summary>
+            /// 对比的列数
+            /// </summary>
+            public int charIndex;
+            /// <summary>
+            /// 当只有一个元素时，返回该元素的索引
+            /// </summary>
+            public int arrayIndex;
+        }
+        public enum NodeType
+        {
+            CompareCreaterThan,
+            CompareLessThan,
+            SetIndex
+        }
+        public struct ColumnCompareData
+        {
+            public int[] ColumnSort;
+            public bool hasMidValue;
+            public long midValue;
+            public int midValueIndex;
+            public int midIndex;
+            public LongCompare compare;
+            public int[] ColumnBig;
+            public int[] ColumnSmall;
+            public int midDistance;
+        }
+        public enum LongCompare
+        {
+            LessThan,
+            CreaterThan
+        }
+        public unsafe static FindDelegate GetFastFindSameLengthStringDelegate<TValue>(List<KV<TValue>> list, int length)
+        {
+            int rowCount = list.Count;
+            int columnLength = (length + 3) >> 2;
+            long[][] KeyLongArray = new long[rowCount][];
+            for (int row = 0; row < rowCount; row++)
             {
-                keyArray[i] = kv.Key;
-                valueArray[i] = kv.Value;
-                KeyLongArray[i] = FastDictionaryUtility.GetArray(keyArray[i]);
-                if (KeyLongArray[i].Length > maxColumnCount)
+                fixed (char* pKey = list[row].key)
                 {
-                    maxColumnCount = KeyLongArray[i].Length;
+                    KeyLongArray[row] = new long[columnLength];
+                    for (int col = 0; col < columnLength; col++)
+                    {
+                        if (col == columnLength - 1)
+                        {
+                            int remain = length & 3;
+                            if (remain == 0)
+                            {
+                                KeyLongArray[row][col] = *(long*)(pKey + col * 4);
+                            }
+                            else if (remain == 1)
+                            {
+                                KeyLongArray[row][col] = *(short*)(pKey + col * 4);
+                            }
+                            else if (remain == 2)
+                            {
+                                KeyLongArray[row][col] = *(int*)(pKey + col * 4);
+                            }
+                            else if (remain == 3)
+                            {
+                                KeyLongArray[row][col] = *(long*)(pKey + col * 4 - 1);
+                            }
+                        }
+                        else
+                        {
+                            KeyLongArray[row][col] = *(long*)(pKey + col * 4);
+                        }
+                    }
                 }
-                i++;
             }
             // 列排序索引，用于对Long二维数组列进行排序
-            int[][] ColumnSortArray = new int[maxColumnCount][];
+            int[][] ColumnSortArray = new int[columnLength][];
             //初始化列索引数组
-            for (int column = 0; column < maxColumnCount; column++)
+            for (int column = 0; column < columnLength; column++)
             {
-                ColumnSortArray[column] = new int[count];
-                for (int row = 0; row < count; row++)
+                ColumnSortArray[column] = new int[rowCount];
+                for (int row = 0; row < rowCount; row++)
                 {
                     ColumnSortArray[column][row] = row;
                 }
             }
-            rootNode = new CodeNode();
-            Init(KeyLongArray, KeyLongArray, ColumnSortArray, ref rootNode);
-            //StringBuilder sb = new StringBuilder();
-            //WriteCode(sb, rootNode, 0);
-            //string result = sb.ToString();
-            ILWriter writer = new ILWriter();
-            getKeyIndex = writer.Generate(rootNode);
+            Node rootNode = new Node();
+            Init(KeyLongArray,KeyLongArray,columnLength, ColumnSortArray, ref rootNode);
+            ILWriter iLWriter = new ILWriter();
+            return iLWriter.Generate(rootNode, length, columnLength);
         }
-
-        /// <summary>
-        /// 获取LongArray二维数组中的值
-        /// </summary>
-        /// <param name="KeyLongArray"></param>
-        /// <param name="RowIndex"></param>
-        /// <param name="ColumnIndex"></param>
-        /// <returns></returns>
-        public long GetKeyLong(long[][] KeyLongArray, int RowIndex, int ColumnIndex)
-        {
-            if (ColumnIndex < KeyLongArray[RowIndex].Length)
-            {
-                return KeyLongArray[RowIndex][ColumnIndex];
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        public bool TryGetValue(string key, int length, out TValue value)
-        {
-            int index = getKeyIndex(key, length);
-            if (string.Equals(keyArray[index], key,StringComparison.Ordinal))
-            {
-                value = valueArray[index];
-                return true;
-            }
-            else
-            {
-                value = default(TValue);
-                return false;
-            }
-        }
-        public bool TryGetValue(string key, out TValue value)
-        {
-            int index = getKeyIndex(key, key.Length);
-            if (string.Equals(keyArray[index], key,StringComparison.Ordinal))
-            {
-                value = valueArray[index];
-                return true;
-            }
-            else
-            {
-                value = default(TValue);
-                return false;
-            }
-        }
-        public TValue this[int index]
-        {
-            get { return valueArray[index]; }
-            set { valueArray[index] = value; }
-        }
-        public TValue this[string key, int length]
-        {
-            get
-            {
-                int index = getKeyIndex(key, length);
-                if (string.Equals(keyArray[index], key))
-                {
-                    return valueArray[index];
-                }
-                else
-                {
-                    return default(TValue);
-                }
-            }
-            set
-            {
-                int index = getKeyIndex(key, length);
-                if (string.Equals(keyArray[index], key))
-                {
-                    valueArray[index] = value;
-                }
-            }
-        }
-        public TValue this[string key]
-        {
-            get
-            {
-                int index = getKeyIndex(key, key.Length);
-                if (string.Equals(keyArray[index], key))
-                {
-                    return valueArray[index];
-                }
-                else
-                {
-                    return default(TValue);
-                }
-            }
-            set
-            {
-                int index = getKeyIndex(key, key.Length);
-                if (string.Equals(keyArray[index], key))
-                {
-                    valueArray[index] = value;
-                }
-            }
-        }
-        public void Init(long[][] FullKeyLongArray, long[][] KeyLongArray, int[][] ColumnSortArray, ref CodeNode codeNode)
+        public static void Init(long[][] FullKeyLongArray, long[][] KeyLongArray,int columnLength, int[][] ColumnSortArray, ref Node codeNode)
         {
             if (KeyLongArray == null) return;
+            if (FullKeyLongArray.Length == 1)
+            {
+                codeNode.nodeType = NodeType.SetIndex;
+                codeNode.arrayIndex = 0;
+                return;
+            }
             // KeyValue数组长度
             int arrayLength = KeyLongArray.Length;
             //是否为奇数数组
@@ -187,9 +139,9 @@ namespace NFinal.Collections
             //是否找到了直接二分值
             bool hasFindBestColumnCompareDataIndex = false;
             //数组中每列比较的结果
-            ColumnCompareData[] columnCompareData = new ColumnCompareData[maxColumnCount]; ;
+            ColumnCompareData[] columnCompareData = new ColumnCompareData[columnLength]; ;
             //一列一列的解析出比较结果，如二分值，索引等
-            for (int column = 0; column < maxColumnCount; column++)
+            for (int column = 0; column < columnLength; column++)
             {
                 //对列索引数组进行排序
                 Array.Sort<int>(ColumnSortArray[column], new KeyLongArrayCompare(FullKeyLongArray, column));
@@ -307,7 +259,7 @@ namespace NFinal.Collections
                 //距离中间最小的距离
                 int minMidDistance = midDistanceLength;
                 //找到最合适的二分索引，即距两边距离最短的
-                for (int column = 0; column < maxColumnCount; column++)
+                for (int column = 0; column < columnLength; column++)
                 {
                     if (columnCompareData[column].midDistance < minMidDistance)
                     {
@@ -331,8 +283,8 @@ namespace NFinal.Collections
                 {
                     KeyLongArraySmall = new long[KeyLongArraySmallLength][];
                     //初始化排序数组
-                    ColumnSortArraySmall = new int[maxColumnCount][];
-                    for (int column = 0; column < maxColumnCount; column++)
+                    ColumnSortArraySmall = new int[columnLength][];
+                    for (int column = 0; column < columnLength; column++)
                     {
                         ColumnSortArraySmall[column] = new int[KeyLongArraySmallLength];
                     }
@@ -341,8 +293,8 @@ namespace NFinal.Collections
                 if (KeyLongArrayBigLength > 0)
                 {
                     KeyLongArrayBig = new long[KeyLongArrayBigLength][];
-                    ColumnSortArrayBig = new int[maxColumnCount][];
-                    for (int column = 0; column < maxColumnCount; column++)
+                    ColumnSortArrayBig = new int[columnLength][];
+                    for (int column = 0; column < columnLength; column++)
                     {
                         ColumnSortArrayBig[column] = new int[KeyLongArrayBigLength];
                     }
@@ -354,7 +306,7 @@ namespace NFinal.Collections
                     if (row > columnCompareData[BestColumnCompareDataIndex].midIndex)
                     {
                         KeyLongArrayBig[bigIndex] = FullKeyLongArray[ColumnSortArray[BestColumnCompareDataIndex][row]];
-                        for (int column = 0; column < maxColumnCount; column++)
+                        for (int column = 0; column < columnLength; column++)
                         {
                             ColumnSortArrayBig[column][bigIndex] = ColumnSortArray[BestColumnCompareDataIndex][row];
                         }
@@ -363,7 +315,7 @@ namespace NFinal.Collections
                     else
                     {
                         KeyLongArraySmall[smallIndex] = FullKeyLongArray[ColumnSortArray[BestColumnCompareDataIndex][row]];
-                        for (int column = 0; column < maxColumnCount; column++)
+                        for (int column = 0; column < columnLength; column++)
                         {
                             ColumnSortArraySmall[column][smallIndex] = ColumnSortArray[BestColumnCompareDataIndex][row];
                         }
@@ -378,8 +330,8 @@ namespace NFinal.Collections
                 if (KeyLongArraySmallLength > 0)
                 {
                     KeyLongArraySmall = new long[KeyLongArraySmallLength][];
-                    ColumnSortArraySmall = new int[maxColumnCount][];
-                    for (int column = 0; column < maxColumnCount; column++)
+                    ColumnSortArraySmall = new int[columnLength][];
+                    for (int column = 0; column < columnLength; column++)
                     {
                         ColumnSortArraySmall[column] = new int[KeyLongArraySmallLength];
                     }
@@ -388,8 +340,8 @@ namespace NFinal.Collections
                 if (KeyLongArrayBigLength > 0)
                 {
                     KeyLongArrayBig = new long[KeyLongArrayBigLength][];
-                    ColumnSortArrayBig = new int[maxColumnCount][];
-                    for (int column = 0; column < maxColumnCount; column++)
+                    ColumnSortArrayBig = new int[columnLength][];
+                    for (int column = 0; column < columnLength; column++)
                     {
                         ColumnSortArrayBig[column] = new int[KeyLongArrayBigLength];
                     }
@@ -401,7 +353,7 @@ namespace NFinal.Collections
                     if (row < columnCompareData[BestColumnCompareDataIndex].midIndex)
                     {
                         KeyLongArraySmall[smallIndex] = FullKeyLongArray[ColumnSortArray[BestColumnCompareDataIndex][row]];
-                        for (int column = 0; column < maxColumnCount; column++)
+                        for (int column = 0; column < columnLength; column++)
                         {
                             ColumnSortArraySmall[column][smallIndex] = ColumnSortArray[BestColumnCompareDataIndex][row];
                         }
@@ -410,7 +362,7 @@ namespace NFinal.Collections
                     else
                     {
                         KeyLongArrayBig[bigIndex] = FullKeyLongArray[ColumnSortArray[BestColumnCompareDataIndex][row]];
-                        for (int column = 0; column < maxColumnCount; column++)
+                        for (int column = 0; column < columnLength; column++)
                         {
                             ColumnSortArrayBig[column][bigIndex] = ColumnSortArray[BestColumnCompareDataIndex][row];
                         }
@@ -421,69 +373,160 @@ namespace NFinal.Collections
             //解析最终结果到CodeNode节点中，用于生成代码用
             if (columnCompareData[BestColumnCompareDataIndex].compare == LongCompare.CreaterThan)
             {
-                codeNode.nodeType = CodeNodeType.CompareCreaterThan;
+                codeNode.nodeType = NodeType.CompareCreaterThan;
                 codeNode.compareValue = columnCompareData[BestColumnCompareDataIndex].midValue;
             }
-            else
+            if(columnCompareData[BestColumnCompareDataIndex].compare==LongCompare.LessThan)
             {
-                codeNode.nodeType = CodeNodeType.CompareLessThan;
+                codeNode.nodeType = NodeType.CompareLessThan;
                 codeNode.compareValue = columnCompareData[BestColumnCompareDataIndex].midValue;
             }
-            codeNode.ifCase = new CodeNode();
-            codeNode.elseCase = new CodeNode();
+            //codeNode.ifCase = new Node();
+            //codeNode.elseCase = new Node();
             codeNode.charIndex = BestColumnCompareDataIndex << 2;
             //[1][2][mid]|[4] if(x>mid){ i=3}else{i=4}
             //[1][2][mid]|[4][5]
-            if (codeNode.nodeType == CodeNodeType.CompareCreaterThan)
+            if (codeNode.nodeType == NodeType.CompareCreaterThan)
             {
-
+                if (KeyLongArrayBigLength == 0)
+                {
+                    codeNode.ifCase = null;
+                }
+                else
+                {
+                    codeNode = new Node();
+                }
                 if (KeyLongArrayBigLength == 1)
                 {
-                    codeNode.ifCase.nodeType = CodeNodeType.SetIndex;
+                    codeNode.ifCase.nodeType = NodeType.SetIndex;
                     codeNode.ifCase.arrayIndex = ColumnSortArray[BestColumnCompareDataIndex][columnCompareData[BestColumnCompareDataIndex].midIndex + 1];
                     codeNode.ifCase.charIndex = codeNode.charIndex;
                 }
                 else
                 {
-                    Init(FullKeyLongArray, KeyLongArrayBig, ColumnSortArrayBig, ref codeNode.ifCase);
+                    Init(FullKeyLongArray, KeyLongArrayBig,columnLength, ColumnSortArrayBig, ref codeNode.ifCase);
+                }
+                if (KeyLongArraySmallLength == 0)
+                {
+                    codeNode.elseCase = null;
+                }
+                else
+                {
+                    codeNode.elseCase = new Node();
                 }
                 if (KeyLongArraySmallLength == 1)
                 {
-                    codeNode.elseCase.nodeType = CodeNodeType.SetIndex;
+                    codeNode.elseCase.nodeType = NodeType.SetIndex;
                     codeNode.elseCase.arrayIndex = ColumnSortArray[BestColumnCompareDataIndex][columnCompareData[BestColumnCompareDataIndex].midIndex];
                     codeNode.elseCase.charIndex = codeNode.charIndex;
 
                 }
                 else
                 {
-                    Init(FullKeyLongArray, KeyLongArraySmall, ColumnSortArraySmall, ref codeNode.elseCase);
+                    Init(FullKeyLongArray, KeyLongArraySmall,columnLength, ColumnSortArraySmall, ref codeNode.elseCase);
                 }
             }
             //[1][2]|[mid][4][5] if(x<mid){}else{}
-            else if (codeNode.nodeType == CodeNodeType.CompareLessThan)
+            else if (codeNode.nodeType == NodeType.CompareLessThan)
             {
+                if (KeyLongArraySmallLength == 0)
+                {
+                    codeNode.ifCase = null;
+                }
+                else
+                {
+                    codeNode.ifCase = new Node();
+                }
                 if (KeyLongArraySmallLength == 1)
                 {
-                    codeNode.ifCase.nodeType = CodeNodeType.SetIndex;
+                    codeNode.ifCase.nodeType = NodeType.SetIndex;
                     codeNode.ifCase.arrayIndex = ColumnSortArray[BestColumnCompareDataIndex][columnCompareData[BestColumnCompareDataIndex].midIndex - 1];
                     codeNode.ifCase.charIndex = codeNode.charIndex;
                 }
                 else
                 {
-                    Init(FullKeyLongArray, KeyLongArraySmall, ColumnSortArraySmall, ref codeNode.ifCase);
+                    Init(FullKeyLongArray, KeyLongArraySmall,columnLength, ColumnSortArraySmall, ref codeNode.ifCase);
+                }
+                if (KeyLongArrayBigLength == 0)
+                {
+                    codeNode.elseCase = null;
+                }
+                else
+                {
+                    codeNode.elseCase = new Node();
                 }
                 if (KeyLongArrayBigLength == 1)
                 {
-                    codeNode.elseCase.nodeType = CodeNodeType.SetIndex;
+                    codeNode.elseCase.nodeType = NodeType.SetIndex;
                     codeNode.elseCase.arrayIndex = ColumnSortArray[BestColumnCompareDataIndex][columnCompareData[BestColumnCompareDataIndex].midIndex];
                     codeNode.elseCase.charIndex = codeNode.charIndex;
                 }
                 else
                 {
-                    Init(FullKeyLongArray, KeyLongArrayBig, ColumnSortArrayBig, ref codeNode.elseCase);
+                    Init(FullKeyLongArray, KeyLongArrayBig,columnLength, ColumnSortArrayBig, ref codeNode.elseCase);
                 }
+            }
+        }
+        public static long GetKeyLong(long[][] KeyLongArray, int RowIndex, int ColumnIndex)
+        {
+            if (ColumnIndex < KeyLongArray[RowIndex].Length)
+            {
+                return KeyLongArray[RowIndex][ColumnIndex];
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        public static unsafe long GetLong(char* pKey, int index,int length)
+        {
+            int positionLength = (length + 3) >> 2;
+            if (index == positionLength - 1)
+            {
+                int remain = length & 3;
+                if (remain == 0)
+                {
+                    return *(long*)(pKey + index * 4);
+                }
+                else if (remain == 1)
+                {
+                    return *(short*)(pKey + index * 4);
+                }
+                else if (remain == 2)
+                {
+                    return *(int*)(pKey + index * 4);
+                }
+                else if (remain == 3)
+                {
+                    return *(long*)(pKey + index * 4 - 1);
+                }
+                else
+                {
+                    return 0;//没用。
+                }
+            }
+            else
+            {
+                return *(long*)(pKey + index * 4);
+            }
+        }
+        public unsafe static void GetFastFindSameLengthStringSample(char* pt,int length)
+        {
+            if (*(long*)(pt) < 343)
+            {
+                if (*(short*)pt > 4545)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+
             }
         }
     }
 }
-#endif

@@ -3,6 +3,9 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp1.1\Plug\NFinalCorePlug\plugin.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Debug\NFinalCorePlug\Controllers\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

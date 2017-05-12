@@ -1,53 +1,88 @@
 ﻿{
-  //用户自定义设置
-  "appSettings": {
-    "key": "value"
-  },
-  //连接字符串设置
-  "connectionStrings": {
-    "Common": {
-      "connectionString": "Data Source=|ModuleDataDirectory|Common.db;Pooling=true;FailIfMissing=false",
-      "providerName": "System.Data.SQLite"
+  //插件信息
+  "plugin": {
+    "hostVersion": [ 2.0, 2.1, 2.2 ],
+    "title": "",
+    "data": {
+      "plugVersion": 1.0,
+      "name": "NFinalCoreWebSample",
+      "enable": true,
+      "urlPrefix": null,
+      "copyright": "",
+      "author": "",
+      "title": "",
+      "description": "",
+      //需要引入的dll文件
+      "library": [],
+      //插件路径
+      "plugPath": "NFinalCoreWebSample.dll",
+      "staticDirectory": "/Content",
+      "modules": [
+        {
+          "name": "",
+          "menu": "",
+          "url": "",
+          "type": 1
+        }
+      ]
     },
-    "LeZhaiQuanStart": {
-      "connectionString": "Server=192.168.1.102;Database=lezhaiquanstart;Uid=root;Pwd=root;",
-      "providerName": "MySql.Data.MySqlClient"
-    }
-  },
-  "verbs": [ "GET", "POST", "HEAD", "DEBUG" ],
-  //Session设置
-  "sessionState": {
-    "cookieName": "session_id",
-    "mode": "Redis",
-    "stateConnectionString": "localhost",
-    "timeout": 20,
-    "prefix": ""
-  },
-  //Url设置
-  "url": {
-    "prefix": "",
-    "extension": ".html",
-    "defaultDocument": "index.html"
-  },
-  //Cookie设置
-  "cookie": {
-    "prefix": ""
-  },
-  //默认皮肤
-  "defaultSkin": null,
-  //用户自定义错误
-  "customErrors": {
-    "defaultRedirect": "Err.htm",
-    "mode": "Off",
-    "errors": [
-      {
-        "statusCode": 403,
-        "redirect": "NoAccess.htm"
+    "setup": {
+      "installUrl": "/install.html",
+      "uninstallUrl": "/uninstall.html",
+      "upgradeUrl": "/upgrade.html"
+    },
+    "config": {
+      //用户自定义设置
+      "appSettings": {
+        "key": "value"
       },
-      {
-        "statusCode": 404,
-        "redirect": "FileNotFound.htm"
+      //连接字符串设置
+      "connectionStrings": {
+        "Common": {
+          "connectionString": "Data Source=|ModuleDataDirectory|Common.db;Pooling=true;FailIfMissing=false",
+          "providerName": "System.Data.SQLite"
+        },
+        "LeZhaiQuanStart": {
+          "connectionString": "Server=192.168.1.102;Database=lezhaiquanstart;Uid=root;Pwd=root;",
+          "providerName": "MySql.Data.MySqlClient"
+        }
+      },
+      "verbs": [ "GET", "POST", "HEAD", "DEBUG" ],
+      //Session设置
+      "sessionState": {
+        "cookieName": "session_id",
+        "mode": "Redis",
+        "stateConnectionString": "localhost",
+        "timeout": 20,
+        "prefix": ""
+      },
+      //Url设置
+      "url": {
+        "prefix": "",
+        "extension": ".html",
+        "defaultDocument": "index.html"
+      },
+      //Cookie设置
+      "cookie": {
+        "prefix": ""
+      },
+      //默认皮肤
+      "defaultSkin": null,
+      //用户自定义错误
+      "customErrors": {
+        "defaultRedirect": "Err.htm",
+        "mode": "Off",
+        "errors": [
+          {
+            "statusCode": 403,
+            "redirect": "NoAccess.htm"
+          },
+          {
+            "statusCode": 404,
+            "redirect": "FileNotFound.htm"
+          }
+        ]
       }
-    ]
+    }
   }
 }

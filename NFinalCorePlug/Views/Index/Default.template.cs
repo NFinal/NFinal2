@@ -16,9 +16,9 @@ namespace NFinalCorePlug.Views.Index
 			writer.Write("<!DOCTYPE html>\r\n<html>\r\n\r\n<head>\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\r\n    <title></title>\r\n\t<meta http-equiv=\"Cache-Control\" content=\"no-cache\">\r\n</head>\r\n<body>\r\n    <h2>Message:");
 			writer.Write(Model.Message);
 			writer.Write("</h2>\r\n    <h2>siteName：");
-			writer.Write(Model.systemConfig["siteName"].value);
+			writer.Write(Model.systemConfig["siteName"]);
 			writer.Write("</h2>\r\n    <h2>mobile:");
-			writer.Write(Model.systemConfig["mobile"].value);
+			writer.Write(Model.systemConfig["mobile"]);
 			writer.Write("</h2>dd\r\n</body>\r\n</html>");
 		}
 	}

@@ -13,6 +13,9 @@ var Url={
     "NFinalCorePlug_BaseController":{
     }
         ,
+    "NFinalCorePlug_Controllers_UserController":{
+    }
+        ,
     "NFinalCorePlug_Controllers_IndexController":{
             "Default":function()
             {
@@ -23,8 +26,5 @@ var Url={
             {
             return "/Index/Ajax.html";
             }
-    }
-        ,
-    "NFinalCorePlug_Controllers_UserController":{
     }
 };

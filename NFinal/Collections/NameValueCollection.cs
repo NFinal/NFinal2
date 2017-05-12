@@ -10,9 +10,9 @@ namespace NFinal
     {
         public NameValueCollection()
         {
-            collection = new Dictionary<string, StringContainer>(StringComparer.Ordinal);
+            collection = new NFinal.Collections.FastDictionary<string, StringContainer>(StringComparer.Ordinal);
         }
-        private IDictionary<string, StringContainer> collection = null;
+        private NFinal.Collections.FastDictionary<string, StringContainer> collection = null;
 
         public StringContainer this[string key]
         {

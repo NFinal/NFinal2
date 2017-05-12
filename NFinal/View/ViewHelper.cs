@@ -18,7 +18,7 @@ namespace NFinal
     {
         public static bool isInit = false;
         //public static Dictionary<string, NFinal.ViewDelegateData>  dicViews = new Dictionary<string, NFinal.ViewDelegateData>();
-        public static NFinal.Collections.FastDictionary<NFinal.ViewDelegateData> viewFastDic = null;
+        public static NFinal.Collections.FastDictionary<string,NFinal.ViewDelegateData> viewFastDic = null;
         public static void Init(NFinal.Config.Global.GlobalConfig globalConfig)
         {
             NFinal.Plugs.PlugInfo plug = null;
@@ -26,7 +26,7 @@ namespace NFinal
             Module[] modules= null;
             NFinal.ViewDelegateData dele;
             ViewAttribute viewAttr;
-            Dictionary<string, ViewDelegateData> viewDataDictionary = new Dictionary<string, NFinal.ViewDelegateData>();
+            NFinal.Collections.FastDictionary<string, ViewDelegateData> viewDataDictionary = new NFinal.Collections.FastDictionary<string, NFinal.ViewDelegateData>();
             for (int i = 0; i < NFinal.Plugs.PlugManager.plugInfoList.Count; i++)
             {
                 plug = NFinal.Plugs.PlugManager.plugInfoList[i];
@@ -68,8 +68,7 @@ namespace NFinal
                     }
                 }
             }
-            viewFastDic = new Collections.FastDictionary<NFinal.ViewDelegateData>(viewDataDictionary, viewDataDictionary.Count);
-            viewDataDictionary.Clear();
+            viewFastDic =viewDataDictionary;
         }
         public static Delegate renderMethodDelegate = null;
         public static Delegate GetRenderDelegate<T>(string url,MethodInfo renderMethodInfo)

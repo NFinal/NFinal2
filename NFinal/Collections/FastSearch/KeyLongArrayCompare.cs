@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace NFinal.Collections
+namespace NFinal.Collections.FastSearch
 {
     public class KeyLongArrayCompare : IComparer<int>
     {
