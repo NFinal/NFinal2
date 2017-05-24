@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using ProtoBuf;
 
-namespace NFinalServer.Code
+namespace NFinalServerSample.Code
 {
     /// <summary>
     /// 用于缓存的用户数据

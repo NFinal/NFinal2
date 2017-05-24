@@ -538,7 +538,7 @@ namespace NFinal.Action
                 {
                     if (dele.renderMethod == null)
                     {
-                        dele.renderMethod = NFinal.ViewHelper.GetRenderDelegate<T>(url,dele.renderMethodInfo);
+                        dele.renderMethod = NFinal.ViewHelper.GetRenderDelegate<T>(url,dele.viewType);
                         NFinal.ViewHelper.viewFastDic[url] = dele;
                     }
                     var render = (NFinal.RenderMethod<T>)dele.renderMethod;

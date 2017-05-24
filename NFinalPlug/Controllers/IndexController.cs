@@ -24,6 +24,9 @@ namespace NFinalPlug.Controllers
         {
             ViewBag.cc2 = DateTime.Now;
             ViewBag.a = "23";
+            //Controllers.IndexController_Model.Show moo = new IndexController_Model.Show();
+            //Views.Index indexView = new Views.Index(this, moo);
+            //indexView.Execute();
             this.Render("/NFinalPlug/Views/Index.cshtml");
         }
     }

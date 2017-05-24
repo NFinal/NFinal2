@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NFinal;
 
-namespace NFinalServer
+namespace NFinalServerSample
 {
     public class Program
     {
@@ -20,7 +20,7 @@ namespace NFinalServer
             {
                 url = "http://localhost:80";
             }
-            using (Microsoft.Owin.Hosting.WebApp.Start<NFinalServer.Startup>(url))
+            using (Microsoft.Owin.Hosting.WebApp.Start<NFinalServerSample.Startup>(url))
             {
                 Console.WriteLine("服务器已经启动");
                 Console.ReadKey();

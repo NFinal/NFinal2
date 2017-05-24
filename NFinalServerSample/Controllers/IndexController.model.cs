@@ -5,7 +5,7 @@ using System.Text;
 using NFinal;
 //此代码由NFinalControllerGenerator生成。
 //http://bbs.nfinal.com
-namespace NFinalServer.Controllers.IndexController_Model
+namespace NFinalServerSample.Controllers.IndexController_Model
 {
 	public class Default
 	{
@@ -14,7 +14,7 @@ namespace NFinalServer.Controllers.IndexController_Model
 		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<string,NFinal.StringContainer> systemConfig;
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
 		public string Message;
 		public string Title;
 	}
@@ -25,7 +25,7 @@ namespace NFinalServer.Controllers.IndexController_Model
 		public string imageServerUrl;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<string,NFinal.StringContainer> systemConfig;
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
 		public string Message;
 		public int id;
 		public System.DateTime time;

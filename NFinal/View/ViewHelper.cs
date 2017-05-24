@@ -11,7 +11,7 @@ namespace NFinal
     public struct ViewDelegateData
     {
         public string viewClassName;
-        public System.Reflection.MethodInfo renderMethodInfo;
+        public Type viewType;
         public Delegate renderMethod;
     }
     public static class ViewHelper
@@ -51,7 +51,7 @@ namespace NFinal
                                 viewAttr.viewUrl = types[k].FullName.Replace('.', '/');
                             }
                             dele = new ViewDelegateData();
-                            dele.renderMethodInfo = types[k].GetMethod("Render");
+                            dele.viewType = types[k];
                             dele.renderMethod = null;//GetRenderDelegate(dele.renderMethodInfo);
                             dele.viewClassName = types[k].FullName;
                             //dicViews.Add(viewAttr.viewUrl, dele);
@@ -71,10 +71,10 @@ namespace NFinal
             viewFastDic =viewDataDictionary;
         }
         public static Delegate renderMethodDelegate = null;
-        public static Delegate GetRenderDelegate<T>(string url,MethodInfo renderMethodInfo)
+        public static Delegate GetRenderDelegate<T>(string url,Type viewType)
         {
-            ParameterInfo[] parameters= renderMethodInfo.GetParameters();
-            Type modelType = parameters[1].ParameterType;
+            PropertyInfo modelProperty= viewType.GetProperty("Model");
+            Type modelType = modelProperty.PropertyType;
             if (typeof(T) != modelType)
             {
                 throw new Exceptions.ViewModelTypeUnMatchedException(url, typeof(T), modelType);
@@ -90,7 +90,8 @@ namespace NFinal
             //methodIL.Emit(OpCodes.Ldloc,model);
             methodIL.Emit(OpCodes.Ldarg_0);
             methodIL.Emit(OpCodes.Ldarg_1);
-            methodIL.Emit(OpCodes.Call, renderMethodInfo);
+            methodIL.Emit(OpCodes.Newobj,viewType.GetConstructor(new Type[] { typeof(NFinal.IO.Writer),modelType }));
+            methodIL.Emit(OpCodes.Callvirt,viewType.GetMethod("Execute",Type.EmptyTypes));
             methodIL.Emit(OpCodes.Ret);
             renderMethodDelegate = method.CreateDelegate(typeof(NFinal.RenderMethod<>).MakeGenericType(modelType));
             return renderMethodDelegate;

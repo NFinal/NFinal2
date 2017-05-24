@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NFinal;
 
-namespace NFinalServer
+namespace NFinalServerSample
 {
     /// <summary>
     /// 控制器的父类必须是泛型

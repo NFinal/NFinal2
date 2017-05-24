@@ -60,24 +60,48 @@ namespace NFinalCompiler.Razor
             sw.Write(className);
             sw.Write(".cshtml");
             sw.WriteLine("\")]");
-            sw.Write("\tpublic static class ");
+            sw.Write("\tpublic class ");
             sw.Write(className);
-            sw.WriteLine("");
+            sw.Write(" : NFinal.View.RazorView<");
+            sw.Write(modelType);
+            sw.WriteLine(">");
             sw.WriteLine("\t{");
-            sw.WriteLine("\t\t//如果此处报错，请添加NFinal引用");
-            sw.WriteLine("\t\t//PMC命令为：Install-Package NFinal");
-            sw.Write("\t\tpublic static void Render(");
+            sw.Write("\t\tpublic ");
+            sw.Write(className);
+            sw.Write("(");
             sw.Write("NFinal.IO.Writer writer,");
             if (modelType == "dynamic")
             {
                 sw.Write(modelType);
-                sw.WriteLine(" ViewBag)");
+                sw.WriteLine(" ViewBag) : base(writer ,ViewBag)");
+                sw.WriteLine("\t\t{");
+                sw.WriteLine("\t\t\tthis.writer=writer;");
+                sw.WriteLine("\t\t\tthis.ViewBag=ViewBag;");
+                sw.WriteLine("\t\t}");
             }
             else
             {
                 sw.Write(modelType);
-                sw.WriteLine(" Model)");
+                sw.WriteLine(" Model) : base(writer ,Model)");
+                sw.WriteLine("\t\t{");
+                sw.WriteLine("\t\t\tthis.writer=writer;");
+                sw.WriteLine("\t\t\tthis.Model=Model;");
+                sw.WriteLine("\t\t}");
             }
+            sw.WriteLine("\t\t//如果此处报错，请添加NFinal引用");
+            sw.WriteLine("\t\t//PMC命令为：Install-Package NFinal");
+            sw.WriteLine("\t\tpublic override void Execute()");
+            //sw.Write("NFinal.IO.Writer writer,");
+            //if (modelType == "dynamic")
+            //{
+            //    sw.Write(modelType);
+            //    sw.WriteLine(" ViewBag)");
+            //}
+            //else
+            //{
+            //    sw.Write(modelType);
+            //    sw.WriteLine(" Model)");
+            //}
             sw.WriteLine("\t\t{");
             sw.Write(renderContent);
             sw.WriteLine("\t\t}");

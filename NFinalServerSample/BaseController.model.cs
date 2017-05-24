@@ -5,6 +5,6 @@ using System.Text;
 using NFinal;
 //此代码由NFinalControllerGenerator生成。
 //http://bbs.nfinal.com
-namespace NFinalServer.BaseController_Model
+namespace NFinalServerSample.BaseController_Model
 {
 }

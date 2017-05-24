@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Owin;
-namespace NFinalServer
+namespace NFinalServerSample
 {
     public class Startup
     {

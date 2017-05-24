@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\NFinal4.dll" />
     <Content Include="bin\System.Web.Helpers.dll" />
     <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />

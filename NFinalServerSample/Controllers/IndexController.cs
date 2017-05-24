@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NFinal;
 
-namespace NFinalServer.Controllers
+namespace NFinalServerSample.Controllers
 {
     public class IndexController:BaseController
     {

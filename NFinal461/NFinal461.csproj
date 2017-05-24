@@ -556,8 +556,8 @@
     <Compile Include="..\nfinal\view\MasterPageModel.cs">
       <Link>Core\View\MasterPageModel.cs</Link>
     </Compile>
-    <Compile Include="..\nfinal\view\razor\BasePage.cs">
-      <Link>Core\View\Razor\BasePage.cs</Link>
+    <Compile Include="..\NFinal\View\RazorView.cs">
+      <Link>Core\View\RazorView.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\view\ViewData.cs">
       <Link>Core\View\ViewData.cs</Link>

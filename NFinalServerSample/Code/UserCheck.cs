@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NFinal.Owin;
 
-namespace NFinalServer.Code
+namespace NFinalServerSample.Code
 {
     /// <summary>
     /// 用户自定义过滤器

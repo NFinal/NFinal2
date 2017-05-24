@@ -24,12 +24,11 @@
     <Compile Include="..\NFinal\IO\StringWriter.cs" Link="StringWriter.cs" />
     <Compile Include="..\NFinal\IO\Writer.cs" Link="Writer.cs" />
     <Compile Include="..\NFinal\System\StringContainer.cs" Link="StringContainer.cs" />
-    <Compile Include="..\NFinal\View\Razor\BasePage.cs" Link="View\Razor\BasePage.cs" />
+    <Compile Include="..\NFinal\View\RazorView.cs" Link="View\RazorView.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Config\Global\" />
-    <Folder Include="View\Razor\" />
     <Folder Include="Attribute\" />
     <Folder Include="View\" />
     <Folder Include="Extension\" />
