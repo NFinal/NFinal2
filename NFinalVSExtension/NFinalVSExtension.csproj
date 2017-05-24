@@ -23,6 +23,7 @@
     <Compile Include="..\NFinal\IO\StreamWriter.cs" Link="StreamWriter.cs" />
     <Compile Include="..\NFinal\IO\StringWriter.cs" Link="StringWriter.cs" />
     <Compile Include="..\NFinal\IO\Writer.cs" Link="Writer.cs" />
+    <Compile Include="..\NFinal\System\StringContainer.cs" Link="StringContainer.cs" />
     <Compile Include="..\NFinal\View\Razor\BasePage.cs" Link="View\Razor\BasePage.cs" />
   </ItemGroup>
 

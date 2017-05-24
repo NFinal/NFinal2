@@ -13,7 +13,7 @@ namespace NFinalPlug.Controllers.IndexController_Model
 		public string a;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
 		public string ab;
 		public string ddd;
 		public int ac;
@@ -24,7 +24,7 @@ namespace NFinalPlug.Controllers.IndexController_Model
 		public string a;
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastDictionary<NFinal.StringContainer> systemConfig;
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
 		public System.DateTime cc2;
 		public NFinalPlug.Controllers.parameterModel model;
 	}

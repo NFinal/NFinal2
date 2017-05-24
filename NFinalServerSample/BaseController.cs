@@ -26,7 +26,7 @@ namespace NFinalServer
                 Dictionary<string, StringContainer> systemConfigDictionary = new Dictionary<string, StringContainer>();
                 systemConfigDictionary.Add("siteName", "站点名称");
                 systemConfigDictionary.Add("mobile","联系电话");
-                BaseController.systemConfig = new NFinal.Collections.FastDictionary<StringContainer>(systemConfigDictionary, systemConfigDictionary.Count);
+                BaseController.systemConfig = new NFinal.Collections.FastSearch.FastSearch<StringContainer>(systemConfigDictionary);
                 systemConfigDictionary.Clear();
             }
             return true;

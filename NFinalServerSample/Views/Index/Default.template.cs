@@ -3,9 +3,9 @@ using NFinal;
 
 //此代码由NFinalRazorGenerator生成。
 //http://bbs.nfinal.com
-namespace NFinalServer.Views.Index
+namespace NFinalServerSample.Views.Index
 {
-    [View("/NFinalServer/Views/Index/Default.cshtml")]
+    [View("/NFinalServerSample/Views/Index/Default.cshtml")]
     public static class Default
     {
         //如果此处报错，请添加NFinal引用

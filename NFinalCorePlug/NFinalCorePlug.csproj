@@ -3,6 +3,16 @@
     <TargetFramework>netstandard1.5</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="bin\NFinal.xml" />
+    <Content Include="bin\System.Runtime.xml" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="protobuf-net" Version="2.1.0" />
     <PackageReference Include="StackExchange.Redis" Version="1.2.1" />
@@ -47,6 +57,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\netstandard1.5\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <None Include="bin\NFinal.dll" />
+    <None Include="bin\NFinalCorePlug.dll" />
+    <None Include="bin\System.Runtime.dll" />
+    <None Include="bin\System.Web.Helpers.dll" />
+    <None Include="bin\System.Web.Mvc.dll" />
+    <None Include="bin\System.Web.Razor.dll" />
+    <None Include="bin\System.Web.WebPages.Deployment.dll" />
+    <None Include="bin\System.Web.WebPages.dll" />
+    <None Include="bin\System.Web.WebPages.Razor.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFinal\NFinal.csproj" />
