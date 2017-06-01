@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : FindGroupIndexDelegateHelper.cs
+//        Description :查找到具有相同字符串长度的字符串信息组。
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,21 +21,57 @@ using System.Reflection.Emit;
 
 namespace NFinal.Collections.FastSearch
 {
+    /// <summary>
+    /// 查找到具有相同字符串长度的字符串信息组
+    /// </summary>
     public class FindGroupIndexDelegateHelper
     {
+        /// <summary>
+        /// 代码节点
+        /// </summary>
         public class Node
         {
+            /// <summary>
+            /// 节点类型
+            /// </summary>
             public NodeType nodeType;
+            /// <summary>
+            ///  比较值
+            /// </summary>
             public int lessThanValue;
+            /// <summary>
+            /// 小于的节点
+            /// </summary>
             public Node smallNode;
+            /// <summary>
+            /// 大于的节点
+            /// </summary>
             public Node createNode;
+            /// <summary>
+            /// 组的索引
+            /// </summary>
             public int arrayIndex;
         }
+        /// <summary>
+        /// 代码节点类型
+        /// </summary>
         public enum NodeType
         {
+            /// <summary>
+            /// 比较
+            /// </summary>
             Compare,
+            /// <summary>
+            /// 设置索引
+            /// </summary>
             SetIndex
         }
+        /// <summary>
+        /// 组装并返回查找具有相同字符串长度的组的索引的函数代理
+        /// </summary>
+        /// <typeparam name="TValue">查找的值类型</typeparam>
+        /// <param name="groupDataArray">具有相同字符串长度的组的数组</param>
+        /// <returns></returns>
         public static FindGroupIndexDelegate GetFindGroupIndexDelegate<TValue>(GroupData<TValue>[] groupDataArray)
         {
             //Node rootNode = new Node();
@@ -34,6 +84,14 @@ namespace NFinal.Collections.FastSearch
             GenerateFindGroupIndexDelegate(methodIL, groupDataArray, 0, groupDataArray.Length - 1);
             return NFinal.Emit.UnSafeHelper.GetDelegate<FindGroupIndexDelegate>(typeBuilder, "FindGroupIndexDelegate");
         }
+        /// <summary>
+        /// 利用IL生成查找函数
+        /// </summary>
+        /// <typeparam name="TValue">查找的值</typeparam>
+        /// <param name="methodIL">IL生成器</param>
+        /// <param name="groupDataArray">具有相同字符串长度的组的数组</param>
+        /// <param name="left">左指向位置</param>
+        /// <param name="right">右指向位置</param>
         public static void GenerateFindGroupIndexDelegate<TValue>(ILGenerator methodIL,GroupData<TValue>[] groupDataArray, int left, int right)
         {
             int middle = (right + left + 1) >> 1;
@@ -64,6 +122,7 @@ namespace NFinal.Collections.FastSearch
                 GenerateFindGroupIndexDelegate(methodIL,groupDataArray,middle,right);
             }
         }
+#if EMITDEBUG
         public static int SampleForIL<TValue>(GroupData<TValue>[] groupDataArray,int length)
         {
             if (length < 0)
@@ -108,5 +167,6 @@ namespace NFinal.Collections.FastSearch
                 FindGroupIndexDelegate(groupDataArray, node.createNode, middle, right);
             }
         }
+#endif
     }
 }

@@ -132,9 +132,6 @@
     <Compile Include="..\NFinal\Attribute\AreaAttribute.cs">
       <Link>Core\Attribute\AreaAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Attribute\ConfigAttribute.cs">
-      <Link>Core\Attribute\ConfigAttribute.cs</Link>
-    </Compile>
     <Compile Include="..\NFinal\Attribute\ControllerAttribute.cs">
       <Link>Core\Attribute\ControllerAttribute.cs</Link>
     </Compile>
@@ -143,9 +140,6 @@
     </Compile>
     <Compile Include="..\NFinal\Attribute\IndexAttribute.cs">
       <Link>Core\Attribute\IndexAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Attribute\SubDomainAttribute.cs">
-      <Link>Core\Attribute\SubDomainAttribute.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Attribute\UrlAttribute.cs">
       <Link>Core\Attribute\UrlAttribute.cs</Link>
@@ -165,23 +159,23 @@
     <Compile Include="..\NFinal\cache\ICache.cs">
       <Link>Core\Cache\ICache.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Cache\Page\BrowserCache.cs">
+      <Link>Core\Cache\Page\BrowserCache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Cache\Page\PageCacheAttribute.cs">
+      <Link>Core\Cache\Page\PageCacheAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Cache\Page\ServerCache.cs">
+      <Link>Core\Cache\Page\ServerCache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Cache\Page\StandardCache.cs">
+      <Link>Core\Cache\Page\StandardCache.cs</Link>
+    </Compile>
     <Compile Include="..\NFinal\cache\RedisCache.cs">
       <Link>Core\Cache\RedisCache.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Cache\SimpleCache.cs">
       <Link>Core\Cache\SimpleCache.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\cache\system\Browser.cs">
-      <Link>Core\Cache\System\Browser.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\cache\system\CacheAttribute.cs">
-      <Link>Core\Cache\System\CacheAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\cache\system\Server.cs">
-      <Link>Core\Cache\System\Server.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\cache\system\Standard.cs">
-      <Link>Core\Cache\System\Standard.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Collections\FastDictionary.cs">
       <Link>Core\Collections\FastDictionary.cs</Link>
@@ -204,17 +198,14 @@
     <Compile Include="..\NFinal\Collections\FastSearch\KeyLongArrayCompare.cs">
       <Link>Core\Collections\FastSearch\KeyLongArrayCompare.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Collections\FastSearch\KV.cs">
-      <Link>Core\Collections\FastSearch\KV.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastSearch\KeyValue.cs">
+      <Link>Core\Collections\FastSearch\KeyValue.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\Collections\FastSearch\KVNode.cs">
-      <Link>Core\Collections\FastSearch\KVNode.cs</Link>
+    <Compile Include="..\NFinal\Collections\FastSearch\KeyValueNode.cs">
+      <Link>Core\Collections\FastSearch\KeyValueNode.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\collections\NameValueCollection.cs">
       <Link>Core\Collections\NameValueCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\collections\NameValueDynamicCollection.cs">
-      <Link>Core\Collections\NameValueDynamicCollection.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\config\Configration.cs">
       <Link>Core\Config\Configration.cs</Link>
@@ -411,9 +402,6 @@
     <Compile Include="..\NFinal\json\IJsonSerialize.cs">
       <Link>Core\Json\IJsonSerialize.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\json\JilJsonSerialize.cs">
-      <Link>Core\Json\JilJsonSerialize.cs</Link>
-    </Compile>
     <Compile Include="..\NFinal\json\JsonHelper.cs">
       <Link>Core\Json\JsonHelper.cs</Link>
     </Compile>
@@ -428,15 +416,6 @@
     </Compile>
     <Compile Include="..\NFinal\logs\ILogger.cs">
       <Link>Core\Logs\ILogger.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\logs\RequestLogs.cs">
-      <Link>Core\Logs\RequestLogs.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Middleware\Builder\Completed.cs">
-      <Link>Core\Middleware\Builder\Completed.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Middleware\Builder\NotFound.cs">
-      <Link>Core\Middleware\Builder\NotFound.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\middleware\ContextMiddleware.cs">
       <Link>Core\Middleware\ContextMiddleware.cs</Link>
@@ -477,11 +456,11 @@
     <Compile Include="..\NFinal\owin\OwinKeys.cs">
       <Link>Core\Owin\OwinKeys.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\owin\OwinModel.cs">
-      <Link>Core\Owin\OwinModel.cs</Link>
-    </Compile>
     <Compile Include="..\NFinal\owin\Request.cs">
       <Link>Core\Owin\Request.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Plugs\Base\Favicon.cs">
+      <Link>Core\Plugs\Base\Favicon.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Plugs\Loader\AssemblyLoader.cs">
       <Link>Core\Plugs\Loader\AssemblyLoader.cs</Link>
@@ -519,8 +498,8 @@
     <Compile Include="..\NFinal\system\StringContainer.cs">
       <Link>Core\System\StringContainer.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\UI\BaseControll.cs">
-      <Link>Core\UI\BaseControll.cs</Link>
+    <Compile Include="..\NFinal\UI\BaseControl.cs">
+      <Link>Core\UI\BaseControl.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\UI\Navigator.cs">
       <Link>Core\UI\Navigator.cs</Link>
@@ -564,14 +543,8 @@
     <Compile Include="..\NFinal\validation\ValidStatus.cs">
       <Link>Core\Validation\ValidStatus.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\View\MasterPageModel.cs">
-      <Link>Core\View\MasterPageModel.cs</Link>
-    </Compile>
     <Compile Include="..\NFinal\View\RazorView.cs">
       <Link>Core\View\RazorView.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\View\ViewData.cs">
-      <Link>Core\View\ViewData.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\view\ViewHelper.cs">
       <Link>Core\View\ViewHelper.cs</Link>

@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : JsonHelper.cs
+//        Description :简单的Json序列化帮助类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,16 +21,46 @@ using System.Reflection.Emit;
 
 namespace NFinal.Json
 {
+    /// <summary>
+    /// model转为Json字符串的代理
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
+    /// <param name="model"></param>
+    /// <param name="writer"></param>
+    /// <param name="dateTimeFormat"></param>
     public delegate void GetJsonDelegate<TModel>(TModel model, NFinal.IO.IWriter writer, DateTimeFormat dateTimeFormat);
+    /// <summary>
+    /// 时间转换方法
+    /// </summary>
     public enum DateTimeFormat
     {
+        /// <summary>
+        /// UTC时间,数字
+        /// </summary>
         UTCTimeNumber,
+        /// <summary>
+        /// 本地时间,数字
+        /// </summary>
         LocalTimeNumber,
+        /// <summary>
+        /// UTC时间,字符串
+        /// </summary>
         UTCTimeString,
+        /// <summary>
+        /// 本地时间,字符串
+        /// </summary>
         LocalTimeString
     }
+    /// <summary>
+    /// 简单的Json序列化帮助类
+    /// </summary>
     public class JsonHelper
     {
+        /// <summary>
+        /// 获取UTC时间,数字
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public static long GetUTCTimeNumber(DateTime dateTime)
         {
             DateTime utcDate = dateTime;

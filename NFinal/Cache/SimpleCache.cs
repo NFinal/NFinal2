@@ -1,10 +1,24 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : SimpleCache.cs
+//        Description :基于当前内存实现的简单缓存功能
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 
 namespace NFinal.Cache
 {
     /// <summary>
-    /// 内存缓存类
+    /// 基于当前内存实现的简单缓存功能
     /// </summary>
     public struct SimpleCacheValue
     {
@@ -24,13 +38,23 @@ namespace NFinal.Cache
     {
         private System.Threading.Timer timer = null;
         //private System.Timers.Timer timer = null;
+        /// <summary>
+        /// 缓存全局字典对象
+        /// </summary>
         public static IDictionary<string, SimpleCacheValue> cacheStore = null;
+        /// <summary>
+        /// 缓存初始化
+        /// </summary>
+        /// <param name="minutes">滑动缓存时间</param>
         public SimpleCache(int minutes) : base(minutes)
         {
             cacheStore = new System.Collections.Concurrent.ConcurrentDictionary<string, SimpleCacheValue>(StringComparer.Ordinal);
             timer = new System.Threading.Timer(Timer_Elapsed, this, 5000, 0); 
         }
-
+        /// <summary>
+        /// 缓存定期处理函数
+        /// </summary>
+        /// <param name="sender"></param>
         private void Timer_Elapsed(object sender)
         {
             foreach (var cacheItem in cacheStore)
@@ -41,10 +65,19 @@ namespace NFinal.Cache
                 }
             }
         }
+        /// <summary>
+        /// 是否拥有某缓存
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <returns></returns>
         public override bool HasKey(string key)
         {
             return cacheStore.ContainsKey(key);
         }
+        /// <summary>
+        /// 删除缓存
+        /// </summary>
+        /// <param name="key">key</param>
         public override void Remove(string key)
         {
             if (cacheStore.ContainsKey(key))
@@ -52,6 +85,11 @@ namespace NFinal.Cache
                 cacheStore.Remove(key);
             }
         }
+        /// <summary>
+        /// 获取缓存
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <returns></returns>
         public override byte[] Get(string key)
         {
             if (cacheStore.ContainsKey(key) && cacheStore[key].expires >= DateTimeOffset.Now)
@@ -67,6 +105,12 @@ namespace NFinal.Cache
             }
             return null;
         }
+        /// <summary>
+        /// 设置缓存
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="value">value</param>
+        /// <param name="minutes">缓存时间</param>
         public override void Set(string key, byte[] value, int minutes)
         {
             SimpleCacheValue CacheValue;

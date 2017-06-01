@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : UnSafeHelper.cs
+//        Description :利用EMIT创建可以使用指针的自定义类型的帮助类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +24,18 @@ using System.Security.Permissions;
 
 namespace NFinal.Emit
 {
+    /// <summary>
+    /// 利用EMIT创建可以使用指针的自定义类型的帮助类
+    /// </summary>
     public class UnSafeHelper
     {
+        /// <summary>
+        /// 获取代理
+        /// </summary>
+        /// <typeparam name="TDelegate"></typeparam>
+        /// <param name="typeBuilder"></param>
+        /// <param name="methodName"></param>
+        /// <returns></returns>
         public static TDelegate GetDelegate<TDelegate>(TypeBuilder typeBuilder,string methodName)
         {
 #if NETCORE
@@ -28,6 +52,10 @@ namespace NFinal.Emit
 #endif
             return delete;
         }
+        /// <summary>
+        /// 获取动态类型
+        /// </summary>
+        /// <returns></returns>
         public static TypeBuilder GetDynamicType()
         {
             AssemblyName assamblyName = new AssemblyName("GenerateAssembly");

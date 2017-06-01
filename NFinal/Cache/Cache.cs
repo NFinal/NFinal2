@@ -1,11 +1,23 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : Cache.cs
+//        Description :缓存抽象类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.IO;
 
-
 namespace NFinal.Cache
 {
-    
     /// <summary>
     /// 缓存
     /// </summary>
@@ -19,6 +31,9 @@ namespace NFinal.Cache
         /// 序列化
         /// </summary>
         ISerializable serialize = null;
+        /// <summary>
+        /// 缓存类型
+        /// </summary>
         public CacheType cacheType;
         /// <summary>
         /// 初始化
@@ -32,7 +47,7 @@ namespace NFinal.Cache
         /// <summary>
         /// 初始化
         /// </summary>
-        /// <param name="">CacheType</param>
+        /// <param name="cacheType">缓存类型</param>
         public Cache(CacheType cacheType)
         {
             this.cacheType = cacheType;
@@ -42,6 +57,7 @@ namespace NFinal.Cache
         /// <summary>
         /// 初始化
         /// </summary>
+        /// <param name="cacheType">缓存类型</param>
         /// <param name="minutes"></param>
         public Cache(CacheType cacheType, int minutes)
         {
@@ -86,12 +102,19 @@ namespace NFinal.Cache
         /// <summary>
         /// 设置缓存
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
+        /// <param name="key">key</param>
+        /// <param name="value">缓存内存块</param>
         public void Set(TKey key, byte[] value)
         {
             this.Set(key, value, this.minutes);
         }
+        /// <summary>
+        /// 设置缓存
+        /// </summary>
+        /// <typeparam name="T">缓存类型</typeparam>
+        /// <param name="key">key</param>
+        /// <param name="t">缓存内容</param>
+        /// <param name="minutes">缓存时间</param>
         public void Set<T>(TKey key, T t, int minutes)
         {
             Set(key, serialize.Serialize<T>(t), minutes);

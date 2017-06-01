@@ -4,43 +4,95 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
+//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : StringContainer.cs
+//        Description :字符串容器类，用于基本类型的自动转换。
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
 using System;
 
 <#var nullableType=new string[]{"String"};#>
 <#var structType=new string[]{"SByte","Byte","Int16","UInt16","Int32","UInt32","Int64","UInt64","Boolean","Char","Decimal","Double","Single","DateTime","DateTimeOffset"};#>
 namespace NFinal
 {
+	/// <summary>
+    /// 字符串容器类，用于基本类型的自动转换。
+    /// </summary>
     public struct StringContainer
     {
+		/// <summary>
+		/// 空容器类，用于判断初始化等。
+		/// </summary>
         public static readonly StringContainer Empty=new StringContainer();
+		/// <summary>
+		/// 字符串
+		/// </summary>
         public string value;
         internal StringContainer(string value)
         {
             this.value = value;
         }
+		/// <summary>
+        /// 比较判断
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
 		public override bool Equals(object obj)
         {
             return base.Equals(obj);
         }
+        /// <summary>
+        /// GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return base.GetHashCode();
         }
+        /// <summary>
+        /// 相等判断
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="str"></param>
+        /// <returns></returns>
 		public static bool operator ==(StringContainer container, string str)
         {
             return container.value == str;
         }
+        /// <summary>
+        /// 不等判断
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static bool operator !=(StringContainer container, string str)
         {
             return container.value != str;
         }
 <#    for(int i=0;i<structType.Length;i++){#>
+		/// <summary>
+        /// 把<#=structType[i]#>类型转为字符串容器类，即字符串类
+        /// </summary>
+        /// <param name="obj"><#=structType[i]#>类型</param>
         public static implicit operator StringContainer(<#=structType[i]#> obj)
 		{
             return new StringContainer(obj.ToString());
 		}
 <#    }#>
 <#    for(int i=0;i<structType.Length;i++){#>
+		/// <summary>
+        /// 把<#=structType[i]#>类型转为字符串容器类，即字符串类
+        /// </summary>
+        /// <param name="obj">可以为null的<#=structType[i]#>类型</param>
         public static implicit operator StringContainer(<#=structType[i]#>? obj)
 		{
             if(obj!=null)
@@ -50,15 +102,27 @@ namespace NFinal
 			return StringContainer.Empty;
 		}
 <#    }#>
+		/// <summary>
+        /// 初始化函数
+        /// </summary>
+        /// <param name="value">字符串</param>
 		public static implicit operator StringContainer(string value)
         {
             return new StringContainer(value);
         }
+		/// <summary>
+        /// 初始化函数
+        /// </summary>
+        /// <param name="stringContainar">字符串容器类</param>
 		public static implicit operator string(StringContainer stringContainar)
 		{
 			return stringContainar.value;
 		}
 <#for(int i=0;i<structType.Length;i++){#>
+		/// <summary>
+        /// 把字符串容器类转换为<#=structType[i]#>类型
+        /// </summary>
+        /// <param name="stringContainar">字符串容器</param>
         public static implicit operator <#=structType[i]#>(StringContainer stringContainar)
         {
             <#=structType[i]#> result;
@@ -67,6 +131,10 @@ namespace NFinal
         }
 <#}#>
 <#for(int i=0;i<structType.Length;i++){#>
+		/// <summary>
+        /// 把字符串容器类转换为可为null的<#=structType[i]#>类型
+        /// </summary>
+        /// <param name="stringContainar">字符串容器</param>
         public static implicit operator <#=structType[i]#>?(StringContainer stringContainar)
         {
             <#=structType[i]#> result;

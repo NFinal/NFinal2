@@ -4,8 +4,8 @@
 //        All rights reserved
 //        
 //        Application:NFinal MVC framework
-//        Filename :MagicViewBag.cs
-//        Description :控制器父类
+//        Filename :AbtractAction.cs
+//        Description :控制器抽象类
 //
 //        created by Lucas at  2015-6-30`
 //     
@@ -23,13 +23,16 @@ using Dapper;
 namespace NFinal.Action
 {
     /// <summary>
-    /// NFinal的控制器基类，核心类，类似于asp.net中的page类
+    /// NFinal的控制器基类，核心类，类似于.net mvc中的BaseController类或者是asp.net中的Page类
     /// </summary>
     /// <typeparam name="TContext">上下文IOwinContext,Enviroment,Context</typeparam>
     /// <typeparam name="TRequest">请求信息</typeparam>
     /// <typeparam name="TUser">用户相关数据类型</typeparam>
     public abstract class AbstractAction<TContext,TRequest,TUser> :NFinal.IO.Writer, IAction<TContext, TRequest>  where TUser: NFinal.User.AbstractUser
     {
+        /// <summary>
+        /// 配置数据
+        /// </summary>
         public Config.Plug.PlugConfig config=null;
         #region 数据库相关
         /// <summary>
@@ -68,6 +71,12 @@ namespace NFinal.Action
             TModel model = this.GetModel<TModel>();
             return Con.SimpleInsert<int,TModel>(model);
 		}
+        /// <summary>
+        /// 插入Model信息
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
         public TKey Insert<TKey, TModel>() where TModel : class
         {
             TModel model = this.GetModel<TModel>();
@@ -146,6 +155,11 @@ namespace NFinal.Action
             TModel model = this.GetModel<TModel>();
             return Con.SimpleDelete(model);
         }
+        /// <summary>
+        /// 获取Model信息
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
         public TModel Get<TModel>() where TModel : class
         {
             TModel model = this.GetModel<TModel>();
@@ -155,19 +169,19 @@ namespace NFinal.Action
         /// 根据Id获取实体
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
-        /// <param name="id"></param>
+        /// <param name="sqlWhere"></param>
         /// <returns></returns>
         public TModel Get<TModel>(string sqlWhere) where TModel : class
         {
             TModel model = this.GetModel<TModel>();
             return Con.SimpleGet(model,sqlWhere);
         }
-       
+
         /// <summary>
         /// 根据查询条件获取实体列表
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
-        /// <param name="strWhere"></param>
+        /// <param name="sqlWhere"></param>
         /// <param name="param"></param>
         /// <returns></returns>
         public IEnumerable<TModel> GetAll<TModel>(string sqlWhere, object param = null) where TModel : class
@@ -175,6 +189,14 @@ namespace NFinal.Action
             TModel model = this.GetModel<TModel>();
             return Con.SimpleGetAll(model,sqlWhere);
         }
+        /// <summary>
+        /// 分页
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public IEnumerable<TModel> Page<TModel>(int pageIndex,int pageSize,out int count)
         {
             return Con.SimpleGetPage<TModel>(pageIndex, pageSize,out count);
@@ -210,10 +232,40 @@ namespace NFinal.Action
         /// 请求参数信息
         /// </summary>
         public NameValueCollection parameters;
+        private NFinal.Collections.FastDictionary<string, NFinal.Http.HttpMultipart.HttpFile> _files;
         /// <summary>
         /// 请求的文件
         /// </summary>
-        public NFinal.Http.HttpMultipart.HttpFile[] files=null;
+        public NFinal.Collections.FastDictionary<string, NFinal.Http.HttpMultipart.HttpFile> files {
+            get {
+                string requestContentType = GetRequestHeader(NFinal.Constant.HeaderContentType);
+                if (methodName == NFinal.Constant.MethodTypePOST
+                   && requestContentType.Split(NFinal.Constant.CharSemicolon)[0] == NFinal.Constant.ContentType_Multipart_form_data
+                   )
+                {
+                    string boundary = NFinal.Http.HttpMultipart.HttpMultipart.boundaryReg.Match(requestContentType).Value;
+                    var multipart = new NFinal.Http.HttpMultipart.HttpMultipart(GetRequestBody(), boundary);
+                    _files = new NFinal.Collections.FastDictionary<string, NFinal.Http.HttpMultipart.HttpFile>(StringComparer.Ordinal);
+                    foreach (var httpMultipartBoundary in multipart.GetBoundaries())
+                    {
+                        if (string.IsNullOrEmpty(httpMultipartBoundary.Filename))
+                        {
+                            string name = httpMultipartBoundary.Name;
+                            if (!string.IsNullOrEmpty(name))
+                            {
+                                string value = new System.IO.StreamReader(httpMultipartBoundary.Value).ReadToEnd();
+                                parameters.Add(name, value);
+                            }
+                        }
+                        else
+                        {
+                            _files.Add(httpMultipartBoundary.Name, new NFinal.Http.HttpMultipart.HttpFile(httpMultipartBoundary));
+                        }
+                    }
+                }
+                return _files;
+            }
+        }
         /// <summary>
         /// 输出类型
         /// </summary>
@@ -256,23 +308,50 @@ namespace NFinal.Action
                 Session.Set<TUser>("user",_user);
             }
         }
+        /// <summary>
+        /// 视图数据
+        /// </summary>
         public dynamic ViewBag=null;
+        /// <summary>
+        /// 上下文
+        /// </summary>
         public TContext context { get; set; }
-
+        /// <summary>
+        /// 请求信息
+        /// </summary>
         public TRequest request { get; set; }
-
+        /// <summary>
+        /// 响应内容
+        /// </summary>
         public Response response { get; set; }
+        /// <summary>
+        /// 输出内容
+        /// </summary>
         public Stream outputStream { get; set; }
-
+        /// <summary>
+        /// 压缩方式
+        /// </summary>
         public CompressMode compressMode { get; set; }
         #region 子类必须实现的方法
+        /// <summary>
+        /// 基础初始化函数
+        /// </summary>
+        /// <param name="context">Http上下文</param>
+        /// <param name="methodName">Http请求方法</param>
         public virtual void BaseInitialization(TContext context, string methodName)
         {
             this.context = context;
             this._methodName = methodName;
             SetResponse(CompressMode.Deflate);
         }
-
+        /// <summary>
+        /// 初始化函数
+        /// </summary>
+        /// <param name="context">Http上下文</param>
+        /// <param name="methodName">Http请求方法</param>
+        /// <param name="outputStream">Http输出流</param>
+        /// <param name="request">Http请求信息</param>
+        /// <param name="compressMode">压缩模式</param>
         public virtual void Initialization(TContext context, string methodName, Stream outputStream, TRequest request, CompressMode compressMode)
         {
             this.context = context;
@@ -310,39 +389,73 @@ namespace NFinal.Action
                 }
             }
         }
+        /// <summary>
+        /// 获取请求Url
+        /// </summary>
+        /// <returns></returns>
         public abstract string GetRequestPath();
-
+        /// <summary>
+        /// 获取IP地址
+        /// </summary>
+        /// <returns></returns>
         public abstract string GetRemoteIpAddress();
-
+        /// <summary>
+        /// 获取请求头信息
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public abstract string GetRequestHeader(string key);
-
+        /// <summary>
+        /// 获取请求内容
+        /// </summary>
+        /// <returns></returns>
         public abstract Stream GetRequestBody();
-
+        /// <summary>
+        /// 设置请求头
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="value">value</param>
         public abstract void SetResponseHeader(string key, string value);
-
+        /// <summary>
+        /// 设置请求头(多项)
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="value">value</param>
         public abstract void SetResponseHeader(string key, string[] value);
-
+        /// <summary>
+        /// 设置返回状态
+        /// </summary>
+        /// <param name="statusCode"></param>
         public abstract void SetResponseStatusCode(int statusCode);
-
+        /// <summary>
+        /// 控制器执行前方法
+        /// </summary>
+        /// <returns></returns>
         public abstract bool Before();
-
+        /// <summary>
+        /// 控制器执行后方法
+        /// </summary>
         public abstract void After();
-
+        /// <summary>
+        /// 关闭控制器相关资源，如输入输出流等
+        /// </summary>
         public abstract void Close();
 
         //public abstract void Write(byte[] buffer, int offset, int count);
 
         //public abstract void Write(string value);
-
+        /// <summary>
+        /// 释放控制器相关资源，如输入输出流等
+        /// </summary>
         public abstract void Dispose();
         #endregion
         #region 扩展方法
         /// <summary>
         /// 输出字节流，用于输出二进制流，如图象，文件等。
         /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="offset"></param>
-        /// <param name="count"></param>
+        /// <param name="buffer">缓冲区</param>
+        /// <param name="offset">起始偏移量</param>
+        /// <param name="count">缓冲区大小</param>
         public override void Write(byte[] buffer, int offset, int count)
         {
             this.writeStream.Write(buffer, 0, count);
@@ -362,7 +475,7 @@ namespace NFinal.Action
         /// <summary>
         /// 页面重定向
         /// </summary>
-        /// <param name="url"></param>
+        /// <param name="url">请求URL字符串</param>
         public void Redirect(string url)
         {
             CloseConnection();
@@ -370,6 +483,9 @@ namespace NFinal.Action
             this.SetResponseHeader(NFinal.Constant.HeaderContentType, NFinal.Constant.ResponseContentType_Text_html);
             this.SetResponseHeader(NFinal.Constant.HeaderLocation, url);
         }
+        /// <summary>
+        /// 把视图数据转换为JSON格式，并输出
+        /// </summary>
         public void AjaxReturn()
         {
             CloseConnection();
@@ -377,7 +493,7 @@ namespace NFinal.Action
             this.Write(Newtonsoft.Json.JsonConvert.SerializeObject(this.ViewBag, new Newtonsoft.Json.Converters.JavaScriptDateTimeConverter()));
         }
         /// <summary>
-        /// 返回json{code:1,msg:"",result:[json字符串]}
+        /// 输出json{code:1,msg:"",result:[json字符串]}
         /// </summary>
         /// <param name="json">json字符串</param>
         public void AjaxReturn(string json)
@@ -387,7 +503,7 @@ namespace NFinal.Action
             this.Write(json);
         }
         /// <summary>
-        /// 返回true或false
+        /// 输出true或false
         /// </summary>
         /// <param name="obj">bool变量</param>
         public  void AjaxReturn(bool obj)
@@ -396,6 +512,11 @@ namespace NFinal.Action
             this.SetResponseHeader(NFinal.Constant.HeaderContentType, NFinal.Constant.ResponseContentType_Application_json);
             this.Write(obj ? NFinal.Constant.trueString : NFinal.Constant.falseString);
         }
+        /// <summary>
+        /// 把请求信息根据名称自动封装进TModel类型中，并返回该类型对象
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
         public TModel GetModel<TModel>()
         {
             TModel model= NFinal.Model.ModelHelper.GetModel<TModel>(this.parameters);
@@ -404,9 +525,9 @@ namespace NFinal.Action
             return model;
         }
         /// <summary>
-        /// 返回数据库实体类对应的json对象{code:1,msg:"",result:[json对象]}
+        /// 返回数据库实体类对应的json对象（对时间进行了数字处理）
         /// </summary>
-        /// <param name="str">数据库实体类</param>
+        /// <param name="model">数据库实体类</param>
         public string GetModelJson<TModel>(TModel model)
         {
             if (model == null)
@@ -421,7 +542,7 @@ namespace NFinal.Action
             }
         }
         /// <summary>
-        /// 从请求参数中解析出Json类
+        /// 从请求内容中解析出Json类
         /// </summary>
         /// <typeparam name="T">类型</typeparam>
         /// <returns></returns>
@@ -433,20 +554,18 @@ namespace NFinal.Action
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(content);
         }
         /// <summary>
-        /// 返回数据库实体类对应的json对象{code:[code状态码],msg:[msg消息],result:[json对象]}
+        /// 把任意类对象转换为Json字符串
         /// </summary>
-        /// <param name="str">数据库实体类</param>
-        /// <param name="code">状态码</param>
-        /// <param name="msg">消息</param>
-        public string GetJson<T>(T t)
+        /// <typeparam name="TModel"></typeparam>
+        public string GetJson<TModel>(TModel model)
         {
-            if (t == null)
+            if (model == null)
             {
                 return Constant.nullString;
             }
             else
             {
-                return Newtonsoft.Json.JsonConvert.SerializeObject(t);
+                return Newtonsoft.Json.JsonConvert.SerializeObject(model);
             }
         }
         /// <summary>
@@ -467,6 +586,11 @@ namespace NFinal.Action
             this.Write(json);
             this.Write(Constant.AjaxReturnJson_End);
         }
+        /// <summary>
+        /// 获取二级域名
+        /// </summary>
+        /// <param name="context">上下文</param>
+        /// <returns></returns>
         public abstract string GetSubDomain(TContext context);
         /// <summary>
         /// 是否是手机端
@@ -503,9 +627,8 @@ namespace NFinal.Action
         /// <summary>
         /// 获取Url
         /// </summary>
-        /// <param name="controllerType">控制器名称</param>
         /// <param name="methodName">方法名</param>
-        /// <param name="urlParameters">Url参数</param>
+        /// <param name="urlParameters">Url中的get参数</param>
         /// <returns></returns>
         public static string Url<TController>(string methodName, params StringContainer[] urlParameters)
         {
@@ -524,10 +647,9 @@ namespace NFinal.Action
         /// <summary>
         /// 模板渲染函数
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="action"></param>
-        /// <param name="url"></param>
-        /// <param name="t"></param>
+        /// <typeparam name="T">视图数据类型</typeparam>
+        /// <param name="url">视图URL路径</param>
+        /// <param name="t">视图数据，即ViewBag</param>
         public bool RenderModel<T>(string url, T t)
         {
             CloseConnection();
@@ -595,11 +717,11 @@ namespace NFinal.Action
         {
             this.RenderModel(templateUrl, ViewBag);
         }
-        /// <summary>
-        /// 根据母模板路径和当前路径渲染模板
-        /// </summary>
-        /// <param name="masterPagePath"></param>
-        /// <param name="templateUrl"></param>
+        ///// <summary>
+        ///// 根据母模板路径和当前路径渲染模板
+        ///// </summary>
+        ///// <param name="masterPagePath"></param>
+        ///// <param name="templateUrl"></param>
         //public void Render(string masterPagePath, string templateUrl)
         //{
         //    if (this.MasterPage.GetType() == typeof(object))

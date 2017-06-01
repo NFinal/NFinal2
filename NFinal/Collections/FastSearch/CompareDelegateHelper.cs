@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : CompareDelegateHelper.cs
+//        Description :字符串比较函数帮助类，用于生成基于一定长度的字符串比较函数
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +23,16 @@ using System.Reflection.Emit;
 namespace NFinal.Collections.FastSearch
 {
     //public delegate bool CompareDelegate(char* keyChar, char* CompareKeyChar, int length);
+    /// <summary>
+    /// 字符串比较函数帮助类，用于生成基于一定长度的字符串比较函数
+    /// </summary>
     public unsafe class CompareDelegateHelper
     {
+        /// <summary>
+        /// 获取字符串比较函数
+        /// </summary>
+        /// <param name="length">两个字符串的长度</param>
+        /// <returns></returns>
         public static CompareDelegate GetCompareDelegate(int length)
         {
             TypeBuilder typeBuilder = NFinal.Emit.UnSafeHelper.GetDynamicType();
@@ -101,12 +123,13 @@ namespace NFinal.Collections.FastSearch
 
             return NFinal.Emit.UnSafeHelper.GetDelegate<CompareDelegate>(typeBuilder, "Compare");
         }
+#if EMITDEBUG
         /// <summary>
         /// 所要生成函数的样子
         /// </summary>
-        /// <param name="strA"></param>
-        /// <param name="strB"></param>
-        /// <param name="length"></param>
+        /// <param name="ptA">字符串指针A</param>
+        /// <param name="ptB">字符串指针B</param>
+        /// <param name="length">两字符串长度</param>
         /// <returns></returns>
         public unsafe static bool CompareA(char* ptA, char* ptB, int length)
         {
@@ -186,5 +209,6 @@ namespace NFinal.Collections.FastSearch
                 return true;
             }
         }
+#endif
     }
 }

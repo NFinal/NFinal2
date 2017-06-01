@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : ViewHelper.cs
+//        Description :视图初始化以及执行帮助类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -6,19 +20,50 @@ using System.Reflection.Emit;
 
 namespace NFinal
 {
+    /// <summary>
+    /// 视渲染函数代理
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="writer"></param>
+    /// <param name="t"></param>
     public delegate void RenderMethod<T>(NFinal.IO.Writer writer, T t);
     //public delegate void GetRenderMethod<T>(T t);
+    /// <summary>
+    /// 视图渲染信息
+    /// </summary>
     public struct ViewDelegateData
     {
+        /// <summary>
+        /// 视图类名
+        /// </summary>
         public string viewClassName;
+        /// <summary>
+        /// 视图类型
+        /// </summary>
         public Type viewType;
+        /// <summary>
+        /// 视图渲染函数
+        /// </summary>
         public Delegate renderMethod;
     }
+    /// <summary>
+    /// 视图初始化以及执行帮助类
+    /// </summary>
     public static class ViewHelper
     {
+        /// <summary>
+        /// 视图是否初始化
+        /// </summary>
         public static bool isInit = false;
         //public static Dictionary<string, NFinal.ViewDelegateData>  dicViews = new Dictionary<string, NFinal.ViewDelegateData>();
+        /// <summary>
+        /// 视图执行代理缓存
+        /// </summary>
         public static NFinal.Collections.FastDictionary<string,NFinal.ViewDelegateData> viewFastDic = null;
+        /// <summary>
+        /// 视图初始化
+        /// </summary>
+        /// <param name="globalConfig"></param>
         public static void Init(NFinal.Config.Global.GlobalConfig globalConfig)
         {
             NFinal.Plugs.PlugInfo plug = null;
@@ -70,7 +115,17 @@ namespace NFinal
             }
             viewFastDic =viewDataDictionary;
         }
+        /// <summary>
+        /// 视图泛型代理
+        /// </summary>
         public static Delegate renderMethodDelegate = null;
+        /// <summary>
+        /// 组装并返回视图泛型函数代理
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <param name="viewType"></param>
+        /// <returns></returns>
         public static Delegate GetRenderDelegate<T>(string url,Type viewType)
         {
             PropertyInfo modelProperty= viewType.GetProperty("Model");

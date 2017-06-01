@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : Request.cs
+//        Description :基于Owin的请求信息。
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -18,6 +32,9 @@ namespace NFinal.Owin
         /// 请求头中包含的Cookie信息
         /// </summary>
         public IDictionary<string,string> cookies;
+        /// <summary>
+        /// Http请求参数
+        /// </summary>
         public NameValueCollection parameters;
         /// <summary>
         /// 请求中包含的内容，例如POST请求
@@ -35,10 +52,6 @@ namespace NFinal.Owin
         /// 请求的绝对路径,例：/Index.html
         /// </summary>
         public string requestPath;
-        /// <summary>
-        /// 请求中包含的参数
-        /// </summary>
-        //public NameValueCollection get;
         /// <summary>
         /// 请求的queryString
         /// </summary>

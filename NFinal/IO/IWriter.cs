@@ -1,9 +1,26 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : IWriter.cs
+//        Description :输出流接口
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace NFinal.IO
 {
+    /// <summary>
+    /// 输出流接口
+    /// </summary>
     public interface IWriter
     {
         /// <summary>

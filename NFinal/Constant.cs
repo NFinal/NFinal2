@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : Constant.cs
+//        Description :常量字符串，可以减少内存占用
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Text;
 using System.Collections.Generic;
 
@@ -18,9 +32,12 @@ namespace NFinal
         /// </summary>
         public const string HeaderCookie = "Cookie";
         /// <summary>
-        /// & Char And
+        /// 与符号
         /// </summary>
         public const char CharAnd = '&';
+        /// <summary>
+        /// 分号
+        /// </summary>
         public const char CharSemicolon = ';';
         /// <summary>
         /// = Char Equal sign

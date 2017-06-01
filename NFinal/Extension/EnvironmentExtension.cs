@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : EnvironmentExtension.cs
+//        Description :Owin中间件扩展函数
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.IO;
 using NFinal.Owin;
@@ -6,8 +20,16 @@ using NFinal.Http;
 
 namespace NFinal
 {
+    /// <summary>
+    /// Owin中间件扩展函数
+    /// </summary>
     public static class EnvironmentExtension
     {
+        /// <summary>
+        /// 获取二级域名
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <returns></returns>
         public static string GetSubDomain(this IDictionary<string, object> environment)
         {
             string host = ((IDictionary<string, string[]>)(environment[NFinal.Owin.OwinKeys.RequestHeaders]))[NFinal.Constant.HeaderHost][0];
@@ -86,6 +108,7 @@ namespace NFinal
         /// <summary>
         /// 获取Cookie
         /// </summary>
+        /// <param name="environment"></param>
         /// <param name="headers"></param>
         /// <returns></returns>
         public static IDictionary<string, string> GetCookies(this IDictionary<string,object> environment, IDictionary<string, string[]> headers)
@@ -112,7 +135,7 @@ namespace NFinal
         /// <summary>
         /// 获取Cookie
         /// </summary>
-        /// <param name="headers"></param>
+        /// <param name="environment"></param>
         /// <returns></returns>
         public static IDictionary<string,string> GetCookies(this IDictionary<string, object> environment)
         {
@@ -126,6 +149,11 @@ namespace NFinal
         {
                 return (Stream)environment[OwinKeys.RequestBody];
         }
+        /// <summary>
+        /// 获取响应流
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <returns></returns>
         public static Stream GetResponseBody(this IDictionary<string, object> environment)
         {
             return (Stream)environment[OwinKeys.ResponseBody];
@@ -228,6 +256,12 @@ namespace NFinal
         {
             return (bool)environment[OwinKeys.IsLocal];
         }
+        /// <summary>
+        /// 获取请求路径根目录
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <param name="headers"></param>
+        /// <returns></returns>
         public static string GetRequestRoot(this IDictionary<string, object> environment,IDictionary<string,string[]> headers)
         {
             string host;
@@ -244,10 +278,20 @@ namespace NFinal
             //return new Uri(environment["owin.RequestScheme"] +"//:" + host+":"+ environment["owin.RequestPathBase"] + environment["owin.RequestPath"] + environment["owin.RequestQueryString"]);
             return environment[OwinKeys.RequestScheme] + NFinal.Constant.SchemeDelimiter + host;
         }
+        /// <summary>
+        /// 获取请求路径根目录
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <returns></returns>
         public static string GetRequestRoot(this IDictionary<string, object> environment)
         {
             return environment.GetRequestRoot((IDictionary<string,string[]>)environment[OwinKeys.RequestHeaders]);
         }
+        /// <summary>
+        /// 获取请求类型
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <returns></returns>
         public static MethodType GetMethodType(this IDictionary<string, object> environment)
         {
             string methodTypeTemp = (string)environment[OwinKeys.RequestMethod];
@@ -398,12 +442,21 @@ namespace NFinal
             }
             return request;
         }
+        /// <summary>
+        /// 获取html输出类
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <returns></returns>
         public static NFinal.Owin.HtmlWriter GetHtmlWriter(this IDictionary<string, object> environment)
         {
             NFinal.Owin.HtmlWriter htmlWriter = new NFinal.Owin.HtmlWriter(environment.GetResponseBody(),CompressMode.GZip);
             return htmlWriter;
         }
-
+        /// <summary>
+        /// 输出html
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <param name="html"></param>
         public static void WriteHtml(this IDictionary<string, object> environment,string html)
         {
             Stream stream= environment.GetResponseBody();
@@ -420,6 +473,11 @@ namespace NFinal
                 headers.Add(NFinal.Constant.HeaderContentType, new string[] { NFinal.Constant.ResponseContentType_Text_html });
             }
         }
+        /// <summary>
+        /// 输出Json
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <param name="json"></param>
         public static void WriteJson(this IDictionary<string, object> environment,string json)
         {
             Stream stream = environment.GetResponseBody();
@@ -436,10 +494,20 @@ namespace NFinal
                 headers.Add(NFinal.Constant.HeaderContentType, new string[] { NFinal.Constant.ResponseContentType_Application_json });
             }
         }
+        /// <summary>
+        /// 拒绝访问
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <param name="url"></param>
         public static void Forbiden(this IDictionary<string, object> environment, string url)
         {
             environment.SetResponseStatusCode(403);
         }
+        /// <summary>
+        /// 重定向
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <param name="url"></param>
         public static void Redirect(this IDictionary<string, object> environment,string url)
         {
             environment.SetResponseStatusCode(302);

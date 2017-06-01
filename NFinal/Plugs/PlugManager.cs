@@ -1,15 +1,40 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : PlugManager.cs
+//        Description :插件管理
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
 namespace NFinal.Plugs
 {
-    
+    /// <summary>
+    /// 插件管理
+    /// </summary>
     public class PlugManager
     {
+        /// <summary>
+        /// 插件列表
+        /// </summary>
         public static List<NFinal.Plugs.PlugInfo> plugInfoList =null;
+        /// <summary>
+        /// 插件是否加载
+        /// </summary>
         public static bool isInit = false;
+        /// <summary>
+        /// 加载插件
+        /// </summary>
         public static void Init()
         {
             if (plugInfoList == null)

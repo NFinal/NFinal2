@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : UrlAttribute.cs
+//        Description :对控制器行为设置请求方法，响应类型，压缩方式以及请求URL的特性
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +21,16 @@ using NFinal.Http;
 namespace NFinal
 {
     /// <summary>
-    /// 默认URL定义类
+    /// 对控制器行为设置请求方法，响应类型，压缩方式以及请求URL的特性
     /// </summary>
     [AttributeUsage(AttributeTargets.Method,AllowMultiple=false,Inherited=false)]
     public class UrlAttribute: System.Attribute
     {
+        /// <summary>
+        /// 控制器行为的URl设置
+        /// </summary>
+        /// <param name="urlString">请求URL</param>
+        /// <param name="queryString">请求的QueryString的key数组</param>
         public UrlAttribute(string urlString, params string[] queryString)
         {
             this.urlString = urlString;
@@ -20,10 +39,25 @@ namespace NFinal
             this.contentType = "text/html; charset=utf-8";
             this.compressMode = CompressMode.None;
         }
+        /// <summary>
+        /// 请求URL
+        /// </summary>
         public string urlString { get; set; }
+        /// <summary>
+        /// 请求的QueryString的key数组
+        /// </summary>
         public string[] queryString { get; set; }
+        /// <summary>
+        /// 请求的类型
+        /// </summary>
         public MethodType methodType { get; set; }
+        /// <summary>
+        /// 响应类型
+        /// </summary>
         public string contentType { get; set; }
+        /// <summary>
+        /// 压缩模式
+        /// </summary>
         public CompressMode compressMode { get; set; }
     }
     /// <summary>
@@ -32,13 +66,15 @@ namespace NFinal
     public class FormHtmlAttribute : UrlAttribute
     {
         /// <summary>
-        /// 定义URL请求路径
+        /// form表单提交并返回html
         /// </summary>
-        /// <param name="path">URL请求路径</param>
+        /// <param name="urlString">URL请求路径</param>
+        /// <param name="queryString">请求的QueryString的key数组</param>
         public FormHtmlAttribute(string urlString, params string[] queryString):base(urlString, queryString)
         {
             this.urlString = urlString;
             this.queryString = queryString;
+            this.compressMode = CompressMode.None;
         }
     }
     ///// <summary>
@@ -59,9 +95,10 @@ namespace NFinal
     public class GetHtmlAttribute : UrlAttribute
     {
         /// <summary>
-        /// 定义URL请求路径
+        /// get提交并返回html
         /// </summary>
-        /// <param name="path">URL请求路径</param>
+        /// <param name="urlString">URL请求路径</param>
+        /// <param name="queryString">请求的QueryString的key数组</param>
         public GetHtmlAttribute(string urlString, params string[] queryString) : base(urlString, queryString)
         {
             this.methodType = MethodType.GET;
@@ -74,9 +111,10 @@ namespace NFinal
     public class PostHtmlAttribute : UrlAttribute
     {
         /// <summary>
-        /// 定义URL请求路径
+        /// post提交并返回html
         /// </summary>
-        /// <param name="path">URL请求路径</param>
+        /// <param name="urlString">URL请求路径</param>
+        /// <param name="queryString">请求的QueryString的key数组</param>
         public PostHtmlAttribute(string urlString, params string[] queryString) : base(urlString, queryString)
         {
             this.methodType= this.methodType = MethodType.POST;
@@ -191,9 +229,9 @@ namespace NFinal
     //    public PostEmptyAttribute(string path)
     //    { }
     //}
-    /// <summary>
-    /// 请求后页面重定向
-    /// </summary>
+    ///// <summary>
+    ///// 请求后页面重定向
+    ///// </summary>
     //public class RedirectAttribute : UrlAttribute
     //{
     //    /// <summary>
@@ -209,9 +247,10 @@ namespace NFinal
     public class GetRedirectAttribute : UrlAttribute
     {
         /// <summary>
-        /// 定义URL请求路径
+        /// get请求后页面重定向
         /// </summary>
-        /// <param name="path">URL请求路径</param>
+        /// <param name="urlString">URL请求路径</param>
+        /// <param name="queryString">请求的QueryString的key数组</param>
         public GetRedirectAttribute(string urlString, params string[] queryString) : base(urlString, queryString)
         {
             this.methodType = MethodType.GET;
@@ -230,9 +269,9 @@ namespace NFinal
     //    public PostRedirectAttribute(string path)
     //    { }
     //}
-    /// <summary>
-    /// 请求后返回json
-    /// </summary>
+    ///// <summary>
+    ///// 请求后返回json
+    ///// </summary>
     //public class JsonAttribute : UrlAttribute
     //{
     //    /// <summary>
@@ -248,9 +287,10 @@ namespace NFinal
     public class GetJsonAttribute : UrlAttribute
     {
         /// <summary>
-        /// 定义URL请求路径
+        /// get请求后返回json
         /// </summary>
-        /// <param name="path">URL请求路径</param>
+        /// <param name="urlString">URL请求路径</param>
+        /// <param name="queryString">请求的QueryString的key数组</param>
         public GetJsonAttribute(string urlString, params string[] queryString) : base(urlString, queryString)
         {
             this.methodType = MethodType.GET;
@@ -263,9 +303,10 @@ namespace NFinal
     public class PostJsonAttribute : UrlAttribute
     {
         /// <summary>
-        /// 定义URL请求路径
+        /// post请求后返回json
         /// </summary>
-        /// <param name="path">URL请求路径</param>
+        /// <param name="urlString">URL请求路径</param>
+        /// <param name="queryString">请求的QueryString的key数组</param>
         public PostJsonAttribute(string urlString, params string[] queryString) : base(urlString, queryString)
         {
             this.methodType = MethodType.POST;
@@ -722,9 +763,10 @@ namespace NFinal
     public class GetXmlAttribute : UrlAttribute
     {
         /// <summary>
-        /// 定义URL请求路径
+        /// get请求后返回xml文本
         /// </summary>
-        /// <param name="path">URL请求路径</param>
+        /// <param name="urlString">URL请求路径</param>
+        /// <param name="queryString">请求的QueryString的key数组</param>
         public GetXmlAttribute(string urlString,params string[] queryString):base(urlString, queryString)
         { }
     }
@@ -734,9 +776,10 @@ namespace NFinal
     public class PostXmlAttribute : UrlAttribute
     {
         /// <summary>
-        /// 定义URL请求路径
+        /// post请求后返回xml文本
         /// </summary>
-        /// <param name="path">URL请求路径</param>
+        /// <param name="urlString">URL请求路径</param>
+        /// <param name="queryString">请求的QueryString的key数组</param>
         public PostXmlAttribute(string urlString,params string[] queryString):base(urlString,queryString)
         { }
     }

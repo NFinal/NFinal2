@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : ModelHelper.cs
+//        Description :把Http请求参数自动封装到自定义Model中的帮助类。
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,16 +21,42 @@ using System.Reflection.Emit;
 
 namespace NFinal.Model
 {
+    /// <summary>
+    /// 把parameters的值复制到与Model名称相同的字段或属性中的函数代理
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
     public delegate TModel GetModelDelegate<TModel>(NFinal.NameValueCollection parameters);
+    /// <summary>
+    /// 把Http请求参数自动封装到自定义Model中的帮助类。
+    /// </summary>
     public class ModelHelper
     {
-        
+        /// <summary>
+        /// 获取代理数据
+        /// </summary>
         public struct GetModelDelegateData
         {
+            /// <summary>
+            /// Model类型
+            /// </summary>
             public Type modelType;
+            /// <summary>
+            /// 获取Model的代理函数
+            /// </summary>
             public Delegate getModelDelegate;
         }
+        /// <summary>
+        /// 缓存得到填充某类型参数的函数代理
+        /// </summary>
         public static Dictionary<Type, GetModelDelegateData> GetModelDictionary = new Dictionary<Type, GetModelDelegateData>();
+        /// <summary>
+        /// 获取自定义类型，并把prameters中的值复制到相应字段中
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public static TModel GetModel<TModel>(NFinal.NameValueCollection parameters)
         {
             GetModelDelegateData getModelDelegateData;
@@ -29,7 +69,16 @@ namespace NFinal.Model
             TModel model= ((GetModelDelegate<TModel>)getModelDelegateData.getModelDelegate)(parameters);
             return model;
         }
+        /// <summary>
+        /// 获取将parameters中的参数复制进自定义Model的函数代理
+        /// </summary>
         public static Dictionary<Type, System.Reflection.MethodInfo> StringContainerOpImplicitMethodInfoDic = null;
+        /// <summary>
+        /// 获取将parameters中的参数复制进自定义Model的函数代理
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public static Delegate GetDelegate<TModel>(NFinal.NameValueCollection parameters)
         {
             if (StringContainerOpImplicitMethodInfoDic == null)
@@ -81,8 +130,18 @@ namespace NFinal.Model
             getModelDelegate = method.CreateDelegate(typeof(GetModelDelegate<>).MakeGenericType(typeof(TModel)));
             return getModelDelegate;
         }
+        /// <summary>
+        /// parameters["key"]中获取值所用到的函数的反射信息
+        /// </summary>
         public static readonly System.Reflection.MethodInfo NameValueCollectionGetMethodInfo = typeof(NameValueCollection).GetMethod("get_Item",new Type[] { typeof(string)});
-        public static readonly System.Reflection.MethodInfo NameValueCollectionOpImplicitMethodInfo = typeof(NameValueCollection).GetMethod("op_Implicit",new Type[] { typeof(StringContainer)});
+        //public static readonly System.Reflection.MethodInfo NameValueCollectionOpImplicitMethodInfo = typeof(NameValueCollection).GetMethod("op_Implicit",new Type[] { typeof(StringContainer)});
+        /// <summary>
+        /// 把parameters中的值转换为Model属性中相应类型的值
+        /// </summary>
+        /// <param name="methodIL"></param>
+        /// <param name="model"></param>
+        /// <param name="propertyInfo"></param>
+        /// <param name="parametersGetItem"></param>
         public static void ConvertPropertyString(ILGenerator methodIL,System.Reflection.Emit.LocalBuilder model,
             System.Reflection.PropertyInfo propertyInfo, System.Reflection.MethodInfo parametersGetItem)
         {
@@ -221,6 +280,13 @@ namespace NFinal.Model
                 }
             }
         }
+        /// <summary>
+        ///  把parameters中的值转换为Model字段中相应类型的值
+        /// </summary>
+        /// <param name="methodIL"></param>
+        /// <param name="model"></param>
+        /// <param name="fieldInfo"></param>
+        /// <param name="parametersGetItem"></param>
         public static void ConvertFieldString(ILGenerator methodIL,System.Reflection.Emit.LocalBuilder model,
             System.Reflection.FieldInfo fieldInfo,System.Reflection.MethodInfo parametersGetItem)
         {
@@ -335,6 +401,7 @@ namespace NFinal.Model
 
             }
         }
+#if EMITDEBUG
         public class ModelSample
         {
             public string a;
@@ -354,5 +421,6 @@ namespace NFinal.Model
             sample.e = parameters["e"];
             return sample;
         }
+#endif
     }
 }

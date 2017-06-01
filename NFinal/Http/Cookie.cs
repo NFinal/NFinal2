@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : Cookie.cs
+//        Description :Cookie类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 
 namespace NFinal.Http
@@ -10,12 +24,15 @@ namespace NFinal.Http
     {
         private IDictionary<string, string> requestCookies = null;
         private IDictionary<string, string> responseCookies  = null;
+        /// <summary>
+        /// 输出Cookie
+        /// </summary>
         public IDictionary<string, string> ResponseCookies { get { return responseCookies; } }
         private string session_id = null;
         /// <summary>
         /// 初始化函数
         /// </summary>
-        /// <param name="cookies"></param>
+        /// <param name="requestCookies"></param>
         public Cookie(IDictionary<string, string> requestCookies)
         {
             this.requestCookies = requestCookies;

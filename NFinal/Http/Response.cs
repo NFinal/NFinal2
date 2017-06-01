@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : Response.cs
+//        Description :Http响应信息
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -6,29 +20,47 @@ using ProtoBuf;
 
 namespace NFinal.Owin
 {
-    //int,statusCode
-    //int,headers的数量，即headers.Count
-    //int,header的名称的长度
-    //  string,HeaderName,即header的名称
-    //  int,headerValues的数量
-    //      int,headerValue的长度
-    //      string,headerValue的值
-    //int,stream的长度
-    //byte[] stream的值
+    /// <summary>
+    /// Http响应信息
+    ///int,statusCode
+    ///int,headers的数量，即headers.Count
+    ///int,header的名称的长度
+    ///  string,HeaderName,即header的名称
+    ///  int,headerValues的数量
+    ///      int,headerValue的长度
+    ///      string,headerValue的值
+    ///int,stream的长度
+    ///byte[] stream的值
+    /// </summary>
     [ProtoContract]
     public class Response
     {
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public Response()
         {
             this.headers = new Dictionary<string, string[]>();
             this.statusCode = 200;
             this.stream = new MemoryStream();
         }
+        /// <summary>
+        /// 编码,不带BOM的UTF-8编码
+        /// </summary>
         private static readonly Encoding encoding=new System.Text.UnicodeEncoding(false,false);
+        /// <summary>
+        /// 响应头
+        /// </summary>
         [ProtoMember(1)]
         public IDictionary<string, string[]> headers;
+        /// <summary>
+        /// 响应内容
+        /// </summary>
         [ProtoMember(2)]
         public Stream stream;
+        /// <summary>
+        /// 响应代码
+        /// </summary>
         [ProtoMember(3)]
         public int statusCode;
         private static void WriteInt32(MemoryStream stream, int count)

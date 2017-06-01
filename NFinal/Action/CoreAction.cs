@@ -1,4 +1,18 @@
-﻿#if NETCORE
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename :CoreAction.cs
+//        Description :HttpContext对应的控制器基类
+//
+//        created by Lucas at  2015-6-30
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+#if NETCORE
 using System;
 using System.Collections.Generic;
 using System.Linq;

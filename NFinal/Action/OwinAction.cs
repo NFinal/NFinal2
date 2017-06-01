@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename :OwinAction.cs
+//        Description :IDictionary<string,object>,即Enviroment对应的控制器基类
+//
+//        created by Lucas at  2015-6-30
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -12,7 +26,15 @@ namespace NFinal
     public class OwinAction<TUser> : NFinal.Action.AbstractAction<IDictionary<string,object>,Owin.Request,TUser> where TUser : NFinal.User.AbstractUser
     {
         #region 初始化函数
+        /// <summary>
+        /// 初始化函数
+        /// </summary>
         public OwinAction() { }
+        /// <summary>
+        /// 基础初始化函数
+        /// </summary>
+        /// <param name="enviroment">Owin中间件</param>
+        /// <param name="methodName">Http请求方法</param>
         public override void BaseInitialization(IDictionary<string, object> enviroment,string methodName) {
             base.BaseInitialization(enviroment, methodName);
             this.request = enviroment.GetRequest();
@@ -25,9 +47,10 @@ namespace NFinal
         /// 流输出初始化函数
         /// </summary>
         /// <param name="enviroment">Owin中间件</param>
-        /// <param name="outputStream">输出流</param>
-        /// <param name="request"></param>
-        /// <param name="compressMode"></param>
+        /// <param name="methodName">Http请求方法</param>
+        /// <param name="outputStream">Http输出流</param>
+        /// <param name="request">Http请求信息</param>
+        /// <param name="compressMode">压缩模式</param>
         public override void Initialization(IDictionary<string, object> enviroment,string methodName, Stream outputStream, Owin.Request request, CompressMode compressMode)
         {
             base.Initialization(enviroment, methodName, outputStream, request, compressMode);
@@ -45,10 +68,18 @@ namespace NFinal
         }
         #endregion
         #region 输出函数
+        /// <summary>
+        /// 获取客户端IP地址
+        /// </summary>
+        /// <returns></returns>
         public override string GetRemoteIpAddress()
         {
             return context.GetRemoteIpAddress();
         }
+        /// <summary>
+        /// 获取请求URL信息
+        /// </summary>
+        /// <returns></returns>
         public override string GetRequestPath()
         {
             return this.GetRequestPath();
@@ -56,8 +87,8 @@ namespace NFinal
         /// <summary>
         /// 获取请求头
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
+        /// <param name="key">key</param>
+        /// <returns>value</returns>
         public override string GetRequestHeader(string key)
         {
             if (request.headers.ContainsKey(key))
@@ -75,6 +106,11 @@ namespace NFinal
         {
             this.response.headers.AddValue(key, new string[] { value });
         }
+        /// <summary>
+        /// 设置响应头
+        /// </summary>
+        /// <param name="key">key</param>
+        /// <param name="value">value</param>
         public override void SetResponseHeader(string key, string[] value)
         {
             this.response.headers.AddValue(key, value);

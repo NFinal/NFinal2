@@ -1,44 +1,143 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename :ActionHelper.cs
+//        Description :控制器行为帮助类，用于分析及执行控制器行为
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Reflection.Emit;
 using NFinal.Http;
 
+/// <summary>
+/// 控制器Action执行代理
+/// </summary>
+/// <typeparam name="TContext">Http上下文类型</typeparam>
+/// <typeparam name="TResquest">Http请求信息类型</typeparam>
+/// <param name="context">Http上下文</param>
+/// <param name="actionData">控制器执行所需信息</param>
+/// <param name="request">Http请求信息</param>
+/// <param name="parameters">Http请求信息，KeyValue集合类型</param>
 public delegate void ActionExecute<TContext, TResquest>(TContext context,NFinal.Action.ActionData<TContext,TResquest> actionData,TResquest request,NFinal.NameValueCollection parameters);
 namespace NFinal.Action
 {
+    /// <summary>
+    /// 控制器中所有行为的URL格式化信息
+    /// </summary>
     public class ControllerData
     {
+        /// <summary>
+        /// URl格式化信息
+        /// </summary>
         public Dictionary<Type, Dictionary<string,string>> formatList;
     }
+    /// <summary>
+    /// 控制器行为的相关信息
+    /// </summary>
+    /// <typeparam name="TContext">Http上下文类型</typeparam>
+    /// <typeparam name="TRequest">Http请求类型</typeparam>
     public class ActionData<TContext,TRequest>
     {
+        /// <summary>
+        /// 请求URL
+        /// </summary>
         public string actionUrl;
+        /// <summary>
+        /// 视图数据类型
+        /// </summary>
         public Type viewBagType;
+        /// <summary>
+        /// 控制器行为执行代理
+        /// </summary>
         public ActionExecute<TContext,TRequest> actionExecute;
+        /// <summary>
+        /// 插件配置信息
+        /// </summary>
         public NFinal.Config.Plug.PlugConfig plugConfig;
+        /// <summary>
+        /// 当前行为对应方法的特性提供者
+        /// </summary>
         public System.Reflection.ICustomAttributeProvider methodProvider;
+        /// <summary>
+        /// 控制器行为基本过滤器对象数组
+        /// </summary>
         public NFinal.Filter.IBaseFilter<TContext>[] IBaseFilters;
+        /// <summary>
+        /// 控制器行为请求信息过滤器对象数组
+        /// </summary>
         public NFinal.Filter.IRequestFilter<TRequest>[] IRequestFilters;
+        /// <summary>
+        /// 控制器行为响 应信息过滤器对象数组
+        /// </summary>
         public NFinal.Filter.IResponseFilter[] IResponseFilters;
+        /// <summary>
+        /// 控制器行为对应方法的URL特性中的Url字符串
+        /// </summary>
         public string urlString;
+        /// <summary>
+        /// 控制器对应的类名
+        /// </summary>
         public string className;
+        /// <summary>
+        /// 控制器行为对应的方法名
+        /// </summary>
         public string methodName;
+        /// <summary>
+        /// 控制器名称
+        /// </summary>
         public string controllerName;
+        /// <summary>
+        /// 控制器行为名称
+        /// </summary>
         public string actionName;
+        /// <summary>
+        /// 控制器区域名称
+        /// </summary>
         public string areaName;
+        /// <summary>
+        /// 可接受的请求方法数组
+        /// </summary>
         public string[] method;
+        /// <summary>
+        /// Http响应类型
+        /// </summary>
         public string contentType;
+        /// <summary>
+        /// Http压缩模式
+        /// </summary>
         public CompressMode compressMode;
+        /// <summary>
+        /// 控制器行为对应的请求URl相关信息
+        /// </summary>
         public NFinal.Url.ActionUrlData actionUrlData;
     }
+    /// <summary>
+    /// 控制器行为帮助类，用于分析及执行控制器行为
+    /// </summary>
     public class ActionHelper
     {
         //public static Dictionary<string, ActionExecute> actionDic = new Dictionary<string, ActionExecute>();
         //public static NFinal.Collections.FastDictionary<ActionData> actionFastDic;
+        /// <summary>
+        /// 控制器行为是否初始化
+        /// </summary>
         public static bool isInit = false;
+        /// <summary>
+        /// 控制器行为初始化函数
+        /// </summary>
+        /// <typeparam name="TContext">Htpp上下文类型</typeparam>
+        /// <typeparam name="TRequest">Http请求信息类型</typeparam>
+        /// <param name="globalConfig">全局配置数据</param>
         public static void Init<TContext, TRequest>(NFinal.Config.Global.GlobalConfig globalConfig)
         {
             Module[] modules = null;
@@ -51,18 +150,18 @@ namespace NFinal.Action
             for (int i = 0; i < NFinal.Plugs.PlugManager.plugInfoList.Count; i++)
             {
                 /////////////////////////////////////////////////////////////////////
-                ///
-                ///Assembly.Load
-                ///精确加载
-                ///
-                ///
-                ///Assembly.LoadFrom
-                ///加载dll的引入
-                ///
-                ///
-                ///Assembly.LoadFile
-                ///仅加载自己
-                ///
+                //
+                //Assembly.Load
+                //精确加载
+                //
+                //
+                //Assembly.LoadFrom
+                //加载dll的引入
+                //
+                //
+                //Assembly.LoadFile
+                //仅加载自己
+                //
                 /////////////////////////////////////////////////////////////////////
                 NFinal.Plugs.PlugInfo plugInfo = NFinal.Plugs.PlugManager.plugInfoList[i];
                 Assembly assembly = plugInfo.assembly;
@@ -114,6 +213,17 @@ namespace NFinal.Action
             Middleware.Middleware<TContext, TRequest>.actionFastDic =new Collections.FastSearch.FastSearch<ActionData<TContext, TRequest>>(actionDataDictionary);
             actionDataDictionary.Clear();
         }
+        /// <summary>
+        /// 向全局添加控制器行为信息
+        /// </summary>
+        /// <typeparam name="TContext">Http请求上下文类型</typeparam>
+        /// <typeparam name="TRequest">Http请求类型</typeparam>
+        /// <param name="actionDataDictionary">控制器行为数据信息字典</param>
+        /// <param name="formatMethodDictionary">控制器行为URl格式化字典</param>
+        /// <param name="assembly">当前程序集</param>
+        /// <param name="controller">控制器类型信息</param>
+        /// <param name="globalConfig">全局配置信息</param>
+        /// <param name="plugInfo">插件信息</param>
         public static void AddActionData<TContext, TRequest>(NFinal.Collections.FastDictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
             Dictionary<string, NFinal.Url.FormatData> formatMethodDictionary,
             Assembly assembly,Type controller, 
@@ -201,6 +311,13 @@ namespace NFinal.Action
                 }
             }
         }
+        /// <summary>
+        /// 获取控制器行为的URL信息
+        /// </summary>
+        /// <param name="controllerName">控制器名称</param>
+        /// <param name="areaName">控制器区域名称</param>
+        /// <param name="controller">控制器类型信息</param>
+        /// <param name="globalConfig">全局配置信息</param>
         public static void GetControllerUrl(out string controllerName, out string areaName, Type controller, NFinal.Config.Global.GlobalConfig globalConfig)
         {
             ControllerAttribute[] controllerAttributes = null;
@@ -245,6 +362,20 @@ namespace NFinal.Action
                 areaName = null;
             }
         }
+        /// <summary>
+        /// 组装并返回控制器对应行为的查找关键字
+        /// </summary>
+        /// <param name="controllerName">控制器名称</param>
+        /// <param name="areaName">区域名称</param>
+        /// <param name="actionUrl">请求URL</param>
+        /// <param name="actionName">控制器行为名称</param>
+        /// <param name="method">可接受的请求方法数组</param>
+        /// <param name="urlAttribute"></param>
+        /// <param name="actionUrlData"></param>
+        /// <param name="methodInfo"></param>
+        /// <param name="globalConfig"></param>
+        /// <param name="plugInfo"></param>
+        /// <returns></returns>
         public static string[] GetActionKeys(string controllerName, string areaName,
             out string actionUrl, out string actionName, out string[] method,
             out UrlAttribute urlAttribute,out NFinal.Url.ActionUrlData actionUrlData,
@@ -337,6 +468,14 @@ namespace NFinal.Action
             //    actionData.method = urlAttributes[0].methodType.ToString();
             //}
         }
+        /// <summary>
+        /// 获取控制器行为中的过滤器
+        /// </summary>
+        /// <typeparam name="TArrayType">过滤器类型</typeparam>
+        /// <param name="filterType">过滤器类型信息</param>
+        /// <param name="controller">控制器类型</param>
+        /// <param name="action">控制器行为类型</param>
+        /// <returns></returns>
         public static TArrayType[] GetFilters<TArrayType>(Type filterType, Type controller, MethodInfo action)
         {
             List<TArrayType> filterList = new List<TArrayType>();
@@ -372,6 +511,14 @@ namespace NFinal.Action
                 return null;
             }
         }
+        /// <summary>
+        /// 组装并返回控制器行为执行代理
+        /// </summary>
+        /// <typeparam name="TContext">Http上下文类型</typeparam>
+        /// <typeparam name="TRequest">Http请求类型</typeparam>
+        /// <param name="assmeblyName">程序集名称</param>
+        /// <param name="methodInfo">控制器行为对应的方法反射信息</param>
+        /// <returns></returns>
         public static ActionExecute<TContext,TRequest> GetActionExecute<TContext, TRequest>(string assmeblyName,MethodInfo methodInfo)
         {
             DynamicMethod method = new DynamicMethod(assmeblyName+methodInfo.DeclaringType.FullName, null, new Type[] { typeof(TContext) });

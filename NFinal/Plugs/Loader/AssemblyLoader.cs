@@ -1,10 +1,27 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : AssemblyLoader.cs
+//        Description :基于.net framework的程序集加载类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace NFinal.Plugs.Loader
 {
+    /// <summary>
+    /// 基于.net framework的程序集加载类
+    /// </summary>
 #if (NET40 || NET451 || NET461)
     public class AssemblyLoader:IAssemblyLoader
     {
@@ -12,6 +29,10 @@ namespace NFinal.Plugs.Loader
         public Dictionary<string, System.Reflection.Assembly> assemblyDictionary { get {
                 return _assemblyDictionary;
             } }
+        /// <summary>
+        /// 加载所有的程序集
+        /// </summary>
+        /// <param name="assemblyFileNames"></param>
         public void LoadAll(string[] assemblyFileNames)
         {
             if (_assemblyDictionary == null)
@@ -26,6 +47,10 @@ namespace NFinal.Plugs.Loader
                 }
             }
         }
+        /// <summary>
+        /// 加载程序集
+        /// </summary>
+        /// <param name="assemblyFileName"></param>
         public void Load(string assemblyFileName)
         {
             if (_assemblyDictionary == null)

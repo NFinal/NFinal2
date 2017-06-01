@@ -1,26 +1,63 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : StructHelper.cs
+//        Description :利用EMIT快速创建自定义类型的帮助类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 
 namespace NFinal.Emit
 {
+    /// <summary>
+    /// 利用EMIT快速创建自定义类型的帮助类
+    /// </summary>
     public class StructHelper
     {
         private TypeBuilder tb;
+        /// <summary>
+        /// 初始化函数
+        /// </summary>
+        /// <param name="assemblyName">程序集名称</param>
+        /// <param name="moduleName">模块名称</param>
+        /// <param name="typeName">类型名称</param>
         public StructHelper(string assemblyName, string moduleName, string typeName)
         {
             this.tb = CreateTypeBuilder(assemblyName,moduleName,typeName);
  
         }
+        /// <summary>
+        /// 添加属性
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <param name="type">类型</param>
         public void AddAttribute(string name, Type type)
         {
             CreateAutoImplementedProperty(this.tb, name, type);
         }
+        /// <summary>
+        /// 添加字段
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         public void AddField(string name, Type type)
         {
             CreateAutoImplementedField(this.tb,name,type);
         }
+        /// <summary>
+        /// 返回类型
+        /// </summary>
+        /// <returns></returns>
         public Type ToType()
         {
             return this.tb.GetType();

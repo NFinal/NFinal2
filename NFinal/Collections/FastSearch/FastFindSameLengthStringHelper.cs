@@ -1,11 +1,31 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : FastFindSameLengthStringHelper.cs
+//        Description :在具有相同长度的字符串组中查找字符串
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace NFinal.Collections.FastSearch
 {
+    /// <summary>
+    /// 在具有相同长度的字符串组中查找字符串
+    /// </summary>
     public class FastFindSameLengthStringHelper
     {
+        /// <summary>
+        /// C#语言代码节点
+        /// </summary>
         public class Node
         {
             /// <summary>
@@ -33,30 +53,88 @@ namespace NFinal.Collections.FastSearch
             /// </summary>
             public int arrayIndex;
         }
+        /// <summary>
+        /// 代码节点类型
+        /// </summary>
         public enum NodeType
         {
+            /// <summary>
+            /// 大于
+            /// </summary>
             CompareCreaterThan,
+            /// <summary>
+            /// 小于
+            /// </summary>
             CompareLessThan,
+            /// <summary>
+            /// 返回数组下标
+            /// </summary>
             SetIndex
         }
+        /// <summary>
+        /// 列比较数据
+        /// </summary>
         public struct ColumnCompareData
         {
+            /// <summary>
+            /// 列排序标记
+            /// </summary>
             public int[] ColumnSort;
+            /// <summary>
+            /// 是否具有中间值
+            /// </summary>
             public bool hasMidValue;
+            /// <summary>
+            /// 中间值
+            /// </summary>
             public long midValue;
+            /// <summary>
+            /// 中间值的值的下标
+            /// </summary>
             public int midValueIndex;
+            /// <summary>
+            /// 中间值的下标
+            /// </summary>
             public int midIndex;
+            /// <summary>
+            /// 4个字符一次比较
+            /// </summary>
             public LongCompare compare;
+            /// <summary>
+            /// 大的组
+            /// </summary>
             public int[] ColumnBig;
+            /// <summary>
+            /// 小的组
+            /// </summary>
             public int[] ColumnSmall;
+            /// <summary>
+            /// 中间值距中部的距离
+            /// </summary>
             public int midDistance;
         }
+        /// <summary>
+        /// 4个字符一次比较的枚举
+        /// </summary>
         public enum LongCompare
         {
+            /// <summary>
+            /// 小于
+            /// </summary>
             LessThan,
+            /// <summary>
+            /// 大于
+            /// </summary>
             CreaterThan
         }
-        public unsafe static FindDelegate GetFastFindSameLengthStringDelegate<TValue>(List<KV<TValue>> list, int length)
+        /// <summary>
+        /// 组装一个比较相同长度字符串的快速比较函数，并返回该函数代理
+        /// </summary>
+        /// <typeparam name="TValue">字符串key对应的value值类型</typeparam>
+        /// <param name="list">具有相同长度的字符串数组</param>
+        /// <param name="length">字符串的长度</param>
+        /// <returns></returns>
+        public unsafe static FindDelegate GetFastFindSameLengthStringDelegate<TValue>(List<KeyValue<TValue>> list, int length)
         {
             int rowCount = list.Count;
             int columnLength = (length + 3) >> 2;
@@ -111,6 +189,14 @@ namespace NFinal.Collections.FastSearch
             ILWriter iLWriter = new ILWriter();
             return iLWriter.Generate(rootNode, length, columnLength);
         }
+        /// <summary>
+        /// 字符串转long数组，并进行解析。
+        /// </summary>
+        /// <param name="FullKeyLongArray"></param>
+        /// <param name="KeyLongArray"></param>
+        /// <param name="columnLength"></param>
+        /// <param name="ColumnSortArray"></param>
+        /// <param name="codeNode"></param>
         public static void Init(long[][] FullKeyLongArray, long[][] KeyLongArray,int columnLength, int[][] ColumnSortArray, ref Node codeNode)
         {
             if (KeyLongArray == null) return;
@@ -467,6 +553,13 @@ namespace NFinal.Collections.FastSearch
                 }
             }
         }
+        /// <summary>
+        /// 根据行列索引返回对应的4字符对应的long值
+        /// </summary>
+        /// <param name="KeyLongArray">long二维数组</param>
+        /// <param name="RowIndex">行索引</param>
+        /// <param name="ColumnIndex">列索引</param>
+        /// <returns></returns>
         public static long GetKeyLong(long[][] KeyLongArray, int RowIndex, int ColumnIndex)
         {
             if (ColumnIndex < KeyLongArray[RowIndex].Length)
@@ -478,6 +571,13 @@ namespace NFinal.Collections.FastSearch
                 return 0;
             }
         }
+        /// <summary>
+        /// 获取某位置之后的四个字符所对应的long值
+        /// </summary>
+        /// <param name="pKey">字符串指针</param>
+        /// <param name="index">起始位置</param>
+        /// <param name="length">字符串长度</param>
+        /// <returns></returns>
         public static unsafe long GetLong(char* pKey, int index,int length)
         {
             int positionLength = (length + 3) >> 2;
@@ -510,6 +610,7 @@ namespace NFinal.Collections.FastSearch
                 return *(long*)(pKey + index * 4);
             }
         }
+#if EMITDEBUG
         public unsafe static void GetFastFindSameLengthStringSample(char* pt,int length)
         {
             if (*(long*)(pt) < 343)
@@ -528,5 +629,6 @@ namespace NFinal.Collections.FastSearch
 
             }
         }
+#endif
     }
 }

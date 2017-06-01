@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : ActionUrlHelper.cs
+//        Description :计算控制器行为所对应URL以及相关信息的帮助类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,37 +21,94 @@ using System.Text.RegularExpressions;
 
 namespace NFinal.Url
 {
+    /// <summary>
+    /// 生成控制器行为对应URL的函数代理
+    /// </summary>
+    /// <param name="methodName"></param>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
     public delegate string UrlDelegate(string methodName, StringContainer[] parameters);
-    public class Parameter
-    {
-        public int index;
-        public Type parameterType;
-        public string name;
-    }
+
+    //public class Parameter
+    //{
+    //    public int index;
+    //    public Type parameterType;
+    //    public string name;
+    //}
+    /// <summary>
+    /// 生成URL时用到的格式化字符串信息
+    /// </summary>
     public class FormatData
     {
-        public FormatData(string formatUrl,string[] actionUrlNames)
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="formatUrl"></param>
+        /// <param name="actionUrlNames"></param>
+        public FormatData(string formatUrl, string[] actionUrlNames)
         {
             this.formatUrl = formatUrl;
             this.actionUrlNames = actionUrlNames;
         }
+        /// <summary>
+        /// 生成URL的格式化字符串
+        /// </summary>
         public string formatUrl;
+        /// <summary>
+        /// Url中所包含的参数名
+        /// </summary>
         public string[] actionUrlNames;
     }
+    /// <summary>
+    /// 控制器行为对应生成Url格式化字符串所需的信息数据，以及解析URL所需要的信息数据
+    /// </summary>
     public class ActionUrlData
     {
+        /// <summary>
+        /// 控制器行为对应方法的反射信息
+        /// </summary>
         public MethodInfo methodInfo;
+        /// <summary>
+        /// 后缀长度
+        /// </summary>
         public int extensionLength;
+        /// <summary>
+        /// actionUrl不带后缀以及Http请求方法名
+        /// </summary>
         public string actionUrl;
+        /// <summary>
+        /// 请求Url中包含的参数名
+        /// </summary>
         public string[] actionUrlNames;
+        /// <summary>
+        /// 请求Url中不包含任何参数
+        /// </summary>
         public bool hasNoParamsInUrl;
+        /// <summary>
+        /// 该Url是否仅以-与/分隔控制器名，方法名以及参数的简单Url
+        /// </summary>
         public bool isSimpleUrl;
+        /// <summary>
+        /// actionKey,为requestMethod+actionUrl,用于搜索对应的控制器行为信息
+        /// </summary>
         public string actionKey;
+        /// <summary>
+        /// 生成Url时，所用到的格式化字符串
+        /// </summary>
         public string formatUrl;
+        /// <summary>
+        /// 解析请求Url中的参数时用到的正则表达式
+        /// </summary>
         public string parameterRegex;
     }
+    /// <summary>
+    /// 计算控制器行为所对应URL以及相关信息的帮助类
+    /// </summary>
     public class ActionUrlHelper
     {
+        /// <summary>
+        /// 缓存所有类型
+        /// </summary>
         public static NFinal.Collections.FastDictionary<Type,Dictionary<string,FormatData>> formatControllerDictionary;
         /// <summary>
         /// 是否是URL分隔符
@@ -57,6 +128,11 @@ namespace NFinal.Url
             }
             return result;
         }
+        /// <summary>
+        /// 解析自定义actionUrl中的参数，后缀等信息
+        /// </summary>
+        /// <param name="actionUrl"></param>
+        /// <returns></returns>
         public static ActionUrlData GetActionUrlData(string actionUrl)
         {
             ActionUrlData actionUrlData = new ActionUrlData();
@@ -246,6 +322,12 @@ namespace NFinal.Url
             #endregion
             return actionUrlData;
         }
+        /// <summary>
+        /// 简化的字符串格式化函数
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static String Format(String format,params StringContainer[] args)
         {
             if (format == null || args == null)
@@ -301,6 +383,14 @@ namespace NFinal.Url
             }
             return StringBuilderCache.GetStringAndRelease(sb);
         }
+        /// <summary>
+        /// 解析只以-和/符号分隔控制器名，行为名，参数的Url
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="nvc"></param>
+        /// <param name="urlParameterNames"></param>
+        /// <param name="actionKeyWithoutSubDomainAndMethodLength"></param>
+        /// <param name="extensionLength"></param>
         public static void SimpleParse(string url, NameValueCollection nvc,string[] urlParameterNames, int actionKeyWithoutSubDomainAndMethodLength,int extensionLength)
         {
             int pos = 0;
@@ -347,6 +437,13 @@ namespace NFinal.Url
             right = url.Length-left-extensionLength-2;
             nvc.Add(urlParameterNames[index], url.Substring(left, right));
         }
+        /// <summary>
+        /// 利用正则解析Url中的参数
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="nvc"></param>
+        /// <param name="urlParameterNames"></param>
+        /// <param name="parameterRegex"></param>
         public static void RegexParse(string url,NameValueCollection nvc,string[] urlParameterNames,string parameterRegex)
         {
             var Regex = new Regex(parameterRegex);
@@ -359,6 +456,10 @@ namespace NFinal.Url
                 }
             }
         }
+        /// <summary>
+        ///  生成包含生成Url函数的javascript文件，用于前端生成Url时使用。
+        /// </summary>
+        /// <param name="globalConfig"></param>
         public static void GetUrlRouteJsContent(NFinal.Config.Global.GlobalConfig globalConfig)
         {
             UrlRouteJsModel model = new UrlRouteJsModel();
@@ -372,6 +473,10 @@ namespace NFinal.Url
             NFinal.Url.UrlRouteJs.Render(fileWriter, model);
             fileWriter.Dispose();
         }
+        /// <summary>
+        ///  生成调试html,用浏览器打开这些html，可以直接调试其目录名对应的控制器行为所对应的函数
+        /// </summary>
+        /// <param name="globalConfig"></param>
         public static void GenerateActionDebugHtml(NFinal.Config.Global.GlobalConfig globalConfig)
         {
             NFinal.IO.FileWriter fileWriter;
@@ -411,6 +516,11 @@ namespace NFinal.Url
                 }
             }
         }
+        /// <summary>
+        /// 获取控制器名称
+        /// </summary>
+        /// <param name="controller"></param>
+        /// <returns></returns>
         public static string GetControllerName(Type controller)
         {
             int SuffixLength = "Controller".Length;
@@ -426,17 +536,22 @@ namespace NFinal.Url
             throw new Exceptions.InvalidControllerNameException(controller.Namespace, controller.Name);
         }
     }
+#if EMITDEBUG
     /// <summary>
     /// 输出URL专用
     /// </summary>
     public class UrlBuildData
     {
+        /// <summary>
+        /// 请求方法名
+        /// </summary>
         public string methodName;
+        /// <summary>
+        /// 生成Url所需的格式化字符串
+        /// </summary>
         public string formatUrl;
     }
-    /// <summary>
-    /// 解析url专用
-    /// </summary>
+
     public class UrlParseData
     {
         public string parameterRegex;
@@ -462,4 +577,5 @@ namespace NFinal.Url
         //    return ActionUrlHelper.Format(formatDictionary[methodName], urlParameters);
         //}
     }
+#endif
 }

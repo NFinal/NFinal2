@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : GRUDHelper.cs
+//        Description :数据库基本增删改查帮助类，用于获取基本sql语句
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
@@ -8,11 +22,25 @@ using System.Text.RegularExpressions;
 
 namespace NFinal.Model
 {
+    /// <summary>
+    /// 获取列名的代理函数
+    /// </summary>
+    /// <returns></returns>
     public delegate string[] GetColumnNamesDelegate();
+    /// <summary>
+    /// 数据库基本增删改查帮助类，用于获取基本sql语句
+    /// </summary>
     public class GRUDHelper
     {
         private static Dictionary<Type, GetColumnNamesDelegate> dic_GetColumnNamesDelegate = new Dictionary<Type, GetColumnNamesDelegate>();
         //private static Dictionary<Type, string> dic_SimpleInsertSql = new Dictionary<Type, string>();
+        /// <summary>
+        /// 获取插入的sql语句
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="sqlWhere"></param>
+        /// <param name="selectIdSql"></param>
+        /// <returns></returns>
         public static string GetInsertSql<TModel>(string sqlWhere,string selectIdSql)
         {
          
@@ -59,7 +87,13 @@ namespace NFinal.Model
             sb.Append(selectIdSql);
             return sb.ToString();
         }
-        
+        /// <summary>
+        /// 获取更新的sql语句
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="sqlWhere"></param>
+        /// <param name="idName"></param>
+        /// <returns></returns>
         public static string GetUpdateSql<TModel>(string sqlWhere,string idName)
         {
             StringBuilder sb = new StringBuilder();
@@ -107,6 +141,13 @@ namespace NFinal.Model
             }
             return sb.ToString();
         }
+        /// <summary>
+        /// 获取某行的sql语句
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="sqlWhere"></param>
+        /// <param name="idName"></param>
+        /// <returns></returns>
         public static string GetSql<TModel>(string sqlWhere,string idName)
         {
             StringBuilder sb = new StringBuilder();
@@ -127,6 +168,12 @@ namespace NFinal.Model
             }
             return sb.ToString();
         }
+        /// <summary>
+        /// 获取所有行的sql语句
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
         public static string GetAllSql<TModel>(string sqlWhere)
         {
             StringBuilder sb = new StringBuilder();
@@ -140,6 +187,14 @@ namespace NFinal.Model
             }
             return sb.ToString();
         }
+        /// <summary>
+        /// 获取前N行的sql语句
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="top"></param>
+        /// <param name="dbType"></param>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
         public static string GetTopSql<TModel>(int top, DBType dbType, string sqlWhere)
         {
             string sql = GetAllSql<TModel>(sqlWhere);
@@ -176,6 +231,17 @@ namespace NFinal.Model
             }
             return topSql;
         }
+        /// <summary>
+        /// 获取分页的sql语句
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="sqlWhere"></param>
+        /// <param name="idName"></param>
+        /// <param name="dbType"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="countSql"></param>
+        /// <returns></returns>
         public static string GetPageSql<TModel>(string sqlWhere,string idName,DBType dbType,int pageIndex,int pageSize,out string countSql)
         {
             string temp = string.Empty;
@@ -303,6 +369,12 @@ namespace NFinal.Model
             }
             return string.Format(pageSql, p1, p2);
         }
+        /// <summary>
+        /// 获取删除的sql语句
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
         public static string GetDeleteSql<TModel>(string sqlWhere)
         {
             StringBuilder sb = new StringBuilder();
@@ -315,10 +387,20 @@ namespace NFinal.Model
             }
             return sb.ToString();
         }
+        /// <summary>
+        /// 获取表名
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
         public static string GetTableName<TModel>()
         {
             return typeof(TModel).Name;
         }
+        /// <summary>
+        /// 获取所有的列名
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
         public static string[] GetColumnNames<TModel>()
         {
             GetColumnNamesDelegate getColumnNamesDelegate = null;
@@ -328,6 +410,11 @@ namespace NFinal.Model
             }
             return getColumnNamesDelegate();
         }
+        /// <summary>
+        /// 获取所有列名的函数代理
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
         public static GetColumnNamesDelegate BuildColumnNamesDelegate<TModel>()
         {
             Type modelType = typeof(TModel);

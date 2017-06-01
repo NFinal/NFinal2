@@ -7,7 +7,6 @@ using NFinal;
 namespace NFinalPlug.Controllers
 {
     
-    [SubDomain("www")]
     public class IndexController : NFinal.OwinAction<NFinal.User.User>
     {
         [GetHtml("/Index-{a}.html")]

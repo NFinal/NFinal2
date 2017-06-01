@@ -7,6 +7,7 @@ using Dapper;
 
 namespace NFinal.Ioc
 {
+#if EMITDEBUG
     public class MethodData
     {
         public Type classType;
@@ -177,4 +178,5 @@ namespace NFinal.Ioc
 
         }
     }
+#endif
 }

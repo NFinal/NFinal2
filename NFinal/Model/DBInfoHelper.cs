@@ -1,19 +1,57 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : DBInfoHelper.cs
+//        Description :获取数据库相关基本信息
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using NFinal.Collections;
 
 namespace NFinal.Model
 {
+    /// <summary>
+    /// 数据库基本信息
+    /// </summary>
     public class DBInfo
     {
+        /// <summary>
+        /// Id名称
+        /// </summary>
         public string idName;
+        /// <summary>
+        /// 返回Id的sql语句
+        /// </summary>
         public string selectIdSql;
+        /// <summary>
+        /// 数据库类型
+        /// </summary>
         public DBType dbType;
     }
+    /// <summary>
+    /// 获取数据库相关基本信息
+    /// </summary>
     public class DBInfoHelper
     {
-        public static Dictionary<string, DBInfo> DBInfoCache = new Dictionary<string, DBInfo>();
+        /// <summary>
+        /// 数据库缓存信息
+        /// </summary>
+        public static FastDictionary<string, DBInfo> DBInfoCache = new FastDictionary<string, DBInfo>();
+        /// <summary>
+        /// 获取数据库基本信息
+        /// </summary>
+        /// <param name="con"></param>
+        /// <returns></returns>
         public static DBInfo GetDBInfo(IDbConnection con)
         {
             DBInfo dbInfo;

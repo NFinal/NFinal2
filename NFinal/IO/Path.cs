@@ -1,12 +1,35 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : Path.cs
+//        Description :Path工具类,用于计算路径
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
 namespace NFinal.IO
 {
+    /// <summary>
+    /// Path工具类
+    /// </summary>
     public class Path
     {   
+        /// <summary>
+        /// 获取绝对路径
+        /// </summary>
+        /// <param name="absoluteDirectory">绝对根目录</param>
+        /// <param name="relativePath">相对路径</param>
+        /// <returns></returns>
         public static string GetAbsolutePath(string absoluteDirectory, string relativePath)
         {
             string[] relativeDirectories = relativePath.Split('/');
@@ -32,6 +55,9 @@ namespace NFinal.IO
             }
             return absolutePath;
         }
+        /// <summary>
+        /// 默认网站根目录
+        /// </summary>
         public static string rootPath =
 #if (NFinalIO)
                 AppContext.BaseDirectory;
@@ -45,7 +71,8 @@ namespace NFinal.IO
         /// <summary>
         /// 获取网站根目录，返回两个结果
         /// </summary>
-        /// <param name="relativePath"></param>
+        /// <param name="projectType">项目类型</param>
+        /// <param name="relativePath">相对路径</param>
         /// <returns>网站根目录，以及应用程序</returns>
         public static string MapPath(NFinal.Config.Global.ProjectType projectType,string relativePath)
         {

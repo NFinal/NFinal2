@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : Configration.cs
+//        Description :NFinal2配置类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +20,28 @@ using System.IO;
 
 namespace NFinal.Config
 {
+    /// <summary>
+    /// NFinal2配置类
+    /// </summary>
     public class Configration
     {
+        /// <summary>
+        /// 是否初始化
+        /// </summary>
         public static bool isInit=false;
+        /// <summary>
+        /// 插件配置
+        /// </summary>
         public static IDictionary<string,NFinal.Config.Plug.PlugConfig> plugConfigDictionary = null;
+        /// <summary>
+        /// 全局配置
+        /// </summary>
         public static NFinal.Config.Global.GlobalConfig globalConfig = null;
+        /// <summary>
+        /// 删除Json配置中的注释，以免解释失败
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static string DeleteComment(string source)
         {
             System.Text.RegularExpressions.Regex commentRegex =
@@ -18,6 +49,9 @@ namespace NFinal.Config
             source = commentRegex.Replace(source, string.Empty);
             return source;
         }
+        /// <summary>
+        /// 加载配置
+        /// </summary>
         public static void Init()
         {
             Configration.isInit = true;

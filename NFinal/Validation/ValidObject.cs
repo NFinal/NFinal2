@@ -1,12 +1,35 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : ValidObject.cs
+//        Description :验证对象
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace NFinal.Validation
 {
+    /// <summary>
+    /// 验证对象
+    /// </summary>
     public class ValidObject
-    {
+    {  
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string name;
+        /// <summary>
+        /// 值
+        /// </summary>
         public string value;
         private bool isDirty;
         public ValidResult validResult;

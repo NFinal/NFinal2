@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : Actuator.cs
+//        Description :控制器执行类，用于组装执行控制器对应的行为的代理。
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +25,65 @@ using NFinal.Http;
 namespace NFinal.Action
 {
     //public delegate void RunActionDelegate<TContext>(TContext context,NFinal.Middleware.ActionData<TContext> actionData);
+    /// <summary>
+    /// 控制器行为执行类
+    /// </summary>
     public class Actuator
     {
+        /// <summary>
+        /// 控制器行为过滤器数组
+        /// </summary>
         public static FieldInfo actionDataEnvironmentFilters = typeof(NFinal.Action.ActionData<,>).GetField("IEnvironmentFilters");
+        /// <summary>
+        /// 控制器行为基础过滤器执行函数的反射信息
+        /// </summary>
         public static MethodInfo BaseFiltersMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("BaseFilter");//, new Type[] { typeof(NFinal.Filter.IEnvironmentFilter[]), typeof(IDictionary<string, object>) });
+        /// <summary>
+        /// 控制器行为对应的请求过滤器数组
+        /// </summary>
         public static FieldInfo actionDataRequestFilters = typeof(NFinal.Action.ActionData<,>).GetField("IRequestFilters");
+        /// <summary>
+        /// 控制器行为请求过滤器执行函数的反射信息
+        /// </summary>
         public static MethodInfo RequestFiltersMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("RequestFilter");//, new Type[] { typeof(NFinal.Filter.IRequestFilter[]), typeof(IDictionary<string, object>), typeof(NFinal.Owin.Request) });
+        /// <summary>
+        /// 控制器行为对应的响应过滤器数组
+        /// </summary>
         public static FieldInfo actionDataResponseFilters = typeof(NFinal.Action.ActionData<,>).GetField("IResponseFilters");
+        /// <summary>
+        /// 控制器行为响应过滤器执行函数的反射信息
+        /// </summary>
         public static MethodInfo ResponseFiltersMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("ResponseFilter");//, new Type[] { typeof(NFinal.Filter.IResponseFilter[]), typeof(NFinal.Owin.Response) });
+        /// <summary>
+        /// 内存流初始化函数的反射信息
+        /// </summary>
         public static ConstructorInfo MemoryStreamConstructorInfo = typeof(System.IO.MemoryStream).GetConstructor(Type.EmptyTypes);
         //public static MethodInfo OwinActionInitializationMethodInfo = typeof(NFinal.OwinAction<,>).GetMethod("Initialization");//, new Type[] { typeof(IDictionary<string, object>), typeof(System.IO.Stream), typeof(NFinal.Owin.Request), typeof(NFinal.CompressMode) });
         //public static FieldInfo requestParametersFieldInfo = typeof(NFinal.Owin.Request).GetField("parameters");
+        /// <summary>
+        /// NameValueCollection获取Value值的函数的反射信息
+        /// </summary>
         public static MethodInfo nameValueCollectionGetItemMethodInfo = typeof(NFinal.NameValueCollection).GetMethod("get_Item", new Type[] { typeof(string) });
+        /// <summary>
+        /// 获取ModelHelper中GetModel的方法的反射信息
+        /// </summary>
         public static MethodInfo modelHelperGetModelMethodInfo = typeof(NFinal.Model.ModelHelper).GetMethod("GetModel");
         //public static MethodInfo getRequestMethodInfo = typeof(System.EnvironmentExtension).GetMethod("GetRequest", new Type[] { typeof(IDictionary<string,object>)});
         //public static MethodInfo getResponseBodyMethodInfo = typeof(System.EnvironmentExtension).GetMethod("GetResponseBody", new Type[] { typeof(IDictionary<string, object>) });
         //public static MethodInfo disposeMethodInfo = typeof(System.IDisposable).GetMethod("Dispose",Type.EmptyTypes);
+        /// <summary>
+        /// 根据类型查找自动转换成该类型的函数的字典缓存对象
+        /// </summary>
         public static Dictionary<Type, System.Reflection.MethodInfo> StringContainerOpImplicitMethodInfoDic = null;
+        /// <summary>
+        /// 获取执行控制器行为的代理函数
+        /// </summary>
+        /// <typeparam name="TContext">Http上下文信息类型</typeparam>
+        /// <typeparam name="TRequest">Http请求信息类型</typeparam>
+        /// <param name="assembly">程序集</param>
+        /// <param name="controllerType">控制器类型</param>
+        /// <param name="actionMethodInfo">控制器行为对应方法的反射信息</param>
+        /// <returns></returns>
         public static ActionExecute<TContext,TRequest> GetRunActionDelegate<TContext,TRequest>(Assembly assembly,Type controllerType,System.Reflection.MethodInfo actionMethodInfo)
         {
             var TContextType = typeof(TContext);

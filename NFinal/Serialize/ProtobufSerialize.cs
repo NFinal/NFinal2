@@ -1,4 +1,18 @@
-﻿using System.IO;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : ProtobufSerialize.cs
+//        Description :基于Protobuf的序列化
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System.IO;
 using ProtoBuf;
 
 namespace NFinal

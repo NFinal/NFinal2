@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : ValidObjectExtension.cs
+//        Description :验证扩展函数
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +20,15 @@ using System.Text.RegularExpressions;
 
 namespace NFinal.Validation
 {
+    /// <summary>
+    /// 验证代理 
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     public delegate bool ValidFunction(ValidObject obj);
+    /// <summary>
+    /// 验证扩展函数
+    /// </summary>
     public static class ValidObjectExtension
     {
         public static ValidResult GetResult(this ValidObject obj)

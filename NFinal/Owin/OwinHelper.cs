@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : OwinHelper.cs
+//        Description :Owin帮助类。
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -185,6 +199,9 @@ namespace NFinal.Owin
                 return (CancellationToken)Environment["owin.CallCancelled"];
             }
         }
+        /// <summary>
+        /// 版本号
+        /// </summary>
         public string Version
         {
             get

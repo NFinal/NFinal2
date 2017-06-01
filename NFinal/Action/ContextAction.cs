@@ -1,4 +1,18 @@
-﻿#if (NET40 || NET451 || NET461)
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename :ContextAction.cs
+//        Description :IOwinContext对应的控制器基类，未实现
+//
+//        created by Lucas at  2015-6-30
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+#if (NET40 || NET451 || NET461)
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +25,7 @@ using System.Data;
 
 namespace NFinal
 {
+    
     public class ContextAction<TUser> : NFinal.Action.AbstractAction<IOwinContext, IOwinRequest, TUser> where TUser : NFinal.User.AbstractUser
     {
         public override void After()

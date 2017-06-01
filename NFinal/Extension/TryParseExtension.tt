@@ -1,4 +1,18 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : TryParseExtension.cs
+//        Description :string转其它基本类型的扩展类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -19,9 +33,11 @@ namespace NFinal
 		/// <summary>
         /// 转换为<#=nullableType[i]#>类型
         /// </summary>
-        /// <param name="obj">字符串</param>
-        /// <returns><#=nullableType[i]#>类型</returns>
-		public static bool TryParse(this <#=structType[i]#> obj,string str,out string value)
+        /// <param name="obj"><#=nullableType[i]#>类型</param>
+		/// <param name="str">string类型</param>
+		/// <param name="value">转换后的类型</param>
+        /// <returns>转换是否成功</returns>
+		public static bool TryParse(this <#=nullableType[i]#> obj,string str,out string value)
         {
             value=str;
             return true;
@@ -32,8 +48,10 @@ namespace NFinal
 		/// <summary>
         /// 转换为<#=structType[i]#>类型
         /// </summary>
-        /// <param name="obj">字符串</param>
-        /// <returns><#=structType[i]#>类型</returns>
+        /// <param name="obj"><#=structType[i]#>类型</param>
+		/// <param name="str">string类型</param>
+		/// <param name="value">转换后的类型</param>
+        /// <returns>转换是否成功</returns>
 		public static bool TryParse(this <#=structType[i]#> obj,string str,out <#=structType[i]#>? value)
         {
 			bool result;

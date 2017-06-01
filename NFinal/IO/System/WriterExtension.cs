@@ -1,10 +1,27 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : WriterExtension.cs
+//        Description :输出扩展函数
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace NFinal
 {
+    /// <summary>
+    /// 输出扩展函数
+    /// </summary>
     public static class WriterExtension
     {
         /// <summary>
@@ -29,13 +46,6 @@ namespace NFinal
         {
             byte[] buffer = value.JsonEncodeBytes();
             writer.Write(buffer,0,buffer.Length);
-        }
-        public static void Write(this NFinal.IO.IWriter writer, dynamic value)
-        {
-            if (value != null)
-            {
-                writer.Write(((object)value).ToString());
-            }
         }
         /// <summary>
         /// 输出字节

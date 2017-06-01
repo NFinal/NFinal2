@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : ModelHelper.cs
+//        Description :把Http请求参数自动封装到自定义Model中的帮助类。
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,6 +26,9 @@ namespace NFinal.Owin
     /// </summary>
     public struct HtmlWriter
     {
+        /// <summary>
+        /// Http响应数据
+        /// </summary>
         public Response response;
         /// <summary>
         /// Set-Cookie的值存储
@@ -20,9 +37,10 @@ namespace NFinal.Owin
         Stream writeStream;
         CompressMode compressMode;
         /// <summary>
-        /// Html类初始化
+        /// HtmlWriter类初始化
         /// </summary>
-        /// <param name="environment">压缩方式</param>
+        /// <param name="stream"></param>
+        /// <param name="compressMode"></param>
         public HtmlWriter(Stream stream,CompressMode compressMode)
         {
             this.compressMode = compressMode;
@@ -196,7 +214,10 @@ namespace NFinal.Owin
             byte[] buffer= Constant.encoding.GetBytes(value);
             writeStream.Write(buffer, 0, buffer.Length);
         }
-       
+        /// <summary>
+        /// 获取Http响应内容
+        /// </summary>
+        /// <returns></returns>
         public NFinal.Owin.Response GetResponse()
         {
             //WriteHeader("Content-Length", response.stream.Length.ToString());

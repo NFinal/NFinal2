@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : FastSearch.cs
+//        Description :快速查找类，比传统字典类快一倍以上。
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,13 +46,22 @@ namespace NFinal.Collections.FastSearch
     /// <typeparam name="TValue"></typeparam>
     public class GroupData<TValue>
     {
-        //字符串长度
+        /// <summary>
+        /// 字符串长度
+        /// </summary>
         public int length;
-        //优化的二分查找函数,长度固定
+        /// <summary>
+        /// 优化的二分查找函数,长度固定
+        /// </summary>
         public FindDelegate findDelegate;
-        //优化过的字符串比较函数
+        /// <summary>
+        /// 优化过的字符串比较函数
+        /// </summary>
         public CompareDelegate compareDelegate;
-        public List<KV<TValue>> list;
+        /// <summary>
+        /// 具有相同长度key的KV列表
+        /// </summary>
+        public List<KeyValue<TValue>> list;
     }
     /// <summary>
     /// 快速查找类，速度是传统Dictionary的两倍以上,
@@ -47,8 +70,14 @@ namespace NFinal.Collections.FastSearch
     /// <typeparam name="TValue"></typeparam>
     public class FastSearch<TValue>
     {
-        GroupData<TValue>[] groupArray;
+        private GroupData<TValue>[] groupArray;
+        /// <summary>
+        /// 查找具有相同key长度的KeyValue组索引
+        /// </summary>
         public FindGroupIndexDelegate findGroupIndexDelegate;
+        /// <summary>
+        /// 快速查找初始化函数
+        /// </summary>
         public FastSearch()
         { }
         /// <summary>
@@ -65,7 +94,7 @@ namespace NFinal.Collections.FastSearch
                 if (groupList.TryGetValue(kv.Key.Length, out groupData))
                 {
                     index = groupList.Count;
-                    groupData.list.Add(new KV<TValue>(kv.Key, kv.Value, index));
+                    groupData.list.Add(new KeyValue<TValue>(kv.Key, kv.Value, index));
                 }
                 else
                 {
@@ -73,8 +102,8 @@ namespace NFinal.Collections.FastSearch
                     //快速比较函数，应用long指针，一次比较4个字符
                     groupData.compareDelegate = CompareDelegateHelper.GetCompareDelegate(kv.Key.Length);
                     groupData.length = kv.Key.Length;
-                    groupData.list = new List<KV<TValue>>();
-                    groupData.list.Add(new KV<TValue>(kv.Key, kv.Value, index));
+                    groupData.list = new List<KeyValue<TValue>>();
+                    groupData.list.Add(new KeyValue<TValue>(kv.Key, kv.Value, index));
                     groupList.Add(kv.Key.Length, groupData);
                 }
             }
@@ -89,6 +118,13 @@ namespace NFinal.Collections.FastSearch
             }
             //originalDictionary.Clear();
         }
+        /// <summary>
+        /// 查找
+        /// </summary>
+        /// <param name="key">字符串key</param>
+        /// <param name="length">所查找的字符串长度</param>
+        /// <param name="value">查找出的值</param>
+        /// <returns>查找是否成功</returns>
         public unsafe bool TryGetValue(string key, int length,out TValue value)
         {
             GroupData<TValue> group = groupArray[findGroupIndexDelegate(length)];

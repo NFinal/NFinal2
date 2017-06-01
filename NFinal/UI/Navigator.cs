@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : Navigator.cs
+//        Description :分页控件
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +26,7 @@ namespace NFinal.UI
     /// <returns></returns>
     public delegate string GetUrlDelegate(int index);
     /// <summary>
-    /// Pgae分页类
+    /// 分页控件
     /// </summary>
     public class Navigator:NFinal.UI.BaseControl
     {

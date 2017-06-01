@@ -1,4 +1,18 @@
-﻿#if (NET40 || NET451 || NET461)
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : BinarySerialize.cs
+//        Description :基于微软原生的序列化
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+#if (NET40 || NET451 || NET461)
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace NFinal

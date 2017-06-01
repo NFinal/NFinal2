@@ -1,4 +1,18 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : DictionaryHelper.cs
+//        Description :微软.net core官方开发人员以MIT协议开源的快速字典类，比传统的Dictionary快30%-40%，做了部分改动。
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;

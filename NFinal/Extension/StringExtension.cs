@@ -1,28 +1,70 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : StringExtension.cs
+//        Description :字符串扩展类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace NFinal
 {
+    /// <summary>
+    /// 字符串扩展类
+    /// </summary>
     public static class StringExtension
     {
+        /// <summary>
+        /// UrlEncode
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static string UrlEncode(this string url)
         {
             return Uri.EscapeDataString(url);
         }
+        /// <summary>
+        /// UrlDecode
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static string UrlDecode(this string url)
         {
             return Uri.UnescapeDataString(url);
         }
+        /// <summary>
+        /// HtmlEncode
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
         public static string HtmlEncode(this string html)
         {
             return System.Net.WebUtility.HtmlEncode(html);
         }
+        /// <summary>
+        /// HtmlDecode
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
         public static string HtmlDecode(this string html)
         {
             return System.Net.WebUtility.HtmlDecode(html);
         }
+        /// <summary>
+        /// 字符串转Json字节流
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
         public static byte[] JsonEncodeBytes(this string json)
         {
             if (json == null)
@@ -36,10 +78,20 @@ namespace NFinal
             byte[] result = GetJsonString(buffer, 0, buffer.Length);
             return result;
         }
+       /// <summary>
+       /// 字符串转Json字符串
+       /// </summary>
+       /// <param name="json"></param>
+       /// <returns></returns>
         public static string JsonEncodeString(this string json)
         {
             return NFinal.Constant.encoding.GetString(JsonEncodeBytes(json));
         }
+        /// <summary>
+        /// 获取hashCode.此函数是为了各平台的hashCode能保持统一。
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static int GetHashCodeEx(this string obj)
         {
             unsafe
@@ -86,6 +138,13 @@ namespace NFinal
                 }
             }
         }
+        /// <summary>
+        /// 判断该字节流是否为合法的字符串
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         private static bool ValidateParameters(byte[] bytes, int offset, int count)
         {
             if (bytes == null && count == 0)

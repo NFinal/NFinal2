@@ -1,10 +1,27 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : StringBuilderCache.cs
+//        Description :字符串连接缓存类，用于字符串连接时的内存控制。
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace NFinal
 {
+    /// <summary>
+    /// 字符串连接缓存类，用于字符串连接时的内存控制。
+    /// </summary>
     internal static class StringBuilderCache
     {
         // The value 360 was chosen in discussion with performance experts as a compromise between using

@@ -1,16 +1,35 @@
-﻿using System;
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : ActionKey.cs
+//        Description :计算搜索控制器行为所用的key
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace NFinal.Url
 {
+    /// <summary>
+    /// 计算搜索控制器行为所用的key
+    /// </summary>
     public class ActionKey
     {
         /// <summary>
         /// 计算actionUrl
         /// </summary>
-        /// <param name="requestedPath"></param>
+        /// <param name="method">Http请求方法</param>
+        /// <param name="requestedPath">Http请求路径</param>
+        /// <param name="shortActionKeyLength">actionKey的长度</param>
         /// <returns></returns>
         public unsafe static string GetActionKey(string method, string requestedPath,out int shortActionKeyLength)
         {
@@ -99,10 +118,6 @@ namespace NFinal.Url
                 }
             }
             return actionKeyString = new string(actionKey);
-        }
-        public static string GetUrlDelegate(string urlString,string path, System.Reflection.MethodInfo methodInfo)
-        {
-            return string.Empty;
         }
     }
 }

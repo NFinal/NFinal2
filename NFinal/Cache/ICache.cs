@@ -1,4 +1,18 @@
-﻿namespace NFinal.Cache
+﻿//======================================================================
+//
+//        Copyright : Zhengzhou Strawberry Computer Technology Co.,LTD.
+//        All rights reserved
+//        
+//        Application:NFinal MVC framework
+//        Filename : ICache.cs
+//        Description :缓存接口类
+//
+//        created by Lucas at  2015-5-31
+//     
+//        WebSite:http://www.nfinal.com
+//
+//======================================================================
+namespace NFinal.Cache
 {
     /// <summary>
     /// 缓存接口
@@ -9,7 +23,7 @@
         /// 设置缓存
         /// </summary>
         /// <param name="key">key</param>
-        /// <param name="value">object</param>
+        /// <param name="t">object</param>
         void Set<T>(TKey key, T t);
         /// <summary>
         /// 设置缓存

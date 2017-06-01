@@ -46,11 +46,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Attribute\ConfigAttribute.cs" />
     <Compile Remove="Attribute\html5Validate.cs" />
     <Compile Remove="Attribute\pattern.cs" />
     <Compile Remove="Attribute\SubDomainAttribute.cs" />
     <Compile Remove="Cache\MemoryCache.cs" />
+    <Compile Remove="Collections\NameValueDynamicCollection.cs" />
     <Compile Remove="Emit\FastReflection.cs" />
+    <Compile Remove="Json\JSONParser.cs" />
+    <Compile Remove="Json\JSONWriter.cs" />
+    <Compile Remove="Middleware\Builder\Completed.cs" />
+    <Compile Remove="Middleware\Builder\NotFound.cs" />
     <Compile Remove="Middleware\StringBuilderCache.cs" />
     <Compile Remove="Properties\AssemblyInfo.cs" />
     <Compile Remove="Url\UrlHelper.cs" />
@@ -106,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\netstandard1.5\" />
+    <Folder Include="Middleware\Builder\" />
     <Folder Include="Properties\" />
     <Folder Include="Build\" />
   </ItemGroup>
