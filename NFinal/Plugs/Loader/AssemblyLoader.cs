@@ -25,7 +25,10 @@ namespace NFinal.Plugs.Loader
 #if (NET40 || NET451 || NET461)
     public class AssemblyLoader:IAssemblyLoader
     {
-        public static Dictionary<string, System.Reflection.Assembly> _assemblyDictionary =null;
+        private static Dictionary<string, System.Reflection.Assembly> _assemblyDictionary =null;
+        /// <summary>
+        /// 程序集缓存
+        /// </summary>
         public Dictionary<string, System.Reflection.Assembly> assemblyDictionary { get {
                 return _assemblyDictionary;
             } }

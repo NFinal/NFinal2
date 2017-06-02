@@ -309,7 +309,7 @@ namespace NFinal.Action
             }
         }
         /// <summary>
-        /// 视图数据
+        /// 视图数据，通过ViewBag.字段名=值;可直接添加视图数据
         /// </summary>
         public dynamic ViewBag=null;
         /// <summary>

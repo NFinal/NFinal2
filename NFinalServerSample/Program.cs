@@ -10,6 +10,7 @@ namespace NFinalServerSample
     {
         public static void Main(string[] args)
         {
+            
             bool debug = true;
             string url = null;
             if (debug)

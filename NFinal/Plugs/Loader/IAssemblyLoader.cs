@@ -24,6 +24,9 @@ namespace NFinal.Plugs.Loader
     /// </summary>
     public interface IAssemblyLoader
     {
+        /// <summary>
+        /// 程序集缓存
+        /// </summary>
         Dictionary<string, System.Reflection.Assembly> assemblyDictionary
         {
             get;
