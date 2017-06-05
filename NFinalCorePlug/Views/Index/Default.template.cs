@@ -26,7 +26,7 @@ namespace NFinalCorePlug.Views.Index
             writer.Write(Model.systemConfig["siteName"]);
             writer.Write("</h2>\r\n    <h2>mobile:");
             writer.Write(Model.systemConfig["mobile"]);
-            writer.Write("</h2>\r\n</body>\r\n</html>");
+            writer.Write("</h2>3\r\n</body>\r\n</html>");
         }
     }
 }

@@ -3,6 +3,8 @@
     <TargetFramework>netstandard1.5</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\netstandard1.5\NFinalCorePlug.deps.json" />
+    <Content Include="bin\Debug\netstandard1.5\NFinalCorePlug.plug.json" />
     <Content Include="bin\NFinal.xml" />
     <Content Include="bin\System.Runtime.xml" />
     <Content Include="bin\System.Web.Helpers.xml" />
@@ -54,9 +56,6 @@
       <Generator>
       </Generator>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\netstandard1.5\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Microsoft.Web.Infrastructure.dll" />

@@ -141,6 +141,7 @@ namespace NFinalCompiler
                 string structFileName = Path.Combine(parentPath, Path.GetFileNameWithoutExtension(parentName) + ".model.cs");
                 ProjectItem projectItem = Helper.ProjectHelpers.FindInProject(structFileName);
                 projectItem?.Document?.Close(vsSaveChanges.vsSaveChangesNo);
+                projectItem.Remove();
                 using (StreamWriter sw = new StreamWriter(structFileName, false, System.Text.Encoding.UTF8))
                 {
                     var document = proj.Documents.Single(doc => { return doc.FilePath == parentFileName; });
@@ -168,6 +169,7 @@ namespace NFinalCompiler
                 string fileName = Path.Combine(parentPath,Path.GetFileNameWithoutExtension(parentName) + ".template.cs");
                 ProjectItem projectItem = Helper.ProjectHelpers.FindInProject(fileName);
                 projectItem?.Document?.Close(vsSaveChanges.vsSaveChangesNo);
+                projectItem.Remove();
                 using (StreamWriter sw = new StreamWriter(fileName, false, System.Text.Encoding.UTF8))
                 {
                     string nameSpace = GetNameSpace(Document);
@@ -180,7 +182,7 @@ namespace NFinalCompiler
                 {
                     projectItem= Helper.ProjectHelpers.AddNestedFile(Document.ProjectItem, fileName, "Compile", false);
                     //添加<Content Include="Views\Index.cshtml">BrowseToURL
-                    
+                    workspace.TryApplyChanges(proj.Solution);
                     //代码结构
                     projectItem?.Document?.NewWindow();
                     workspace = componentModel.GetService<VisualStudioWorkspace>();
