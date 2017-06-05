@@ -13,9 +13,6 @@ namespace NFinalCoreServer
     {
         public static void Main(string[] args)
         {
-            string a = NFinal.IO.Path.GetApplicationPath("/a");
-            string b = NFinal.IO.Path.GetProjectPath("/b");
-            string c = NFinal.IO.Path.MapPath(NFinal.Config.Global.ProjectType.Console, "/c");
             bool debug = true;
             string url = null;
             if (debug)

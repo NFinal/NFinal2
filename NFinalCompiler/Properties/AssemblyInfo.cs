@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("NFinalCompiler")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("NFinalCompiler plug for nfinal mvc framework.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Zhengzhou Strawberry Computer Technology Co.,LTD")]
 [assembly: AssemblyProduct("NFinalCompiler")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("Zhengzhou Strawberry Computer Technology Co.,LTD")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

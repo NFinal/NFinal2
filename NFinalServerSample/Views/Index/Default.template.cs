@@ -10,8 +10,6 @@ namespace NFinalServerSample.Views.Index
     {
         public Default(NFinal.IO.Writer writer, NFinalServerSample.Controllers.IndexController_Model.Default Model) : base(writer, Model)
         {
-            this.writer = writer;
-            this.Model = Model;
         }
         //如果此处报错，请添加NFinal引用
         //PMC命令为：Install-Package NFinal
@@ -24,7 +22,7 @@ namespace NFinalServerSample.Views.Index
             writer.Write(Model.systemConfig["siteName"].value);
             writer.Write("</h2>\r\n    <h2>mobile:");
             writer.Write(Model.systemConfig["mobile"].value);
-            writer.Write("</h2>\r\n</body>\r\n</html>");
+            writer.Write("</h2>\r\n</body>\r\n</html> ");
         }
     }
 }

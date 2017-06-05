@@ -75,8 +75,8 @@ namespace NFinalCompiler.Razor
                 sw.Write(modelType);
                 sw.WriteLine(" ViewBag) : base(writer ,ViewBag)");
                 sw.WriteLine("\t\t{");
-                sw.WriteLine("\t\t\tthis.writer=writer;");
-                sw.WriteLine("\t\t\tthis.ViewBag=ViewBag;");
+                //sw.WriteLine("\t\t\tthis.writer=writer;");
+                //sw.WriteLine("\t\t\tthis.ViewBag=ViewBag;");
                 sw.WriteLine("\t\t}");
             }
             else
@@ -84,8 +84,8 @@ namespace NFinalCompiler.Razor
                 sw.Write(modelType);
                 sw.WriteLine(" Model) : base(writer ,Model)");
                 sw.WriteLine("\t\t{");
-                sw.WriteLine("\t\t\tthis.writer=writer;");
-                sw.WriteLine("\t\t\tthis.Model=Model;");
+                //sw.WriteLine("\t\t\tthis.writer=writer;");
+                //sw.WriteLine("\t\t\tthis.Model=Model;");
                 sw.WriteLine("\t\t}");
             }
             sw.WriteLine("\t\t//如果此处报错，请添加NFinal引用");
