@@ -66,6 +66,7 @@ namespace NFinalCompiler
         public VisualStudioWorkspace workspace;
         public static EnvDTE.SolutionEvents _solutionEvents;
         public static EnvDTE.DocumentEvents _documentEvents;
+        public string projectName = null;
         /// <summary>
         /// Initializes a new instance of the <see cref="NFinalCompiler"/> class.
         /// </summary>
@@ -92,15 +93,66 @@ namespace NFinalCompiler
             Helper.Logger.Initialize(this, "NFinalCompiler");
             _documentEvents = events.DocumentEvents;
             _solutionEvents = events.SolutionEvents;
+            events.BuildEvents.OnBuildDone += BuildEvents_OnBuildDone;
+            events.BuildEvents.OnBuildProjConfigDone += BuildEvents_OnBuildProjConfigDone;
             _documentEvents.DocumentSaved += DocumentEvents_DocumentSaved;
             _solutionEvents.AfterClosing += _solutionEvents_AfterClosing;
             _solutionEvents.ProjectRemoved += _solutionEvents_ProjectRemoved;
+            
             componentModel =
         (IComponentModel)Microsoft.VisualStudio.Shell.Package.GetGlobalService(typeof(SComponentModel));
             
             base.Initialize();
         }
 
+
+        private void BuildEvents_OnBuildProjConfigDone(string Project, string ProjectConfig, string Platform, string SolutionConfig, bool Success)
+        {
+            //得到当前编译项目的项目文件名
+            string solutionName= _dte.Solution.FullName;
+            projectName= Path.Combine(Path.GetDirectoryName(solutionName), Project);
+            foreach (dynamic project in _dte.Solution.Projects)
+            {
+                if (project.UniqueName == Project)
+                {
+                    projectName = project.FullName;
+                }
+            }
+            //throw new NotImplementedException();
+            
+        }
+
+        private void BuildEvents_OnBuildDone(vsBuildScope Scope, vsBuildAction Action)
+        {
+            if (vsBuildAction.vsBuildActionBuild== Action || vsBuildAction.vsBuildActionRebuildAll== Action)
+            {
+                if (vsBuildScope.vsBuildScopeProject==Scope)
+                {
+                    //Project
+                    StreamReader sr = new StreamReader(projectName, System.Text.Encoding.UTF8);
+                    string projectFileContent= sr.ReadToEnd();
+                    sr.Dispose();
+                    System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex("<OutputPath>(\\S+)</OutputPath>");
+                    string outPutPath= reg.Match(projectFileContent).Groups[1].Value;
+                    string FullOutPutPath = Path.Combine(Path.GetDirectoryName(projectName), outPutPath);
+                    string FullCopyPath=Path.Combine(Path.GetDirectoryName(projectName),"bin\\");
+                    if (FullOutPutPath != FullCopyPath)
+                    {
+                        CopyDirectory(FullOutPutPath, FullCopyPath);
+                    }
+                }
+            }
+        }
+
+        void CopyDirectory(string SourcePath, string DestinationPath)
+        {
+            //创建所有目录
+            foreach (string dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
+                Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
+            //复制所有文件
+            foreach (string newPath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
+                File.Copy(newPath, newPath.Replace(SourcePath, DestinationPath),true);
+        }
         private void _solutionEvents_ProjectRemoved(EnvDTE.Project Project)
         {
            
@@ -141,7 +193,7 @@ namespace NFinalCompiler
                 string structFileName = Path.Combine(parentPath, Path.GetFileNameWithoutExtension(parentName) + ".model.cs");
                 ProjectItem projectItem = Helper.ProjectHelpers.FindInProject(structFileName);
                 projectItem?.Document?.Close(vsSaveChanges.vsSaveChangesNo);
-                projectItem.Remove();
+                projectItem?.Remove();
                 using (StreamWriter sw = new StreamWriter(structFileName, false, System.Text.Encoding.UTF8))
                 {
                     var document = proj.Documents.Single(doc => { return doc.FilePath == parentFileName; });
@@ -169,7 +221,7 @@ namespace NFinalCompiler
                 string fileName = Path.Combine(parentPath,Path.GetFileNameWithoutExtension(parentName) + ".template.cs");
                 ProjectItem projectItem = Helper.ProjectHelpers.FindInProject(fileName);
                 projectItem?.Document?.Close(vsSaveChanges.vsSaveChangesNo);
-                projectItem.Remove();
+                projectItem?.Remove();
                 using (StreamWriter sw = new StreamWriter(fileName, false, System.Text.Encoding.UTF8))
                 {
                     string nameSpace = GetNameSpace(Document);

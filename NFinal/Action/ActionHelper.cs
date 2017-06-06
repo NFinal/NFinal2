@@ -200,6 +200,11 @@ namespace NFinal.Action
                     }
                 }
             }
+            //如果未找到任何一个控制器类型，则抛出异常
+            if (formatControllerDictionary.Count < 1)
+            {
+                throw new NFinal.Exceptions.HasNoControllerInProjectException();
+            }
             NFinal.Url.ActionUrlHelper.formatControllerDictionary= formatControllerDictionary;
             if (globalConfig.debug.enable)
             {

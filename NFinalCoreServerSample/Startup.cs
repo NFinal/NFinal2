@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel;
 using Microsoft.Extensions.FileProviders;
 
-namespace NFinalCoreServer
+namespace NFinalCoreServerSample
 {
     public class Startup
     {

@@ -31,9 +31,6 @@
       <Generator>
       </Generator>
     </Compile>
-    <Compile Update="Controllers\IndexController.model.cs">
-      <DependentUpon>IndexController.cs</DependentUpon>
-    </Compile>
     <Compile Update="Controllers\UserController.model.cs">
       <DependentUpon>UserController.cs</DependentUpon>
     </Compile>

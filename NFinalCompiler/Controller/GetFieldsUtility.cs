@@ -158,8 +158,38 @@ namespace NFinalCompiler.Controller
                             data.AttributeList = new List<string>();
                             foreach (var attr in attrArray)
                             {
-                                AttrbuteListString = attr.ApplicationSyntaxReference.SyntaxTree.GetText().ToString(attr.ApplicationSyntaxReference.Span);
-                                data.AttributeList.Add(AttrbuteListString);
+                                if (attr.ApplicationSyntaxReference == null)
+                                {
+                                    string arglist = null;
+                                    bool isFirst = true;
+                                    foreach (var arg in attr.ConstructorArguments)
+                                    {
+                                        if (isFirst)
+                                        {
+                                            isFirst = false;
+                                            arglist += arg.ToCSharpString();
+                                        }
+                                        else
+                                        {
+                                            arglist +="," + arg.ToCSharpString();
+                                        }
+                                    }
+                                    if (arglist != null)
+                                    {
+                                        arglist = "(" + arglist + ")";
+                                    }
+                                    string attrName = attr.AttributeClass.ToString();
+                                    if (attrName.EndsWith("Attribute"))
+                                    {
+                                        attrName = attrName.Substring(0, attrName.Length - 9);
+                                    }
+                                    data.AttributeList.Add(attrName + arglist);
+                                }
+                                else
+                                {
+                                    AttrbuteListString = attr.ApplicationSyntaxReference.SyntaxTree.GetText().ToString(attr.ApplicationSyntaxReference.Span);
+                                    data.AttributeList.Add(AttrbuteListString);
+                                }
                             }
                         }
                     }
