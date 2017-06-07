@@ -146,14 +146,13 @@ namespace NFinalCompiler.Helper
                     return null;
                 ProjectItem newItem = null;
                 bool mayNeedAttributeSet = item.ContainingProject.IsKind(ProjectTypes.DOTNET_Core, ProjectTypes.UNIVERSAL_APP);
-                
                 if (item.ProjectItems == null)
                 {
                     item.ContainingProject.AddFileToProject(newFile, itemType);
                 }
                 else if ((newItem=_dte.Solution.FindProjectItem(newFile)) == null || force)
                 {
-                    newItem= item.ProjectItems.AddFromFile(newFile);
+                    newItem= item.ProjectItems.AddFromFileCopy(newFile);
                 }
                 bool isVisualStudioRTM = false;
                 if (mayNeedAttributeSet)

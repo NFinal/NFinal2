@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard1.5</TargetFramework>
   </PropertyGroup>
@@ -6,8 +6,14 @@
     <Compile Remove="bin\Controllers\**" />
     <EmbeddedResource Remove="bin\Controllers\**" />
     <None Remove="bin\Controllers\**" />
+    <Compile Update="Controllers\IndexController.model.cs">
+      <DependentUpon>IndexController.cs</DependentUpon>
+    </Compile>
     <Compile Update="Controllers\UserController.model.cs">
       <DependentUpon>UserController.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Index\Default.template.cs">
+      <DependentUpon>Default.cshtml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -38,9 +44,6 @@
     <Compile Update="Controllers\IndexController.cs">
       <Generator>
       </Generator>
-    </Compile>
-    <Compile Update="Views\Index\Default.template.cs">
-      <DependentUpon>Default.cshtml</DependentUpon>
     </Compile>
     <Compile Update="Controllers\UserController.cs">
       <Generator />

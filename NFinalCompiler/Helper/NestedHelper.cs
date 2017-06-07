@@ -121,6 +121,7 @@ namespace NFinalCompiler.Helper
                 if (hasModify)
                 {
                     doc.Save(projectFileName);
+  
                 }
             }
         }

@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_4;NFinalIO</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NFinalIO;NETSTANDARD1_3</DefineConstants>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <OutputPath>bin\Debug\netstandard1.3\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

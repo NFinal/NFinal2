@@ -105,9 +105,28 @@ namespace NFinalCompiler
             base.Initialize();
         }
 
-        private static void OutPutString(string str)
+        private static void OutPutString(string str,bool clear=false)
         {
-            _dte.ToolWindows.OutputWindow.ActivePane?.OutputString(str);
+            //_dte.ToolWindows.OutputWindow.ActivePane?.OutputString("NFinalCompiler插件："+str+"\r\n");
+            string windowName = "NFinalCompiler插件";
+            OutputWindowPane pane = null; 
+            foreach (OutputWindowPane panel in _dte.ToolWindows.OutputWindow.OutputWindowPanes)
+            {
+                if (panel.Name == windowName)
+                {
+                    pane = panel;
+                }
+            }
+            if (pane == null)
+            {
+                pane= _dte.ToolWindows.OutputWindow.OutputWindowPanes.Add(windowName);
+            }
+            if (clear)
+            {
+                pane.Clear();
+                pane.Activate();
+            }
+            pane.OutputString("NFinalCompiler插件：" + str + "\r\n");
         }
         private void BuildEvents_OnBuildProjConfigDone(string Project, string ProjectConfig, string Platform, string SolutionConfig, bool Success)
         {
@@ -157,7 +176,7 @@ namespace NFinalCompiler
                     if (FullOutPutPath != FullCopyPath)
                     {
                         CopyDirectory(FullOutPutPath, FullCopyPath);
-                        OutPutString("从目录：\"" + FullOutPutPath + "\"复制到：\"" + FullCopyPath+"\"");
+                        OutPutString("从目录：\"" + FullOutPutPath + "\"复制到：\"" + FullCopyPath+"\"",true);
                     }
                 }
             }
@@ -219,7 +238,7 @@ namespace NFinalCompiler
                 string structFileName = Path.Combine(parentPath, Path.GetFileNameWithoutExtension(parentName) + ".model.cs");
                 ProjectItem projectItem = Helper.ProjectHelpers.FindInProject(structFileName);
                 projectItem?.Document?.Close(vsSaveChanges.vsSaveChangesNo);
-                projectItem?.Remove();
+                //projectItem?.Remove();
                 using (StreamWriter sw = new StreamWriter(structFileName, false, System.Text.Encoding.UTF8))
                 {
                     var document = proj.Documents.Single(doc => { return doc.FilePath == parentFileName; });
@@ -229,6 +248,7 @@ namespace NFinalCompiler
                     SemanticModel semanticModel = cSharpCompilation.GetSemanticModel(tree);
                     model.WriteDocument(sw, tree, semanticModel);
                     sw.Close();
+                    OutPutString("生成控制器实体类成功：\""+ structFileName + "\"");
                 }
                 if (File.Exists(structFileName))
                 {
@@ -248,6 +268,7 @@ namespace NFinalCompiler
                 ProjectItem projectItem = Helper.ProjectHelpers.FindInProject(fileName);
                 projectItem?.Document?.Close(vsSaveChanges.vsSaveChangesNo);
                 projectItem?.Remove();
+                Document.ProjectItem.ContainingProject.Save();
                 using (StreamWriter sw = new StreamWriter(fileName, false, System.Text.Encoding.UTF8))
                 {
                     string nameSpace = GetNameSpace(Document);
@@ -255,6 +276,7 @@ namespace NFinalCompiler
                     Razor.RazorWriter writer = new Razor.RazorWriter(parentFileName);
                     writer.WriteTemplate(sw, nameSpace, className);
                     sw.Close();
+                    OutPutString("生成模板类成功：\"" + fileName + "\"");
                 }
                 if (File.Exists(fileName))
                 {
@@ -310,6 +332,7 @@ namespace NFinalCompiler
                         gen.ExamplesInDocumentation = true;
                         gen.OutputStream = sw;
                         gen.GenerateClasses();
+                        OutPutString("生成JSON对应实体类成功：\"" + outPutFileName + "\"");
                     }
                 }
                 if (File.Exists(outPutFileName))
@@ -339,6 +362,7 @@ namespace NFinalCompiler
                         {
                             sw.Write(model.content);
                             sw.Close();
+                            OutPutString("生成sql对应实体类成功：\"" + model.fileName + "\"");
                         }
                         if (File.Exists(model.fileName))
                         {

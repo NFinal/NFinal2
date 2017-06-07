@@ -10,8 +10,6 @@ namespace NFinalPlug.Views
     {
         public Index(NFinal.IO.Writer writer, NFinalPlug.Controllers.IndexController_Model.Show Model) : base(writer, Model)
         {
-            this.writer = writer;
-            this.Model = Model;
         }
         //如果此处报错，请添加NFinal引用
         //PMC命令为：Install-Package NFinal

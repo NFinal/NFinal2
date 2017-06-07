@@ -73,9 +73,6 @@
       <DependentUpon>IndexController.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Index.template.cs">
-      <DependentUpon>Index.cshtml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
