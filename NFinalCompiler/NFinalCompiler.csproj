@@ -192,6 +192,11 @@
     <Compile Include="Controller\StructModel.cs" />
     <Compile Include="Helper\NestedHelper.cs" />
     <Compile Include="Helper\VsHelper.cs" />
+    <Compile Include="RazorLibrary\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Razor\RazorPropertyHelper.cs" />
     <Compile Include="Sql\Data\DataUtility.cs" />
     <Compile Include="Sql\ModelFileData.cs" />
@@ -227,6 +232,13 @@
     <Compile Include="Helper\ProjectHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Razor\RazorWriter.cs" />
+    <Content Include="RazorLibrary\Microsoft.AspNetCore.Razor.dll" />
+    <Content Include="RazorLibrary\Microsoft.AspNetCore.Razor.xml" />
+    <Content Include="RazorLibrary\Microsoft.AspNetCore.Runtime.dll" />
+    <Content Include="RazorLibrary\System.Runtime.dll" />
+    <Content Include="RazorLibrary\System.Runtime.xml" />
+    <Content Include="RazorLibrary\System.Web.Razor.dll" />
+    <Content Include="RazorLibrary\System.Web.Razor.xml" />
     <Content Include="Sql\ModelTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -391,6 +403,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Json\JsonClassGeneratorLib\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RazorLibrary\Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>

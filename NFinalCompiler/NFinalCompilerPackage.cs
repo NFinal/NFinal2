@@ -177,11 +177,69 @@ namespace NFinalCompiler
                     {
                         CopyDirectory(FullOutPutPath, FullCopyPath);
                         OutPutString("从目录：\"" + FullOutPutPath + "\"复制到：\"" + FullCopyPath+"\"",true);
+                        //复制文件添加Razor自动提示功能
+                        CopyRazorLibrary(projectName, projectFileContent);
                     }
                 }
             }
         }
-
+        public static void CopyRazorLibrary(string projectName,string projectFileContent)
+        {
+            string binFolder = Path.Combine(Path.GetDirectoryName(projectName),"bin\\");
+            bool isFrameWork = false;
+            if (projectFileContent.IndexOf("<TargetFrameworkVersion>") > -1)
+            {
+                isFrameWork = true;
+            }
+            string fileName;
+            byte[] buffer;
+            if (isFrameWork)
+            {
+                fileName = Path.Combine(binFolder, "System.Web.Razor.dll");
+                buffer = RazorLibrary.Resource.System_Web_Razor;
+                if (!File.Exists(fileName))
+                {
+                    using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                    {
+                        stream.Write(buffer, 0, buffer.Length);
+                        stream.Close();
+                    }
+                }
+                fileName = Path.Combine(binFolder, "System.Runtime.dll");
+                buffer = RazorLibrary.Resource.System_Runtime;
+                if (!File.Exists(fileName))
+                {
+                    using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                    {
+                        stream.Write(buffer, 0, buffer.Length);
+                        stream.Close();
+                    }
+                }
+            }
+            else
+            {
+                fileName = Path.Combine(binFolder, "Microsoft.AspNetCore.Razor.dll");
+                buffer = RazorLibrary.Resource.Microsoft_AspNetCore_Razor;
+                if (!File.Exists(fileName))
+                {
+                    using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                    {
+                        stream.Write(buffer, 0, buffer.Length);
+                        stream.Close();
+                    }
+                }
+                fileName = Path.Combine(binFolder, "Microsoft.AspNetCore.Runtime.dll");
+                buffer = RazorLibrary.Resource.Microsoft_AspNetCore_Runtime;
+                if (!File.Exists(fileName))
+                {
+                    using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                    {
+                        stream.Write(buffer, 0, buffer.Length);
+                        stream.Close();
+                    }
+                }
+            }
+        }
         void CopyDirectory(string SourcePath, string DestinationPath)
         {
             //创建所有目录

@@ -38,8 +38,11 @@ namespace NFinalCompiler.Razor
         }
         public void WriteTemplate(TextWriter sw, string nameSpace, string className)
         {
-            usings.Add("using System;");
-            usings.Add("using NFinal;");
+            usings.Add("using System");
+            usings.Add("using System.IO");
+            usings.Add("using System.Net");
+            usings.Add("using System.Collections.Generic");
+            usings.Add("using NFinal");
             string usingString = null;
             foreach (var us in usings)
             {
