@@ -6,7 +6,7 @@ using NFinal;
 namespace NFinalCorePlug.Views.Index
 {
     [View("/NFinalCorePlug/Views/Index/Default.cshtml")]
-    public class Default : NFinal.View.RazorView<NFinalCorePlug.Controllers.IndexController_Model.Default>
+    public class Default : NFinal.View.RazorView<NFinalCorePlug.Controllers.IndexController_Model.Default> 
     {
         public Default(NFinal.IO.Writer writer, NFinalCorePlug.Controllers.IndexController_Model.Default Model) : base(writer, Model)
         {

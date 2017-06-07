@@ -264,6 +264,9 @@
     <Compile Include="..\NFinal\exceptions\DuplicateViewUrlException.cs">
       <Link>Core\Exceptions\DuplicateViewUrlException.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Exceptions\HasNoControllerInProjectException.cs">
+      <Link>Core\Exceptions\HasNoControllerInProjectException.cs</Link>
+    </Compile>
     <Compile Include="..\NFinal\Exceptions\IConnectionNotImplementedException.cs">
       <Link>Core\Exceptions\IConnectionNotImplementedException.cs</Link>
     </Compile>

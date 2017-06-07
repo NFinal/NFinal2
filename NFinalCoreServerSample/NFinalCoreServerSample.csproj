@@ -4,10 +4,6 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="bin\Debug\netcoreapp1.1\nfinal.json" />
-    <None Include="bin\Debug\netcoreapp1.1\NFinalCoreServerSample.plug.json" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="1.1.1" />
@@ -28,6 +24,9 @@
     <Compile Update="BaseTableController.model.cs">
       <DependentUpon>BaseTableController.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
   <PropertyGroup>
     <RuntimeIdentifiers>win7-x64;win7-x86;win10-x64;win10-x86;centos.7-x64</RuntimeIdentifiers>

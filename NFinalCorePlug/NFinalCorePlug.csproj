@@ -3,6 +3,14 @@
     <TargetFramework>netstandard1.5</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="bin\Controllers\**" />
+    <EmbeddedResource Remove="bin\Controllers\**" />
+    <None Remove="bin\Controllers\**" />
+    <Compile Update="Controllers\UserController.model.cs">
+      <DependentUpon>UserController.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="bin\Debug\netstandard1.5\NFinalCorePlug.deps.json" />
     <Content Include="bin\Debug\netstandard1.5\NFinalCorePlug.plug.json" />
     <Content Include="bin\NFinal.xml" />
@@ -31,9 +39,6 @@
       <Generator>
       </Generator>
     </Compile>
-    <Compile Update="Controllers\UserController.model.cs">
-      <DependentUpon>UserController.cs</DependentUpon>
-    </Compile>
     <Compile Update="Views\Index\Default.template.cs">
       <DependentUpon>Default.cshtml</DependentUpon>
     </Compile>
@@ -57,7 +62,6 @@
   <ItemGroup>
     <None Include="bin\Microsoft.Web.Infrastructure.dll" />
     <None Include="bin\NFinal.dll" />
-    <None Include="bin\NFinalCorePlug.dll" />
     <None Include="bin\System.Runtime.dll" />
     <None Include="bin\System.Web.Helpers.dll" />
     <None Include="bin\System.Web.Mvc.dll" />

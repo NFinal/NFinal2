@@ -105,7 +105,10 @@ namespace NFinalCompiler
             base.Initialize();
         }
 
-
+        private static void OutPutString(string str)
+        {
+            _dte.ToolWindows.OutputWindow.ActivePane?.OutputString(str);
+        }
         private void BuildEvents_OnBuildProjConfigDone(string Project, string ProjectConfig, string Platform, string SolutionConfig, bool Success)
         {
             //得到当前编译项目的项目文件名
@@ -134,11 +137,27 @@ namespace NFinalCompiler
                     sr.Dispose();
                     System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex("<OutputPath>(\\S+)</OutputPath>");
                     string outPutPath= reg.Match(projectFileContent).Groups[1].Value;
+                    if (outPutPath == string.Empty)
+                    {
+                        outPutPath = "bin\\Debug\\";
+                    }
                     string FullOutPutPath = Path.Combine(Path.GetDirectoryName(projectName), outPutPath);
+                    System.Text.RegularExpressions.Regex regframework = new System.Text.RegularExpressions.Regex("<TargetFramework>(\\S+)</TargetFramework>");
+                    System.Text.RegularExpressions.Group groupframework= regframework.Match(projectFileContent).Groups[1];
+                    string repairFullOutPutPath = null;
+                    if (groupframework.Success)
+                    {
+                        repairFullOutPutPath = Path.Combine(FullOutPutPath, groupframework.Value);
+                        if (Directory.Exists(repairFullOutPutPath))
+                        {
+                            FullOutPutPath = repairFullOutPutPath;
+                        }
+                    }
                     string FullCopyPath=Path.Combine(Path.GetDirectoryName(projectName),"bin\\");
                     if (FullOutPutPath != FullCopyPath)
                     {
                         CopyDirectory(FullOutPutPath, FullCopyPath);
+                        OutPutString("从目录：\"" + FullOutPutPath + "\"复制到：\"" + FullCopyPath+"\"");
                     }
                 }
             }
@@ -151,7 +170,14 @@ namespace NFinalCompiler
                 Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
             //复制所有文件
             foreach (string newPath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories))
-                File.Copy(newPath, newPath.Replace(SourcePath, DestinationPath),true);
+                try
+                {
+                    File.Copy(newPath, newPath.Replace(SourcePath, DestinationPath), true);
+                }
+                catch
+                {
+                    continue;
+                }
         }
         private void _solutionEvents_ProjectRemoved(EnvDTE.Project Project)
         {
