@@ -348,7 +348,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="bin\Debug\nfinal.json" />
-    <None Include="bin\Debug\NFinalServer.plug.json" />
     <Content Include="bin\Debug\Plugs\NFinalPlug\plug.json" />
     <Content Include="bin\Debug\Plugs\Main\plug.json" />
     <None Include="bin\nfinal.json" />
