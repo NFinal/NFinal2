@@ -6,9 +6,14 @@
     <OutputPath>bin\Debug\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="bin\" />
+    <Content Include="bin\Debug\netcoreapp1.1\Plugs\CorePlug\plug.json" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Debug\NFinalCorePlug\Controllers\" />
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\netcoreapp1.1\nfinal.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />

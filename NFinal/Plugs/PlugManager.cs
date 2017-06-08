@@ -48,10 +48,10 @@ namespace NFinal.Plugs
                 NFinal.Plugs.PlugInfo plugInfo = null;
                 bool loadSuccess = false;
                 string assemblyFilePath = null;
-                foreach (var plug in NFinal.Config.Configration.globalConfig.plugs)
+                foreach (var plug in NFinal.Config.Configration.plugConfigDictionary)
                 {
                     loadSuccess = false;
-                    assemblyFilePath =NFinal.IO.Path.GetApplicationPath(plug.assemblyPath);
+                    assemblyFilePath =NFinal.IO.Path.GetApplicationPath(plug.Value.plug.assemblyPath);
                     if (File.Exists(assemblyFilePath))
                     {
                         try
@@ -79,13 +79,13 @@ namespace NFinal.Plugs
                         plugInfo.assembly = null;
                     }
                     plugInfo.loadSuccess = loadSuccess;
-                    plugInfo.config= NFinal.Config.Configration.plugConfigDictionary[plug.name];
-                    plugInfo.assemblyPath = plug.assemblyPath;
-                    plugInfo.configPath = plug.configPath;
-                    plugInfo.description = plug.description;
-                    plugInfo.enable = plug.enable;
-                    plugInfo.name = plug.name;
-                    plugInfo.urlPrefix = plug.urlPrefix;
+                    plugInfo.config= NFinal.Config.Configration.plugConfigDictionary[plug.Value.plug.name];
+                    plugInfo.assemblyFullPath = assemblyFilePath;
+                    //plugInfo.configPath = plug.configPath;
+                    plugInfo.description = plug.Value.plug.description;
+                    plugInfo.enable = plug.Value.plug.enable;
+                    plugInfo.name = plug.Value.plug.name;
+                    plugInfo.urlPrefix = plug.Value.plug.urlPrefix;
                     plugInfoList.Add(plugInfo);
                 }
             }

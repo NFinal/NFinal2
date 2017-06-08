@@ -10,10 +10,13 @@ function StringFormat() {
 }
 var Url={
 
-    "NFinalCoreServer_BaseController":{
+    "NFinalCorePlug_BaseController":{
     }
         ,
-    "NFinalCoreServer_Controllers_IndexController":{
+    "NFinalCorePlug_Controllers_UserController":{
+    }
+        ,
+    "NFinalCorePlug_Controllers_IndexController":{
             "Default":function()
             {
             return "/Index/Default.html";
@@ -23,8 +26,5 @@ var Url={
             {
             return "/Index/Ajax.html";
             }
-    }
-        ,
-    "NFinalCoreServer_Controllers_UserController":{
     }
 };

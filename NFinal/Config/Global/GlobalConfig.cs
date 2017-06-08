@@ -27,7 +27,8 @@ namespace NFinal.Config.Global
         /// <summary>
         /// 插件信息
         /// </summary>
-        public Plug[] plugs;
+        //[JsonIgnore]
+        //public NFinal.Config.Plug.Plug[] plugs;
         /// <summary>
         /// 调试信息
         /// </summary>

@@ -31,6 +31,10 @@ namespace NFinal.Config.Plug
         [JsonIgnore]
         public SimpleJSON.JSONObject JsonObject;
         /// <summary>
+        /// 插件信息
+        /// </summary>
+        public Plug plug;
+        /// <summary>
         /// 自定义配置项
         /// </summary>
         public Dictionary<string, string> appSettings;

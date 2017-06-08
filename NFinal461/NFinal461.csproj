@@ -202,9 +202,6 @@
     <Compile Include="..\nfinal\config\global\GlobalConfig.cs">
       <Link>Core\Config\Global\GlobalConfig.cs</Link>
     </Compile>
-    <Compile Include="..\nfinal\config\global\Plug.cs">
-      <Link>Core\Config\Global\Plug.cs</Link>
-    </Compile>
     <Compile Include="..\nfinal\config\global\ProjectType.cs">
       <Link>Core\Config\Global\ProjectType.cs</Link>
     </Compile>
@@ -219,6 +216,9 @@
     </Compile>
     <Compile Include="..\nfinal\config\plug\CustomErrors.cs">
       <Link>Core\Config\Plug\CustomErrors.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Config\Plug\Plug.cs">
+      <Link>Core\Config\Plug\Plug.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\config\plug\PlugConfig.cs">
       <Link>Core\Config\Plug\PlugConfig.cs</Link>

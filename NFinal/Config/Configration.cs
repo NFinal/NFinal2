@@ -68,31 +68,56 @@ namespace NFinal.Config
                     Configration.globalConfig = Newtonsoft.Json.JsonConvert.DeserializeObject<NFinal.Config.Global.GlobalConfig>(nfinalJsonText);
                     Configration.globalConfig.JsonObject = SimpleJSON.JSON.Parse(nfinalJsonText).AsObject;
                     NFinal.Config.Plug.PlugConfig plugConfig = null;
-                    for (int i = 0; i < Configration.globalConfig.plugs.Length; i++)
+                    string nfinalPlugFolder = NFinal.IO.Path.GetApplicationPath("/Plugs/");
+                    string[] plugJsonFileNameList = Directory.GetFiles(nfinalPlugFolder, "plug.json", SearchOption.AllDirectories);
+                    //Configration.globalConfig.plugs = new Plug.Plug[plugJsonFileNameList.Length];
+                    for (int i = 0; i < plugJsonFileNameList.Length; i++)
                     {
-                        if (globalConfig.plugs[i].enable)
+                        string plugJsonFileName = plugJsonFileNameList[i];
+                        if (File.Exists(plugJsonFileName))
                         {
-                            string plugConfigPath = NFinal.IO.Path.GetApplicationPath(globalConfig.plugs[i].configPath);
-                            if (File.Exists(plugConfigPath))
+                            using (StreamReader streamReader = System.IO.File.OpenText(plugJsonFileName))
                             {
-                                using (StreamReader streamReader = System.IO.File.OpenText(plugConfigPath))
-                                {
-                                    string plugJsonText = streamReader.ReadToEnd();
-                                    streamReader.Dispose();
-                                    plugJsonText = DeleteComment(plugJsonText);
-                                    plugConfig = Newtonsoft.Json.JsonConvert.DeserializeObject<NFinal.Config.Plug.PlugConfig>(plugJsonText);
-                                    plugConfig.JsonObject = SimpleJSON.JSON.Parse(nfinalJsonText).AsObject;
-                                    plugConfigDictionary.Add(globalConfig.plugs[i].name,plugConfig);
-                                }
-                            }
-                            else
-                            {
-                                throw new FileNotFoundException("找不到NFinal插件配置文件："
-                                    + plugConfigPath,
-                                    plugConfigPath);
+                                string plugJsonText = streamReader.ReadToEnd();
+                                streamReader.Dispose();
+                                plugJsonText = DeleteComment(plugJsonText);
+                                plugConfig = Newtonsoft.Json.JsonConvert.DeserializeObject<NFinal.Config.Plug.PlugConfig>(plugJsonText);
+                                plugConfig.JsonObject = SimpleJSON.JSON.Parse(nfinalJsonText).AsObject;
+                                plugConfigDictionary.Add(plugConfig.plug.name, plugConfig);
                             }
                         }
+                        else
+                        {
+                            throw new FileNotFoundException("找不到NFinal插件配置文件："
+                                + plugJsonFileName,
+                                plugJsonFileName);
+                        }
                     }
+                    //for (int i = 0; i < Configration.globalConfig.plugs.Length; i++)
+                    //{
+                    //    if (globalConfig.plugs[i].enable)
+                    //    {
+                    //        string plugConfigPath = NFinal.IO.Path.GetApplicationPath(globalConfig.plugs[i].configPath);
+                    //        if (File.Exists(plugConfigPath))
+                    //        {
+                    //            using (StreamReader streamReader = System.IO.File.OpenText(plugConfigPath))
+                    //            {
+                    //                string plugJsonText = streamReader.ReadToEnd();
+                    //                streamReader.Dispose();
+                    //                plugJsonText = DeleteComment(plugJsonText);
+                    //                plugConfig = Newtonsoft.Json.JsonConvert.DeserializeObject<NFinal.Config.Plug.PlugConfig>(plugJsonText);
+                    //                plugConfig.JsonObject = SimpleJSON.JSON.Parse(nfinalJsonText).AsObject;
+                    //                plugConfigDictionary.Add(globalConfig.plugs[i].name,plugConfig);
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            throw new FileNotFoundException("找不到NFinal插件配置文件："
+                    //                + plugConfigPath,
+                    //                plugConfigPath);
+                    //        }
+                    //    }
+                    //}
 
                 }
             }

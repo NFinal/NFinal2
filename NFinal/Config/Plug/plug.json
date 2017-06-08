@@ -1,4 +1,12 @@
 ﻿{
+  "plug": {
+    "enable": true,
+    "name": "web",
+    "urlPrefix": null,
+    "description": "网站",
+    "assemblyPath": "/Plugs/web.dll",
+    "contentPath": "/Plugs/Content/"
+  },
   //用户自定义设置
   "appSettings": {
     "key": "value"
@@ -14,7 +22,7 @@
       "providerName": "MySql.Data.MySqlClient"
     }
   },
-  "verbs":["GET","POST","HEAD","DEBUG"],
+  "verbs": [ "GET", "POST", "HEAD", "DEBUG" ],
   //Session设置
   "sessionState": {
     "cookieName": "session_id",

@@ -164,6 +164,10 @@ namespace NFinal.Action
                 //
                 /////////////////////////////////////////////////////////////////////
                 NFinal.Plugs.PlugInfo plugInfo = NFinal.Plugs.PlugManager.plugInfoList[i];
+                if (!plugInfo.loadSuccess)
+                {
+                    continue;
+                }
                 Assembly assembly = plugInfo.assembly;
                
                 modules = assembly.GetModules();

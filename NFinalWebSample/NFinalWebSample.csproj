@@ -127,6 +127,8 @@
     <Content Include="packages.config" />
     <Content Include="nfinal.json" />
     <Content Include="NFinalWebSample.plug.json" />
+    <Content Include="bin\Plugs\NFinalPlug\plug.json" />
+    <Content Include="bin\nfinal.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -143,9 +145,7 @@
       <Name>NFinal4</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

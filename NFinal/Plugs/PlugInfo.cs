@@ -52,7 +52,7 @@ namespace NFinal.Plugs
         /// <summary>
         /// 插件程序集路径
         /// </summary>
-        public string assemblyPath;
+        public string assemblyFullPath;
         /// <summary>
         /// 插件配置文件路径
         /// </summary>

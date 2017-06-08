@@ -75,6 +75,10 @@ namespace NFinal
             for (int i = 0; i < NFinal.Plugs.PlugManager.plugInfoList.Count; i++)
             {
                 plug = NFinal.Plugs.PlugManager.plugInfoList[i];
+                if (!plug.loadSuccess)
+                {
+                    continue;
+                }
                 assembly = plug.assembly;
                 modules = assembly.GetModules();
                 for (int j = 0; j < modules.Length; j++)

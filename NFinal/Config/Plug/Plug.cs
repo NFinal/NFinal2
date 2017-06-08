@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NFinal.Config.Global
+namespace NFinal.Config.Plug
 {
     /// <summary>
     /// 插件配置信息
@@ -33,7 +33,7 @@ namespace NFinal.Config.Global
         public string name;
         /// <summary>
         /// 插件Url前缀
-        /// </summary>
+        /// </summary>s
         public string urlPrefix;
         /// <summary>
         /// 插件描述
@@ -43,9 +43,13 @@ namespace NFinal.Config.Global
         /// 插件程序集所在路径
         /// </summary>
         public string assemblyPath;
+        ///// <summary>
+        ///// 插件配置信息路径
+        ///// </summary>
+        //public string configPath;
         /// <summary>
-        /// 插件配置信息路径
+        /// 静态文件路径
         /// </summary>
-        public string configPath;
+        public string contentPath;
     }
 }

@@ -10,10 +10,10 @@ function StringFormat() {
 }
 var Url={
 
-    "NFinalCorePlug_BaseController":{
+    "NFinalCorePlug_Controllers_UserController":{
     }
         ,
-    "NFinalCorePlug_Controllers_UserController":{
+    "NFinalCorePlug_BaseController":{
     }
         ,
     "NFinalCorePlug_Controllers_IndexController":{
