@@ -8,7 +8,6 @@
 !nfinal.json
 !*.plug.json
 !plug.json
-!Plugs/*
 # Build results
 
 [Dd]ebug/
@@ -153,3 +152,4 @@ $RECYCLE.BIN/
 /packages
 /.vs
 /NFinal/.vs
+!Plugs/
