@@ -8,7 +8,7 @@
 !nfinal.json
 !*.plug.json
 !plug.json
-!Plugs/
+!Plugs/*
 # Build results
 
 [Dd]ebug/
