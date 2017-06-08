@@ -40,7 +40,7 @@ namespace NFinal
             this.request = enviroment.GetRequest();
             this.parameters = request.parameters;
             this.Cookie = new Cookie(this.request.cookies);
-            this.Session = new NFinal.Http.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
+            this.Session = GetSession(Cookie.SessionId);
             this.outputStream = enviroment.GetResponseBody();
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace NFinal
             base.Initialization(enviroment, methodName, outputStream, request, compressMode);
             this.parameters = request.parameters;
             this.Cookie = new Cookie(this.request.cookies);
-            this.Session = new NFinal.Http.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
+            this.Session = GetSession(Cookie.SessionId);
             if (outputStream == null)
             {
                 this.outputStream = enviroment.GetResponseBody();

@@ -27,6 +27,12 @@ namespace NFinal.Action
     public interface IAction<TContext, TRequest> : IO.IWriter,IDisposable
     {
         /// <summary>
+        /// 获取Session对象
+        /// </summary>
+        /// <param name="sessionId"></param>
+        /// <returns></returns>
+        NFinal.Http.ISession GetSession(string sessionId);
+        /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="context">Http上下文</param>

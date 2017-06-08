@@ -31,6 +31,15 @@ namespace NFinal.Action
     public abstract class AbstractAction<TContext,TRequest,TUser> :NFinal.IO.Writer, IAction<TContext, TRequest>  where TUser: NFinal.User.AbstractUser
     {
         /// <summary>
+        /// 获取Session对象
+        /// </summary>
+        /// <param name="sessionId"></param>
+        /// <returns></returns>
+        public virtual NFinal.Http.ISession GetSession(string sessionId)
+        {
+            return new Session(sessionId, new NFinal.Cache.SimpleCache(30));
+        }
+        /// <summary>
         /// 配置数据
         /// </summary>
         public Config.Plug.PlugConfig config=null;

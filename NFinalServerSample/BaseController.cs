@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NFinal;
+using NFinal.Http;
 
 namespace NFinalServerSample
 {
@@ -30,6 +31,10 @@ namespace NFinalServerSample
                 systemConfigDictionary.Clear();
             }
             return true;
+        }
+        public override ISession GetSession(string sessionId)
+        {
+            return base.GetSession(sessionId);
         }
     }
 }

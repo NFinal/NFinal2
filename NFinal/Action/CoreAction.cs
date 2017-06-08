@@ -51,7 +51,7 @@ namespace NFinal
             }
 
             this.Cookie = new Cookie(requestCookie);
-            this.Session = new NFinal.Http.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
+            this.Session = GetSession(Cookie.SessionId);
             this.outputStream = context.Response.Body;
         }
         /// <summary>
@@ -83,7 +83,7 @@ namespace NFinal
             }
 
             this.Cookie = new Cookie(requestCookie);
-            this.Session = new NFinal.Http.Session(this.Cookie.SessionId, new Cache.SimpleCache(30));
+            this.Session = GetSession(Cookie.SessionId);
             if (outputStream == null)
             {
                 this.outputStream = context.Response.Body;
