@@ -1,15 +1,4 @@
 ﻿{
-  //插件设置
-  "plugs": [
-    {
-      "enable": true,
-      "name": "NFinalServerSample",
-      "urlPrefix": null,
-      "description": "NFinalServerSample测试网站",
-      "assemblyPath": "/NFinalServer.exe",
-      "configPath": "/NFinalServer.plug.json"
-    }
-  ],
   //调试设置
   "debug": {
     "enable": true,
