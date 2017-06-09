@@ -116,13 +116,17 @@ namespace NFinalCompiler
             {
                 if (vsBuildScope.vsBuildScopeProject == Scope)
                 {
-                    foreach (EnvDTE.Document doc in _dte.Documents)
+                    try
                     {
-                        if (doc?.FullName.LastIndexOf(".cshtml") > -1)
+                        foreach (EnvDTE.Document doc in _dte.Documents)
                         {
-                            doc?.Close(vsSaveChanges.vsSaveChangesYes);
+                            if (doc?.FullName.LastIndexOf(".cshtml") > -1)
+                            {
+                                doc?.Close(vsSaveChanges.vsSaveChangesYes);
+                            }
                         }
                     }
+                    catch { }
                 }
             }
         }
@@ -195,12 +199,12 @@ namespace NFinalCompiler
                         }
                     }
                     string FullCopyPath=Path.Combine(Path.GetDirectoryName(projectName),"bin\\");
+                    //复制文件添加Razor自动提示功能
+                    CopyRazorLibrary(projectName, projectFileContent);
                     if (FullOutPutPath != FullCopyPath)
                     {
                         CopyDirectory(FullOutPutPath, FullCopyPath);
                         OutPutString("从目录：\"" + FullOutPutPath + "\"复制到：\"" + FullCopyPath+"\"",true);
-                        //复制文件添加Razor自动提示功能
-                        CopyRazorLibrary(projectName, projectFileContent);
                     }
                 }
             }
