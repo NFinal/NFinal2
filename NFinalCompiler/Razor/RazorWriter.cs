@@ -92,7 +92,7 @@ namespace NFinalCompiler.Razor
                 sw.WriteLine("\t\t}");
             }
             sw.WriteLine("\t\t//如果此处报错，请添加NFinal引用");
-            sw.WriteLine("\t\t//PMC命令为：Install-Package NFinal");
+            sw.WriteLine("\t\t//PMC命令为：Install-Package NFinal2");
             sw.WriteLine("\t\tpublic override void Execute()");
             //sw.Write("NFinal.IO.Writer writer,");
             //if (modelType == "dynamic")

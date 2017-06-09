@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="NFinalCompiler.Microsoft.82c4ac20-259c-413f-b3e8-7d0c06489e46" Version="1.0" Language="en-US" Publisher="Microsoft" />
+    <Identity Id="NFinalCompiler.NFinal2.82c4ac20-259c-413f-b3e8-7d0c06489e46" Version="1.0" Language="en-US" Publisher="Lucas" />
     <DisplayName>NFinalCompiler</DisplayName>
     <Description xml:space="preserve">NFinalCompiler Visual Studio contains Controller Model Builder,Razor Render Method Buidler,Sql Entity Builder,Json Class Builder.
 It's Use for NFinal MVC framework.
