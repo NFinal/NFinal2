@@ -93,6 +93,7 @@ namespace NFinalCompiler
             Helper.Logger.Initialize(this, "NFinalCompiler");
             _documentEvents = events.DocumentEvents;
             _solutionEvents = events.SolutionEvents;
+            events.BuildEvents.OnBuildBegin += BuildEvents_OnBuildBegin;
             events.BuildEvents.OnBuildDone += BuildEvents_OnBuildDone;
             events.BuildEvents.OnBuildProjConfigDone += BuildEvents_OnBuildProjConfigDone;
             _documentEvents.DocumentSaved += DocumentEvents_DocumentSaved;
@@ -103,6 +104,27 @@ namespace NFinalCompiler
         (IComponentModel)Microsoft.VisualStudio.Shell.Package.GetGlobalService(typeof(SComponentModel));
             
             base.Initialize();
+        }
+        /// <summary>
+        /// 关闭所有的cshtml,防止visual studio报错。
+        /// </summary>
+        /// <param name="Scope"></param>
+        /// <param name="Action"></param>
+        private void BuildEvents_OnBuildBegin(vsBuildScope Scope, vsBuildAction Action)
+        {
+            if (vsBuildAction.vsBuildActionBuild == Action || vsBuildAction.vsBuildActionRebuildAll == Action)
+            {
+                if (vsBuildScope.vsBuildScopeProject == Scope)
+                {
+                    foreach (EnvDTE.Document doc in _dte.Documents)
+                    {
+                        if (doc?.FullName.LastIndexOf(".cshtml") > -1)
+                        {
+                            doc?.Close(vsSaveChanges.vsSaveChangesYes);
+                        }
+                    }
+                }
+            }
         }
 
         private static void OutPutString(string str,bool clear=false)
