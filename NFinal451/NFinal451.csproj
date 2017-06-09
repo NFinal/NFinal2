@@ -527,6 +527,9 @@
     <Compile Include="..\nfinal\view\RazorView.cs">
       <Link>Core\View\RazorView.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\View\ViewDelegate.cs">
+      <Link>Core\View\ViewDelegate.cs</Link>
+    </Compile>
     <Compile Include="..\nfinal\view\ViewHelper.cs">
       <Link>Core\View\ViewHelper.cs</Link>
     </Compile>

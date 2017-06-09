@@ -31,7 +31,7 @@ namespace NFinal.Middleware
         /// </summary>
         /// <param name="next"></param>
         public OwinMiddleware(InvokeDelegate<IDictionary<string, object>> next) : base(next)
-        {  
+        {
         }
         /// <summary>
         /// 获取默认控制器

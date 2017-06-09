@@ -663,14 +663,14 @@ namespace NFinal.Action
         {
             CloseConnection();
             NFinal.ViewDelegateData dele;
-            if (NFinal.ViewHelper.viewFastDic != null)
+            if (NFinal.ViewDelegate.viewFastDic != null)
             {
-                if (NFinal.ViewHelper.viewFastDic.TryGetValue(url, out dele))
+                if (NFinal.ViewDelegate.viewFastDic.TryGetValue(url, out dele))
                 {
                     if (dele.renderMethod == null)
                     {
-                        dele.renderMethod = NFinal.ViewHelper.GetRenderDelegate<T>(url,dele.viewType);
-                        NFinal.ViewHelper.viewFastDic[url] = dele;
+                        dele.renderMethod = NFinal.ViewDelegate.GetRenderDelegate<T>(url,dele.viewType);
+                        NFinal.ViewDelegate.viewFastDic[url] = dele;
                     }
                     var render = (NFinal.RenderMethod<T>)dele.renderMethod;
                     render(this, t);

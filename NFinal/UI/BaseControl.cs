@@ -52,14 +52,14 @@ namespace NFinal.UI
         private void Render<T>(string ViewPath, T ViewBag)
         {
             NFinal.ViewDelegateData dele;
-            if (NFinal.ViewHelper.viewFastDic != null)
+            if (NFinal.ViewDelegate.viewFastDic != null)
             {
-                if (NFinal.ViewHelper.viewFastDic.TryGetValue(ViewPath, out dele))
+                if (NFinal.ViewDelegate.viewFastDic.TryGetValue(ViewPath, out dele))
                 {
                     if (dele.renderMethod == null)
                     {
-                        dele.renderMethod = NFinal.ViewHelper.GetRenderDelegate<T>(ViewPath, dele.viewType);
-                        NFinal.ViewHelper.viewFastDic[ViewPath] = dele;
+                        dele.renderMethod = NFinal.ViewDelegate.GetRenderDelegate<T>(ViewPath, dele.viewType);
+                        NFinal.ViewDelegate.viewFastDic[ViewPath] = dele;
                     }
                     var render = (NFinal.RenderMethod<T>)dele.renderMethod;
                     render(writer, ViewBag);

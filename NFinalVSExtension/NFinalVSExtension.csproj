@@ -15,8 +15,11 @@
   <ItemGroup>
     <Compile Include="..\NFinal\Attribute\ViewAttribute.cs" Link="Attribute\ViewAttribute.cs" />
     <Compile Include="..\NFinal\Attribute\ViewBagMemberAttribute.cs" Link="Attribute\ViewBagMemberAttribute.cs" />
+    <Compile Include="..\NFinal\Collections\FastDictionary.cs" Link="Collections\FastDictionary.cs" />
     <Compile Include="..\NFinal\Config\Global\ProjectType.cs" Link="Config\Global\ProjectType.cs" />
     <Compile Include="..\NFinal\Constant.cs" Link="Constant.cs" />
+    <Compile Include="..\NFinal\Exceptions\ViewModelTypeUnMatched.cs" Link="Exceptions\ViewModelTypeUnMatched.cs" />
+    <Compile Include="..\NFinal\Exceptions\ViewNotFoundException.cs" Link="Exceptions\ViewNotFoundException.cs" />
     <Compile Include="..\NFinal\Extension\StringExtension.cs" Link="Extension\StringExtension.cs" />
     <Compile Include="..\NFinal\IO\FileWriter.cs" Link="FileWriter.cs" />
     <Compile Include="..\NFinal\IO\IWriter.cs" Link="IWriter.cs" />
@@ -26,6 +29,7 @@
     <Compile Include="..\NFinal\IO\Writer.cs" Link="Writer.cs" />
     <Compile Include="..\NFinal\System\StringContainer.cs" Link="StringContainer.cs" />
     <Compile Include="..\NFinal\View\RazorView.cs" Link="View\RazorView.cs" />
+    <Compile Include="..\NFinal\View\ViewDelegate.cs" Link="View\ViewDelegate.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +37,13 @@
     <Folder Include="Attribute\" />
     <Folder Include="View\" />
     <Folder Include="Extension\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Collections\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using NFinal;
+using NFinal.Http;
 
 namespace NFinalCorePlug
 {
@@ -15,7 +16,14 @@ namespace NFinalCorePlug
     {
         public override IDbConnection GetDbConnection()
         {
-            return null;
+            System.Data.IDbConnection con=new System.Data.SqlClient.SqlConnection(this.config.connectionStrings["Common"].connectionString);
+            return con;
+        }
+        public override ISession GetSession(string sessionId)
+        {
+            //return new Session(sessionId, new NFinal.Cache.SimpleCache(30));
+            return new Session(sessionId, new NFinal.Cache.RedisCache("localhost", 30));
+            return base.GetSession(sessionId);
         }
         /// <summary>
         /// 此字段加上ViewBagMember属性将会自动添加到ViewBag中。

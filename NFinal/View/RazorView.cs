@@ -15,9 +15,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace NFinal.View
 {
+
     /// <summary>
     /// 视图接口
     /// </summary>
@@ -26,7 +28,7 @@ namespace NFinal.View
         /// <summary>
         /// 输入对象
         /// </summary>
-        NFinal.IO.IWriter writer { get; set; }
+        NFinal.IO.Writer writer { get; set; }
         /// <summary>
         /// 输出模板
         /// </summary>
@@ -39,11 +41,45 @@ namespace NFinal.View
     public abstract class RazorView<T>:IView
     {
         /// <summary>
+        /// 模板渲染函数
+        /// </summary>
+        /// <typeparam name="TModel">视图数据类型</typeparam>
+        /// <param name="url">视图URL路径</param>
+        /// <param name="t">视图数据，即ViewBag</param>
+        public bool Render<TModel>(string url, TModel t)
+        {
+
+            NFinal.ViewDelegateData dele;
+            if (NFinal.ViewDelegate.viewFastDic != null)
+            {
+                if (NFinal.ViewDelegate.viewFastDic.TryGetValue(url, out dele))
+                {
+                    if (dele.renderMethod == null)
+                    {
+                        dele.renderMethod = NFinal.ViewDelegate.GetRenderDelegate<TModel>(url, dele.viewType);
+                        NFinal.ViewDelegate.viewFastDic[url] = dele;
+                    }
+                    var render = (NFinal.RenderMethod<TModel>)dele.renderMethod;
+                    render(this.writer, t);
+                    return true;
+                }
+                else
+                {
+                    //模板未找到异常
+                    throw new NFinal.Exceptions.ViewNotFoundException(url);
+                }
+            }
+            else
+            {
+                throw new NFinal.Exceptions.ViewNotFoundException(url);
+            }
+        }
+        /// <summary>
         /// 初始化函数
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="Model"></param>
-        public RazorView(NFinal.IO.IWriter writer,T Model)
+        public RazorView(NFinal.IO.Writer writer,T Model)
         {
             this.writer = writer;
             this.Model = Model;
@@ -51,7 +87,7 @@ namespace NFinal.View
         /// <summary>
         /// 输出对象
         /// </summary>
-        public NFinal.IO.IWriter writer { get; set; }
+        public NFinal.IO.Writer writer { get; set; }
         /// <summary>
         /// 模板实体类
         /// </summary>
