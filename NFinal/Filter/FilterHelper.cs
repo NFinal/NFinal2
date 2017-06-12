@@ -24,55 +24,60 @@ namespace NFinal.Filter
     /// </summary>
     public class FilterHelper
     {
-        /// <summary>
-        /// 基础Http上下文过滤器执行函数
-        /// </summary>
-        /// <typeparam name="TContext"></typeparam>
-        /// <param name="filters"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static bool BaseFilter<TContext>(IBaseFilter<TContext>[] filters,TContext context)
+        public static bool ParamaterFilter(IParameterFilter[] filters, NameValueCollection parameters)
         {
             if (filters != null)
             {
                 foreach (var filter in filters)
                 {
-                    if (!filter.BaseFilter(context))
+                    if (!filter.ParameterFilter(parameters))
                     {
                         return false;
                     }
                 }
-            }
-            else
-            {
-                return true;
             }
             return true;
         }
-        /// <summary>
-        /// Http请求过滤器执行函数
-        /// </summary>
-        /// <typeparam name="TContext"></typeparam>
-        /// <typeparam name="TRequest"></typeparam>
-        /// <param name="filters"></param>
-        /// <param name="context"></param>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        public static bool RequestFilter<TContext,TRequest>(IRequestFilter<TRequest>[] filters,TContext context,TRequest request)
+
+        public static bool AuthorizationFilter<TContext, TRequest>(IAuthorizationFilter[] filters, NFinal.Action.AbstractAction<TContext, TRequest> action)
         {
             if (filters != null)
             {
                 foreach (var filter in filters)
                 {
-                    if (!filter.RequestFilter(request))
+                    if (!filter.AuthorizationFilter(action))
                     {
                         return false;
                     }
                 }
             }
-            else
+            return true;
+        }
+        public static bool BeforeActionFilter<TContext, TRequest>(IBeforeActionFilter[] filters, NFinal.Action.AbstractAction<TContext, TRequest> action)
+        {
+            if (filters != null)
             {
-                return true;
+                foreach (var filter in filters)
+                {
+                    if (!filter.ActionFilter(action))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        public static bool AfterActionFilter<TContext, TRequest>(IAfterActionFilter[] filters, NFinal.Action.AbstractAction<TContext, TRequest> action)
+        {
+            if (filters != null)
+            {
+                foreach (var filter in filters)
+                {
+                    if (!filter.ActionFilter(action))
+                    {
+                        return false;
+                    }
+                }
             }
             return true;
         }
@@ -93,10 +98,6 @@ namespace NFinal.Filter
                         return false;
                     }
                 }
-            }
-            else
-            {
-                return true;
             }
             return true;
         }

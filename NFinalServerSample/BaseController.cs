@@ -11,7 +11,7 @@ namespace NFinalServerSample
     /// 控制器的父类必须是泛型
     /// </summary>
     /// <typeparam name="TMasterPage">母页模板数据</typeparam>
-    public class BaseController:NFinal.OwinAction<Code.User>
+    public class BaseController:NFinal.OwinAction
     {
         /// <summary>
         /// 此字段加上ViewBagMember属性将会自动添加到ViewBag中。

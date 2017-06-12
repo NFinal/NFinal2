@@ -299,26 +299,26 @@
     <Compile Include="..\nfinal\extension\UniqueKeyDictionayExtension.cs">
       <Link>Core\Extension\UniqueKeyDictionayExtension.cs</Link>
     </Compile>
-    <Compile Include="..\nfinal\filter\FilterEvent.cs">
-      <Link>Core\Filter\FilterEvent.cs</Link>
+    <Compile Include="..\NFinal\Filter\ActionFilter.cs">
+      <Link>Core\Filter\ActionFilter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinal\filter\FilterHelper.cs">
+    <Compile Include="..\NFinal\Filter\AuthorizationFilter.cs">
+      <Link>Core\Filter\AuthorizationFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\filter\FilterHelper.cs">
       <Link>Core\Filter\FilterHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinal\filter\IBaseFilter.cs">
-      <Link>Core\Filter\IBaseFilter.cs</Link>
+    <Compile Include="..\NFinal\Filter\IActionFilter.cs">
+      <Link>Core\Filter\IActionFilter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinal\filter\IContextFilter.cs">
-      <Link>Core\Filter\IContextFilter.cs</Link>
+    <Compile Include="..\NFinal\Filter\IAuthorizationFilter.cs">
+      <Link>Core\Filter\IAuthorizationFilter.cs</Link>
     </Compile>
-    <Compile Include="..\nfinal\filter\IEnvironmentFilter.cs">
-      <Link>Core\Filter\IEnvironmentFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinal\filter\IRequestFilter.cs">
-      <Link>Core\Filter\IRequestFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinal\filter\IResponseFilter.cs">
+    <Compile Include="..\NFinal\filter\IResponseFilter.cs">
       <Link>Core\Filter\IResponseFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Filter\ParameterFilter.cs">
+      <Link>Core\Filter\ParameterFilter.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\http\CompressMode.cs">
       <Link>Core\Http\CompressMode.cs</Link>

@@ -27,17 +27,18 @@ namespace NFinal.Action
     /// </summary>
     /// <typeparam name="TContext">上下文IOwinContext,Enviroment,Context</typeparam>
     /// <typeparam name="TRequest">请求信息</typeparam>
-    /// <typeparam name="TUser">用户相关数据类型</typeparam>
-    public abstract class AbstractAction<TContext,TRequest,TUser> :NFinal.IO.Writer, IAction<TContext, TRequest>  where TUser: NFinal.User.AbstractUser
+    //// <typeparam name="TUser">用户相关数据类型</typeparam>
+    public abstract class AbstractAction<TContext,TRequest/*,TUser*/> :NFinal.IO.Writer, IAction<TContext, TRequest> /* where TUser: NFinal.User.AbstractUser*/
     {
         /// <summary>
         /// 获取Session对象
         /// </summary>
-        /// <param name="sessionId"></param>
+        /// <param name="sessionId">存储在Cookie的SessionId的名称</param>
+        /// <param name="userKey">存储用户Session的Key</param>
         /// <returns></returns>
         public virtual NFinal.Http.ISession GetSession(string sessionId)
         {
-            return new Session(sessionId, new NFinal.Cache.SimpleCache(30));
+            return new Session(sessionId,"User", new NFinal.Cache.SimpleCache(30));
         }
         /// <summary>
         /// 配置数据
@@ -295,7 +296,7 @@ namespace NFinal.Action
         /// Session
         /// </summary>
         public ISession Session;
-        private TUser _user;
+        //private TUser _user;
         private string _methodName;
         /// <summary>
         /// 方法名，只读
@@ -304,19 +305,19 @@ namespace NFinal.Action
         /// <summary>
         /// 用户
         /// </summary>
-        public TUser user
-        {
-            get
-            {
-                return Session.Get<TUser>("user");
-            }
+        //public TUser user
+        //{
+        //    get
+        //    {
+        //        return Session.Get<TUser>("user");
+        //    }
 
-            set
-            {
-                _user = value;
-                Session.Set<TUser>("user",_user);
-            }
-        }
+        //    set
+        //    {
+        //        _user = value;
+        //        Session.Set<TUser>("user",_user);
+        //    }
+        //}
         /// <summary>
         /// 视图数据，通过ViewBag.字段名=值;可直接添加视图数据
         /// </summary>
@@ -697,7 +698,16 @@ namespace NFinal.Action
             string[] nameSpace= controllerType.Namespace.Split('.');
             using (StringWriter sw = new StringWriter())
             {
-                for (int i = 0; i < nameSpace.Length; i++)
+                sw.Write("/");
+                if (!string.IsNullOrEmpty(config.defaultSkin))
+                {
+                    sw.Write(config.defaultSkin);
+                }
+                else
+                {
+                    sw.Write(nameSpace[0]);
+                }
+                for (int i = 1; i < nameSpace.Length; i++)
                 {
                     sw.Write("/");
                     if (nameSpace[i] == "Controllers")

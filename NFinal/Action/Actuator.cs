@@ -30,26 +30,34 @@ namespace NFinal.Action
     /// </summary>
     public class Actuator
     {
+        ///// <summary>
+        ///// 用户权限限验证过滤器数组
+        ///// </summary>
+        //public static FieldInfo actionDataIAuthorizationActionFilters = typeof(NFinal.Action.ActionData<,>).GetField("IAuthorizationFilters");
         /// <summary>
-        /// 控制器行为过滤器数组
+        /// 用户权限过滤器执行函数的反射信息
         /// </summary>
-        public static FieldInfo actionDataEnvironmentFilters = typeof(NFinal.Action.ActionData<,>).GetField("IEnvironmentFilters");
+        public static MethodInfo AuthorizationFilterMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("AuthorizationFilter");//, new Type[] { typeof(NFinal.Filter.IEnvironmentFilter[]), typeof(IDictionary<string, object>) });
+        ///// <summary>
+        ///// 控制器行为执行之前过滤器数组
+        ///// </summary>
+        //public static FieldInfo actionDataIBeforeActionFilters = typeof(NFinal.Action.ActionData<,>).GetField("IBeforeActionFilters");
         /// <summary>
-        /// 控制器行为基础过滤器执行函数的反射信息
+        /// 控制器行为执行之前过滤器执行函数的反射信息
         /// </summary>
-        public static MethodInfo BaseFiltersMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("BaseFilter");//, new Type[] { typeof(NFinal.Filter.IEnvironmentFilter[]), typeof(IDictionary<string, object>) });
+        public static MethodInfo BeforeActionFilterMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("BeforeActionFilter");//, new Type[] { typeof(NFinal.Filter.IRequestFilter[]), typeof(IDictionary<string, object>), typeof(NFinal.Owin.Request) });
+        ///// <summary>
+        ///// 控制器行为执行之后过滤器数组
+        ///// </summary>
+        //public static FieldInfo actionDataIAfterActionFilters = typeof(NFinal.Action.ActionData<,>).GetField("IAfterActionFilters");
         /// <summary>
-        /// 控制器行为对应的请求过滤器数组
+        /// 控制器行为执行之后过滤器执行函数的反射信息
         /// </summary>
-        public static FieldInfo actionDataRequestFilters = typeof(NFinal.Action.ActionData<,>).GetField("IRequestFilters");
-        /// <summary>
-        /// 控制器行为请求过滤器执行函数的反射信息
-        /// </summary>
-        public static MethodInfo RequestFiltersMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("RequestFilter");//, new Type[] { typeof(NFinal.Filter.IRequestFilter[]), typeof(IDictionary<string, object>), typeof(NFinal.Owin.Request) });
-        /// <summary>
-        /// 控制器行为对应的响应过滤器数组
-        /// </summary>
-        public static FieldInfo actionDataResponseFilters = typeof(NFinal.Action.ActionData<,>).GetField("IResponseFilters");
+        public static MethodInfo AfterActionFilterMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("AfterActionFilter");
+        ///// <summary>
+        ///// 控制器行为对应的响应过滤器数组
+        ///// </summary>
+        //public static FieldInfo actionDataResponseFilters = typeof(NFinal.Action.ActionData<,>).GetField("IResponseFilters");
         /// <summary>
         /// 控制器行为响应过滤器执行函数的反射信息
         /// </summary>
@@ -162,17 +170,43 @@ namespace NFinal.Action
                         typeof(System.IO.Stream),
                         typeof(TRequest),
                         typeof(CompressMode) }));
-                
+                #region 执行用户权限过滤器
+                //actionData
+                methodIL.Emit(OpCodes.Ldarg_1);
+                //actionData.IAuthorizationFilters//泛型的类型必须固定
+                methodIL.Emit(OpCodes.Ldfld, typeof(NFinal.Action.ActionData<TContext,TRequest>).GetField("IAuthorizationFilters"));
+                //controller
+                methodIL.Emit(OpCodes.Ldloc, controller);//泛型的类型必须固定
+                methodIL.Emit(OpCodes.Call, AuthorizationFilterMethodInfo.MakeGenericMethod(new Type[] { typeof(TContext),typeof(TRequest)}));
+                var BeforeAuthorizationEnd = methodIL.DefineLabel();
+                methodIL.Emit(OpCodes.Brtrue_S, BeforeAuthorizationEnd);
+                methodIL.Emit(OpCodes.Leave, methodEnd);//离函数体较远，使用leave_s会报错。
+                methodIL.MarkLabel(BeforeAuthorizationEnd);
+                #endregion
+
+                #region 执行Action执行之前的过滤器
+                //actionData
+                methodIL.Emit(OpCodes.Ldarg_1);
+                //actionData.IBeforeActionFilters
+                methodIL.Emit(OpCodes.Ldfld, typeof(NFinal.Action.ActionData<TContext, TRequest>).GetField("IBeforeActionFilters"));
+                //controller
+                methodIL.Emit(OpCodes.Ldloc, controller);
+                //FilterHelper.BeforeActionFilter();
+                methodIL.Emit(OpCodes.Call, BeforeActionFilterMethodInfo.MakeGenericMethod(new Type[] { typeof(TContext), typeof(TRequest) }));
+                var BeforeActionEnd = methodIL.DefineLabel();
+                methodIL.Emit(OpCodes.Brtrue_S, BeforeActionEnd);
+                methodIL.Emit(OpCodes.Leave, methodEnd);
+                methodIL.MarkLabel(BeforeActionEnd);
+                #endregion
+
                 //controller
                 methodIL.Emit(OpCodes.Ldloc, controller);
                 //controller.Before();
                 methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("Before", Type.EmptyTypes));
                 //bool,0
-                methodIL.Emit(OpCodes.Ldc_I4_0);
-                methodIL.Emit(OpCodes.Ceq);
                 var BeforeEnd = methodIL.DefineLabel();
-                methodIL.Emit(OpCodes.Brfalse_S, BeforeEnd);
-                methodIL.Emit(OpCodes.Leave_S,methodEnd);
+                methodIL.Emit(OpCodes.Brtrue_S, BeforeEnd);
+                methodIL.Emit(OpCodes.Leave_S, methodEnd);
                 methodIL.MarkLabel(BeforeEnd);
 
                 //ViewBag初始化
@@ -330,6 +364,21 @@ namespace NFinal.Action
                 //controller.After();
                 methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("After", Type.EmptyTypes));
 
+                #region 执行Action执行之后的过滤器
+                //actionData
+                methodIL.Emit(OpCodes.Ldarg_1);
+                //actionData.IBeforeActionFilters
+                methodIL.Emit(OpCodes.Ldfld, typeof(NFinal.Action.ActionData<TContext, TRequest>).GetField("IAfterActionFilters"));
+                //controller
+                methodIL.Emit(OpCodes.Ldloc, controller);
+                //FilterHelper.BeforeActionFilter();
+                methodIL.Emit(OpCodes.Call, AfterActionFilterMethodInfo.MakeGenericMethod(new Type[] { typeof(TContext), typeof(TRequest) }));
+                var AfterActionEnd = methodIL.DefineLabel();
+                methodIL.Emit(OpCodes.Brtrue_S, AfterActionEnd);
+                methodIL.Emit(OpCodes.Leave, methodEnd);
+                methodIL.MarkLabel(AfterActionEnd);
+                #endregion
+
                 //actionData
                 methodIL.Emit(OpCodes.Ldarg_1);
                 //actionData.IResponseFilters
@@ -340,11 +389,9 @@ namespace NFinal.Action
                 methodIL.Emit(OpCodes.Callvirt, controllerType.GetProperty("response").GetGetMethod());
                 //FilterHelper.Filter(actionData.IResponseFilters,controller.response)
                 methodIL.Emit(OpCodes.Call, ResponseFiltersMethodInfo);
-                methodIL.Emit(OpCodes.Ldc_I4_0);
-                methodIL.Emit(OpCodes.Ceq);
                 var ifResponseFiltersEnd = methodIL.DefineLabel();
-                methodIL.Emit(OpCodes.Brfalse_S, ifResponseFiltersEnd);
-                methodIL.Emit(OpCodes.Leave_S, methodEnd);
+                methodIL.Emit(OpCodes.Brtrue_S, ifResponseFiltersEnd);
+                methodIL.Emit(OpCodes.Leave, methodEnd);
                 methodIL.MarkLabel(ifResponseFiltersEnd);
 
                 //controller
@@ -407,7 +454,7 @@ namespace NFinal.Action
     }
     public class RunAction:Index
     {
-        public static void Run1<TContext,TRequest>(TContext context, NFinal.Middleware.ActionData<TContext,TRequest> actionData,TRequest request,NameValueCollection parameters)
+        public static void Run1<TContext,TRequest>(TContext context, NFinal.Action.ActionData<TContext,TRequest> actionData,TRequest request,NameValueCollection parameters)
         {
             using (Index controller = new Index())
             {
@@ -427,16 +474,27 @@ namespace NFinal.Action
                 {
                     return;
                 }
+                if (!Filter.FilterHelper.AuthorizationFilter(actionData.IAuthorizationFilters, controller))
                 {
+                    return;
+                }
+                if (!Filter.FilterHelper.BeforeActionFilter(actionData.IBeforeActionFilters,controller))
+                {
+                    return;
+                }
                     //添参数问题。。。
                     //string a = request.parameters["a"];
                     //int b = request.parameters["b"];
                     //int? b1 = request.parameters["b1"];
                     //ParameterModel c = new ParameterModel();
                     //c = NFinal.Model.ModelHelper.GetModel(new ParameterModel(), request.parameters);
-                    controller.Index1(parameters["a"], parameters["b"], NFinal.Model.ModelHelper.GetModel<ParameterModel>(parameters));
-                }
+               controller.Index1(parameters["a"], parameters["b"], NFinal.Model.ModelHelper.GetModel<ParameterModel>(parameters));
                 controller.After();
+                if (!Filter.FilterHelper.AfterActionFilter(actionData.IAfterActionFilters, controller))
+                {
+                    return;
+                }
+                Filter.FilterHelper.AfterActionFilter(actionData.IAfterActionFilters, controller);
                 if (!NFinal.Filter.FilterHelper.ResponseFilter(actionData.IResponseFilters,controller.response))
                 {
                     return;
@@ -454,7 +512,7 @@ namespace NFinal.Action
         public int userId;
         public string userName;
     }
-    public class BaseController : OwinAction<EmptyMasterPageModel, User>
+    public class BaseController : OwinAction
     {
         [ViewBagMember]
         public string imageUrl;
@@ -467,8 +525,6 @@ namespace NFinal.Action
             base.After();
         }
     }
-    [EnvFilter]
-    [OwinReqFilter]
     [ResFilter]
     public class Index : BaseController
     {
@@ -509,20 +565,7 @@ namespace NFinal.Action
             this.ViewBag.a = 1;
         }
     }
-    public class EnvFilter : EnvironmentFilterAttribute
-    {
-        public override bool BaseFilter(IDictionary<string, object> environment)
-        {
-            return true;
-        }
-    }
-    public class OwinReqFilter : OwinRequestFilterAttribute
-    {
-        public override bool RequestFilter(Request request)
-        {
-            return true;
-        }
-    }
+    
     public class ResFilter : ResponseFilterAttribute
     {
         public override bool ResponseFilter(Response response)

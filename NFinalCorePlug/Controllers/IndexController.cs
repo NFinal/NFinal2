@@ -10,6 +10,8 @@ namespace NFinalCorePlug.Controllers
     public class IndexController:BaseController
     {
         [Code.UserCheck]
+        [Code.UserAuthroization]
+        [Code.AfterAction]
         public void Default(Code.User model)
         {
             this.ViewBag.Message = "Hello World!";

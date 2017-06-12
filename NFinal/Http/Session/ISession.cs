@@ -25,6 +25,18 @@ namespace NFinal.Http
     public interface ISession
     {
         /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <typeparam name="TUser"></typeparam>
+        /// <returns></returns>
+        TUser GetUser<TUser>() where TUser : class;
+        /// <summary>
+        /// 设置用户
+        /// </summary>
+        /// <typeparam name="TUser"></typeparam>
+        /// <param name="user"></param>
+        void SetUser<TUser>(TUser user) where TUser : class;
+        /// <summary>
         /// 获取Session
         /// </summary>
         /// <typeparam name="T"></typeparam>

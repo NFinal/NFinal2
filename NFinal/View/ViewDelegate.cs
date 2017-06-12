@@ -48,7 +48,27 @@ namespace NFinal
         /// <returns></returns>
         public static Delegate GetRenderDelegate<T>(string url, Type viewType)
         {
-
+            PropertyInfo modelProperty = viewType.GetProperty("Model");
+            Type modelType = modelProperty.PropertyType;
+            if (typeof(T) != modelType)
+            {
+                throw new Exceptions.ViewModelTypeUnMatchedException(url, typeof(T), modelType);
+            }
+            DynamicMethod method = new DynamicMethod("RenderX", typeof(void), new Type[] { typeof(NFinal.IO.Writer), modelType });
+            ILGenerator methodIL = method.GetILGenerator();
+            var model = methodIL.DeclareLocal(modelType);
+            methodIL.Emit(OpCodes.Nop);
+            //methodIL.Emit(OpCodes.Ldarg_1);
+            //methodIL.Emit(OpCodes.Castclass, modelType);
+            //methodIL.Emit(OpCodes.Stloc,model);
+            //methodIL.Emit(OpCodes.Ldarg_0);
+            //methodIL.Emit(OpCodes.Ldloc,model);
+            methodIL.Emit(OpCodes.Ldarg_0);
+            methodIL.Emit(OpCodes.Ldarg_1);
+            methodIL.Emit(OpCodes.Newobj, viewType.GetConstructor(new Type[] { typeof(NFinal.IO.Writer), modelType }));
+            methodIL.Emit(OpCodes.Callvirt, viewType.GetMethod("Execute", Type.EmptyTypes));
+            methodIL.Emit(OpCodes.Ret);
+            renderMethodDelegate = method.CreateDelegate(typeof(NFinal.RenderMethod<>).MakeGenericType(modelType));
             return renderMethodDelegate;
         }
     }

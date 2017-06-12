@@ -8,7 +8,7 @@ namespace NFinal.Plugs.Base
     /// <summary>
     /// 输出图标
     /// </summary>
-    public class FaviconController:NFinal.OwinAction<NFinal.User.User>
+    public class FaviconController:NFinal.OwinAction
     {
         /// <summary>
         /// 网站图标的Stream流

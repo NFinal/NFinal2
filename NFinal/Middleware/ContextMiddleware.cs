@@ -45,7 +45,7 @@ namespace NFinal.Middleware
         /// <returns></returns>
         public override IAction<IOwinContext,IOwinRequest> GetAction(IOwinContext context)
         {
-            ContextAction<NFinal.User.User> controller= new ContextAction<NFinal.User.User>();
+            ContextAction controller= new ContextAction();
             controller.BaseInitialization(context,null);
             return controller;
         }

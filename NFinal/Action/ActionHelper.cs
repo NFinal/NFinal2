@@ -69,13 +69,21 @@ namespace NFinal.Action
         /// </summary>
         public System.Reflection.ICustomAttributeProvider methodProvider;
         /// <summary>
-        /// 控制器行为基本过滤器对象数组
+        /// 用户权限验证接口数组
         /// </summary>
-        public NFinal.Filter.IBaseFilter<TContext>[] IBaseFilters;
+        public NFinal.Filter.IAuthorizationFilter[] IAuthorizationFilters;
         /// <summary>
-        /// 控制器行为请求信息过滤器对象数组
+        /// 参数验证接口数组
         /// </summary>
-        public NFinal.Filter.IRequestFilter<TRequest>[] IRequestFilters;
+        public NFinal.Filter.IParameterFilter[] IParametersFilters;
+        /// <summary>
+        /// 在控制器行为之前过滤接口数组
+        /// </summary>
+        public NFinal.Filter.IBeforeActionFilter[] IBeforeActionFilters;
+        /// <summary>
+        /// 在控制器行为之后过滤接口数组
+        /// </summary>
+        public NFinal.Filter.IAfterActionFilter[] IAfterActionFilters;
         /// <summary>
         /// 控制器行为响 应信息过滤器对象数组
         /// </summary>
@@ -298,10 +306,16 @@ namespace NFinal.Action
                         formatMethodDictionary.Add(actions[m].Name, new NFinal.Url.FormatData(actionData.actionUrl,null));
                     }
                     methodInfo = actions[m];
-                    actionData.IBaseFilters = GetFilters<NFinal.Filter.IBaseFilter<TContext>>(
-                        typeof(NFinal.Filter.IBaseFilter<TContext>), controller, actions[m]);
-                    actionData.IRequestFilters = GetFilters<NFinal.Filter.IRequestFilter<TRequest>>(
-                        typeof(NFinal.Filter.IRequestFilter<TRequest>), controller, actions[m]);
+                    actionData.IAuthorizationFilters = GetFilters<NFinal.Filter.IAuthorizationFilter>(
+                        typeof(NFinal.Filter.IAuthorizationFilter), controller, actions[m]);
+                    actionData.IParametersFilters = GetFilters<NFinal.Filter.IParameterFilter>(
+                        typeof(NFinal.Filter.IParameterFilter),controller,actions[m]);
+                    actionData.IBeforeActionFilters = GetFilters<NFinal.Filter.IBeforeActionFilter>(
+                        typeof(NFinal.Filter.IBeforeActionFilter),controller,actions[m]
+                        );
+                    actionData.IAfterActionFilters = GetFilters<NFinal.Filter.IAfterActionFilter>(
+                        typeof(NFinal.Filter.IAfterActionFilter), controller, actions[m]
+                        );
                     actionData.IResponseFilters = GetFilters<NFinal.Filter.IResponseFilter>(
                         typeof(NFinal.Filter.IResponseFilter), controller, actions[m]);
                     actionData.actionExecute = NFinal.Action.Actuator.GetRunActionDelegate<TContext, TRequest>(assembly,controller, methodInfo);

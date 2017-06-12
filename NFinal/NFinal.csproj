@@ -12,7 +12,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>DEBUG;NETCORE;CORE;COREFX;ASYNC;FILESYSTEM;NETCOREAPP1_1</DefineConstants>
+    <DefineConstants>DEBUG;NETCORE;CORE;COREFX;ASYNC;FILESYSTEM;NETCOREAPP1_1;NETSTANDARD1_5;EMITDEBUG</DefineConstants>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <DocumentationFile>bin\Debug\netstandard1.5\NFinal.xml</DocumentationFile>
   </PropertyGroup>
@@ -53,6 +53,11 @@
     <Compile Remove="Cache\MemoryCache.cs" />
     <Compile Remove="Collections\NameValueDynamicCollection.cs" />
     <Compile Remove="Emit\FastReflection.cs" />
+    <Compile Remove="Filter\FilterEvent.cs" />
+    <Compile Remove="Filter\IBaseFilter.cs" />
+    <Compile Remove="Filter\IContextFilter.cs" />
+    <Compile Remove="Filter\IEnvironmentFilter.cs" />
+    <Compile Remove="Filter\IRequestFilter.cs" />
     <Compile Remove="Json\JSONParser.cs" />
     <Compile Remove="Json\JSONWriter.cs" />
     <Compile Remove="Middleware\Builder\Completed.cs" />
@@ -115,6 +120,7 @@
     <Folder Include="Middleware\Builder\" />
     <Folder Include="Properties\" />
     <Folder Include="Build\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>

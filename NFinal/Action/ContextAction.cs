@@ -26,7 +26,7 @@ using System.Data;
 namespace NFinal
 {
     
-    public class ContextAction<TUser> : NFinal.Action.AbstractAction<IOwinContext, IOwinRequest, TUser> where TUser : NFinal.User.AbstractUser
+    public class ContextAction : NFinal.Action.AbstractAction<IOwinContext, IOwinRequest>
     {
         public override void After()
         {

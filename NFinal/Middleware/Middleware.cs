@@ -160,23 +160,6 @@ namespace NFinal.Middleware
             NFinal.Action.ActionData<TContext,TRequest> actionData;
             if (actionFastDic.TryGetValue(actionKey,actionKey.Length, out actionData))
             {
-                //if (actionData.method != null)
-                //{
-                //    if (actionData.method != GetRequestMethod(context))
-                //    {
-                //        return this._next(context);
-                //    }
-                //}
-                if (actionData.IBaseFilters != null)
-                {
-                    foreach (var iBaseFilter in actionData.IBaseFilters)
-                    {
-                        if (!iBaseFilter.BaseFilter(context))
-                        {
-                            return FinishedTask;
-                        }
-                    }
-                }
 
                 TRequest request = default(TRequest);
                 try
@@ -198,16 +181,6 @@ namespace NFinal.Middleware
                         }
                     }
                 }
-                if (actionData.IRequestFilters != null)
-                {
-                    foreach (var iRequestFilter in actionData.IRequestFilters)
-                    {
-                        if (!iRequestFilter.RequestFilter(request))
-                        {
-                            return FinishedTask;
-                        }
-                    }
-                }
                 NameValueCollection parameters = GetParameters(request);
                 //获取Url中的参数
                 if (actionData.actionUrlData != null && !actionData.actionUrlData.hasNoParamsInUrl)
@@ -224,6 +197,10 @@ namespace NFinal.Middleware
                 //生产环境下
                 if (!debug)
                 {
+                    if (!NFinal.Filter.FilterHelper.ParamaterFilter(actionData.IParametersFilters, parameters))
+                    {
+                        return FinishedTask;
+                    }
                     try
                     {
                         actionData.actionExecute(context, actionData, request, parameters);

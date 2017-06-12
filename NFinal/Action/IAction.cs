@@ -29,7 +29,8 @@ namespace NFinal.Action
         /// <summary>
         /// 获取Session对象
         /// </summary>
-        /// <param name="sessionId"></param>
+        /// <param name="sessionId">存储在sessionId</param>
+        /// <param name="userKey">用户key</param>
         /// <returns></returns>
         NFinal.Http.ISession GetSession(string sessionId);
         /// <summary>

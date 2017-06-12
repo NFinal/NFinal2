@@ -24,7 +24,7 @@ using System.Data;
 
 namespace NFinal
 {
-    public class CoreAction<TUser> : NFinal.Action.AbstractAction<HttpContext, HttpRequest, TUser> where TUser: NFinal.User.AbstractUser
+    public class CoreAction : NFinal.Action.AbstractAction<HttpContext, HttpRequest>
     {
 #region 初始化函数
         public CoreAction() { }

@@ -15,9 +15,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NET40</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NET40;EMITDEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -309,26 +309,26 @@
     <Compile Include="..\NFinal\extension\UniqueKeyDictionayExtension.cs">
       <Link>Core\Extension\UniqueKeyDictionayExtension.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\filter\FilterEvent.cs">
-      <Link>Core\Filter\FilterEvent.cs</Link>
+    <Compile Include="..\NFinal\Filter\ActionFilter.cs">
+      <Link>Core\Filter\ActionFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Filter\AuthorizationFilter.cs">
+      <Link>Core\Filter\AuthorizationFilter.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\filter\FilterHelper.cs">
       <Link>Core\Filter\FilterHelper.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\filter\IBaseFilter.cs">
-      <Link>Core\Filter\IBaseFilter.cs</Link>
+    <Compile Include="..\NFinal\Filter\IActionFilter.cs">
+      <Link>Core\Filter\IActionFilter.cs</Link>
     </Compile>
-    <Compile Include="..\NFinal\filter\IContextFilter.cs">
-      <Link>Core\Filter\IContextFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\filter\IEnvironmentFilter.cs">
-      <Link>Core\Filter\IEnvironmentFilter.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\filter\IRequestFilter.cs">
-      <Link>Core\Filter\IRequestFilter.cs</Link>
+    <Compile Include="..\NFinal\Filter\IAuthorizationFilter.cs">
+      <Link>Core\Filter\IAuthorizationFilter.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\filter\IResponseFilter.cs">
       <Link>Core\Filter\IResponseFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Filter\ParameterFilter.cs">
+      <Link>Core\Filter\ParameterFilter.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Http\CompressMode.cs">
       <Link>Core\Http\CompressMode.cs</Link>

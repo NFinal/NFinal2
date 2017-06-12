@@ -7,7 +7,7 @@ using NFinal;
 namespace NFinalPlug.Controllers
 {
     
-    public class IndexController : NFinal.OwinAction<NFinal.User.User>
+    public class IndexController : NFinal.OwinAction
     {
         [GetHtml("/Index-{a}.html")]
         public void INN(int ac)

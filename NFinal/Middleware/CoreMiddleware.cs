@@ -41,7 +41,7 @@ namespace NFinal.Middleware
         /// <returns></returns>
         public override IAction<HttpContext, HttpRequest> GetAction(HttpContext context)
         {
-            return new NFinal.CoreAction<NFinal.User.User>();
+            return new NFinal.CoreAction();
         }
         /// <summary>
         /// 获取参数

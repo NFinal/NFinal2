@@ -23,7 +23,7 @@ namespace NFinal
     /// <summary>
     /// NFinal的控制器基类，MasterPage为母模板，ViewBag为视图数据,User为用户数据
     /// </summary>
-    public class OwinAction<TUser> : NFinal.Action.AbstractAction<IDictionary<string,object>,Owin.Request,TUser> where TUser : NFinal.User.AbstractUser
+    public class OwinAction : NFinal.Action.AbstractAction<IDictionary<string,object>,Owin.Request>
     {
         #region 初始化函数
         /// <summary>

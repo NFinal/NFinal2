@@ -12,7 +12,7 @@ namespace NFinalCorePlug
     /// 控制器的父类必须是泛型
     /// </summary>
     /// <typeparam name="TMasterPage">母页模板数据</typeparam>
-    public class BaseController:NFinal.CoreAction<Code.User>
+    public class BaseController:NFinal.CoreAction
     {
         public override IDbConnection GetDbConnection()
         {
@@ -22,7 +22,7 @@ namespace NFinalCorePlug
         public override ISession GetSession(string sessionId)
         {
             //return new Session(sessionId, new NFinal.Cache.SimpleCache(30));
-            return new Session(sessionId, new NFinal.Cache.RedisCache("localhost", 30));
+            //return new Session(sessionId, new NFinal.Cache.RedisCache("localhost", 30));
             return base.GetSession(sessionId);
         }
         /// <summary>

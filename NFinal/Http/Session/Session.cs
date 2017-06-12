@@ -22,7 +22,8 @@ namespace NFinal.Http
         /// <summary>
         /// Session ID
         /// </summary>
-        protected string sessionId = null;
+        private static string sessionId = null;
+        private static string userKey;
         /// <summary>
         /// 缓存类
         /// </summary>
@@ -31,11 +32,31 @@ namespace NFinal.Http
         /// 初始化
         /// </summary>
         /// <param name="sessionId"></param>
+        /// <param name="userKey">存储用户的key</param>
         /// <param name="cache"></param>
-        public Session(string sessionId, Cache.ICache<string> cache)
+        public Session(string sessionId,string userKey, Cache.ICache<string> cache)
         {
-            this.sessionId = sessionId;
+            Session.sessionId = sessionId;
+            Session.userKey = userKey;
             this.cache = cache;
+        }
+        /// <summary>
+        /// 获取用户
+        /// </summary>
+        /// <typeparam name="TUser"></typeparam>
+        /// <returns></returns>
+        public TUser GetUser<TUser>() where TUser : class
+        {
+            return Get<TUser>(userKey);
+        }
+        /// <summary>
+        /// 设置用户
+        /// </summary>
+        /// <typeparam name="TUser"></typeparam>
+        /// <param name="user"></param>
+        public void SetUser<TUser>(TUser user) where TUser : class
+        {
+            Set<TUser>(userKey, user);
         }
         /// <summary>
         /// 判断Session是否存在
