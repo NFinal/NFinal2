@@ -24,6 +24,12 @@ namespace NFinal.Filter
     /// </summary>
     public class FilterHelper
     {
+        /// <summary>
+        /// 参数过滤器
+        /// </summary>
+        /// <param name="filters"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public static bool ParamaterFilter(IParameterFilter[] filters, NameValueCollection parameters)
         {
             if (filters != null)
@@ -38,7 +44,14 @@ namespace NFinal.Filter
             }
             return true;
         }
-
+        /// <summary>
+        /// 验证过滤器
+        /// </summary>
+        /// <typeparam name="TContext"></typeparam>
+        /// <typeparam name="TRequest"></typeparam>
+        /// <param name="filters"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public static bool AuthorizationFilter<TContext, TRequest>(IAuthorizationFilter[] filters, NFinal.Action.AbstractAction<TContext, TRequest> action)
         {
             if (filters != null)
@@ -53,6 +66,14 @@ namespace NFinal.Filter
             }
             return true;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TContext"></typeparam>
+        /// <typeparam name="TRequest"></typeparam>
+        /// <param name="filters"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public static bool BeforeActionFilter<TContext, TRequest>(IBeforeActionFilter[] filters, NFinal.Action.AbstractAction<TContext, TRequest> action)
         {
             if (filters != null)

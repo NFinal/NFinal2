@@ -33,7 +33,7 @@ namespace NFinal
             throw new NotImplementedException();
         }
 
-        public override void BaseInitialization(IOwinContext context,string methodName)
+        public override void BaseInitialization(IOwinContext context,string methodName, NFinal.Config.Plug.PlugConfig plugConfig)
         {
             throw new NotImplementedException();
         }
@@ -78,7 +78,7 @@ namespace NFinal
             throw new NotImplementedException();
         }
 
-        public override void Initialization(IOwinContext context,string methodName, Stream outputStream, IOwinRequest request, CompressMode compressMode)
+        public override void Initialization(IOwinContext context,string methodName, Stream outputStream, IOwinRequest request, CompressMode compressMode, NFinal.Config.Plug.PlugConfig plugConfig)
         {
             throw new NotImplementedException();
         }

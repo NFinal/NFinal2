@@ -28,9 +28,9 @@ namespace NFinal
     {
 #region 初始化函数
         public CoreAction() { }
-        public override void BaseInitialization(HttpContext context, string methodName)
+        public override void BaseInitialization(HttpContext context, string methodName, NFinal.Config.Plug.PlugConfig plugConfig)
         {
-            base.BaseInitialization(context, methodName);
+            base.BaseInitialization(context, methodName, plugConfig);
             this.request = context.Request;
             this.parameters = new NFinal.NameValueCollection();
             foreach (var query in request.Query)
@@ -57,13 +57,15 @@ namespace NFinal
         /// <summary>
         /// 流输出初始化函数
         /// </summary>
-        /// <param name="enviroment">Owin中间件</param>
+        /// <param param name="plugConfig">插件配置</param>
+        /// <param name="methodName">行为名称</param>
+        /// <param name="context">Http上下文</param>
         /// <param name="outputStream">输出流</param>
         /// <param name="request"></param>
         /// <param name="compressMode"></param>
-        public override void Initialization(HttpContext context, string methodName, Stream outputStream, HttpRequest request, CompressMode compressMode)
+        public override void Initialization(HttpContext context, string methodName, Stream outputStream, HttpRequest request, CompressMode compressMode, NFinal.Config.Plug.PlugConfig plugConfig)
         {
-            base.Initialization(context, methodName, outputStream, request, compressMode);
+            base.Initialization(context, methodName, outputStream, request, compressMode, plugConfig);
             this.parameters = new NFinal.NameValueCollection();
             foreach (var query in request.Query)
             {

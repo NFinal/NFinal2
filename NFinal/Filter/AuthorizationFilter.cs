@@ -4,9 +4,19 @@ using System.Text;
 
 namespace NFinal.Filter
 { 
+    /// <summary>
+    /// 用户验证过滤器
+    /// </summary>
     [AttributeUsage(AttributeTargets.Method|AttributeTargets.Class)]
     public class AuthorizationFilterAttribute:System.Attribute,NFinal.Filter.IAuthorizationFilter
     {
+        /// <summary>
+        /// 用户验证
+        /// </summary>
+        /// <typeparam name="TContext"></typeparam>
+        /// <typeparam name="TRequest"></typeparam>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public bool AuthorizationFilter<TContext, TRequest>(NFinal.Action.AbstractAction<TContext, TRequest> action)
         {
             return true;

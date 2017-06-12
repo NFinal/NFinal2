@@ -173,7 +173,7 @@ namespace NFinal.Middleware
                     {
                         using (IAction<TContext, TRequest> controller = GetAction(context))
                         {
-                            controller.Initialization(context,actionData.methodName, null, request, CompressMode.GZip);
+                            controller.Initialization(context,actionData.methodName, null, request, CompressMode.GZip, actionData.plugConfig);
                             controller.SetResponseHeader("Content-Type", "text/html; charset=utf-8");
                             //解析出错
                             controller.SetResponseStatusCode(200);
@@ -212,7 +212,7 @@ namespace NFinal.Middleware
                         {
                             using (IAction<TContext, TRequest> controller = GetAction(context))
                             {
-                                controller.Initialization(context,null, null, request, CompressMode.GZip);
+                                controller.Initialization(context,null, null, request, CompressMode.GZip, actionData.plugConfig);
                                 controller.SetResponseHeader("Content-Type", "text/html; charset=utf-8");
                                 //服务器错误
                                 controller.SetResponseStatusCode(500);
@@ -224,7 +224,7 @@ namespace NFinal.Middleware
                     {
                         using (IAction<TContext, TRequest> controller = GetAction(context))
                         {
-                            controller.Initialization(context,null, null, request, CompressMode.GZip);
+                            controller.Initialization(context,null, null, request, CompressMode.GZip,actionData.plugConfig);
                             controller.Redirect(actionData.plugConfig.customErrors.defaultRedirect);
                         }
                     }

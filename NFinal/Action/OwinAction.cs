@@ -33,10 +33,11 @@ namespace NFinal
         /// <summary>
         /// 基础初始化函数
         /// </summary>
+        /// <param name="plugConfig">插件配置</param>
         /// <param name="enviroment">Owin中间件</param>
         /// <param name="methodName">Http请求方法</param>
-        public override void BaseInitialization(IDictionary<string, object> enviroment,string methodName) {
-            base.BaseInitialization(enviroment, methodName);
+        public override void BaseInitialization(IDictionary<string, object> enviroment,string methodName, NFinal.Config.Plug.PlugConfig plugConfig) {
+            base.BaseInitialization(enviroment, methodName, plugConfig);
             this.request = enviroment.GetRequest();
             this.parameters = request.parameters;
             this.Cookie = new Cookie(this.request.cookies);
@@ -51,9 +52,9 @@ namespace NFinal
         /// <param name="outputStream">Http输出流</param>
         /// <param name="request">Http请求信息</param>
         /// <param name="compressMode">压缩模式</param>
-        public override void Initialization(IDictionary<string, object> enviroment,string methodName, Stream outputStream, Owin.Request request, CompressMode compressMode)
+        public override void Initialization(IDictionary<string, object> enviroment,string methodName, Stream outputStream, Owin.Request request, CompressMode compressMode, NFinal.Config.Plug.PlugConfig plugConfig)
         {
-            base.Initialization(enviroment, methodName, outputStream, request, compressMode);
+            base.Initialization(enviroment, methodName, outputStream, request, compressMode, plugConfig);
             this.parameters = request.parameters;
             this.Cookie = new Cookie(this.request.cookies);
             this.Session = GetSession(Cookie.SessionId);

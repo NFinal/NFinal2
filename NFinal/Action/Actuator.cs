@@ -30,34 +30,18 @@ namespace NFinal.Action
     /// </summary>
     public class Actuator
     {
-        ///// <summary>
-        ///// 用户权限限验证过滤器数组
-        ///// </summary>
-        //public static FieldInfo actionDataIAuthorizationActionFilters = typeof(NFinal.Action.ActionData<,>).GetField("IAuthorizationFilters");
         /// <summary>
         /// 用户权限过滤器执行函数的反射信息
         /// </summary>
         public static MethodInfo AuthorizationFilterMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("AuthorizationFilter");//, new Type[] { typeof(NFinal.Filter.IEnvironmentFilter[]), typeof(IDictionary<string, object>) });
-        ///// <summary>
-        ///// 控制器行为执行之前过滤器数组
-        ///// </summary>
-        //public static FieldInfo actionDataIBeforeActionFilters = typeof(NFinal.Action.ActionData<,>).GetField("IBeforeActionFilters");
         /// <summary>
         /// 控制器行为执行之前过滤器执行函数的反射信息
         /// </summary>
         public static MethodInfo BeforeActionFilterMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("BeforeActionFilter");//, new Type[] { typeof(NFinal.Filter.IRequestFilter[]), typeof(IDictionary<string, object>), typeof(NFinal.Owin.Request) });
-        ///// <summary>
-        ///// 控制器行为执行之后过滤器数组
-        ///// </summary>
-        //public static FieldInfo actionDataIAfterActionFilters = typeof(NFinal.Action.ActionData<,>).GetField("IAfterActionFilters");
         /// <summary>
         /// 控制器行为执行之后过滤器执行函数的反射信息
         /// </summary>
         public static MethodInfo AfterActionFilterMethodInfo = typeof(NFinal.Filter.FilterHelper).GetMethod("AfterActionFilter");
-        ///// <summary>
-        ///// 控制器行为对应的响应过滤器数组
-        ///// </summary>
-        //public static FieldInfo actionDataResponseFilters = typeof(NFinal.Action.ActionData<,>).GetField("IResponseFilters");
         /// <summary>
         /// 控制器行为响应过滤器执行函数的反射信息
         /// </summary>
@@ -66,8 +50,6 @@ namespace NFinal.Action
         /// 内存流初始化函数的反射信息
         /// </summary>
         public static ConstructorInfo MemoryStreamConstructorInfo = typeof(System.IO.MemoryStream).GetConstructor(Type.EmptyTypes);
-        //public static MethodInfo OwinActionInitializationMethodInfo = typeof(NFinal.OwinAction<,>).GetMethod("Initialization");//, new Type[] { typeof(IDictionary<string, object>), typeof(System.IO.Stream), typeof(NFinal.Owin.Request), typeof(NFinal.CompressMode) });
-        //public static FieldInfo requestParametersFieldInfo = typeof(NFinal.Owin.Request).GetField("parameters");
         /// <summary>
         /// NameValueCollection获取Value值的函数的反射信息
         /// </summary>
@@ -76,9 +58,6 @@ namespace NFinal.Action
         /// 获取ModelHelper中GetModel的方法的反射信息
         /// </summary>
         public static MethodInfo modelHelperGetModelMethodInfo = typeof(NFinal.Model.ModelHelper).GetMethod("GetModel");
-        //public static MethodInfo getRequestMethodInfo = typeof(System.EnvironmentExtension).GetMethod("GetRequest", new Type[] { typeof(IDictionary<string,object>)});
-        //public static MethodInfo getResponseBodyMethodInfo = typeof(System.EnvironmentExtension).GetMethod("GetResponseBody", new Type[] { typeof(IDictionary<string, object>) });
-        //public static MethodInfo disposeMethodInfo = typeof(System.IDisposable).GetMethod("Dispose",Type.EmptyTypes);
         /// <summary>
         /// 根据类型查找自动转换成该类型的函数的字典缓存对象
         /// </summary>
@@ -112,37 +91,6 @@ namespace NFinal.Action
             var methodEnd = methodIL.DefineLabel();
             var request= methodIL.DeclareLocal(typeof(TRequest));
             var controller = methodIL.DeclareLocal(controllerType);
-            ////null
-            //methodIL.Emit(OpCodes.Ldnull);
-            ////request=null;
-            //methodIL.Emit(OpCodes.Stloc,request);
-
-            //var ifIEnvironmentFiltersEnd = methodIL.DefineLabel();
-            ////actionData
-            //methodIL.Emit(OpCodes.Ldarg_1);
-            ////actionData.IEnvironmentFilters
-            //methodIL.Emit(OpCodes.Ldfld, actionDataEnvironmentFilters);
-            ////actionData.IEnvironmentFilters,IDictionary<string,object>
-            //methodIL.Emit(OpCodes.Ldarg_0);
-            ////FilterHelper.Filter(actionData.IBaseFilters,environment);
-            //methodIL.Emit(OpCodes.Call, BaseFiltersMethodInfo.MakeGenericMethod(TContextType));
-            //methodIL.Emit(OpCodes.Ldc_I4_0);
-            //methodIL.Emit(OpCodes.Ceq);
-            //methodIL.Emit(OpCodes.Brtrue_S, methodEnd);
-
-            ////actionData
-            //methodIL.Emit(OpCodes.Ldarg_1);
-            ////actionData.IRequestFilters
-            //methodIL.Emit(OpCodes.Ldfld, actionDataRequestFilters);
-            ////actionData.IRequestFilters,IDictionary<string,object>
-            //methodIL.Emit(OpCodes.Ldarg_0);
-            ////actionData.IRequestFilters,IDictionary<string,object>,request
-            //methodIL.Emit(OpCodes.Ldloca_S, request);
-            ////FilterHelper.Filter(actionData.IEnvironmentFilters,environment,request);
-            //methodIL.Emit(OpCodes.Call, RequestFiltersMethodInfo.MakeGenericMethod(TContextType));
-            //methodIL.Emit(OpCodes.Ldc_I4_0);
-            //methodIL.Emit(OpCodes.Ceq);
-            //methodIL.Emit(OpCodes.Brtrue_S, methodEnd);
 
             var defaultConstructor = controllerType.GetConstructor(Type.EmptyTypes);
             methodIL.Emit(OpCodes.Newobj, defaultConstructor);
@@ -164,12 +112,18 @@ namespace NFinal.Action
                 methodIL.Emit(OpCodes.Ldarg_2);
                 //controller,environment,"methodName",null,Request,CompressMode
                 methodIL.Emit(OpCodes.Ldc_I4, (int)CompressMode.Deflate);
+                //controller,environment,"methodName",null,Request,CompressMode,actionData
+                methodIL.Emit(OpCodes.Ldarg_1);
+                //controller,environment,"methodName",null,Request,CompressMode,actionData.plugConfig
+                methodIL.Emit(OpCodes.Ldfld, typeof(NFinal.Action.ActionData<TContext, TRequest>).GetField("plugConfig"));
                 methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("Initialization",
                     new Type[] { typeof(TContext),
                         typeof(string),
                         typeof(System.IO.Stream),
                         typeof(TRequest),
-                        typeof(CompressMode) }));
+                        typeof(CompressMode),
+                        typeof(NFinal.Config.Plug.PlugConfig)
+                    }));
                 #region 执行用户权限过滤器
                 //actionData
                 methodIL.Emit(OpCodes.Ldarg_1);

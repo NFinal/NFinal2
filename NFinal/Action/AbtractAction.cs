@@ -27,8 +27,7 @@ namespace NFinal.Action
     /// </summary>
     /// <typeparam name="TContext">上下文IOwinContext,Enviroment,Context</typeparam>
     /// <typeparam name="TRequest">请求信息</typeparam>
-    //// <typeparam name="TUser">用户相关数据类型</typeparam>
-    public abstract class AbstractAction<TContext,TRequest/*,TUser*/> :NFinal.IO.Writer, IAction<TContext, TRequest> /* where TUser: NFinal.User.AbstractUser*/
+    public abstract class AbstractAction<TContext,TRequest> :NFinal.IO.Writer, IAction<TContext, TRequest>
     {
         /// <summary>
         /// 获取Session对象
@@ -346,10 +345,12 @@ namespace NFinal.Action
         /// <summary>
         /// 基础初始化函数
         /// </summary>
+        /// <param name="plugConfig">插件配置</param>
         /// <param name="context">Http上下文</param>
         /// <param name="methodName">Http请求方法</param>
-        public virtual void BaseInitialization(TContext context, string methodName)
+        public virtual void BaseInitialization(TContext context, string methodName, NFinal.Config.Plug.PlugConfig plugConfig)
         {
+            this.config = plugConfig;
             this.context = context;
             this._methodName = methodName;
             SetResponse(CompressMode.Deflate);
@@ -357,13 +358,15 @@ namespace NFinal.Action
         /// <summary>
         /// 初始化函数
         /// </summary>
+        /// <param name="plugConfig">插件配置</param>
         /// <param name="context">Http上下文</param>
         /// <param name="methodName">Http请求方法</param>
         /// <param name="outputStream">Http输出流</param>
         /// <param name="request">Http请求信息</param>
         /// <param name="compressMode">压缩模式</param>
-        public virtual void Initialization(TContext context, string methodName, Stream outputStream, TRequest request, CompressMode compressMode)
+        public virtual void Initialization(TContext context, string methodName, Stream outputStream, TRequest request, CompressMode compressMode, NFinal.Config.Plug.PlugConfig plugConfig)
         {
+            this.config = plugConfig;
             this.context = context;
             this._methodName = methodName;
             this.outputStream = outputStream;

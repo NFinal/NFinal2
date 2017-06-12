@@ -42,7 +42,7 @@ namespace NFinal.Middleware
         {
             NFinal.Owin.Request request = context.GetRequest();
             NFinal.OwinAction controller = new OwinAction();
-            controller.BaseInitialization(context,null);
+            controller.BaseInitialization(context,null,null);
             return controller;
         }
         /// <summary>

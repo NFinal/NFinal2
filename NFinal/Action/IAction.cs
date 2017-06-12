@@ -36,18 +36,20 @@ namespace NFinal.Action
         /// <summary>
         /// 初始化
         /// </summary>
+        /// <param name="plugConfig">插件配置</param>
         /// <param name="context">Http上下文</param>
         /// <param name="methodName">请求方法</param>
-        void BaseInitialization(TContext context,string methodName);
+        void BaseInitialization(TContext context,string methodName, NFinal.Config.Plug.PlugConfig plugConfig);
         /// <summary>
         /// 初始化
         /// </summary>
+        /// <param name="plugConfig">插件配置</param>
         /// <param name="context">Http上下文</param>
         /// <param name="methodName">请求方法</param>
         /// <param name="outputStream">响应内容</param>
         /// <param name="request">请求信息</param>
         /// <param name="compressMode">压缩模式</param>
-        void Initialization(TContext context,string methodName, Stream outputStream, TRequest request, CompressMode compressMode);
+        void Initialization(TContext context,string methodName, Stream outputStream, TRequest request, CompressMode compressMode, NFinal.Config.Plug.PlugConfig plugConfig);
         /// <summary>
         /// Http上下文
         /// </summary>
