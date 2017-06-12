@@ -12,7 +12,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>DEBUG;NETCORE;CORE;COREFX;ASYNC;FILESYSTEM;NETCOREAPP1_1;NETSTANDARD1_5;EMITDEBUG</DefineConstants>
+    <DefineConstants>DEBUG;NETCORE;CORE;COREFX;ASYNC;FILESYSTEM;NETCOREAPP1_1;NETSTANDARD1_5</DefineConstants>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <DocumentationFile>bin\Debug\netstandard1.5\NFinal.xml</DocumentationFile>
   </PropertyGroup>
