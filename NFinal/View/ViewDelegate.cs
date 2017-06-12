@@ -48,6 +48,7 @@ namespace NFinal
         /// <returns></returns>
         public static Delegate GetRenderDelegate<T>(string url, Type viewType)
         {
+#if !NFinalIO
             PropertyInfo modelProperty = viewType.GetProperty("Model");
             Type modelType = modelProperty.PropertyType;
             if (typeof(T) != modelType)
@@ -70,6 +71,9 @@ namespace NFinal
             methodIL.Emit(OpCodes.Ret);
             renderMethodDelegate = method.CreateDelegate(typeof(NFinal.RenderMethod<>).MakeGenericType(modelType));
             return renderMethodDelegate;
+#else
+            return null;
+#endif
         }
     }
 }
