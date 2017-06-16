@@ -12,6 +12,8 @@
 //        WebSite:http://www.nfinal.com
 //
 //======================================================================
+using System;
+
 namespace NFinal.Http
 {
     /// <summary>
@@ -27,7 +29,7 @@ namespace NFinal.Http
         /// <summary>
         /// 缓存类
         /// </summary>
-        private Cache.ICache<string> cache = null;
+        public Cache.ICache<string> cache = null;
         /// <summary>
         /// 初始化
         /// </summary>
@@ -114,6 +116,8 @@ namespace NFinal.Http
         {
             cache.SetString(string.Concat(Constant.SessionChannel, sessionId, key), value);
         }
+
+
         /// <summary>
         /// Session属性
         /// </summary>

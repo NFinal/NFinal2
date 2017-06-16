@@ -31,7 +31,7 @@ namespace NFinal.Middleware
         /// 初始化
         /// </summary>
         /// <param name="next"></param>
-        public CoreMiddleware(RequestDelegate next):base((context) => { return next.Invoke(context); })
+        public CoreMiddleware(RequestDelegate next):base(async(context) => { await next.Invoke(context); })
         {
         }
         /// <summary>

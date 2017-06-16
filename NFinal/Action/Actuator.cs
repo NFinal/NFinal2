@@ -61,7 +61,7 @@ namespace NFinal.Action
         /// <summary>
         /// 根据类型查找自动转换成该类型的函数的字典缓存对象
         /// </summary>
-        public static Dictionary<Type, System.Reflection.MethodInfo> StringContainerOpImplicitMethodInfoDic = null;
+        public static Dictionary<RuntimeTypeHandle, System.Reflection.MethodInfo> StringContainerOpImplicitMethodInfoDic = null;
         /// <summary>
         /// 获取执行控制器行为的代理函数
         /// </summary>
@@ -76,13 +76,13 @@ namespace NFinal.Action
             var TContextType = typeof(TContext);
             if (StringContainerOpImplicitMethodInfoDic == null)
             {
-                StringContainerOpImplicitMethodInfoDic = new Dictionary<Type, System.Reflection.MethodInfo>();
+                StringContainerOpImplicitMethodInfoDic = new Dictionary<RuntimeTypeHandle, System.Reflection.MethodInfo>();
                 System.Reflection.MethodInfo[] methodInfos = typeof(StringContainer).GetMethods();
                 foreach (var methodInfo in methodInfos)
                 {
                     if (methodInfo.Name == "op_Implicit" && methodInfo.ReturnType != typeof(StringContainer))
                     {
-                        StringContainerOpImplicitMethodInfoDic.Add(methodInfo.ReturnType, methodInfo);
+                        StringContainerOpImplicitMethodInfoDic.Add(methodInfo.ReturnType.TypeHandle, methodInfo);
                     }
                 }
             }
@@ -160,7 +160,7 @@ namespace NFinal.Action
                 //bool,0
                 var BeforeEnd = methodIL.DefineLabel();
                 methodIL.Emit(OpCodes.Brtrue_S, BeforeEnd);
-                methodIL.Emit(OpCodes.Leave_S, methodEnd);
+                methodIL.Emit(OpCodes.Leave, methodEnd);
                 methodIL.MarkLabel(BeforeEnd);
 
                 //ViewBag初始化
@@ -297,7 +297,7 @@ namespace NFinal.Action
                             //parameters[name]
                             methodIL.Emit(OpCodes.Callvirt, nameValueCollectionGetItemMethodInfo);
                             //ParameterType op_Implicit(request.parameters[name]);隐式转换
-                            methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[parameterInfos[i].ParameterType]);
+                            methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[parameterInfos[i].ParameterType.TypeHandle]);
                         }
                         else
                         {
@@ -353,7 +353,7 @@ namespace NFinal.Action
                 //controller.Close();
                 methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("Close"));
                 //跳出异常
-                methodIL.Emit(OpCodes.Leave_S, methodEnd);
+                methodIL.Emit(OpCodes.Leave, methodEnd);
             }
             //finally
             methodIL.BeginFinallyBlock();
@@ -367,6 +367,7 @@ namespace NFinal.Action
                 methodIL.Emit(OpCodes.Ldloc, controller);
                 //controller.Dispose();
                 methodIL.Emit(OpCodes.Callvirt, controllerType.GetMethod("Dispose", Type.EmptyTypes));
+                //methodIL.Emit(OpCodes.Callvirt,typeof(System.IDisposable).GetMethod("Dispose",Type.EmptyTypes));
                 methodIL.MarkLabel(finallyEnd);
             }
             //end
@@ -380,7 +381,7 @@ namespace NFinal.Action
     }
 #if EMITDEBUG
     public class ViewBag
-    {
+    {.
         public string a;
         public string b { get; set; }
         public string c { get; set; }

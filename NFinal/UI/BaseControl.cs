@@ -58,7 +58,7 @@ namespace NFinal.UI
                 {
                     if (dele.renderMethod == null)
                     {
-                        dele.renderMethod = NFinal.ViewDelegate.GetRenderDelegate<T>(ViewPath, dele.viewType);
+                        dele.renderMethod = NFinal.ViewDelegate.GetRenderDelegate<T>(ViewPath,Type.GetTypeFromHandle(dele.viewTypeHandle));
                         NFinal.ViewDelegate.viewFastDic[ViewPath] = dele;
                     }
                     var render = (NFinal.RenderMethod<T>)dele.renderMethod;

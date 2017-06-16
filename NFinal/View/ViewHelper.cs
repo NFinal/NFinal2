@@ -74,7 +74,7 @@ namespace NFinal
                                 viewAttr.viewUrl = types[k].FullName.Replace('.', '/');
                             }
                             dele = new ViewDelegateData();
-                            dele.viewType = types[k];
+                            dele.viewTypeHandle = types[k].TypeHandle;
                             dele.renderMethod = null;//GetRenderDelegate(dele.renderMethodInfo);
                             dele.viewClassName = types[k].FullName;
                             //dicViews.Add(viewAttr.viewUrl, dele);

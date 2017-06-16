@@ -26,7 +26,7 @@ namespace NFinal
         /// <summary>
         /// 视图类型
         /// </summary>
-        public Type viewType;
+        public RuntimeTypeHandle viewTypeHandle;
         /// <summary>
         /// 视图渲染函数
         /// </summary>

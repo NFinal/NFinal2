@@ -15,6 +15,7 @@
     <DefineConstants>DEBUG;NETCORE;CORE;COREFX;ASYNC;FILESYSTEM;NETCOREAPP1_1;NETSTANDARD1_5</DefineConstants>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <DocumentationFile>bin\Debug\netstandard1.5\NFinal.xml</DocumentationFile>
+    <Optimize>False</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Collections\FastDictionary\**" />
@@ -35,9 +36,6 @@
     <None Update="Url\UrlRouteJs.cshtml">
       <Generator />
     </None>
-    <Compile Update="Url\UrlRouteJs.template.cs">
-      <DependentUpon>UrlRouteJs.cshtml</DependentUpon>
-    </Compile>
     <Compile Update="UI\NavigatorTemplate.template.cs">
       <DependentUpon>NavigatorTemplate.cshtml</DependentUpon>
     </Compile>

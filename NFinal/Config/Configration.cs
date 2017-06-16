@@ -26,6 +26,10 @@ namespace NFinal.Config
     public class Configration
     {
         /// <summary>
+        /// 依赖注入容量
+        /// </summary>
+        public static DependencyInjection.IServiceCollection serviceCollection = new DependencyInjection.ServiceCollection();
+        /// <summary>
         /// 是否初始化
         /// </summary>
         public static bool isInit=false;

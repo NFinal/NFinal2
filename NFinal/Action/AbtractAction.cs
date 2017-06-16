@@ -47,7 +47,7 @@ namespace NFinal.Action
         /// <summary>
         /// 获取数据库连接
         /// </summary>
-        private IDbConnection con=null;
+        protected IDbConnection con=null;
         /// <summary>
         /// 获取并打开数据库连接
         /// </summary>
@@ -282,7 +282,7 @@ namespace NFinal.Action
         /// <summary>
         /// 内容
         /// </summary>
-        protected Stream writeStream;
+        public Stream writeStream;
         /// <summary>
         /// 服务器类型
         /// </summary>
@@ -301,9 +301,9 @@ namespace NFinal.Action
         /// 方法名，只读
         /// </summary>
         public string methodName { get { return _methodName; } }
-        /// <summary>
-        /// 用户
-        /// </summary>
+        ///// <summary>
+        ///// 用户
+        ///// </summary>
         //public TUser user
         //{
         //    get
@@ -645,7 +645,7 @@ namespace NFinal.Action
         /// <returns></returns>
         public static string Url<TController>(string methodName, params StringContainer[] urlParameters)
         {
-            return NFinal.Url.ActionUrlHelper.Format(NFinal.Url.ActionUrlHelper.formatControllerDictionary[typeof(TController)][methodName].formatUrl, urlParameters);
+            return NFinal.Url.ActionUrlHelper.Format(NFinal.Url.ActionUrlHelper.formatControllerDictionary[typeof(TController).TypeHandle][methodName].formatUrl, urlParameters);
         }
         /// <summary>
         /// 获取Url
@@ -655,7 +655,7 @@ namespace NFinal.Action
         /// <returns></returns>
         public string Url(string methodName, params StringContainer[] urlParameters)
         {
-            return NFinal.Url.ActionUrlHelper.Format(NFinal.Url.ActionUrlHelper.formatControllerDictionary[this.GetType()][methodName].formatUrl, urlParameters);
+            return NFinal.Url.ActionUrlHelper.Format(NFinal.Url.ActionUrlHelper.formatControllerDictionary[this.GetType().TypeHandle][methodName].formatUrl, urlParameters);
         }
         /// <summary>
         /// 模板渲染函数
@@ -673,7 +673,7 @@ namespace NFinal.Action
                 {
                     if (dele.renderMethod == null)
                     {
-                        dele.renderMethod = NFinal.ViewDelegate.GetRenderDelegate<T>(url,dele.viewType);
+                        dele.renderMethod = NFinal.ViewDelegate.GetRenderDelegate<T>(url,Type.GetTypeFromHandle(dele.viewTypeHandle));
                         NFinal.ViewDelegate.viewFastDic[url] = dele;
                     }
                     var render = (NFinal.RenderMethod<T>)dele.renderMethod;

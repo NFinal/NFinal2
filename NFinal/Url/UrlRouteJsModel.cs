@@ -27,6 +27,6 @@ namespace NFinal.Url
         /// <summary>
         /// 包含Url解析后相关的信息，用于生成Js函数时使用
         /// </summary>
-        public NFinal.Collections.FastDictionary<Type, Dictionary<string, FormatData>> formatControllerDictionary;
+        public NFinal.Collections.FastDictionary<RuntimeTypeHandle, Dictionary<string, FormatData>> formatControllerDictionary;
     }
 }

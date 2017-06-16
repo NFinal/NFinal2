@@ -25,27 +25,39 @@ using System.Data;
 
 namespace NFinal
 {
-    
+    /// <summary>
+    /// IOwinContext
+    /// </summary>
     public class ContextAction : NFinal.Action.AbstractAction<IOwinContext, IOwinRequest>
     {
+        /// <summary>
+        /// 控制器行为执行后函数
+        /// </summary>
         public override void After()
         {
             throw new NotImplementedException();
         }
-
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="methodName"></param>
+        /// <param name="plugConfig"></param>
         public override void BaseInitialization(IOwinContext context,string methodName, NFinal.Config.Plug.PlugConfig plugConfig)
         {
-            throw new NotImplementedException();
         }
-
+        /// <summary>
+        /// 控制器行为执行前函数
+        /// </summary>
+        /// <returns></returns>
         public override bool Before()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public override void Close()
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void Dispose()

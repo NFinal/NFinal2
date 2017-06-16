@@ -164,25 +164,34 @@ namespace NFinal
                     headers.AddValue(header.Key, header.Value);
                 }
             }
-            this.writeStream.Flush();
             this.writeStream.Dispose();
             this.response.stream.Seek(0, SeekOrigin.Begin);
             this.response.stream.CopyTo(this.outputStream);
-            this.Dispose();
+            this.response.stream.Dispose();
         }
         /// <summary>
         /// 释放相关对象
         /// </summary>
         public override void Dispose()
         {
-            this.writeStream?.Dispose();
-            this.response.stream?.Dispose();
-            if (this.request?.files != null)
+            if (this.writeStream != null)
+            {
+                this.writeStream.Dispose();
+            }
+            if (this.response.stream != null)
+            {
+                this.response.stream.Dispose();
+            }
+            if (this.files != null)
             {
                 foreach (var file in this.request.files)
                 {
-                    file.Value.Value.Dispose();
+                    file.Value?.Value?.Dispose();
                 }
+            }
+            if (this.con != null)
+            {
+                this.con.Close();
             }
         }
         /// <summary>

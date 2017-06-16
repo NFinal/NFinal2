@@ -41,7 +41,7 @@ namespace NFinal.Model
             /// <summary>
             /// Model类型
             /// </summary>
-            public Type modelType;
+            public RuntimeTypeHandle modelType;
             /// <summary>
             /// 获取Model的代理函数
             /// </summary>
@@ -50,7 +50,7 @@ namespace NFinal.Model
         /// <summary>
         /// 缓存得到填充某类型参数的函数代理
         /// </summary>
-        public static Dictionary<Type, GetModelDelegateData> GetModelDictionary = new Dictionary<Type, GetModelDelegateData>();
+        public static System.Collections.Concurrent.ConcurrentDictionary<RuntimeTypeHandle, GetModelDelegateData> GetModelDictionary = new System.Collections.Concurrent.ConcurrentDictionary<RuntimeTypeHandle, GetModelDelegateData>();
         /// <summary>
         /// 获取自定义类型，并把prameters中的值复制到相应字段中
         /// </summary>
@@ -60,11 +60,11 @@ namespace NFinal.Model
         public static TModel GetModel<TModel>(NFinal.NameValueCollection parameters)
         {
             GetModelDelegateData getModelDelegateData;
-            if (!GetModelDictionary.TryGetValue(typeof(TModel), out getModelDelegateData))
+            if (!GetModelDictionary.TryGetValue(typeof(TModel).TypeHandle, out getModelDelegateData))
             {
-                getModelDelegateData.modelType = typeof(TModel);
+                getModelDelegateData.modelType = typeof(TModel).TypeHandle;
                 getModelDelegateData.getModelDelegate = GetDelegate<TModel>(parameters);
-                GetModelDictionary.Add(typeof(TModel), getModelDelegateData);
+                GetModelDictionary.TryAdd(typeof(TModel).TypeHandle, getModelDelegateData);
             }
             TModel model= ((GetModelDelegate<TModel>)getModelDelegateData.getModelDelegate)(parameters);
             return model;
@@ -72,7 +72,7 @@ namespace NFinal.Model
         /// <summary>
         /// 获取将parameters中的参数复制进自定义Model的函数代理
         /// </summary>
-        public static Dictionary<Type, System.Reflection.MethodInfo> StringContainerOpImplicitMethodInfoDic = null;
+        public static System.Collections.Concurrent.ConcurrentDictionary<RuntimeTypeHandle, MethodInfo> StringContainerOpImplicitMethodInfoDic = new System.Collections.Concurrent.ConcurrentDictionary<RuntimeTypeHandle, MethodInfo>();
         /// <summary>
         /// 获取将parameters中的参数复制进自定义Model的函数代理
         /// </summary>
@@ -81,16 +81,13 @@ namespace NFinal.Model
         /// <returns></returns>
         public static Delegate GetDelegate<TModel>(NFinal.NameValueCollection parameters)
         {
-            if (StringContainerOpImplicitMethodInfoDic == null)
+            System.Reflection.MethodInfo[] methodInfos = typeof(StringContainer).GetMethods();
+            foreach (var methodInfo in methodInfos)
             {
-                StringContainerOpImplicitMethodInfoDic = new Dictionary<Type, System.Reflection.MethodInfo>();
-                System.Reflection.MethodInfo[] methodInfos = typeof(StringContainer).GetMethods();
-                foreach (var methodInfo in methodInfos)
+                if (methodInfo.Name == "op_Implicit" && methodInfo.ReturnType != typeof(StringContainer))
                 {
-                    if (methodInfo.Name == "op_Implicit" && methodInfo.ReturnType != typeof(StringContainer))
-                    {
-                        StringContainerOpImplicitMethodInfoDic.Add(methodInfo.ReturnType, methodInfo);
-                    }
+                    StringContainerOpImplicitMethodInfoDic.TryAdd(methodInfo.ReturnType.TypeHandle,
+                        methodInfo);
                 }
             }
             Delegate getModelDelegate = null;
@@ -167,7 +164,7 @@ namespace NFinal.Model
                     methodIL.Emit(OpCodes.Ldarg_0);//model,nvc
                     methodIL.Emit(OpCodes.Ldstr, propertyInfo.Name);//model,nvc,key
                     methodIL.Emit(OpCodes.Callvirt,NameValueCollectionGetMethodInfo );//model,string
-                    methodIL.Emit(OpCodes.Call,StringContainerOpImplicitMethodInfoDic[typeof(String)]);
+                    methodIL.Emit(OpCodes.Call,StringContainerOpImplicitMethodInfoDic[typeof(String).TypeHandle]);
                     methodIL.Emit(OpCodes.Call, propertyInfo.GetSetMethod());
                 }
                 else
@@ -175,7 +172,7 @@ namespace NFinal.Model
                     methodIL.Emit(OpCodes.Ldarg_0);//nvc
                     methodIL.Emit(OpCodes.Ldstr, propertyInfo.Name);//nvc,key
                     methodIL.Emit(OpCodes.Callvirt, NameValueCollectionGetMethodInfo);//model,string
-                    methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[typeof(String)]);
+                    methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[typeof(String).TypeHandle]);
                     methodIL.Emit(OpCodes.Call, propertyInfo.GetSetMethod());
                 }
             }
@@ -203,7 +200,7 @@ namespace NFinal.Model
                     methodIL.Emit(OpCodes.Ldarg_0);//nvc
                     methodIL.Emit(OpCodes.Ldstr, propertyInfo.Name);//nvc,key
                     methodIL.Emit(OpCodes.Callvirt, NameValueCollectionGetMethodInfo);//model,string
-                    methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[propertyInfo.PropertyType]);
+                    methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[propertyInfo.PropertyType.TypeHandle]);
                     methodIL.Emit(OpCodes.Callvirt, propertyInfo.GetSetMethod());
                 }
                 else
@@ -211,7 +208,7 @@ namespace NFinal.Model
                     methodIL.Emit(OpCodes.Ldarg_0);//nvc
                     methodIL.Emit(OpCodes.Ldstr, propertyInfo.Name);//nvc,key
                     methodIL.Emit(OpCodes.Callvirt, NameValueCollectionGetMethodInfo);//model,string
-                    methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[propertyInfo.PropertyType]);
+                    methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[propertyInfo.PropertyType.TypeHandle]);
                     methodIL.Emit(OpCodes.Call, propertyInfo.GetSetMethod());
                 }
                 if (isNullable)
@@ -311,7 +308,7 @@ namespace NFinal.Model
                 methodIL.Emit(OpCodes.Ldarg_0);//model,nvc
                 methodIL.Emit(OpCodes.Ldstr, fieldInfo.Name);//model,nvc,key
                 methodIL.Emit(OpCodes.Callvirt, NameValueCollectionGetMethodInfo);//model,string
-                methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[typeof(String)]);
+                methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[typeof(String).TypeHandle]);
                 //model.field=string
                 methodIL.Emit(OpCodes.Stfld, fieldInfo);
             }
@@ -338,7 +335,7 @@ namespace NFinal.Model
                 methodIL.Emit(OpCodes.Ldarg_0);//model,nvc
                 methodIL.Emit(OpCodes.Ldstr, fieldInfo.Name);//model,nvc,key
                 methodIL.Emit(OpCodes.Callvirt, NameValueCollectionGetMethodInfo);//model,string
-                methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[fieldInfo.FieldType]);
+                methodIL.Emit(OpCodes.Call, StringContainerOpImplicitMethodInfoDic[fieldInfo.FieldType.TypeHandle]);
                 //model.field=string
                 methodIL.Emit(OpCodes.Stfld, fieldInfo);
                 //如果是泛型

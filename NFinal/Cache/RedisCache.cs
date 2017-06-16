@@ -24,33 +24,20 @@ namespace NFinal.Cache
     /// </summary>
     public class RedisCache : Cache<string>
     {
-        private string configuration = null;
-        /// <summary>
-        /// redis服务器缓存
-        /// </summary>
-        public static Dictionary<string, IDatabase> databasePool = new Dictionary<string, IDatabase>(StringComparer.Ordinal);
         /// <summary>
         /// 当前redis服务器
         /// </summary>
-        public IDatabase database = null;
+       public IDatabase database = null;
+
+       private static ConnectionMultiplexer redis = null;
         /// <summary>
         /// reids缓存初始化
         /// </summary>
         /// <param name="configuration">redis配置参数</param>
         /// <param name="minutes">滑动缓存时间</param>
-        public RedisCache(string configuration, int minutes):base(CacheType.SlidingExpiration,minutes)
+        public RedisCache(ConnectionMultiplexer redis, int minutes):base(CacheType.SlidingExpiration,minutes)
         {
-            this.configuration = configuration;
-            if (databasePool.ContainsKey(configuration))
-            {
-                this.database = databasePool[configuration];
-            }
-            else
-            {
-                ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(configuration);
-                this.database = redis.GetDatabase();
-                databasePool.Add(configuration, this.database);
-            }
+            this.database = redis.GetDatabase();
         }
         /// <summary>
         /// redis缓存初始化
@@ -60,17 +47,7 @@ namespace NFinal.Cache
         /// <param name="minutes">缓存时间</param>
         public RedisCache(string configuration, CacheType cacheType,int minutes) : base(cacheType,minutes)
         {
-            this.configuration = configuration;
-            if (databasePool.ContainsKey(configuration))
-            {
-                this.database = databasePool[configuration];
-            }
-            else
-            {
-                ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(configuration);
-                this.database = redis.GetDatabase();
-                databasePool.Add(configuration, this.database);
-            }
+            this.database = redis.GetDatabase();
         }
         /// <summary>
         /// 是否拥有该缓存
@@ -119,5 +96,12 @@ namespace NFinal.Cache
                 database.StringSet(key, value, TimeSpan.FromMinutes(minutes));
             }
         }
+        /// <summary>
+        /// 释放连接
+        /// </summary>
+        //public void Dispose()
+        //{
+        //    this.redis.Dispose();
+        //}
     }
 }

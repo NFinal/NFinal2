@@ -36,20 +36,31 @@ namespace NFinal.Cache
     /// </summary>
     public class SimpleCache : Cache<string>
     {
-        private System.Threading.Timer timer = null;
+        public static bool hasInit = false;
+        private static System.Threading.Timer timer = null;
         //private System.Timers.Timer timer = null;
         /// <summary>
         /// 缓存全局字典对象
         /// </summary>
-        public static IDictionary<string, SimpleCacheValue> cacheStore = null;
+        public static System.Collections.Concurrent.ConcurrentDictionary<string, SimpleCacheValue> cacheStore = null;
+        public void Configration(string configstring)
+        {
+
+        }
         /// <summary>
         /// 缓存初始化
         /// </summary>
         /// <param name="minutes">滑动缓存时间</param>
         public SimpleCache(int minutes) : base(minutes)
         {
-            cacheStore = new System.Collections.Concurrent.ConcurrentDictionary<string, SimpleCacheValue>(StringComparer.Ordinal);
-            timer = new System.Threading.Timer(Timer_Elapsed, this, 5000, 0); 
+            //System.Threading.Monitor.Enter(hasInit);
+            //if (!hasInit)
+            //{
+            //    hasInit = true;
+            //    cacheStore = new System.Collections.Concurrent.ConcurrentDictionary<string, SimpleCacheValue>(StringComparer.Ordinal);
+            //    timer = new System.Threading.Timer(Timer_Elapsed, this, 5000, 0);
+            //}
+            //System.Threading.Monitor.Exit(hasInit);
         }
         /// <summary>
         /// 缓存定期处理函数
@@ -61,7 +72,8 @@ namespace NFinal.Cache
             {
                 if (cacheItem.Value.expires < DateTimeOffset.Now)
                 {
-                    cacheStore.Remove(cacheItem);
+                    SimpleCacheValue simpleCacheValue;
+                    cacheStore.TryRemove(cacheItem.Key,out simpleCacheValue);
                 }
             }
         }
@@ -82,7 +94,8 @@ namespace NFinal.Cache
         {
             if (cacheStore.ContainsKey(key))
             {
-                cacheStore.Remove(key);
+                SimpleCacheValue simpleCacheValue;
+                cacheStore.TryRemove(key,out simpleCacheValue);
             }
         }
         /// <summary>
@@ -100,7 +113,8 @@ namespace NFinal.Cache
                 }
                 else
                 {
-                    cacheStore.Remove(key);
+                    SimpleCacheValue simpleCacheValue;
+                    cacheStore.TryRemove(key, out simpleCacheValue);
                 }
             }
             return null;
@@ -123,7 +137,7 @@ namespace NFinal.Cache
             else
             {
                 CacheValue.value = value;
-                cacheStore.Add(key, CacheValue);
+                cacheStore.TryAdd(key, CacheValue);
             }
         }
     }

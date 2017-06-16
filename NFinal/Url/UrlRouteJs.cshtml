@@ -1,4 +1,4 @@
-﻿@inherits NFinal.View.Razor.BasePage<NFinal.Url.UrlRouteJsModel>
+﻿@inherits NFinal.View.RazorView<NFinal.Url.UrlRouteJsModel>
 @using System.Collections.Generic
 function StringFormat() {
     if (arguments.length == 0)
@@ -12,10 +12,11 @@ function StringFormat() {
 }
 var Url={
 @{bool isFirstAction = true; bool isFirstController = true; }
-@foreach (KeyValuePair<Type, Dictionary<string, NFinal.Url.FormatData>> formatController in Model.formatControllerDictionary)
+@foreach (KeyValuePair<RuntimeTypeHandle, Dictionary<string, NFinal.Url.FormatData>> formatController in Model.formatControllerDictionary)
 {
-    string controllerName = formatController.Key.Namespace.Replace('.', '_') + "_" + formatController.Key.Name;
-    
+    Type controllerType = Type.GetTypeFromHandle(formatController.Key);
+    string controllerName = controllerType.Namespace.Replace('.', '_') + "_" + controllerType.Name;
+
     if (isFirstController)
     {
         isFirstController = false;

@@ -137,7 +137,7 @@ namespace NFinal.Middleware
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public virtual Task Invoke(TContext context)
+        public async Task Invoke(TContext context)
         {
             string requestPath = GetRequestPath(context);
             //路径为"/"时变为类"/Index.html"
@@ -199,7 +199,7 @@ namespace NFinal.Middleware
                 {
                     if (!NFinal.Filter.FilterHelper.ParamaterFilter(actionData.IParametersFilters, parameters))
                     {
-                        return FinishedTask;
+                        await FinishedTask;
                     }
                     try
                     {
@@ -232,10 +232,10 @@ namespace NFinal.Middleware
                 //测试环境下
                 else
                 {
-                    actionData.actionExecute(context, actionData, request, parameters);
+                    //actionData.actionExecute(context, actionData, request, parameters);
                     try
                     {
-                        //actionData.actionExecute(context, actionData,request,parameters);
+                        actionData.actionExecute(context, actionData,request,parameters);
                     }
                     catch (System.Exception e)
                     {
@@ -258,13 +258,14 @@ namespace NFinal.Middleware
                             }
                             controller.Close();
                         }
+                        await FinishedTask;
                     }
                 }
-                return FinishedTask;
+                await FinishedTask;
             }
             else
             {
-                return _next.Invoke(context);
+                await _next.Invoke(context);
             }
         }
         #region 参数解析

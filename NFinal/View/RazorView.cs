@@ -56,7 +56,7 @@ namespace NFinal.View
                 {
                     if (dele.renderMethod == null)
                     {
-                        dele.renderMethod = NFinal.ViewDelegate.GetRenderDelegate<TModel>(url, dele.viewType);
+                        dele.renderMethod = NFinal.ViewDelegate.GetRenderDelegate<TModel>(url,Type.GetTypeFromHandle(dele.viewTypeHandle));
                         NFinal.ViewDelegate.viewFastDic[url] = dele;
                     }
                     var render = (NFinal.RenderMethod<TModel>)dele.renderMethod;

@@ -32,7 +32,7 @@ namespace NFinal.Model
     /// </summary>
     public class GRUDHelper
     {
-        private static Dictionary<Type, GetColumnNamesDelegate> dic_GetColumnNamesDelegate = new Dictionary<Type, GetColumnNamesDelegate>();
+        private static System.Collections.Concurrent.ConcurrentDictionary<RuntimeTypeHandle, GetColumnNamesDelegate> dic_GetColumnNamesDelegate = new System.Collections.Concurrent.ConcurrentDictionary<RuntimeTypeHandle, GetColumnNamesDelegate>();
         //private static Dictionary<Type, string> dic_SimpleInsertSql = new Dictionary<Type, string>();
         /// <summary>
         /// 获取插入的sql语句
@@ -404,7 +404,7 @@ namespace NFinal.Model
         public static string[] GetColumnNames<TModel>()
         {
             GetColumnNamesDelegate getColumnNamesDelegate = null;
-            if (!dic_GetColumnNamesDelegate.TryGetValue(typeof(TModel), out getColumnNamesDelegate))
+            if (!dic_GetColumnNamesDelegate.TryGetValue(typeof(TModel).TypeHandle, out getColumnNamesDelegate))
             {
                 getColumnNamesDelegate = BuildColumnNamesDelegate<TModel>();
             }

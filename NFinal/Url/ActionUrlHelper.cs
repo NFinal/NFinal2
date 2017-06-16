@@ -64,10 +64,10 @@ namespace NFinal.Url
     /// </summary>
     public class ActionUrlData
     {
-        /// <summary>
-        /// 控制器行为对应方法的反射信息
-        /// </summary>
-        public MethodInfo methodInfo;
+        ///// <summary>
+        ///// 控制器行为对应方法的反射信息
+        ///// </summary>
+        //public RuntimeMethodHandle methodInfoHandle;
         /// <summary>
         /// 后缀长度
         /// </summary>
@@ -109,7 +109,7 @@ namespace NFinal.Url
         /// <summary>
         /// 缓存所有类型
         /// </summary>
-        public static NFinal.Collections.FastDictionary<Type,Dictionary<string,FormatData>> formatControllerDictionary;
+        public static NFinal.Collections.FastDictionary<RuntimeTypeHandle,Dictionary<string,FormatData>> formatControllerDictionary;
         /// <summary>
         /// 是否是URL分隔符
         /// </summary>
@@ -470,7 +470,8 @@ namespace NFinal.Url
                 System.IO.Directory.CreateDirectory(directory);
             }
             NFinal.IO.FileWriter fileWriter = new IO.FileWriter(System.IO.Path.Combine(directory, "Url.js"));
-            NFinal.Url.UrlRouteJs.Render(fileWriter, model);
+            NFinal.Url.UrlRouteJs urlRouteJsTemplate = new UrlRouteJs(fileWriter, model);
+            urlRouteJsTemplate.Execute();
             fileWriter.Dispose();
         }
         /// <summary>
@@ -490,7 +491,8 @@ namespace NFinal.Url
             }
             foreach (var controller in formatControllerDictionary)
             {
-                relativePath = "/" + globalConfig.debug.directory.TrimStart('/')+"/"+ controller.Key.Namespace.Replace('.','/') + "/" + ActionUrlHelper.GetControllerName(controller.Key);
+                Type controllerType = Type.GetTypeFromHandle(controller.Key);
+                relativePath = "/" + globalConfig.debug.directory.TrimStart('/')+"/"+ controllerType.Namespace.Replace('.','/') + "/" + ActionUrlHelper.GetControllerName(controllerType);
                 absolutePath = NFinal.IO.Path.GetProjectPath(relativePath);
 
                 if (!System.IO.Directory.Exists(absolutePath))
@@ -503,13 +505,14 @@ namespace NFinal.Url
                     if (!System.IO.File.Exists(fileName))
                     {
                         debugData = new NFinal.Url.DebugData();
-                        debugData.classFullName = controller.Key.FullName;
+                        debugData.classFullName = controllerType.FullName;
                         debugData.methodName = method.Key;
                         debugData.formatData = method.Value;
                         debugData.debugUrl = globalConfig.debug.url;
                         using (fileWriter = new IO.FileWriter(fileName))
                         {
-                            NFinal.Url.Debug.Render(fileWriter, debugData);
+                            NFinal.Url.Debug debugTemplate = new Debug(fileWriter, debugData);
+                            debugTemplate.Execute();
                         }
                     }
 
