@@ -118,7 +118,6 @@
     <Folder Include="Middleware\Builder\" />
     <Folder Include="Properties\" />
     <Folder Include="Build\" />
-    <Folder Include="Data\" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>
