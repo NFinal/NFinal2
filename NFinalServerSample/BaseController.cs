@@ -13,6 +13,10 @@ namespace NFinalServerSample
     /// <typeparam name="TMasterPage">母页模板数据</typeparam>
     public class BaseController:NFinal.OwinAction
     {
+        public void UpdateA<TModel>(TModel model)
+        {
+
+        }
         /// <summary>
         /// 此字段加上ViewBagMember属性将会自动添加到ViewBag中。
         /// </summary>

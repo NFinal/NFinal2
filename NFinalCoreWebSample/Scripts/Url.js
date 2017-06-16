@@ -13,9 +13,6 @@ var Url={
     "NFinalCorePlug_Controllers_UserController":{
     }
         ,
-    "NFinalCorePlug_BaseController":{
-    }
-        ,
     "NFinalCorePlug_Controllers_IndexController":{
             "Default":function()
             {

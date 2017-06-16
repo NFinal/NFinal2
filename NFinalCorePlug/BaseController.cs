@@ -12,8 +12,13 @@ namespace NFinalCorePlug
     /// 控制器的父类必须是泛型
     /// </summary>
     /// <typeparam name="TMasterPage">母页模板数据</typeparam>
-    public class BaseController:NFinal.CoreAction
+    //[ActionExport("UpdateA",typeof(object))]
+    public class BaseController<TModel>:NFinal.CoreAction
     {
+        public void UpdateA(TModel model,int a,string b)
+        {
+            //this.ViewBag.a = model;
+        }
         public override IDbConnection GetDbConnection()
         {
             System.Data.IDbConnection con=new System.Data.SqlClient.SqlConnection(this.config.connectionStrings["Common"].connectionString);
@@ -34,14 +39,14 @@ namespace NFinalCorePlug
         public override bool Before()
         {
             //systemConfig通常用于全局缓存。
-            if (systemConfig == null)
-            {
-                Dictionary<string, StringContainer> systemConfigDictionary = new Dictionary<string, StringContainer>();
-                systemConfigDictionary.Add("siteName", "站点名称");
-                systemConfigDictionary.Add("mobile","联系电话");
-                BaseController.systemConfig = new NFinal.Collections.FastSearch.FastSearch<StringContainer>(systemConfigDictionary);
-                systemConfigDictionary.Clear();
-            }
+            //if (systemConfig == null)
+            //{
+            //    Dictionary<string, StringContainer> systemConfigDictionary = new Dictionary<string, StringContainer>();
+            //    systemConfigDictionary.Add("siteName", "站点名称");
+            //    systemConfigDictionary.Add("mobile","联系电话");
+            //    BaseController<TModel>.systemConfig = new NFinal.Collections.FastSearch.FastSearch<StringContainer>(systemConfigDictionary);
+            //    systemConfigDictionary.Clear();
+            //}
             return true;
         }
     }

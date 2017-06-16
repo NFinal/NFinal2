@@ -101,6 +101,9 @@
     <Compile Include="..\nfinal\attribute\ActionAttribute.cs">
       <Link>Core\Attribute\ActionAttribute.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Attribute\ActionExportAttribute.cs">
+      <Link>Core\Attribute\ActionExportAttribute.cs</Link>
+    </Compile>
     <Compile Include="..\nfinal\attribute\AreaAttribute.cs">
       <Link>Core\Attribute\AreaAttribute.cs</Link>
     </Compile>
@@ -217,6 +220,24 @@
     </Compile>
     <Compile Include="..\nfinal\Constant.cs">
       <Link>Core\Constant.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinal\dependencyinjection\IServiceCollection.cs">
+      <Link>Core\DependencyInjection\IServiceCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinal\dependencyinjection\IServiceCollectionExtension.cs">
+      <Link>Core\DependencyInjection\IServiceCollectionExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinal\dependencyinjection\ITypeHandler.cs">
+      <Link>Core\DependencyInjection\ITypeHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinal\dependencyinjection\ServiceCache.cs">
+      <Link>Core\DependencyInjection\ServiceCache.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinal\dependencyinjection\ServiceCollection.cs">
+      <Link>Core\DependencyInjection\ServiceCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\nfinal\dependencyinjection\TypeHandler.cs">
+      <Link>Core\DependencyInjection\TypeHandler.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\emit\CopyHelper.cs">
       <Link>Core\Emit\CopyHelper.cs</Link>
@@ -346,9 +367,6 @@
     </Compile>
     <Compile Include="..\nfinal\icon\Favicon.cs">
       <Link>Core\Icon\Favicon.cs</Link>
-    </Compile>
-    <Compile Include="..\nfinal\ioc\ClassManager.cs">
-      <Link>Core\Ioc\ClassManager.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\io\FileWriter.cs">
       <Link>Core\IO\FileWriter.cs</Link>
@@ -488,13 +506,13 @@
     <Compile Include="..\nfinal\url\ActionUrlHelper.cs">
       <Link>Core\Url\ActionUrlHelper.cs</Link>
     </Compile>
-    <Compile Include="..\nfinal\url\Debug.template.cs">
+    <Compile Include="..\NFinal\Url\Debug.template.cs">
       <Link>Core\Url\Debug.template.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\url\DebugData.cs">
       <Link>Core\Url\DebugData.cs</Link>
     </Compile>
-    <Compile Include="..\nfinal\url\UrlRouteJs.template.cs">
+    <Compile Include="..\NFinal\Url\UrlRouteJs.template.cs">
       <Link>Core\Url\UrlRouteJs.template.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\url\UrlRouteJsModel.cs">

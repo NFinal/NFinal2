@@ -9,4 +9,15 @@ using NFinal.Http;
 //http://bbs.nfinal.com
 namespace NFinalCorePlug.BaseController_Model
 {
+	public class UpdateA
+	{
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
+		public string imageServerUrl;
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
+		public int a;
+		public string b;
+	}
 }

@@ -4,6 +4,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>bin\Debug\</OutputPath>
+    <Optimize>False</Optimize>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="bin\Debug\netcoreapp1.1\Plugs\CorePlug\plug.json" />

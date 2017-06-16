@@ -17,11 +17,19 @@ namespace NFinalCoreWebSample
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            NFinal.Config.Configration.serviceCollection
+                .SetService<NFinal.Cache.ICache<string>,int>(typeof(NFinal.Cache.RedisCache))
+                .Configaure("localhost", 30);
+            NFinal.Config.Configration.serviceCollection
+                .SetService<NFinal.Http.ISession,int>(typeof(NFinal.Http.Session))
+                .Configaure();
+            var cache= NFinal.Config.Configration.serviceCollection.GetService<NFinal.Cache.ICache<string>, int>(30);
             app.UseMiddleware<NFinal.Middleware.CoreMiddleware>();
             //app.Run(async (context) =>
             //{

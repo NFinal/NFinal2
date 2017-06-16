@@ -24,6 +24,7 @@ namespace NFinal.Cache
     /// </summary>
     public class RedisCache : Cache<string>
     {
+        public static string configration;
         /// <summary>
         /// 当前redis服务器
         /// </summary>
@@ -35,9 +36,18 @@ namespace NFinal.Cache
         /// </summary>
         /// <param name="configuration">redis配置参数</param>
         /// <param name="minutes">滑动缓存时间</param>
-        public RedisCache(ConnectionMultiplexer redis, int minutes):base(CacheType.SlidingExpiration,minutes)
+        public RedisCache(int minutes):base(CacheType.SlidingExpiration,minutes)
         {
+            ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(configration);
             this.database = redis.GetDatabase();
+        }
+        /// <summary>
+        /// Redis配置
+        /// </summary>
+        /// <param name="configration"></param>
+        public static void Configaure(string configration)
+        {
+            RedisCache.configration = configration;
         }
         /// <summary>
         /// redis缓存初始化

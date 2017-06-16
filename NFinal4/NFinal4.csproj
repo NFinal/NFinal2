@@ -15,7 +15,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NET40;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -128,6 +128,9 @@
     </Compile>
     <Compile Include="..\NFinal\Attribute\ActionAttribute.cs">
       <Link>Core\Attribute\ActionAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Attribute\ActionExportAttribute.cs">
+      <Link>Core\Attribute\ActionExportAttribute.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Attribute\AreaAttribute.cs">
       <Link>Core\Attribute\AreaAttribute.cs</Link>
@@ -245,6 +248,24 @@
     </Compile>
     <Compile Include="..\NFinal\Constant.cs">
       <Link>Core\Constant.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\DependencyInjection\IServiceCollection.cs">
+      <Link>Core\DependencyInjection\IServiceCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\DependencyInjection\IServiceCollectionExtension.cs">
+      <Link>Core\DependencyInjection\IServiceCollectionExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\DependencyInjection\ITypeHandler.cs">
+      <Link>Core\DependencyInjection\ITypeHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\DependencyInjection\ServiceCache.cs">
+      <Link>Core\DependencyInjection\ServiceCache.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\DependencyInjection\ServiceCollection.cs">
+      <Link>Core\DependencyInjection\ServiceCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\DependencyInjection\TypeHandler.cs">
+      <Link>Core\DependencyInjection\TypeHandler.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\emit\CopyHelper.cs">
       <Link>Core\Emit\CopyHelper.cs</Link>
@@ -374,9 +395,6 @@
     </Compile>
     <Compile Include="..\NFinal\icon\Favicon.cs">
       <Link>Core\Icon\Favicon.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Ioc\ClassManager.cs">
-      <Link>Core\Ioc\ClassManager.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\io\FileWriter.cs">
       <Link>Core\IO\FileWriter.cs</Link>
@@ -516,8 +534,14 @@
     <Compile Include="..\NFinal\Url\ActionUrlHelper.cs">
       <Link>Core\Url\ActionUrlHelper.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Url\Debug.template.cs">
+      <Link>Core\Url\Debug.template.cs</Link>
+    </Compile>
     <Compile Include="..\NFinal\Url\DebugData.cs">
       <Link>Core\Url\DebugData.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Url\UrlRouteJs.template.cs">
+      <Link>Core\Url\UrlRouteJs.template.cs</Link>
     </Compile>
     <Compile Include="..\NFinal\Url\UrlRouteJsModel.cs">
       <Link>Core\Url\UrlRouteJsModel.cs</Link>
@@ -554,12 +578,6 @@
     </Compile>
     <Compile Include="..\NFinal\view\ViewHelper.cs">
       <Link>Core\View\ViewHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Url\Debug.template.cs">
-      <Link>Core\Url\Debug.template.cs</Link>
-    </Compile>
-    <Compile Include="..\NFinal\Url\UrlRouteJs.template.cs">
-      <Link>Core\Url\UrlRouteJs.template.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

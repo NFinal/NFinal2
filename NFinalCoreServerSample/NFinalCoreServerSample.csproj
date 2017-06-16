@@ -37,5 +37,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath></OutputPath>
+    <Optimize>False</Optimize>
   </PropertyGroup>
 </Project>

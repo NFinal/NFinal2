@@ -100,13 +100,17 @@ namespace NFinalCompiler.Controller
             }
             foreach (var par in methodSy.Parameters)
             {
-                data = new DeclareData();
-                data.IsAttribute = false;
-                data.Type = par.Type.ToString();
-                data.Name = par.Name;
-                if (!declares.ContainsKey(data.Name))
-                { 
-                    declares.Add(data.Name,data);
+                //排除泛型参数
+                if (par.Type.TypeKind != TypeKind.TypeParameter)
+                {
+                    data = new DeclareData();
+                    data.IsAttribute = false;
+                    data.Type = par.Type.ToString();
+                    data.Name = par.Name;
+                    if (!declares.ContainsKey(data.Name))
+                    {
+                        declares.Add(data.Name, data);
+                    }
                 }
             }
         }

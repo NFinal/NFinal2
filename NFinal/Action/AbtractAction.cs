@@ -37,7 +37,7 @@ namespace NFinal.Action
         /// <returns></returns>
         public virtual NFinal.Http.ISession GetSession(string sessionId)
         {
-            return new Session(sessionId,"User", new NFinal.Cache.SimpleCache(30));
+            return new Session(sessionId,"User",NFinal.Config.Configration.serviceCollection.GetService<NFinal.Cache.ICache<string>,int>(30));
         }
         /// <summary>
         /// 配置数据

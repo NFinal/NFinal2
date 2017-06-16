@@ -36,16 +36,19 @@ namespace NFinal.Cache
     /// </summary>
     public class SimpleCache : Cache<string>
     {
-        public static bool hasInit = false;
         private static System.Threading.Timer timer = null;
         //private System.Timers.Timer timer = null;
         /// <summary>
         /// 缓存全局字典对象
         /// </summary>
         public static System.Collections.Concurrent.ConcurrentDictionary<string, SimpleCacheValue> cacheStore = null;
-        public void Configration(string configstring)
+        /// <summary>
+        /// 配置
+        /// </summary>
+        public static void Configaure()
         {
-
+            cacheStore = new System.Collections.Concurrent.ConcurrentDictionary<string, SimpleCacheValue>();
+            timer = new System.Threading.Timer(Timer_Elapsed, cacheStore, 5000, 0);
         }
         /// <summary>
         /// 缓存初始化
@@ -53,20 +56,12 @@ namespace NFinal.Cache
         /// <param name="minutes">滑动缓存时间</param>
         public SimpleCache(int minutes) : base(minutes)
         {
-            //System.Threading.Monitor.Enter(hasInit);
-            //if (!hasInit)
-            //{
-            //    hasInit = true;
-            //    cacheStore = new System.Collections.Concurrent.ConcurrentDictionary<string, SimpleCacheValue>(StringComparer.Ordinal);
-            //    timer = new System.Threading.Timer(Timer_Elapsed, this, 5000, 0);
-            //}
-            //System.Threading.Monitor.Exit(hasInit);
         }
         /// <summary>
         /// 缓存定期处理函数
         /// </summary>
         /// <param name="sender"></param>
-        private void Timer_Elapsed(object sender)
+        public static void Timer_Elapsed(object sender)
         {
             foreach (var cacheItem in cacheStore)
             {
