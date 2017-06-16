@@ -19,8 +19,20 @@ namespace NFinal.DependencyInjection
         public void Configaure(params object[] options)
         {
             Type ImplementationType = Type.GetTypeFromHandle(ImplementationTypeHandle);
-            MethodInfo configureMethodInfo = ImplementationType.GetMethod("Configure", new Type[] { typeof(object[]) });
-            configureMethodInfo.Invoke(null, options);
+            Type[] types = Type.EmptyTypes;
+            if (options.Length > 0)
+            {
+                types = new Type[options.Length];
+            }
+            for (int i = 0; i < options.Length; i++)
+            {
+                types[i] = options[i].GetType();
+            }
+            MethodInfo configureMethodInfo = ImplementationType.GetMethod("Configure", types);
+            if (configureMethodInfo != null)
+            {
+                configureMethodInfo.Invoke(null, options);
+            }
         }
     }
 }

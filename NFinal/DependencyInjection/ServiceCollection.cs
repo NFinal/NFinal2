@@ -14,13 +14,13 @@ namespace NFinal.DependencyInjection
         /// <summary>
         /// 注入初始化数据缓存
         /// </summary>
-        private static NFinal.Collections.FastDictionary<RuntimeTypeHandle, ServiceCache> serviceCacheDictionary = null;
+        private static Dictionary<RuntimeTypeHandle, ServiceCache> serviceCacheDictionary = null;
         /// <summary>
         /// 服务集合
         /// </summary>
         public ServiceCollection()
         {
-            serviceCacheDictionary = new Collections.FastDictionary<RuntimeTypeHandle, ServiceCache>();
+            serviceCacheDictionary = new Dictionary<RuntimeTypeHandle, ServiceCache>();
         }
         /// <summary>
         /// 获取服务对象
@@ -113,7 +113,7 @@ namespace NFinal.DependencyInjection
         private DynamicMethod GetServiceMethod<TInterface>(Type ImplementationType,Type[] types)
         {
            
-            if (ImplementationType is TInterface)
+            if (typeof(TInterface).IsAssignableFrom(ImplementationType))
             {
                 ConstructorInfo constructorInfo = ImplementationType.GetConstructor(types);
                 DynamicMethod method = new DynamicMethod(Guid.NewGuid().ToString(), typeof(TInterface), types);
@@ -142,7 +142,8 @@ namespace NFinal.DependencyInjection
             serviceCache.GetServiceDelegate = createInstanceDelegate;
             serviceCache.ImplementationTypeHandle = ImplementationType.TypeHandle;
             RuntimeTypeHandle key = typeof(TInterface).TypeHandle;
-            if (serviceCacheDictionary.TryGetValue(key, out serviceCache))
+            ServiceCache serviceCache1;
+            if (serviceCacheDictionary.TryGetValue(key, out serviceCache1))
             {
                 serviceCacheDictionary[key] = serviceCache;
             }
@@ -167,7 +168,8 @@ namespace NFinal.DependencyInjection
             serviceCache.GetServiceDelegate = createInstanceDelegate;
             serviceCache.ImplementationTypeHandle = ImplementationType.TypeHandle;
             RuntimeTypeHandle key = typeof(TInterface).TypeHandle;
-            if (serviceCacheDictionary.TryGetValue(key, out serviceCache))
+            ServiceCache serviceCache1;
+            if (serviceCacheDictionary.TryGetValue(key, out serviceCache1))
             {
                 serviceCacheDictionary[key] = serviceCache;
             }
@@ -193,7 +195,8 @@ namespace NFinal.DependencyInjection
             serviceCache.GetServiceDelegate = createInstanceDelegate;
             serviceCache.ImplementationTypeHandle = ImplementationType.TypeHandle;
             RuntimeTypeHandle key = typeof(TInterface).TypeHandle;
-            if (serviceCacheDictionary.TryGetValue(key, out serviceCache))
+            ServiceCache serviceCache1;
+            if (serviceCacheDictionary.TryGetValue(key, out serviceCache1))
             {
                 serviceCacheDictionary[key] = serviceCache;
             }
@@ -220,7 +223,8 @@ namespace NFinal.DependencyInjection
             serviceCache.GetServiceDelegate = createInstanceDelegate;
             serviceCache.ImplementationTypeHandle = ImplementationType.TypeHandle;
             RuntimeTypeHandle key = typeof(TInterface).TypeHandle;
-            if (serviceCacheDictionary.TryGetValue(key, out serviceCache))
+            ServiceCache serviceCache1;
+            if (serviceCacheDictionary.TryGetValue(key, out serviceCache1))
             {
                 serviceCacheDictionary[key] = serviceCache;
             }
