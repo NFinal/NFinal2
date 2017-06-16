@@ -134,7 +134,7 @@ namespace NFinal.DependencyInjection
         /// <typeparam name="TInterface">接口</typeparam>
         /// <param name="ImplementationType">实现接口的类型</param>
         /// <returns>返回服务数据</returns>
-        public ServiceCache SetService<TInterface>(Type ImplementationType)
+        public ITypeHandler SetService<TInterface>(Type ImplementationType)
         {
             DynamicMethod method = GetServiceMethod<TInterface>(ImplementationType, Type.EmptyTypes);
             Delegate createInstanceDelegate = method.CreateDelegate(typeof(Func<TInterface>));
@@ -160,7 +160,7 @@ namespace NFinal.DependencyInjection
         /// <typeparam name="T1">参数1类型</typeparam>
         /// <param name="ImplementationType">实现接口的类型</param>
         /// <returns>返回服务数据</returns>
-        public ServiceCache SetService<TInterface, T1>(Type ImplementationType)
+        public ITypeHandler SetService<TInterface, T1>(Type ImplementationType)
         {
             DynamicMethod method = GetServiceMethod<TInterface>(ImplementationType, new Type[] { typeof(T1)});
             Delegate createInstanceDelegate = method.CreateDelegate(typeof(Func<T1,TInterface>));
@@ -187,7 +187,7 @@ namespace NFinal.DependencyInjection
         /// <typeparam name="T2">参数2类型</typeparam>
         /// <param name="ImplementationType">实现接口的类型</param>
         /// <returns>返回服务数据</returns>
-        public ServiceCache SetService<TInterface, T1,T2>(Type ImplementationType)
+        public ITypeHandler SetService<TInterface, T1,T2>(Type ImplementationType)
         {
             DynamicMethod method = GetServiceMethod<TInterface>(ImplementationType, new Type[] { typeof(T1),typeof(T2) });
             Delegate createInstanceDelegate = method.CreateDelegate(typeof(Func<T1,T2, TInterface>));
@@ -215,7 +215,7 @@ namespace NFinal.DependencyInjection
         /// <typeparam name="T3">参数3类型</typeparam>
         /// <param name="ImplementationType">实现接口的类型</param>
         /// <returns>返回服务数据</returns>
-        public ServiceCache SetService<TInterface, T1, T2,T3>(Type ImplementationType)
+        public ITypeHandler SetService<TInterface, T1, T2,T3>(Type ImplementationType)
         {
             DynamicMethod method = GetServiceMethod<TInterface>(ImplementationType, new Type[] { typeof(T1), typeof(T2),typeof(T3) });
             Delegate createInstanceDelegate = method.CreateDelegate(typeof(Func<T1, T2,T3, TInterface>));

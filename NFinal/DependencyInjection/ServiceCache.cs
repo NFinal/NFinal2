@@ -8,31 +8,11 @@ namespace NFinal.DependencyInjection
     /// <summary>
     /// 服务数据
     /// </summary>
-    public class ServiceCache
+    public class ServiceCache: TypeHandler
     {
-        public Delegate GetServiceDelegate;
-        public RuntimeTypeHandle ImplementationTypeHandle;
         /// <summary>
-        /// 服务配置
+        /// 获取服务的函数代理
         /// </summary>
-        /// <param name="options">配置参数</param>
-        public void Configaure(params object[] options)
-        {
-            Type ImplementationType = Type.GetTypeFromHandle(ImplementationTypeHandle);
-            Type[] types = Type.EmptyTypes;
-            if (options.Length > 0)
-            {
-                types = new Type[options.Length];
-            }
-            for (int i = 0; i < options.Length; i++)
-            {
-                types[i] = options[i].GetType();
-            }
-            MethodInfo configureMethodInfo = ImplementationType.GetMethod("Configure", types);
-            if (configureMethodInfo != null)
-            {
-                configureMethodInfo.Invoke(null, options);
-            }
-        }
+        public Delegate GetServiceDelegate;
     }
 }
