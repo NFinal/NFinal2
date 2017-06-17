@@ -22,7 +22,7 @@ namespace NFinal.Emit
     /// <summary>
     /// 利用EMIT快速创建自定义类型的帮助类
     /// </summary>
-    public class StructHelper
+    public class ClassHelper
     {
         private TypeBuilder tb;
         /// <summary>
@@ -31,7 +31,7 @@ namespace NFinal.Emit
         /// <param name="assemblyName">程序集名称</param>
         /// <param name="moduleName">模块名称</param>
         /// <param name="typeName">类型名称</param>
-        public StructHelper(string assemblyName, string moduleName, string typeName)
+        public ClassHelper(string assemblyName, string moduleName, string typeName)
         {
             this.tb = CreateTypeBuilder(assemblyName,moduleName,typeName);
  
@@ -50,9 +50,10 @@ namespace NFinal.Emit
         /// </summary>
         /// <param name="name">变量名</param>
         /// <param name="type">变量类型</param>
-        public void AddStaticField(string name, Type type)
+        public FieldBuilder AddStaticField(string name, Type type)
         {
             FieldBuilder fieldBuilder = this.tb.DefineField(name, type, FieldAttributes.Public|FieldAttributes.Static);
+            return fieldBuilder;
         }
         /// <summary>
         /// 添加字段
@@ -67,10 +68,20 @@ namespace NFinal.Emit
         /// 返回类型
         /// </summary>
         /// <returns></returns>
+
+#if (NET40 || NET451 || NET461)
         public Type ToType()
         {
-            return this.tb.GetType();
+            return this.tb.CreateType();
         }
+#endif
+#if NETCORE
+        public Type ToType()
+        {
+            return this.tb.CreateTypeInfo().AsType();
+        }
+#endif
+
         private static TypeBuilder CreateTypeBuilder(string assemblyName, string moduleName, string typeName)
         {
             TypeBuilder typeBuilder =
@@ -80,7 +91,7 @@ namespace NFinal.Emit
 #if NETCORE
                 AssemblyBuilder
 #endif
-                .DefineDynamicAssembly(new AssemblyName(assemblyName), AssemblyBuilderAccess.Run).DefineDynamicModule(moduleName).DefineType(typeName, TypeAttributes.Public);
+                .DefineDynamicAssembly(new AssemblyName(assemblyName), AssemblyBuilderAccess.Run).DefineDynamicModule(moduleName).DefineType(typeName, TypeAttributes.Public|TypeAttributes.Class);
             typeBuilder.DefineDefaultConstructor(MethodAttributes.Public);
             //typeBuilder.DefineConstructor(MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig, CallingConventions.Standard, new Type[] { });
             return typeBuilder;
