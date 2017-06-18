@@ -21,6 +21,8 @@ using NFinal.Owin;
 using System.Reflection;
 using System.Reflection.Emit;
 using NFinal.Http;
+using System.Runtime.CompilerServices;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace NFinal.Action
 {
@@ -71,7 +73,7 @@ namespace NFinal.Action
         /// <param name="controllerType">控制器类型</param>
         /// <param name="actionMethodInfo">控制器行为对应方法的反射信息</param>
         /// <returns></returns>
-        public static ActionExecute<TContext,TRequest> GetRunActionDelegate<TContext,TRequest>(Assembly assembly,Type controllerType,System.Reflection.MethodInfo actionMethodInfo)
+        public static ActionExecute<TContext,TRequest> GetRunActionDelegate<TContext,TRequest>(Assembly assembly,Type controllerType,System.Reflection.MethodInfo actionMethodInfo,ActionData<TContext,TRequest> actionData)
         {
             var TContextType = typeof(TContext);
             if (StringContainerOpImplicitMethodInfoDic == null)
@@ -167,28 +169,33 @@ namespace NFinal.Action
                 if (true)
                 {
                     var ControllerViewBagFieldInfo = controllerType.GetField("ViewBag");
-                    Type ViewBagType = null;
-                    if (ControllerViewBagFieldInfo.FieldType == typeof(object))
-                    {
-                        string modelTypeName = controllerType.Namespace + "." + controllerType.Name + "_Model";
-                        modelTypeName += "." + actionMethodInfo.Name;
-                        ViewBagType = assembly.GetType(modelTypeName);
-                        if (ViewBagType == null)
-                        {
-                            throw new NFinal.Exceptions.ModelNotFoundException(modelTypeName);
-                        }
-                    }
-                    else
-                    {
-                        ViewBagType = ControllerViewBagFieldInfo.FieldType;
-                    }
+                    Type ViewBagType =Type.GetTypeFromHandle(actionData.viewBagType);
+                    //if (ControllerViewBagFieldInfo.FieldType == typeof(object))
+                    //{
+                    //    string modelTypeName = controllerType.Namespace + "." + controllerType.Name + "_Model";
+                    //    modelTypeName += "." + actionMethodInfo.Name;
+                    //    ViewBagType = assembly.GetType(modelTypeName);
+                    //    if (ViewBagType == null)
+                    //    {
+                    //        throw new NFinal.Exceptions.ModelNotFoundException(modelTypeName);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    ViewBagType = ControllerViewBagFieldInfo.FieldType;
+                    //}
                     var ViewBagContructorInfo = ViewBagType.GetConstructor(Type.EmptyTypes);
                     var ViewBag = methodIL.DeclareLocal(ViewBagType);
-
+                    bool viewBagTypeIsExpandoObject = false;
+                    if (ViewBagType == typeof(System.Dynamic.ExpandoObject))
+                    {
+                        viewBagTypeIsExpandoObject = true;
+                    }
                     //controller
                     methodIL.Emit(OpCodes.Newobj, ViewBagContructorInfo);
                     methodIL.Emit(OpCodes.Stloc, ViewBag);
-
+                    List<FieldInfo> viewBagFiledInfoList = new List<FieldInfo>();
+                    List<FieldInfo> controllerFieldInfoList = new List<FieldInfo>();
                     //获取所有字段
                     var controllerFieldInfos = controllerType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static|BindingFlags.FlattenHierarchy);
                     foreach (var controllerFieldInfo in controllerFieldInfos)
@@ -197,54 +204,89 @@ namespace NFinal.Action
                         var viewBagMemberAttribute = controllerFieldInfo.GetCustomAttributes(typeof(ViewBagMemberAttribute), true);
                         if (viewBagMemberAttribute.Count() > 0)
                         {
-                            var ViewBagFiledInfo = ViewBagType.GetField(
-                                controllerFieldInfo.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
-                            //查找到ViewBag中具有相同名字的字段
-                            if (ViewBagFiledInfo != null && ViewBagFiledInfo.FieldType == controllerFieldInfo.FieldType)
+                            if (viewBagTypeIsExpandoObject)
                             {
-                                if (controllerFieldInfo.IsStatic)
+                                controllerFieldInfoList.Add(controllerFieldInfo);
+                            }
+                            else
+                            {
+                                var ViewBagFiledInfo = ViewBagType.GetField(
+                                    controllerFieldInfo.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                                //查找到ViewBag中具有相同名字的字段
+                                if (ViewBagFiledInfo != null && ViewBagFiledInfo.FieldType == controllerFieldInfo.FieldType)
                                 {
-                                    methodIL.Emit(OpCodes.Ldloc, ViewBag);
-                                    methodIL.Emit(OpCodes.Ldsfld, controllerFieldInfo);
-                                    methodIL.Emit(OpCodes.Stfld, ViewBagFiledInfo);
-                                }
-                                else
-                                {
-                                    //赋值操作
-                                    methodIL.Emit(OpCodes.Ldloc, ViewBag);
-                                    methodIL.Emit(OpCodes.Ldloc, controller);
-                                    methodIL.Emit(OpCodes.Ldfld, controllerFieldInfo);
-                                    methodIL.Emit(OpCodes.Stfld, ViewBagFiledInfo);
+                                    viewBagFiledInfoList.Add(ViewBagFiledInfo);
+                                    controllerFieldInfoList.Add(controllerFieldInfo);
                                 }
                             }
                         }
                     }
+                    
+                    List<MethodInfo> controllerProperyInfoGetMethodList = new List<MethodInfo>();
+                    List<MethodInfo> viewBagPropertyInfoSetMethodList = new List<MethodInfo>();
                     var controllerPropertyInfos = controllerType.GetProperties(BindingFlags.Public|BindingFlags.Instance|BindingFlags.Static| BindingFlags.FlattenHierarchy);
                     foreach (var controllerPropertyInfo in controllerPropertyInfos)
                     {
                         var viewBagMemberAttribute = controllerPropertyInfo.GetCustomAttributes(typeof(ViewBagMemberAttribute), true);
                         if (viewBagMemberAttribute.Count() > 0)
                         {
-                            var viewBagPropertyInfo = ViewBagType.GetProperty(
-                                controllerPropertyInfo.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
-                            if (viewBagPropertyInfo != null && viewBagPropertyInfo.PropertyType == controllerPropertyInfo.PropertyType)
+                            if (viewBagTypeIsExpandoObject)
                             {
-                                MethodInfo controllerPropertyInfoGetGetMethod = controllerPropertyInfo.GetGetMethod();
-                                MethodInfo viewBagPropertyInfoGetSetMethod = viewBagPropertyInfo.GetSetMethod();
-                                if (controllerPropertyInfo.GetGetMethod().IsStatic)
+                                controllerProperyInfoGetMethodList.Add(controllerPropertyInfo.GetGetMethod());
+                            }
+                            else
+                            {
+                                var viewBagPropertyInfo = ViewBagType.GetProperty(
+                                    controllerPropertyInfo.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                                if (viewBagPropertyInfo != null && viewBagPropertyInfo.PropertyType == controllerPropertyInfo.PropertyType)
                                 {
-                                    methodIL.Emit(OpCodes.Ldloc, ViewBag);
-                                    methodIL.Emit(OpCodes.Call, controllerPropertyInfoGetGetMethod);
-                                    methodIL.Emit(OpCodes.Callvirt, viewBagPropertyInfoGetSetMethod);
-                                }
-                                else
-                                {
-                                    methodIL.Emit(OpCodes.Ldloc, ViewBag);
-                                    methodIL.Emit(OpCodes.Ldloc, controller);
-                                    methodIL.Emit(OpCodes.Callvirt, controllerPropertyInfoGetGetMethod);
-                                    methodIL.Emit(OpCodes.Callvirt, viewBagPropertyInfoGetSetMethod);
+                                    MethodInfo controllerPropertyInfoGetMethod = controllerPropertyInfo.GetGetMethod();
+                                    MethodInfo viewBagPropertyInfoSetMethod = viewBagPropertyInfo.GetSetMethod();
+                                    controllerProperyInfoGetMethodList.Add(controllerPropertyInfoGetMethod);
+                                    viewBagPropertyInfoSetMethodList.Add(viewBagPropertyInfoSetMethod);
                                 }
                             }
+                        }
+                    }
+                    Type viewBagOperateStaticType = null;
+                    if (viewBagTypeIsExpandoObject)
+                    {
+                    }
+                    for (int i = 0; i < viewBagFiledInfoList.Count; i++)
+                    {
+                        FieldInfo controllerFieldInfo = controllerFieldInfoList[i];
+                        FieldInfo viewBagFiledInfo = viewBagFiledInfoList[i];
+                        if (controllerFieldInfo.IsStatic)
+                        {
+                            methodIL.Emit(OpCodes.Ldloc, ViewBag);
+                            methodIL.Emit(OpCodes.Ldsfld, controllerFieldInfo);
+                            methodIL.Emit(OpCodes.Stfld, viewBagFiledInfo);
+                        }
+                        else
+                        {
+                            //赋值操作
+                            methodIL.Emit(OpCodes.Ldloc, ViewBag);
+                            methodIL.Emit(OpCodes.Ldloc, controller);
+                            methodIL.Emit(OpCodes.Ldfld, controllerFieldInfo);
+                            methodIL.Emit(OpCodes.Stfld, viewBagFiledInfo);
+                        }
+                    }
+                    for (int i = 0; i < viewBagPropertyInfoSetMethodList.Count; i++)
+                    {
+                        MethodInfo controllerPropertyInfoGetMethod = controllerProperyInfoGetMethodList[i];
+                        MethodInfo viewBagPropertyInfoSetMethod = viewBagPropertyInfoSetMethodList[i];
+                        if (controllerPropertyInfoGetMethod.IsStatic)
+                        {
+                            methodIL.Emit(OpCodes.Ldloc, ViewBag);
+                            methodIL.Emit(OpCodes.Call, controllerPropertyInfoGetMethod);
+                            methodIL.Emit(OpCodes.Callvirt, viewBagPropertyInfoSetMethod);
+                        }
+                        else
+                        {
+                            methodIL.Emit(OpCodes.Ldloc, ViewBag);
+                            methodIL.Emit(OpCodes.Ldloc, controller);
+                            methodIL.Emit(OpCodes.Callvirt, controllerPropertyInfoGetMethod);
+                            methodIL.Emit(OpCodes.Callvirt, viewBagPropertyInfoSetMethod);
                         }
                     }
                     methodIL.Emit(OpCodes.Ldloc, controller);

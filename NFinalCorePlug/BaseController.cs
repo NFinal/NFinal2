@@ -15,8 +15,9 @@ namespace NFinalCorePlug
     //[ActionExport("UpdateA",typeof(object))]
     public class BaseController<TModel>:NFinal.CoreAction
     {
-        public void UpdateA(TModel model,int a,string b)
+        public void UpdateA(int a,string b)
         {
+            this.ViewBag.a = 1;
             //this.ViewBag.a = model;
         }
         public override IDbConnection GetDbConnection()

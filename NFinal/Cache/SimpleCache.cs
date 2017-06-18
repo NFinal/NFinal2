@@ -45,8 +45,9 @@ namespace NFinal.Cache
         /// <summary>
         /// 配置
         /// </summary>
-        public static void Configaure()
+        public static void Configaure(int minutes)
         {
+            SimpleCache.minutes = minutes;
             cacheStore = new System.Collections.Concurrent.ConcurrentDictionary<string, SimpleCacheValue>();
             timer = new System.Threading.Timer(Timer_Elapsed, cacheStore, 5000, 0);
         }
@@ -54,7 +55,7 @@ namespace NFinal.Cache
         /// 缓存初始化
         /// </summary>
         /// <param name="minutes">滑动缓存时间</param>
-        public SimpleCache(int minutes) : base(minutes)
+        public SimpleCache(NFinal.Serialize.ISerializable serializable) : base(serializable,CacheType.SlidingExpiration)
         {
         }
         /// <summary>

@@ -7,7 +7,8 @@ using Dapper;
 
 namespace NFinalCorePlug.Controllers
 {
-    public class IndexController:BaseController<int>
+    [NFinal.ActionExport("UpdateA")]
+    public class IndexController : BaseController<int>
     {
         [Code.UserCheck]
         [Code.UserAuthroization]

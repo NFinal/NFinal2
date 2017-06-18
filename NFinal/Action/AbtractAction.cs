@@ -37,7 +37,21 @@ namespace NFinal.Action
         /// <returns></returns>
         public virtual NFinal.Http.ISession GetSession(string sessionId)
         {
-            return new Session(sessionId,"User",NFinal.Config.Configration.serviceCollection.GetService<NFinal.Cache.ICache<string>,int>(30));
+            return NFinal.Config.Configration.serviceCollection.
+                GetService<NFinal.Http.ISession,
+                //ISession初始化时的参数类型
+                string, NFinal.Cache.ICache<string>>
+                (
+                    //sessionId
+                    sessionId, 
+                    //缓存对象
+                    NFinal.Config.Configration.serviceCollection.GetService<NFinal.Cache.ICache<string>,
+                    //ICache初始化时的参数类型
+                    NFinal.Serialize.ISerializable>
+                    (
+                        //序列化对象
+                        NFinal.Config.Configration.serviceCollection.GetService<NFinal.Serialize.ISerializable>()
+                    ));
         }
         /// <summary>
         /// 配置数据

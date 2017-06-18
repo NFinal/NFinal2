@@ -7,6 +7,7 @@ namespace NFinal.DependencyInjection
     public interface ITypeHandler
     {
         RuntimeTypeHandle ImplementationTypeHandle { get; set; }
+        bool allowConfigaure { get; set; }
         void Configaure(params object[] options);
     }
 }

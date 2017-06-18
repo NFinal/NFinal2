@@ -4,7 +4,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netstandard1.5</TargetFramework>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>False</SignAssembly>
     <AssemblyOriginatorKeyFile>key.pfx</AssemblyOriginatorKeyFile>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <ApplicationIcon />

@@ -20,6 +20,7 @@ using System.IO;
 using System.Threading.Tasks;
 using NFinal.Action;
 using NFinal.Http;
+using NFinal.DependencyInjection;
 
 namespace NFinal.Middleware
 {
@@ -77,6 +78,7 @@ namespace NFinal.Middleware
         /// <param name="next">Http上下文处理函数</param>
         public Middleware(InvokeDelegate<TContext> next)
         {
+            NFinal.Config.Configration.serviceCollection.SetDefault();
             ////初始化插件
             if (!NFinal.Plugs.PlugManager.isInit)
             {

@@ -30,7 +30,7 @@ namespace NFinal.Emit
             for (int i = 0; i < fields.Count; i++)
             {
                 FieldInfo fieldInfo=  ViewBagOperateType.GetField("<>p__" + i.ToString());
-                fieldInfos.Add(fieldInfo);dynamic a = new System.Dynamic.ExpandoObject();
+                fieldInfos.Add(fieldInfo);
                
             }
             

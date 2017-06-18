@@ -15,7 +15,7 @@
 using System.IO;
 using ProtoBuf;
 
-namespace NFinal
+namespace NFinal.Serialize
 {
     /// <summary>
     /// 序列化

@@ -151,7 +151,7 @@ namespace NFinal.Action
             Module[] modules = null;
             Type[] types = null;
 
-            NFinal.Collections.FastDictionary<string,ActionData<TContext, TRequest>> actionDataDictionary = new NFinal.Collections.FastDictionary<string, ActionData<TContext, TRequest>>();
+            NFinal.Collections.FastDictionary<string, ActionData<TContext, TRequest>> actionDataDictionary = new NFinal.Collections.FastDictionary<string, ActionData<TContext, TRequest>>();
             //List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList = new List<KeyValuePair<string, ActionData<TContext, TRequest>>>();
             NFinal.Collections.FastDictionary<RuntimeTypeHandle, Dictionary<string, NFinal.Url.FormatData>> formatControllerDictionary = new NFinal.Collections.FastDictionary<RuntimeTypeHandle, Dictionary<string, NFinal.Url.FormatData>>();
             Type controller = null;
@@ -177,12 +177,12 @@ namespace NFinal.Action
                     continue;
                 }
                 Assembly assembly = plugInfo.assembly;
-               
+
                 modules = assembly.GetModules();
                 for (int j = 0; j < modules.Length; j++)
                 {
                     types = modules[j].GetTypes();
-                   
+
                     for (int k = 0; k < types.Length; k++)
                     {
                         controller = types[k];
@@ -208,7 +208,7 @@ namespace NFinal.Action
                                 formatControllerDictionary.Add(controller.TypeHandle, formatMethodDic);
                             }
                         }
-                        
+
                     }
                 }
             }
@@ -217,17 +217,17 @@ namespace NFinal.Action
             {
                 throw new NFinal.Exceptions.HasNoControllerInProjectException();
             }
-            NFinal.Url.ActionUrlHelper.formatControllerDictionary= formatControllerDictionary;
+            NFinal.Url.ActionUrlHelper.formatControllerDictionary = formatControllerDictionary;
             if (globalConfig.debug.enable)
             {
                 NFinal.Url.ActionUrlHelper.GetUrlRouteJsContent(globalConfig);
                 NFinal.Url.ActionUrlHelper.GenerateActionDebugHtml(globalConfig);
             }
-            
+
             //}
             //添加图标响应
             //Icon.Favicon.Init(actionDataList);
-            Middleware.Middleware<TContext, TRequest>.actionFastDic =new Collections.FastSearch.FastSearch<ActionData<TContext, TRequest>>(actionDataDictionary);
+            Middleware.Middleware<TContext, TRequest>.actionFastDic = new Collections.FastSearch.FastSearch<ActionData<TContext, TRequest>>(actionDataDictionary);
             actionDataDictionary.Clear();
         }
         /// <summary>
@@ -243,38 +243,30 @@ namespace NFinal.Action
         /// <param name="plugInfo">插件信息</param>
         public static void AddActionData<TContext, TRequest>(NFinal.Collections.FastDictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
             Dictionary<string, NFinal.Url.FormatData> formatMethodDictionary,
-            Assembly assembly,Type controller, 
+            Assembly assembly, Type controller,
             NFinal.Config.Global.GlobalConfig globalConfig,
             NFinal.Plugs.PlugInfo plugInfo)
         {
             Type viewBagType = null;
-            MethodInfo methodInfo = null;
             viewBagType = controller.GetField("ViewBag").FieldType;
             if (viewBagType == typeof(object))
             {
                 MethodInfo[] actions = null;
-                string[] actionKeys;
                 string controllerName;
                 string areaName;
-                string actionUrl;
-                string actionName;
-                string[] method;
-                UrlAttribute urlAttribute;
-                NFinal.Url.ActionUrlData actionUrlData;
+
                 ActionData<TContext, TRequest> actionData;
                 GetControllerUrl(out controllerName, out areaName, controller, globalConfig);
-                actions = controller.GetMethods(BindingFlags.DeclaredOnly|BindingFlags.Instance | BindingFlags.Public);
-                List<MethodInfo> actionList = new List<MethodInfo>();
-                actionList.AddRange(actions);
+                actions = controller.GetMethods(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public);
 #if NETCORE
                 //查找函数
-                var controllerAttributeList = controller.GetTypeInfo().GetCustomAttributes(typeof(NFinal.ActionExportAttribute),true);
+                var controllerAttributeList = controller.GetTypeInfo().GetCustomAttributes(typeof(NFinal.ActionExportAttribute), true);
 #else
                 var controllerAttributeList = controller.GetCustomAttributes(typeof(NFinal.ActionExportAttribute), true);
 #endif
                 MethodInfo action = null;
                 bool hasAction = false;
-                ActionExportAttribute actionExportAttribute=null;
+                ActionExportAttribute actionExportAttribute = null;
                 foreach (var controllerAttribute in controllerAttributeList)
                 {
                     actionExportAttribute = (NFinal.ActionExportAttribute)controllerAttribute;
@@ -284,10 +276,14 @@ namespace NFinal.Action
                     }
                     else
                     {
-                        action = controller.GetMethod(actionExportAttribute.methodName,actionExportAttribute.types);
+                        action = controller.GetMethod(actionExportAttribute.methodName, actionExportAttribute.types);
+                    }
+                    if (action == null)
+                    {
+                        throw new NFinal.Exceptions.NotFoundExportActionException(controller.FullName, actionExportAttribute.methodName);
                     }
                     hasAction = false;
-                    foreach (var actionTmp in actionList)
+                    foreach (var actionTmp in actions)
                     {
                         if (actionTmp == action)
                         {
@@ -296,77 +292,114 @@ namespace NFinal.Action
                     }
                     if (!hasAction)
                     {
-                        actionList.Add(action);
+                        actionData = new ActionData<TContext, TRequest>();
+                        actionData.viewBagType = actionExportAttribute.viewBagType.TypeHandle;
+                        AddActionDataForMethod(actionDataDictionary, formatMethodDictionary, 
+                            assembly, controller, 
+                            actionData, action, 
+                            controllerName, areaName, 
+                            globalConfig, plugInfo);
                     }
                 }
 
                 //MethodInfo actionExportList =
-                for (int m = 0; m < actionList.Count; m++)
+                for (int m = 0; m < actions.Length; m++)
                 {
-                    if (actionList[m].IsAbstract || actionList[m].IsVirtual || actionList[m].IsGenericMethod
-                        || actionList[m].IsStatic || actionList[m].IsConstructor)
-                    {
-                        continue;
-                    }
-                    actionKeys = GetActionKeys(controllerName, areaName, out actionUrl, out actionName, out method,
-                        out urlAttribute,out actionUrlData,
-                        actionList[m], globalConfig,plugInfo);
                     actionData = new ActionData<TContext, TRequest>();
-                    if (urlAttribute == null)
+                    string modelTypeName = controller.Namespace + "." + controller.Name + "_Model";
+                    modelTypeName += "." + actions[m].Name;
+                    viewBagType = assembly.GetType(modelTypeName);
+                    if (viewBagType == null)
                     {
-                        actionData.urlString = null;
-                        actionData.contentType = "text/html; charset=utf-8";
-                        actionData.compressMode = CompressMode.None;
+                        throw new NFinal.Exceptions.ModelNotFoundException(modelTypeName);
                     }
                     else
                     {
-                        actionData.urlString = urlAttribute.urlString;
-                        actionData.contentType = urlAttribute.contentType;
-                        actionData.compressMode = urlAttribute.compressMode;
+                        actionData.viewBagType = viewBagType.TypeHandle;
                     }
-                    actionData.className = controller.FullName;
-                    actionData.methodName = actionList[m].Name;
-                    actionData.actionUrlData = actionUrlData;
-                    actionData.controllerName = controllerName;
-                    actionData.areaName = areaName;
-                    actionData.actionUrl = actionUrl;
-                    actionData.actionName = actionName;
-                    actionData.method = method;
-                    actionData.plugConfig = plugInfo.config;
-                    if (actionData.actionUrlData != null)   
-                    {
-                        formatMethodDictionary.Add(actionList[m].Name, new NFinal.Url.FormatData(actionData.actionUrlData.formatUrl, actionData.actionUrlData.actionUrlNames));
-                    }
-                    else
-                    {
-                        formatMethodDictionary.Add(actionList[m].Name, new NFinal.Url.FormatData(actionData.actionUrl,null));
-                    }
-                    methodInfo = actionList[m];
-                    actionData.IAuthorizationFilters = GetFilters<NFinal.Filter.IAuthorizationFilter>(
-                        typeof(NFinal.Filter.IAuthorizationFilter), controller, actionList[m]);
-                    actionData.IParametersFilters = GetFilters<NFinal.Filter.IParameterFilter>(
-                        typeof(NFinal.Filter.IParameterFilter),controller, actionList[m]);
-                    actionData.IBeforeActionFilters = GetFilters<NFinal.Filter.IBeforeActionFilter>(
-                        typeof(NFinal.Filter.IBeforeActionFilter),controller, actionList[m]
-                        );
-                    actionData.IAfterActionFilters = GetFilters<NFinal.Filter.IAfterActionFilter>(
-                        typeof(NFinal.Filter.IAfterActionFilter), controller, actionList[m]
-                        );
-                    actionData.IResponseFilters = GetFilters<NFinal.Filter.IResponseFilter>(
-                        typeof(NFinal.Filter.IResponseFilter), controller, actionList[m]);
-                    actionData.actionExecute = NFinal.Action.Actuator.GetRunActionDelegate<TContext, TRequest>(assembly,controller, methodInfo);
-                    foreach (var actionKey in actionKeys)
-                    {
-                        if (actionDataDictionary.ContainsKey(actionKey))
-                        {
-                            var oldActionData = actionDataDictionary[actionKey];
-                            throw new NFinal.Exceptions.DuplicateActionUrlException(oldActionData.className, oldActionData.methodName, actionData.className, actionData.methodName);
-                        }
-                        else
-                        {
-                            actionDataDictionary.Add(actionKey, actionData);
-                        }
-                    }
+                    AddActionDataForMethod(actionDataDictionary, formatMethodDictionary,
+                        assembly, controller,
+                        actionData, actions[m],
+                        controllerName, areaName,
+                        globalConfig, plugInfo);
+                }
+            }
+        }
+        public static void AddActionDataForMethod<TContext, TRequest>(NFinal.Collections.FastDictionary<string, ActionData<TContext, TRequest>> actionDataDictionary,
+            Dictionary<string, NFinal.Url.FormatData> formatMethodDictionary,
+            Assembly assembly, Type controller,
+            ActionData<TContext, TRequest> actionData,
+            MethodInfo methodInfo,string controllerName,string areaName,
+            NFinal.Config.Global.GlobalConfig globalConfig,
+            NFinal.Plugs.PlugInfo plugInfo)
+        {
+            if (methodInfo.IsAbstract || methodInfo.IsVirtual || methodInfo.IsGenericMethod
+                        || methodInfo.IsStatic || methodInfo.IsConstructor)
+            {
+                return;
+            }
+            string actionName;
+            string actionUrl;
+            string[] actionKeys;
+            string[] method;
+            UrlAttribute urlAttribute;
+            NFinal.Url.ActionUrlData actionUrlData;
+            actionKeys = GetActionKeys(controllerName, areaName, out actionUrl, out actionName, out method,
+                out urlAttribute, out actionUrlData,
+                methodInfo, globalConfig, plugInfo);
+            
+            if (urlAttribute == null)
+            {
+                actionData.urlString = null;
+                actionData.contentType = "text/html; charset=utf-8";
+                actionData.compressMode = CompressMode.None;
+            }
+            else
+            {
+                actionData.urlString = urlAttribute.urlString;
+                actionData.contentType = urlAttribute.contentType;
+                actionData.compressMode = urlAttribute.compressMode;
+            }
+            actionData.className = controller.FullName;
+            actionData.methodName = methodInfo.Name;
+            actionData.actionUrlData = actionUrlData;
+            actionData.controllerName = controllerName;
+            actionData.areaName = areaName;
+            actionData.actionUrl = actionUrl;
+            actionData.actionName = actionName;
+            actionData.method = method;
+            actionData.plugConfig = plugInfo.config;
+            if (actionData.actionUrlData != null)
+            {
+                formatMethodDictionary.Add(methodInfo.Name, new NFinal.Url.FormatData(actionData.actionUrlData.formatUrl, actionData.actionUrlData.actionUrlNames));
+            }
+            else
+            {
+                formatMethodDictionary.Add(methodInfo.Name, new NFinal.Url.FormatData(actionData.actionUrl, null));
+            }
+            actionData.IAuthorizationFilters = GetFilters<NFinal.Filter.IAuthorizationFilter>(
+                typeof(NFinal.Filter.IAuthorizationFilter), controller, methodInfo);
+            actionData.IParametersFilters = GetFilters<NFinal.Filter.IParameterFilter>(
+                typeof(NFinal.Filter.IParameterFilter), controller, methodInfo);
+            actionData.IBeforeActionFilters = GetFilters<NFinal.Filter.IBeforeActionFilter>(
+                typeof(NFinal.Filter.IBeforeActionFilter), controller, methodInfo
+                );
+            actionData.IAfterActionFilters = GetFilters<NFinal.Filter.IAfterActionFilter>(
+                typeof(NFinal.Filter.IAfterActionFilter), controller, methodInfo
+                );
+            actionData.IResponseFilters = GetFilters<NFinal.Filter.IResponseFilter>(
+                typeof(NFinal.Filter.IResponseFilter), controller, methodInfo);
+            actionData.actionExecute = NFinal.Action.Actuator.GetRunActionDelegate<TContext, TRequest>(assembly, controller, methodInfo,actionData);
+            foreach (var actionKey in actionKeys)
+            {
+                if (actionDataDictionary.ContainsKey(actionKey))
+                {
+                    var oldActionData = actionDataDictionary[actionKey];
+                    throw new NFinal.Exceptions.DuplicateActionUrlException(oldActionData.className, oldActionData.methodName, actionData.className, actionData.methodName);
+                }
+                else
+                {
+                    actionDataDictionary.Add(actionKey, actionData);
                 }
             }
         }

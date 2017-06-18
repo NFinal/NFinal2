@@ -38,15 +38,15 @@ namespace NFinal.Cache
         /// <summary>
         /// 序列化对象
         /// </summary>
-        public NFinal.ISerializable serialize;
+        public NFinal.Serialize.ISerializable serialize;
         /// <summary>
         /// redis缓存
         /// </summary>
         /// <param name="configuration">redis缓存配置</param>
         /// <param name="minutes">缓存时间</param>
-        public RedisCacheT(string configuration, int minutes)
+        public RedisCacheT(NFinal.Serialize.ISerializable serialize, string configuration, int minutes)
         {
-            this.serialize = new NFinal.ProtobufSerialize();
+            this.serialize = serialize;
             this.configuration = configuration;
             this.minutes = minutes;
             if (databasePool.ContainsKey(configuration))

@@ -36,7 +36,7 @@ namespace NFinal.Cache
         /// </summary>
         /// <param name="configuration">redis配置参数</param>
         /// <param name="minutes">滑动缓存时间</param>
-        public RedisCache(int minutes):base(CacheType.SlidingExpiration,minutes)
+        public RedisCache(NFinal.Serialize.ISerializable serializable):base(serializable, CacheType.SlidingExpiration)
         {
             ConnectionMultiplexer redis = ConnectionMultiplexer.Connect(configration);
             this.database = redis.GetDatabase();
@@ -45,9 +45,10 @@ namespace NFinal.Cache
         /// Redis配置
         /// </summary>
         /// <param name="configration"></param>
-        public static void Configaure(string configration)
+        public static void Configaure(string configration,int minutes)
         {
             RedisCache.configration = configration;
+            RedisCache.minutes = minutes;
         }
         /// <summary>
         /// redis缓存初始化
@@ -55,7 +56,7 @@ namespace NFinal.Cache
         /// <param name="configuration">redis配置参数</param>
         /// <param name="cacheType">缓存类型</param>
         /// <param name="minutes">缓存时间</param>
-        public RedisCache(string configuration, CacheType cacheType,int minutes) : base(cacheType,minutes)
+        public RedisCache(NFinal.Serialize.ISerializable serializable, string configuration, CacheType cacheType) : base(serializable,cacheType)
         {
             this.database = redis.GetDatabase();
         }
@@ -85,7 +86,7 @@ namespace NFinal.Cache
         {
             if (cacheType == CacheType.SlidingExpiration)
             {
-                database.KeyExpire(key, TimeSpan.FromMinutes(this.minutes));
+                database.KeyExpire(key, TimeSpan.FromMinutes(Cache<string>.minutes));
             }
             return database.StringGet(key);
         }

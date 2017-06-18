@@ -239,8 +239,14 @@
     <Compile Include="..\nfinal\dependencyinjection\TypeHandler.cs">
       <Link>Core\DependencyInjection\TypeHandler.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Emit\ClassHelper.cs">
+      <Link>Core\Emit\ClassHelper.cs</Link>
+    </Compile>
     <Compile Include="..\nfinal\emit\CopyHelper.cs">
       <Link>Core\Emit\CopyHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Emit\ExpandoObject.cs">
+      <Link>Core\Emit\ExpandoObject.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\emit\StructHelper.cs">
       <Link>Core\Emit\StructHelper.cs</Link>

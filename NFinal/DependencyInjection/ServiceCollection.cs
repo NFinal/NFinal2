@@ -14,13 +14,13 @@ namespace NFinal.DependencyInjection
         /// <summary>
         /// 注入初始化数据缓存
         /// </summary>
-        private static Dictionary<RuntimeTypeHandle, ServiceCache> serviceCacheDictionary = null;
+        private static NFinal.Collections.FastDictionary<RuntimeTypeHandle, ServiceCache> serviceCacheDictionary = null;
         /// <summary>
         /// 服务集合
         /// </summary>
         public ServiceCollection()
         {
-            serviceCacheDictionary = new Dictionary<RuntimeTypeHandle, ServiceCache>();
+            serviceCacheDictionary = new NFinal.Collections.FastDictionary<RuntimeTypeHandle, ServiceCache>();
         }
         /// <summary>
         /// 获取服务对象
@@ -132,9 +132,10 @@ namespace NFinal.DependencyInjection
         /// 设置服务
         /// </summary>
         /// <typeparam name="TInterface">接口</typeparam>
+        /// <param name="rewrite">如果已经注册服务，是否需要重写</param>
         /// <param name="ImplementationType">实现接口的类型</param>
         /// <returns>返回服务数据</returns>
-        public ITypeHandler SetService<TInterface>(Type ImplementationType)
+        public ITypeHandler SetService<TInterface>(Type ImplementationType, bool rewrite = true)
         {
             DynamicMethod method = GetServiceMethod<TInterface>(ImplementationType, Type.EmptyTypes);
             Delegate createInstanceDelegate = method.CreateDelegate(typeof(Func<TInterface>));
@@ -142,14 +143,23 @@ namespace NFinal.DependencyInjection
             serviceCache.GetServiceDelegate = createInstanceDelegate;
             serviceCache.ImplementationTypeHandle = ImplementationType.TypeHandle;
             RuntimeTypeHandle key = typeof(TInterface).TypeHandle;
-            ServiceCache serviceCache1;
+            ServiceCache serviceCache1 = null;
             if (serviceCacheDictionary.TryGetValue(key, out serviceCache1))
             {
-                serviceCacheDictionary[key] = serviceCache;
+                if (rewrite || serviceCache1 != null)
+                {
+                    serviceCacheDictionary[key] = serviceCache;
+                    serviceCache.allowConfigaure = true;
+                }
+                else
+                {
+                    serviceCache.allowConfigaure = false;
+                }
             }
             else
             {
                 serviceCacheDictionary.Add(key, serviceCache);
+                serviceCache.allowConfigaure = true;
             }
             return serviceCache;
         }
@@ -158,9 +168,10 @@ namespace NFinal.DependencyInjection
         /// </summary>
         /// <typeparam name="TInterface">接口</typeparam>
         /// <typeparam name="T1">参数1类型</typeparam>
+        /// <param name="rewrite">如果已经注册服务，是否需要重写</param>
         /// <param name="ImplementationType">实现接口的类型</param>
         /// <returns>返回服务数据</returns>
-        public ITypeHandler SetService<TInterface, T1>(Type ImplementationType)
+        public ITypeHandler SetService<TInterface, T1>(Type ImplementationType, bool rewrite = true)
         {
             DynamicMethod method = GetServiceMethod<TInterface>(ImplementationType, new Type[] { typeof(T1)});
             Delegate createInstanceDelegate = method.CreateDelegate(typeof(Func<T1,TInterface>));
@@ -169,13 +180,23 @@ namespace NFinal.DependencyInjection
             serviceCache.ImplementationTypeHandle = ImplementationType.TypeHandle;
             RuntimeTypeHandle key = typeof(TInterface).TypeHandle;
             ServiceCache serviceCache1;
+            
             if (serviceCacheDictionary.TryGetValue(key, out serviceCache1))
             {
-                serviceCacheDictionary[key] = serviceCache;
+                if (rewrite || serviceCache1 != null)
+                {
+                    serviceCacheDictionary[key] = serviceCache;
+                    serviceCache.allowConfigaure = true;
+                }
+                else
+                {
+                    serviceCache.allowConfigaure = false;
+                }
             }
             else
             {
                 serviceCacheDictionary.Add(key, serviceCache);
+                serviceCache.allowConfigaure = true;
             }
             return serviceCache;
         }
@@ -185,9 +206,10 @@ namespace NFinal.DependencyInjection
         /// <typeparam name="TInterface">接口</typeparam>
         /// <typeparam name="T1">参数1类型</typeparam>
         /// <typeparam name="T2">参数2类型</typeparam>
+        /// <param name="rewrite">如果已经注册服务，是否需要重写</param>
         /// <param name="ImplementationType">实现接口的类型</param>
         /// <returns>返回服务数据</returns>
-        public ITypeHandler SetService<TInterface, T1,T2>(Type ImplementationType)
+        public ITypeHandler SetService<TInterface, T1,T2>(Type ImplementationType, bool rewrite = true)
         {
             DynamicMethod method = GetServiceMethod<TInterface>(ImplementationType, new Type[] { typeof(T1),typeof(T2) });
             Delegate createInstanceDelegate = method.CreateDelegate(typeof(Func<T1,T2, TInterface>));
@@ -198,11 +220,20 @@ namespace NFinal.DependencyInjection
             ServiceCache serviceCache1;
             if (serviceCacheDictionary.TryGetValue(key, out serviceCache1))
             {
-                serviceCacheDictionary[key] = serviceCache;
+                if (rewrite || serviceCache1 != null)
+                {
+                    serviceCacheDictionary[key] = serviceCache;
+                    serviceCache.allowConfigaure = true;
+                }
+                else
+                {
+                    serviceCache.allowConfigaure = false;
+                }
             }
             else
             {
                 serviceCacheDictionary.Add(key, serviceCache);
+                serviceCache.allowConfigaure = true;
             }
             return serviceCache;
         }
@@ -213,9 +244,10 @@ namespace NFinal.DependencyInjection
         /// <typeparam name="T1">参数1类型</typeparam>
         /// <typeparam name="T2">参数2类型</typeparam>
         /// <typeparam name="T3">参数3类型</typeparam>
+        /// <param name="rewrite">如果已经注册服务，是否需要重写</param>
         /// <param name="ImplementationType">实现接口的类型</param>
         /// <returns>返回服务数据</returns>
-        public ITypeHandler SetService<TInterface, T1, T2,T3>(Type ImplementationType)
+        public ITypeHandler SetService<TInterface, T1, T2,T3>(Type ImplementationType, bool rewrite = true)
         {
             DynamicMethod method = GetServiceMethod<TInterface>(ImplementationType, new Type[] { typeof(T1), typeof(T2),typeof(T3) });
             Delegate createInstanceDelegate = method.CreateDelegate(typeof(Func<T1, T2,T3, TInterface>));
@@ -226,11 +258,20 @@ namespace NFinal.DependencyInjection
             ServiceCache serviceCache1;
             if (serviceCacheDictionary.TryGetValue(key, out serviceCache1))
             {
-                serviceCacheDictionary[key] = serviceCache;
+                if (rewrite || serviceCache1 != null)
+                {
+                    serviceCacheDictionary[key] = serviceCache;
+                    serviceCache.allowConfigaure = true;
+                }
+                else
+                {
+                    serviceCache.allowConfigaure = false;
+                }
             }
             else
             {
                 serviceCacheDictionary.Add(key, serviceCache);
+                serviceCache.allowConfigaure = true;
             }
             return serviceCache;
         }

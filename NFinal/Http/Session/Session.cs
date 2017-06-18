@@ -24,7 +24,7 @@ namespace NFinal.Http
         /// <summary>
         /// Session ID
         /// </summary>
-        private static string sessionId = null;
+        private string sessionId = null;
         private static string userKey;
         /// <summary>
         /// 缓存类
@@ -36,11 +36,14 @@ namespace NFinal.Http
         /// <param name="sessionId"></param>
         /// <param name="userKey">存储用户的key</param>
         /// <param name="cache"></param>
-        public Session(string sessionId,string userKey, Cache.ICache<string> cache)
+        public Session(string sessionId, Cache.ICache<string> cache)
         {
-            Session.sessionId = sessionId;
-            Session.userKey = userKey;
+            this.sessionId = sessionId;
             this.cache = cache;
+        }
+        public static void Configaure(string userKey)
+        {
+            Session.userKey = userKey;
         }
         /// <summary>
         /// 获取用户

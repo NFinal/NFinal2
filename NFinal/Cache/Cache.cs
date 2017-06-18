@@ -26,11 +26,11 @@ namespace NFinal.Cache
         /// <summary>
         /// 缓存时间
         /// </summary>
-        protected int minutes = 20;
+        protected static int minutes = 20;
         /// <summary>
         /// 序列化
         /// </summary>
-        ISerializable serialize = null;
+        NFinal.Serialize.ISerializable serialize = null;
         /// <summary>
         /// 缓存类型
         /// </summary>
@@ -38,42 +38,19 @@ namespace NFinal.Cache
         /// <summary>
         /// 初始化
         /// </summary>
-        public Cache()
+        public Cache(NFinal.Serialize.ISerializable serialize)
         {
             this.cacheType = CacheType.SlidingExpiration;
-            this.minutes = 20;
-            serialize = new NFinal.ProtobufSerialize();
+            this.serialize = serialize;
         }
         /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="cacheType">缓存类型</param>
-        public Cache(CacheType cacheType)
+        public Cache(NFinal.Serialize.ISerializable serialize,CacheType cacheType)
         {
             this.cacheType = cacheType;
-            this.minutes = 20;
-            this.serialize = new NFinal.ProtobufSerialize();
-        }
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        /// <param name="cacheType">缓存类型</param>
-        /// <param name="minutes"></param>
-        public Cache(CacheType cacheType, int minutes)
-        {
-            this.cacheType = cacheType;
-            this.minutes = minutes;
-            this.serialize = new NFinal.ProtobufSerialize();
-        }
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        /// <param name="minutes"></param>
-        public Cache(int minutes)
-        {
-            this.cacheType = CacheType.SlidingExpiration;
-            this.minutes = minutes;
-            this.serialize = new NFinal.ProtobufSerialize();
+            this.serialize = serialize;
         }
         /// <summary>
         /// 获取缓存
@@ -106,7 +83,7 @@ namespace NFinal.Cache
         /// <param name="value">缓存内存块</param>
         public void Set(TKey key, byte[] value)
         {
-            this.Set(key, value, this.minutes);
+            this.Set(key, value, Cache<TKey>.minutes);
         }
         /// <summary>
         /// 设置缓存
@@ -167,7 +144,7 @@ namespace NFinal.Cache
         /// <param name="value"></param>
         public void Set<T>(TKey key, T value)
         {
-            this.Set(key, serialize.Serialize<T>(value),this.minutes);
+            this.Set(key, serialize.Serialize<T>(value), Cache<TKey>.minutes);
         }
     }
 }

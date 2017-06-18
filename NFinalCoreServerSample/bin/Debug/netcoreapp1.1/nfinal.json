@@ -2,7 +2,7 @@
   //调试设置
   "debug": {
     "enable": true,
-    "url": "localhost:8083",
+    "url": "http://localhost:8083",
     "directory": "/Debug"
   },
   //项目类型

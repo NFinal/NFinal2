@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel;
 using Microsoft.Extensions.FileProviders;
+using NFinal.DependencyInjection;
 
 namespace NFinalCoreServerSample
 {

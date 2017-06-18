@@ -32,6 +32,10 @@
       <DependentUpon>BaseTableController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Debug\NFinalCorePlug\Controllers\Index\" />
+    <Folder Include="Debug\NFinalCorePlug\Controllers\Index\" />
+  </ItemGroup>
   <PropertyGroup>
     <RuntimeIdentifiers>win7-x64;win7-x86;win10-x64;win10-x86;centos.7-x64</RuntimeIdentifiers>
   </PropertyGroup>

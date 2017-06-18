@@ -15,7 +15,7 @@
 #if (NET40 || NET451 || NET461)
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-namespace NFinal
+namespace NFinal.Serialize
 {
     /// <summary>
     /// 序列化
