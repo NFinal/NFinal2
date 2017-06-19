@@ -32,4 +32,22 @@ namespace NFinalCorePlug.Controllers.IndexController_Model
 		public int id;
 		public System.DateTime time;
 	}
+	public class SetSession
+	{
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
+		public string imageServerUrl;
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
+	}
+	public class WriteSession
+	{
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
+		public string imageServerUrl;
+		[ViewBagMember]
+		[Newtonsoft.Json.JsonIgnore]
+		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
+	}
 }

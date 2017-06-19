@@ -10,10 +10,19 @@ function StringFormat() {
 }
 var Url={
 
-    "NFinalCorePlug_Controllers_UserController":{
+    "NFinalCorePlug_BaseController":{
+            "UpdateA":function()
+            {
+            return "/Base/UpdateA.html";
+            }
     }
         ,
     "NFinalCorePlug_Controllers_IndexController":{
+            "UpdateA":function()
+            {
+            return "/Index/UpdateA.html";
+            }
+            ,
             "Default":function()
             {
             return "/Index/Default.html";
@@ -23,5 +32,18 @@ var Url={
             {
             return "/Index/Ajax.html";
             }
+            ,
+            "SetSession":function()
+            {
+            return "/Index/SetSession.html";
+            }
+            ,
+            "WriteSession":function()
+            {
+            return "/Index/WriteSession.html";
+            }
+    }
+        ,
+    "NFinalCorePlug_Controllers_UserController":{
     }
 };

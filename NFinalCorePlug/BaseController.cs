@@ -13,7 +13,7 @@ namespace NFinalCorePlug
     /// </summary>
     /// <typeparam name="TMasterPage">母页模板数据</typeparam>
     //[ActionExport("UpdateA",typeof(object))]
-    public class BaseController<TModel>:NFinal.CoreAction
+    public class BaseController:NFinal.CoreAction
     {
         public void UpdateA(int a,string b)
         {
@@ -25,29 +25,27 @@ namespace NFinalCorePlug
             System.Data.IDbConnection con=new System.Data.SqlClient.SqlConnection(this.config.connectionStrings["Common"].connectionString);
             return con;
         }
-        public override ISession GetSession(string sessionId)
-        {
-            //return new Session(sessionId, new NFinal.Cache.SimpleCache(30));
-            //return new Session(sessionId, new NFinal.Cache.RedisCache("localhost", 30));
-            return base.GetSession(sessionId);
-        }
         /// <summary>
         /// 此字段加上ViewBagMember属性将会自动添加到ViewBag中。
         /// </summary>
         [ViewBagMember]
         [Newtonsoft.Json.JsonIgnore]
         public static string imageServerUrl = "";
-        public override bool Before()
+        public static void Configure(NFinal.Config.Plug.PlugConfig plugConfig)
         {
             //systemConfig通常用于全局缓存。
-            //if (systemConfig == null)
-            //{
-            //    Dictionary<string, StringContainer> systemConfigDictionary = new Dictionary<string, StringContainer>();
-            //    systemConfigDictionary.Add("siteName", "站点名称");
-            //    systemConfigDictionary.Add("mobile","联系电话");
-            //    BaseController<TModel>.systemConfig = new NFinal.Collections.FastSearch.FastSearch<StringContainer>(systemConfigDictionary);
-            //    systemConfigDictionary.Clear();
-            //}
+            if (systemConfig == null)
+            {
+                Dictionary<string, StringContainer> systemConfigDictionary = new Dictionary<string, StringContainer>();
+                systemConfigDictionary.Add("siteName", "站点名称");
+                systemConfigDictionary.Add("mobile", "联系电话");
+                BaseController.systemConfig = new NFinal.Collections.FastSearch.FastSearch<StringContainer>(systemConfigDictionary);
+                systemConfigDictionary.Clear();
+            }
+        }
+        public override bool Before()
+        {
+            
             return true;
         }
     }

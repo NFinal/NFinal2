@@ -5,7 +5,7 @@ using NFinal;
 
 namespace NFinalCorePlug
 {
-    public class BaseTableController<TModel> : BaseController<int> where TModel : class
+    public class BaseTableController<TModel> : BaseController where TModel : class
     {
         public int Insert()
         {
