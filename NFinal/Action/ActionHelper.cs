@@ -187,7 +187,8 @@ namespace NFinal.Action
                     {
                         controller = types[k];
                         //控制器必须以Controller结尾
-                        if (!controller.FullName.EndsWith("Controller", StringComparison.Ordinal))
+                        if ((!controller.FullName.EndsWith("Controller", StringComparison.Ordinal))
+                            )
                         {
                             continue;
                         }
@@ -203,6 +204,15 @@ namespace NFinal.Action
                             if (!controller.GetTypeInfo().IsGenericType)
 #endif
                             {
+                                var configureMethodInfo = controller.GetMethod("Configure", BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public);
+                                if (configureMethodInfo != null)
+                                {
+                                    var parameters = configureMethodInfo.GetParameters();
+                                    if (parameters.Length == 1 && parameters[0].ParameterType == typeof(NFinal.Config.Plug.PlugConfig))
+                                    {
+                                        configureMethodInfo.Invoke(null, new object[] { plugInfo.config });
+                                    }
+                                }
                                 Dictionary<string, NFinal.Url.FormatData> formatMethodDic = new Dictionary<string, NFinal.Url.FormatData>();
                                 AddActionData(actionDataDictionary, formatMethodDic, assembly, controller, globalConfig, plugInfo);
                                 formatControllerDictionary.Add(controller.TypeHandle, formatMethodDic);
@@ -305,6 +315,11 @@ namespace NFinal.Action
                 //MethodInfo actionExportList =
                 for (int m = 0; m < actions.Length; m++)
                 {
+                    if (actions[m].IsAbstract || actions[m].IsVirtual || actions[m].IsGenericMethod || actions[m].IsPrivate || actions[m].ReturnType != typeof(void)
+                        || actions[m].IsStatic || actions[m].IsConstructor)
+                    {
+                        continue;
+                    }
                     actionData = new ActionData<TContext, TRequest>();
                     string modelTypeName = controller.Namespace + "." + controller.Name + "_Model";
                     modelTypeName += "." + actions[m].Name;
@@ -333,7 +348,7 @@ namespace NFinal.Action
             NFinal.Config.Global.GlobalConfig globalConfig,
             NFinal.Plugs.PlugInfo plugInfo)
         {
-            if (methodInfo.IsAbstract || methodInfo.IsVirtual || methodInfo.IsGenericMethod
+            if (methodInfo.IsAbstract || methodInfo.IsVirtual || methodInfo.IsGenericMethod || methodInfo.IsPrivate||methodInfo.ReturnType!=typeof(void)
                         || methodInfo.IsStatic || methodInfo.IsConstructor)
             {
                 return;

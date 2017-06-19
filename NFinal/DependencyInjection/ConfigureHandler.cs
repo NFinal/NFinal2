@@ -5,11 +5,11 @@ using System.Reflection;
 
 namespace NFinal.DependencyInjection
 {
-    public class ConfigaureHandler : ITypeHandler
+    public class ConfigureHandler : ITypeHandler
     {
         public RuntimeTypeHandle ImplementationTypeHandle { get; set; }
         public bool allowConfigaure { get; set; }
-        public ConfigaureHandler()
+        public ConfigureHandler()
         {
             this.allowConfigaure = true;
         }

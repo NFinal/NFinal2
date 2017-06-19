@@ -68,6 +68,7 @@
     <Compile Remove="View\ViewData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bean\bean.json" />
     <Content Include="UI\NavigatorTemplate.cshtml">
       <Generator>
       </Generator>
@@ -118,6 +119,7 @@
     <Folder Include="Middleware\Builder\" />
     <Folder Include="Properties\" />
     <Folder Include="Build\" />
+    <Folder Include="RMI\" />
   </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>

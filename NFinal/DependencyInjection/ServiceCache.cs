@@ -8,7 +8,7 @@ namespace NFinal.DependencyInjection
     /// <summary>
     /// 服务数据
     /// </summary>
-    public class ServiceCache: ConfigaureHandler
+    public class ServiceCache: ConfigureHandler
     {
         /// <summary>
         /// 获取服务的函数代理

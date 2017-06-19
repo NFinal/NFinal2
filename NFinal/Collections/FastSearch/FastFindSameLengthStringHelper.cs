@@ -480,7 +480,7 @@ namespace NFinal.Collections.FastSearch
                 }
                 else
                 {
-                    codeNode = new Node();
+                    codeNode.ifCase = new Node();
                 }
                 if (KeyLongArrayBigLength == 1)
                 {

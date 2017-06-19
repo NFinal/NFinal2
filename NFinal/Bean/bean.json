@@ -1,0 +1,18 @@
+﻿{
+  "beans": [
+    {
+      "id": "myTestBean",
+      "class": "bean.MyTestBean",
+      "constructor": [
+        {"name":"str","type":"System.String","value":"你好" }
+      ],
+      "method": [
+        {
+          "name": "Run",
+          "parameters": ["System.Int32","System.String"]
+        }
+      ],
+      "property": [ {"name": "id","type": "System.Int32"} ]
+    }
+  ]
+}

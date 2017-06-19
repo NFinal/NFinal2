@@ -26,6 +26,11 @@ namespace NFinal.Config.Plug
     public class PlugConfig
     {
         /// <summary>
+        /// 类型的全路径
+        /// </summary>
+        [JsonIgnore]
+        public NFinal.DependencyInjection.IServiceCollection serviceCollection=null;
+        /// <summary>
         /// Json实体类，用于用户自定义配置
         /// </summary>
         [JsonIgnore]

@@ -5,7 +5,8 @@
     "urlPrefix": null,
     "description": "网站",
     "assemblyPath": "/Plugs/web.dll",
-    "contentPath": "/Plugs/Content/"
+    "contentPath": "/Plugs/Content/",
+    "plugStart": null
   },
   //用户自定义设置
   "appSettings": {

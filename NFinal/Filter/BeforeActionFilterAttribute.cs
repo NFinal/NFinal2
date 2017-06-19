@@ -9,7 +9,7 @@ namespace NFinal.Filter
     /// 控制器行为过滤器
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class BeforeActionFilterAttribute :System.Attribute,IBeforeActionFilter
+    public abstract class BeforeActionFilterAttribute :System.Attribute,IBeforeActionFilter
     {
         /// <summary>
         /// 行为过滤
@@ -18,10 +18,7 @@ namespace NFinal.Filter
         /// <typeparam name="TContext"></typeparam>
         /// <param name="action"></param>
         /// <returns></returns>
-        public bool ActionFilter<TContext, TRequest>(AbstractAction<TContext, TRequest> action)
-        {
-            return true;
-        }
+        public abstract bool ActionFilter<TContext, TRequest>(AbstractAction<TContext, TRequest> action);
     }
 
 }
