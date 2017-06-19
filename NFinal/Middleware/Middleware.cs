@@ -109,7 +109,7 @@ namespace NFinal.Middleware
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public abstract IAction<TContext,TRequest> GetAction(TContext context);
+        public abstract IAction<TContext,TRequest> GetAction(TContext context,NFinal.Config.Plug.PlugConfig plugConfig);
         /// <summary>
         /// 获取请求信息
         /// </summary>
@@ -173,7 +173,7 @@ namespace NFinal.Middleware
                     hasError = true;
                     if (actionData.plugConfig.customErrors.mode ==Config.Plug.CustomErrorsMode.Off)
                     {
-                        using (IAction<TContext, TRequest> controller = GetAction(context))
+                        using (IAction<TContext, TRequest> controller = GetAction(context,actionData.plugConfig))
                         {
                             controller.Initialization(context,actionData.methodName, null, request, CompressMode.GZip, actionData.plugConfig);
                             controller.SetResponseHeader("Content-Type", "text/html; charset=utf-8");
@@ -212,7 +212,7 @@ namespace NFinal.Middleware
                         hasError = true;
                         if (actionData.plugConfig.customErrors.mode == Config.Plug.CustomErrorsMode.Off)
                         {
-                            using (IAction<TContext, TRequest> controller = GetAction(context))
+                            using (IAction<TContext, TRequest> controller = GetAction(context,actionData.plugConfig))
                             {
                                 controller.Initialization(context,null, null, request, CompressMode.GZip, actionData.plugConfig);
                                 controller.SetResponseHeader("Content-Type", "text/html; charset=utf-8");
@@ -224,7 +224,7 @@ namespace NFinal.Middleware
                     }
                     if (hasError)
                     {
-                        using (IAction<TContext, TRequest> controller = GetAction(context))
+                        using (IAction<TContext, TRequest> controller = GetAction(context,actionData.plugConfig))
                         {
                             controller.Initialization(context,null, null, request, CompressMode.GZip,actionData.plugConfig);
                             controller.Redirect(actionData.plugConfig.customErrors.defaultRedirect);
@@ -237,11 +237,12 @@ namespace NFinal.Middleware
                     //actionData.actionExecute(context, actionData, request, parameters);
                     try
                     {
-                        actionData.actionExecute(context, actionData,request,parameters);
+                        actionData.actionExecute(context, actionData, request, parameters);
                     }
                     catch (System.Exception e)
                     {
-                        using (IAction<TContext, TRequest> controller = GetAction(context))
+                        //using (
+                        IAction<TContext, TRequest> controller = GetAction(context, actionData.plugConfig);//)
                         {
                             controller.SetResponseHeader("Content-Type", "text/html; charset=utf-8");
                             controller.SetResponseStatusCode(200);

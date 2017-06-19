@@ -49,7 +49,6 @@ namespace NFinal
             {
                 requestCookie.Add(cookie.Key, cookie.Value);
             }
-
             this.Cookie = new Cookie(requestCookie);
             this.Session = GetSession(Cookie.SessionId);
             this.outputStream = context.Response.Body;
@@ -125,7 +124,14 @@ namespace NFinal
                 }
                 foreach (var header in this.response.headers)
                 {
-                    context.Response.Headers.Add(header.Key, header.Value);
+                    if (header.Key == "Content-Type")
+                    {
+                        context.Response.ContentType = header.Value[0];
+                    }
+                    else
+                    {
+                        context.Response.Headers.Add(header.Key, header.Value);
+                    }
                 }
             }
             this.writeStream.Dispose();

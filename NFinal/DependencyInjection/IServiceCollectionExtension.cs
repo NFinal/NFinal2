@@ -16,9 +16,9 @@ namespace NFinal.DependencyInjection
         /// <param name="minutes">缓存时间</param>
         public static void SetRedisSession(this IServiceCollection serviceCollection,int minutes=30,string configration="localhost",string userSessionKey="User")
         {
-            serviceCollection.SetService<NFinal.Cache.ICache<string>, NFinal.Serialize.ISerializable>(typeof(NFinal.Cache.RedisCache)).Configaure(configration,minutes);
+            serviceCollection.SetService<NFinal.Cache.ICache<string>, NFinal.Serialize.ISerializable>(typeof(NFinal.Cache.RedisCache)).Configure(configration,minutes);
             serviceCollection.SetService<NFinal.Http.ISession,string,NFinal.Cache.ICache<string>>
-                (typeof(NFinal.Http.Session)).Configaure(userSessionKey);
+                (typeof(NFinal.Http.Session)).Configure(userSessionKey);
         }
         /// <summary>
         /// 使用内存作为Session
@@ -27,9 +27,9 @@ namespace NFinal.DependencyInjection
         /// <param name="minutes">缓存时间</param>
         public static void SetSimpleSession(this IServiceCollection serviceCollection, int minutes=30,string userSessionKey="User")
         {
-            serviceCollection.SetService<NFinal.Cache.ICache<string>, NFinal.Serialize.ISerializable>(typeof(NFinal.Cache.SimpleCache)).Configaure(minutes);
+            serviceCollection.SetService<NFinal.Cache.ICache<string>, NFinal.Serialize.ISerializable>(typeof(NFinal.Cache.SimpleCache)).Configure(minutes);
             serviceCollection.SetService<NFinal.Http.ISession, string, NFinal.Cache.ICache<string>>
-                (typeof(NFinal.Http.Session)).Configaure(userSessionKey);
+                (typeof(NFinal.Http.Session)).Configure(userSessionKey);
         }
         /// <summary>
         /// 设置二进制序列化
@@ -55,9 +55,9 @@ namespace NFinal.DependencyInjection
         /// <param name="serviceCollection"></param>
         public static void SetDefault(this IServiceCollection serviceCollection)
         {
-            serviceCollection.SetService<NFinal.Cache.ICache<string>, NFinal.Serialize.ISerializable>(typeof(NFinal.Cache.SimpleCache),false).Configaure(30);
+            serviceCollection.SetService<NFinal.Cache.ICache<string>, NFinal.Serialize.ISerializable>(typeof(NFinal.Cache.SimpleCache),false).Configure(30);
             serviceCollection.SetService<NFinal.Http.ISession, string, NFinal.Cache.ICache<string>>
-                (typeof(NFinal.Http.Session)).Configaure("User",false);
+                (typeof(NFinal.Http.Session),false).Configure("User");
             serviceCollection.SetService<NFinal.Serialize.ISerializable>(typeof(NFinal.Serialize.ProtobufSerialize),false);
         }
     }

@@ -45,7 +45,7 @@ namespace NFinal.Cache
         /// Redis配置
         /// </summary>
         /// <param name="configration"></param>
-        public static void Configaure(string configration,int minutes)
+        public static void Configure(string configration,int minutes)
         {
             RedisCache.configration = configration;
             RedisCache.minutes = minutes;

@@ -39,9 +39,11 @@ namespace NFinal.Middleware
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public override IAction<HttpContext, HttpRequest> GetAction(HttpContext context)
+        public override IAction<HttpContext, HttpRequest> GetAction(HttpContext context,Config.Plug.PlugConfig plugConfig)
         {
-            return new NFinal.CoreAction();
+            NFinal.CoreAction action = new CoreAction();
+            action.BaseInitialization(context, null, new Config.Plug.PlugConfig());
+            return action;
         }
         /// <summary>
         /// 获取参数

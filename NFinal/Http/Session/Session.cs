@@ -41,7 +41,7 @@ namespace NFinal.Http
             this.sessionId = sessionId;
             this.cache = cache;
         }
-        public static void Configaure(string userKey)
+        public static void Configure(string userKey)
         {
             Session.userKey = userKey;
         }

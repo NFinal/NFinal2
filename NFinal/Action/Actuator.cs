@@ -397,6 +397,13 @@ namespace NFinal.Action
                 //跳出异常
                 methodIL.Emit(OpCodes.Leave, methodEnd);
             }
+            if (!Config.Configration.globalConfig.debug.enable)
+            {
+                methodIL.BeginCatchBlock(typeof(System.Exception));
+                {
+                    methodIL.Emit(OpCodes.Throw);
+                }
+            }
             //finally
             methodIL.BeginFinallyBlock();
             {

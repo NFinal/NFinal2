@@ -104,7 +104,15 @@ namespace NFinal.Cache
         /// <returns></returns>
         public T Get<T>(TKey key)
         {
-            return serialize.Deserialize<T>(this.Get(key));
+            byte[] buffer = this.Get(key);
+            if (buffer != null)
+            {
+                return serialize.Deserialize<T>(this.Get(key));
+            }
+            else
+            {
+                return default(T);
+            }
         }
         /// <summary>
         /// 获取字符串

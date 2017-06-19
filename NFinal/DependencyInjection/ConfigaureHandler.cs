@@ -22,7 +22,7 @@ namespace NFinal.DependencyInjection
         /// 服务配置
         /// </summary>
         /// <param name="options">配置参数</param>
-        public void Configaure(params object[] options)
+        public void Configure(params object[] options)
         {
             if (allowConfigaure)
             {

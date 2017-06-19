@@ -8,6 +8,6 @@ namespace NFinal.DependencyInjection
     {
         RuntimeTypeHandle ImplementationTypeHandle { get; set; }
         bool allowConfigaure { get; set; }
-        void Configaure(params object[] options);
+        void Configure(params object[] options);
     }
 }

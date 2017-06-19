@@ -45,7 +45,7 @@ namespace NFinal.Cache
         /// <summary>
         /// 配置
         /// </summary>
-        public static void Configaure(int minutes)
+        public static void Configure(int minutes)
         {
             SimpleCache.minutes = minutes;
             cacheStore = new System.Collections.Concurrent.ConcurrentDictionary<string, SimpleCacheValue>();

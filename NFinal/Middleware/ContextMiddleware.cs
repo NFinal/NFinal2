@@ -43,10 +43,10 @@ namespace NFinal.Middleware
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public override IAction<IOwinContext,IOwinRequest> GetAction(IOwinContext context)
+        public override IAction<IOwinContext,IOwinRequest> GetAction(IOwinContext context,NFinal.Config.Plug.PlugConfig plugConfig)
         {
             ContextAction controller= new ContextAction();
-            controller.BaseInitialization(context,null,null);
+            controller.BaseInitialization(context,null, plugConfig);
             return controller;
         }
         

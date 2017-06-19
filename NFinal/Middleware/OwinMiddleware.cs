@@ -38,11 +38,11 @@ namespace NFinal.Middleware
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public override IAction<IDictionary<string, object>,Owin.Request> GetAction(IDictionary<string, object> context)
+        public override IAction<IDictionary<string, object>,Owin.Request> GetAction(IDictionary<string, object> context,NFinal.Config.Plug.PlugConfig plugConfig)
         {
             NFinal.Owin.Request request = context.GetRequest();
             NFinal.OwinAction controller = new OwinAction();
-            controller.BaseInitialization(context,null,null);
+            controller.BaseInitialization(context,null,plugConfig);
             return controller;
         }
         /// <summary>
