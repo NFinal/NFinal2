@@ -10,7 +10,8 @@
     <Content Include="bin\Debug\netcoreapp1.1\Plugs\CorePlug\plug.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Debug\NFinalCorePlug\Controllers\" />
+    <Folder Include="Debug\NFinalCorePlug\Controllers\User\" />
+    <Folder Include="Debug\NFinalCorePlug\Controllers\User\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>

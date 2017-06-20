@@ -241,11 +241,13 @@ namespace NFinal.Middleware
                     }
                     catch (System.Exception e)
                     {
-                        //using (
-                        IAction<TContext, TRequest> controller = GetAction(context, actionData.plugConfig);//)
+                        #region 输出错误信息
+                        using (
+                        IAction<TContext, TRequest> controller = GetAction(context, actionData.plugConfig))
                         {
                             controller.SetResponseHeader("Content-Type", "text/html; charset=utf-8");
                             controller.SetResponseStatusCode(200);
+                            
                             controller.Write("错误消息：<br/>");
                             controller.Write(e.Message);
                             controller.Write("<br/>");
@@ -254,13 +256,114 @@ namespace NFinal.Middleware
                             controller.Write("<br/>");
                             controller.Write("错误跟踪：</br>");
                             string[] stackTraces = e.StackTrace.Split('\n');
+                            System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex(@"\s+at\s([\S\s]+)(\sin\s([\S\s]+):line\s([0-9]+))+?\s*");
+                            System.Text.RegularExpressions.Match mat;
+                            string atfunctionName;
+                            string infilePostion;
+                            string fileName;
+                            int lineNum;
+                            string fileText;
+                            int currentLineNum;
+                            controller.Write("<html>");
+                            controller.Write("<head></head>");
+                            controller.Write("<body>");
+                            controller.Write("<div id=\"traces\">");
                             for (int i = 0; i < stackTraces.Length; i++)
                             {
+                                controller.Write("<dl>");
+                                mat= reg.Match(stackTraces[i]);
+                                controller.Write("<dt style=\"background:grey;cursor:pointer;\">");
                                 controller.Write(stackTraces[i]);
-                                controller.Write("</br>");
+                                controller.Write("</dt>");
+                                if (i == 0)
+                                {
+                                    controller.Write("<dd style=\"display: block;\">");
+                                }
+                                else
+                                {
+                                    controller.Write("<dd style=\"display: none;\">");
+                                }
+                                if (mat.Success)
+                                {
+                                    atfunctionName = mat.Groups[1].Value;
+                                    controller.Write(atfunctionName);
+                                   
+                                    if (mat.Groups[2].Success)
+                                    {
+                                        infilePostion = mat.Groups[2].Value;
+                                        fileName = mat.Groups[3].Value;
+                                        int.TryParse(mat.Groups[4].Value,out lineNum);
+                                        controller.Write(infilePostion);
+                                        controller.Write("<br/>");
+                                        using (StreamReader reader = File.OpenText(fileName))
+                                        {
+                                            currentLineNum = 0;
+                                            controller.Write("<ul style=\"list-style:none;\">");
+                                            while (!reader.EndOfStream)
+                                            {
+                                                currentLineNum++;
+                                                fileText = reader.ReadLine();
+                                                if (currentLineNum == lineNum)
+                                                {
+                                                    controller.Write("<li style=\"background:red;min-width:500px;\">");
+                                                }
+                                                else
+                                                {
+                                                    controller.Write("<li>");
+                                                }
+                                                controller.Write(string.Format("{0:0000}",currentLineNum));
+                                                controller.Write(":");
+                                                if (currentLineNum == lineNum)
+                                                {
+                                                    controller.Write(fileText.Replace("<","&lt")
+                                                        .Replace(">","&gt;")
+                                                        .Replace("\t", "&nbsp&nbsp&nbsp&nbsp").Replace(" ", "&nbsp"));
+                                                }
+                                                else
+                                                {
+                                                    controller.Write(fileText.Replace("<", "&lt")
+                                                        .Replace(">", "&gt;")
+                                                        .Replace("\t", "&nbsp&nbsp&nbsp&nbsp").Replace(" ", "&nbsp"));
+                                                }
+                                                controller.Write("</li>");
+                                                //controller.Write("<br/>");
+                                                
+                                            }
+                                            controller.Write("</ul>");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        controller.Write(atfunctionName);
+                                    }
+                                    
+                                }
+                                controller.Write("</dd>");
+                                controller.Write("</dl>");
                             }
+                            controller.Write("</div>");
+                            controller.Write("</body>");
+                            controller.Write("</html>");
+                            controller.Write(@"<script>
+                                var tracesDiv = document.getElementById('traces');
+                                var traceTitles = tracesDiv.getElementsByTagName('dt');
+                                for (var i = 0; i < traceTitles.length; i++)
+                                {
+                                    traceTitles[i].addEventListener('click',function() {
+                                        if (this.nextSibling.style.display == 'none')
+                                        {
+                                            this.nextSibling.style.display = 'block';
+                                        }
+                                        else
+                                        {
+                                            this.nextSibling.style.display = 'none';
+                                        }
+                                    });
+                                }
+                            </script>");
                             controller.Close();
                         }
+                        #endregion
                         await FinishedTask;
                     }
                 }

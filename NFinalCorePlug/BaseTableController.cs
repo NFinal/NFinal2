@@ -7,9 +7,9 @@ namespace NFinalCorePlug
 {
     public class BaseTableController<TModel> : BaseController where TModel : class
     {
-        public int Insert()
+        public void Insert()
         {
-            return this.Insert<TModel>();
+            this.Insert<TModel>();
         }
         public bool Update()
         {

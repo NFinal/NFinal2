@@ -10,13 +10,6 @@ function StringFormat() {
 }
 var Url={
 
-    "NFinalCorePlug_BaseController":{
-            "UpdateA":function()
-            {
-            return "/Base/UpdateA.html";
-            }
-    }
-        ,
     "NFinalCorePlug_Controllers_IndexController":{
             "UpdateA":function()
             {
@@ -44,6 +37,17 @@ var Url={
             }
     }
         ,
+    "NFinalCorePlug_BaseController":{
+            "UpdateA":function()
+            {
+            return "/Base/UpdateA.html";
+            }
+    }
+        ,
     "NFinalCorePlug_Controllers_UserController":{
+            "Insert":function()
+            {
+            return "/User/Insert.html";
+            }
     }
 };
