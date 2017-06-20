@@ -286,14 +286,14 @@ namespace NFinal.Middleware
                                 if (mat.Success)
                                 {
                                     atfunctionName = mat.Groups[1].Value;
-                                    controller.Write(atfunctionName);
+                                    //controller.Write(atfunctionName);
                                    
                                     if (mat.Groups[2].Success)
                                     {
                                         infilePostion = mat.Groups[2].Value;
                                         fileName = mat.Groups[3].Value;
                                         int.TryParse(mat.Groups[4].Value,out lineNum);
-                                        controller.Write(infilePostion);
+                                        controller.Write(fileName);
                                         controller.Write("<br/>");
                                         using (StreamReader reader = File.OpenText(fileName))
                                         {
