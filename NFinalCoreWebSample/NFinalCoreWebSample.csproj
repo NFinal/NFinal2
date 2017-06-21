@@ -8,10 +8,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="bin\Debug\netcoreapp1.1\Plugs\CorePlug\plug.json" />
+    <Content Include="bin\Debug\netcoreapp1.1\Plugs\Main\plug.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Debug\NFinalCorePlug\Controllers\User\" />
-    <Folder Include="Debug\NFinalCorePlug\Controllers\User\" />
+    <Folder Include="Debug\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
@@ -24,5 +24,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NFinal\NFinal.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Controllers\IndexController.cs">
+      <Generator />
+    </Compile>
+    <Compile Update="Controllers\IndexController.model.cs">
+      <DependentUpon>IndexController.cs</DependentUpon>
+    </Compile>
+    <Compile Update="BaseController.cs">
+      <Generator />
+    </Compile>
+    <Compile Update="BaseController.model.cs">
+      <DependentUpon>BaseController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

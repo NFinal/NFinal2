@@ -172,7 +172,7 @@ namespace NFinal.Action
                 //
                 /////////////////////////////////////////////////////////////////////
                 NFinal.Plugs.PlugInfo plugInfo = NFinal.Plugs.PlugManager.plugInfoList[i];
-                if (!plugInfo.loadSuccess)
+                if (!plugInfo.loadSuccess || plugInfo.enable==false)
                 {
                     continue;
                 }

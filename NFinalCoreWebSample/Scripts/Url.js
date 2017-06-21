@@ -10,44 +10,13 @@ function StringFormat() {
 }
 var Url={
 
-    "NFinalCorePlug_BaseController":{
-            "UpdateA":function()
+    "NFinalCoreWebSample_Controllers_IndexController":{
+            "Index":function()
             {
-            return "/Base/UpdateA.html";
+            return "/Index/Index.html";
             }
     }
         ,
-    "NFinalCorePlug_Controllers_IndexController":{
-            "UpdateA":function()
-            {
-            return "/Index/UpdateA.html";
-            }
-            ,
-            "Default":function()
-            {
-            return "/Index/Default.html";
-            }
-            ,
-            "Ajax":function()
-            {
-            return "/Index/Ajax.html";
-            }
-            ,
-            "SetSession":function()
-            {
-            return "/Index/SetSession.html";
-            }
-            ,
-            "WriteSession":function()
-            {
-            return "/Index/WriteSession.html";
-            }
-    }
-        ,
-    "NFinalCorePlug_Controllers_UserController":{
-            "Insert":function()
-            {
-            return "/User/Insert.html";
-            }
+    "NFinalCoreWebSample_BaseController":{
     }
 };

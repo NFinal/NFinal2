@@ -1,6 +1,6 @@
 ﻿{
   "plug": {
-    "enable": true,
+    "enable": false,
     "name": "web",
     "urlPrefix": null,
     "description": "网站",
