@@ -13,9 +13,8 @@ namespace NFinalCorePlug.Controllers.IndexController_Model
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
 		public string imageServerUrl;
-		[ViewBagMember]
-		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
+		[NFinal.ViewBagMember]
+		public NFinal.Config.Plug.PlugConfig config;
 		public string Message;
 		public string Title;
 		public NFinalCorePlug.Code.User model;
@@ -25,9 +24,8 @@ namespace NFinalCorePlug.Controllers.IndexController_Model
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
 		public string imageServerUrl;
-		[ViewBagMember]
-		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
+		[NFinal.ViewBagMember]
+		public NFinal.Config.Plug.PlugConfig config;
 		public string Message;
 		public int id;
 		public System.DateTime time;
@@ -37,17 +35,15 @@ namespace NFinalCorePlug.Controllers.IndexController_Model
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
 		public string imageServerUrl;
-		[ViewBagMember]
-		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
+		[NFinal.ViewBagMember]
+		public NFinal.Config.Plug.PlugConfig config;
 	}
 	public class WriteSession
 	{
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
 		public string imageServerUrl;
-		[ViewBagMember]
-		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
+		[NFinal.ViewBagMember]
+		public NFinal.Config.Plug.PlugConfig config;
 	}
 }

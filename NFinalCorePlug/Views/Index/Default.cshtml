@@ -11,7 +11,7 @@
 </head>
 <body>
     <h2>Message:@Model.Message</h2>
-    <h2>siteName：@Model.systemConfig["siteName"]</h2>
-    <h2>mobile:@Model.systemConfig["mobile"]</h2>
+    <h2>站点名称:@Model.config.keyValueCache["siteName"]</h2>
+    <h2>联系电话:@Model.config.keyValueCache["mobile"]</h2>
 </body>
 </html>

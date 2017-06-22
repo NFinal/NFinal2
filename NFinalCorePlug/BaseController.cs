@@ -34,12 +34,12 @@ namespace NFinalCorePlug
         public static void Configure(NFinal.Config.Plug.PlugConfig plugConfig)
         {
             //systemConfig通常用于全局缓存。
-            if (systemConfig == null)
+            if (plugConfig.keyValueCache == null)
             {
                 Dictionary<string, StringContainer> systemConfigDictionary = new Dictionary<string, StringContainer>();
                 systemConfigDictionary.Add("siteName", "站点名称");
                 systemConfigDictionary.Add("mobile", "联系电话");
-                BaseController.systemConfig = new NFinal.Collections.FastSearch.FastSearch<StringContainer>(systemConfigDictionary);
+                plugConfig.keyValueCache = new NFinal.Collections.FastSearch.FastSearch<StringContainer>(systemConfigDictionary);
                 systemConfigDictionary.Clear();
             }
         }

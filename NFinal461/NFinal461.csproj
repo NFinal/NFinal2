@@ -278,6 +278,9 @@
     <Compile Include="..\nfinal\exceptions\DuplicateViewUrlException.cs">
       <Link>Core\Exceptions\DuplicateViewUrlException.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Exceptions\FastSearchHasNoElementException.cs">
+      <Link>Core\Exceptions\FastSearchHasNoElementException.cs</Link>
+    </Compile>
     <Compile Include="..\NFinal\Exceptions\HasNoControllerInProjectException.cs">
       <Link>Core\Exceptions\HasNoControllerInProjectException.cs</Link>
     </Compile>

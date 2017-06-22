@@ -14,9 +14,8 @@ namespace NFinalCorePlug.BaseController_Model
 		[ViewBagMember]
 		[Newtonsoft.Json.JsonIgnore]
 		public string imageServerUrl;
-		[ViewBagMember]
-		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
+		[NFinal.ViewBagMember]
+		public NFinal.Config.Plug.PlugConfig config;
 		public int a;
 		public string b;
 	}

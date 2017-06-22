@@ -10,13 +10,13 @@ function StringFormat() {
 }
 var Url={
 
+    "NFinalCoreWebSample_BaseController":{
+    }
+        ,
     "NFinalCoreWebSample_Controllers_IndexController":{
             "Index":function()
             {
             return "/Index/Index.html";
             }
-    }
-        ,
-    "NFinalCoreWebSample_BaseController":{
     }
 };

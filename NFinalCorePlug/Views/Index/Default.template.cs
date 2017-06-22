@@ -15,7 +15,7 @@ namespace NFinalCorePlug.Views.Index
         {
         }
         //如果此处报错，请添加NFinal引用
-        //PMC命令为：Install-Package NFinal
+        //PMC命令为：Install-Package NFinal2
         public override void Execute()
         {
             writer.Write("");
@@ -23,10 +23,10 @@ namespace NFinalCorePlug.Views.Index
             writer.Write(Model.Title);
             writer.Write("</title>\r\n\t<meta http-equiv=\"Cache-Control\" content=\"no-cache\">\r\n</head>\r\n<body>\r\n    <h2>Message:");
             writer.Write(Model.Message);
-            writer.Write("</h2>\r\n    <h2>siteName：");
-            writer.Write(Model.systemConfig["siteName"]);
-            writer.Write("</h2>\r\n    <h2>mobile:");
-            writer.Write(Model.systemConfig["mobile"]);
+            writer.Write("</h2>\r\n    <h2>站点名称:");
+            writer.Write(Model.config.keyValueCache["siteName"]);
+            writer.Write("</h2>\r\n    <h2>联系电话:");
+            writer.Write(Model.config.keyValueCache["mobile"]);
             writer.Write("</h2>\r\n</body>\r\n</html>");
         }
     }
