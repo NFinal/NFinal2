@@ -56,6 +56,7 @@ namespace NFinal.Action
         /// <summary>
         /// 配置数据
         /// </summary>
+        [NFinal.ViewBagMember]
         public Config.Plug.PlugConfig config=null;
         #region 数据库相关
         /// <summary>
@@ -245,12 +246,6 @@ namespace NFinal.Action
                 currentType.Namespace, currentType.Name));
         }
 #endregion
-        /// <summary>
-        /// 常用系统变量
-        /// </summary>
-        [ViewBagMember]
-        [Newtonsoft.Json.JsonIgnore]
-        public static NFinal.Collections.FastSearch.FastSearch<StringContainer> systemConfig = null;
         /// <summary>
         /// 请求参数信息
         /// </summary>

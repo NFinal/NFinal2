@@ -28,11 +28,11 @@ namespace NFinal.Plugs.Loader
 #if NETCORE
     public class AssemblyLoader : AssemblyLoadContext, IAssemblyLoader
     {
-        private static Dictionary<string, System.Reflection.Assembly> _assemblyDictionary = null;
+        private static NFinal.Collections.FastDictionary<string, System.Reflection.Assembly> _assemblyDictionary = null;
         /// <summary>
         /// 程序集缓存
         /// </summary>
-        public Dictionary<string, System.Reflection.Assembly> assemblyDictionary
+        public NFinal.Collections.FastDictionary<string, System.Reflection.Assembly> assemblyDictionary
         {
             get
             {
@@ -43,7 +43,7 @@ namespace NFinal.Plugs.Loader
         {
             if (_assemblyDictionary == null)
             {
-                _assemblyDictionary = new Dictionary<string, System.Reflection.Assembly>();
+                _assemblyDictionary = new NFinal.Collections.FastDictionary<string, System.Reflection.Assembly>();
             }
             foreach (var assemblyFileName in assemblyFileNames)
             {
@@ -57,7 +57,7 @@ namespace NFinal.Plugs.Loader
         {
             if (_assemblyDictionary == null)
             {
-                _assemblyDictionary = new Dictionary<string, System.Reflection.Assembly>();
+                _assemblyDictionary = new NFinal.Collections.FastDictionary<string, System.Reflection.Assembly>();
             }
             if (!_assemblyDictionary.ContainsKey(assemblyFileName))
             {

@@ -27,7 +27,8 @@ namespace NFinal.Emit
         /// <summary>
         /// 复制代理类
         /// </summary>
-        public static Dictionary<long, Delegate> CopyDic = new Dictionary<long, Delegate>();
+        public static System.Collections.Concurrent.ConcurrentDictionary<Tuple<RuntimeTypeHandle,RuntimeTypeHandle>, Delegate> CopyDic =
+            new System.Collections.Concurrent.ConcurrentDictionary<Tuple<RuntimeTypeHandle, RuntimeTypeHandle>, Delegate>();
         /// <summary>
         /// 复制代码声明
         /// </summary>
@@ -51,9 +52,10 @@ namespace NFinal.Emit
             Type toType = typeof(To);
             long key = (long)fromType.GetHashCode() << 32 | (long)toType.GetHashCode();
             CopyDelegate<From, To> copyDelegate;
-            if (CopyDic.ContainsKey(key))
+            Tuple<RuntimeTypeHandle, RuntimeTypeHandle> keyDelegate = new Tuple<RuntimeTypeHandle, RuntimeTypeHandle>(fromType.TypeHandle, toType.TypeHandle);
+            if (CopyDic.ContainsKey(keyDelegate))
             {
-                Delegate delegateTemp = CopyDic[key];
+                Delegate delegateTemp = CopyDic[keyDelegate];
                 copyDelegate = (CopyDelegate<From, To>)delegateTemp;
             }
             else
@@ -90,7 +92,7 @@ namespace NFinal.Emit
                 methodIL.Emit(OpCodes.Ldarg_1);
                 methodIL.Emit(OpCodes.Ret);
                 Delegate delegateTemp = CopyMethod.CreateDelegate(typeof(CopyDelegate<From, To>));
-                CopyDic.Add(key, delegateTemp);
+                CopyDic.TryAdd(keyDelegate, delegateTemp);
                 copyDelegate = (CopyDelegate<From, To>)delegateTemp;
             }
             return copyDelegate(f, t);

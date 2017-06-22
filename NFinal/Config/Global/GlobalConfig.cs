@@ -25,10 +25,11 @@ namespace NFinal.Config.Global
     public class GlobalConfig
     {
         /// <summary>
-        /// 插件信息
+        /// 全局扩展对象
         /// </summary>
-        //[JsonIgnore]
-        //public NFinal.Config.Plug.Plug[] plugs;
+        public NFinal.Collections.FastSearch.FastSearch<StringContainer> keyValueCache=null;
+        [JsonIgnore]
+        public object extraData;
         /// <summary>
         /// 调试信息
         /// </summary>

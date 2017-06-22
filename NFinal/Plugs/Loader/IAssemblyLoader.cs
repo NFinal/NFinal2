@@ -27,7 +27,7 @@ namespace NFinal.Plugs.Loader
         /// <summary>
         /// 程序集缓存
         /// </summary>
-        Dictionary<string, System.Reflection.Assembly> assemblyDictionary
+        NFinal.Collections.FastDictionary<string, System.Reflection.Assembly> assemblyDictionary
         {
             get;
         }

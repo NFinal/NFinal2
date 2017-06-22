@@ -106,21 +106,23 @@ namespace NFinal.Json
         public static readonly System.Reflection.MethodInfo GetUTCTimeStringMethodInfo = typeof(JsonHelper).GetMethod("GetUTCTimeString", new Type[] { typeof(DateTime) });
         public struct GetJsonDelegateData
         {
-            public Type modelType;
+            public RuntimeTypeHandle modelTypeHandle;
             public Delegate getJsonDelegate;
         }
-        public static Dictionary<Type, GetJsonDelegateData> GetJsonDictionary = new Dictionary<Type, GetJsonDelegateData>();
+        public static System.Collections.Concurrent.ConcurrentDictionary<RuntimeTypeHandle, GetJsonDelegateData> GetJsonDictionary =
+            new System.Collections.Concurrent.ConcurrentDictionary<RuntimeTypeHandle, GetJsonDelegateData>();
         public static readonly System.Reflection.MethodInfo toBase64StringMethodInfo = typeof(System.Convert).GetMethod("ToBase64String",new Type[] { typeof(byte[])});
         public static readonly System.Reflection.MethodInfo writeMethodInfo = typeof(NFinal.IO.IWriter).GetMethod("Write", new Type[] { typeof(string) });
         public static readonly System.Reflection.MethodInfo WriteJsonReverseStringMethodInfo = typeof(NFinal.WriterExtension).GetMethod("WriteJsonReverseString", new Type[] {typeof(NFinal.IO.IWriter), typeof(string) });
         public static void GetJson<TModel>(TModel model,NFinal.IO.IWriter writer, DateTimeFormat format)
         {
             GetJsonDelegateData getJsonDelegateData;
-            if (!GetJsonDictionary.TryGetValue(model.GetType(), out getJsonDelegateData))
+            RuntimeTypeHandle modelTypeHandle = model.GetType().TypeHandle;
+            if (!GetJsonDictionary.TryGetValue(modelTypeHandle, out getJsonDelegateData))
             {
-                getJsonDelegateData.modelType = model.GetType();
+                getJsonDelegateData.modelTypeHandle = modelTypeHandle;
                 getJsonDelegateData.getJsonDelegate = GetDelegate(model, format);
-                GetJsonDictionary.Add(model.GetType(), getJsonDelegateData);
+                GetJsonDictionary.TryAdd(modelTypeHandle, getJsonDelegateData);
             }
             ((GetJsonDelegate<TModel>)getJsonDelegateData.getJsonDelegate)(model,writer, format);
         }

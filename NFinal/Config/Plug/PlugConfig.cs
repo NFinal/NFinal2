@@ -26,6 +26,16 @@ namespace NFinal.Config.Plug
     public class PlugConfig
     {
         /// <summary>
+        /// plug全局字符串，数字等缓存类。
+        /// </summary>
+        [JsonIgnore]
+        public NFinal.Collections.FastSearch.FastSearch<StringContainer> keyValueCache=null;
+        /// <summary>
+        /// plug附加对象
+        /// </summary>
+        [JsonIgnore]
+        public object extraData;
+        /// <summary>
         /// 类型的全路径
         /// </summary>
         [JsonIgnore]

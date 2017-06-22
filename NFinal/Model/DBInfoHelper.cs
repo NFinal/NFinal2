@@ -46,7 +46,8 @@ namespace NFinal.Model
         /// <summary>
         /// 数据库缓存信息
         /// </summary>
-        public static FastDictionary<string, DBInfo> DBInfoCache = new FastDictionary<string, DBInfo>();
+        public static System.Collections.Concurrent.ConcurrentDictionary<string, DBInfo> DBInfoCache =
+            new System.Collections.Concurrent.ConcurrentDictionary<string, DBInfo>();
         /// <summary>
         /// 获取数据库基本信息
         /// </summary>
@@ -88,7 +89,7 @@ namespace NFinal.Model
                 {
                     throw new NFinal.Exceptions.DataBaseNotSupportException(con.Database);
                 }
-                DBInfoCache.Add(con.ConnectionString, dbInfo);
+                DBInfoCache.TryAdd(con.ConnectionString, dbInfo);
             }
             return dbInfo;
         }

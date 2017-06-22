@@ -155,8 +155,10 @@ namespace NFinal.Action
             //List<KeyValuePair<string, ActionData<TContext, TRequest>>> actionDataList = new List<KeyValuePair<string, ActionData<TContext, TRequest>>>();
             NFinal.Collections.FastDictionary<RuntimeTypeHandle, Dictionary<string, NFinal.Url.FormatData>> formatControllerDictionary = new NFinal.Collections.FastDictionary<RuntimeTypeHandle, Dictionary<string, NFinal.Url.FormatData>>();
             Type controller = null;
+            bool hasExecuteConfigure = false;
             for (int i = 0; i < NFinal.Plugs.PlugManager.plugInfoList.Count; i++)
             {
+                hasExecuteConfigure = false;
                 /////////////////////////////////////////////////////////////////////
                 //
                 //Assembly.Load
@@ -204,13 +206,17 @@ namespace NFinal.Action
                             if (!controller.GetTypeInfo().IsGenericType)
 #endif
                             {
-                                var configureMethodInfo = controller.GetMethod("Configure", BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.Public);
-                                if (configureMethodInfo != null)
+                                if (!hasExecuteConfigure)
                                 {
-                                    var parameters = configureMethodInfo.GetParameters();
-                                    if (parameters.Length == 1 && parameters[0].ParameterType == typeof(NFinal.Config.Plug.PlugConfig))
+                                    var configureMethodInfo = controller.GetMethod("Configure", BindingFlags.Static | BindingFlags.Public);
+                                    if (configureMethodInfo != null)
                                     {
-                                        configureMethodInfo.Invoke(null, new object[] { plugInfo.config });
+                                        var parameters = configureMethodInfo.GetParameters();
+                                        if (parameters.Length == 1 && parameters[0].ParameterType == typeof(NFinal.Config.Plug.PlugConfig))
+                                        {
+                                            configureMethodInfo.Invoke(null, new object[] { plugInfo.config });
+                                            hasExecuteConfigure = true;
+                                        }
                                     }
                                 }
                                 Dictionary<string, NFinal.Url.FormatData> formatMethodDic = new Dictionary<string, NFinal.Url.FormatData>();

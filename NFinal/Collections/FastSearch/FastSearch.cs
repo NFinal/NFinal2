@@ -81,11 +81,15 @@ namespace NFinal.Collections.FastSearch
         public FastSearch()
         { }
         /// <summary>
-        /// 快速查找类
+        /// 快速查找类,初始化集合元素必须大于0
         /// </summary>
-        /// <param name="originalDictionary"></param>
+        /// <param name="originalDictionary">初始化集合元素</param>
         public unsafe FastSearch(IEnumerable<KeyValuePair<string, TValue>> originalDictionary)
         {
+            if (originalDictionary.Count() < 1)
+            {
+                throw new NFinal.Exceptions.FastSearchHasNoElementException();
+            }
             GroupData<TValue> groupData;
             int index = 0;
             SortedList<int, GroupData<TValue>> groupList = new SortedList<int, GroupData<TValue>>();

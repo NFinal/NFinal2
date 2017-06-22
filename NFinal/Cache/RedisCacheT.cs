@@ -30,7 +30,8 @@ namespace NFinal.Cache
         /// <summary>
         /// redis服务器缓存
         /// </summary>
-        public static Dictionary<string, IDatabase> databasePool = new Dictionary<string, IDatabase>(StringComparer.Ordinal);
+        public static NFinal.Collections.FastDictionary<string, IDatabase> databasePool = 
+            new NFinal.Collections.FastDictionary<string, IDatabase>(StringComparer.Ordinal);
         /// <summary>
         /// 当前redis服务器
         /// </summary>
@@ -59,6 +60,10 @@ namespace NFinal.Cache
                 this.database = redis.GetDatabase();
                 databasePool.Add(configuration, this.database);
             }
+        }
+        public static void Configure(NFinal.Collections.FastDictionary<string, IDatabase> dataBasePool)
+        {
+            RedisCacheT<TValue>.databasePool = dataBasePool;
         }
         /// <summary>
         /// 移除缓存
