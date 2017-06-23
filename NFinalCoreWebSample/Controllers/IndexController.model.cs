@@ -9,8 +9,7 @@ namespace NFinalCoreWebSample.Controllers.IndexController_Model
 {
 	public class Index
 	{
-		[ViewBagMember]
-		[Newtonsoft.Json.JsonIgnore]
-		public NFinal.Collections.FastSearch.FastSearch<NFinal.StringContainer> systemConfig;
+		[NFinal.ViewBagMember]
+		public NFinal.Config.Plug.PlugConfig config;
 	}
 }
