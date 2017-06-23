@@ -50,7 +50,6 @@ namespace NFinal.Emit
         {
             Type fromType = typeof(From);
             Type toType = typeof(To);
-            long key = (long)fromType.GetHashCode() << 32 | (long)toType.GetHashCode();
             CopyDelegate<From, To> copyDelegate;
             Tuple<RuntimeTypeHandle, RuntimeTypeHandle> keyDelegate = new Tuple<RuntimeTypeHandle, RuntimeTypeHandle>(fromType.TypeHandle, toType.TypeHandle);
             if (CopyDic.ContainsKey(keyDelegate))
@@ -60,7 +59,7 @@ namespace NFinal.Emit
             }
             else
             {
-                DynamicMethod CopyMethod = new DynamicMethod(key.ToString(), typeof(To), new Type[] { typeof(From), typeof(To) }, true);
+                DynamicMethod CopyMethod = new DynamicMethod("Copy_"+fromType.Name+toType.Name, typeof(To), new Type[] { typeof(From), typeof(To) }, true);
                 ILGenerator methodIL = CopyMethod.GetILGenerator();
                 PropertyInfo[] fromTypePropertyInfo = fromType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
                 PropertyInfo[] toTypePropertyInfo = toType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
