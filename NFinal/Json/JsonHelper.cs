@@ -114,7 +114,7 @@ namespace NFinal.Json
         public static readonly System.Reflection.MethodInfo toBase64StringMethodInfo = typeof(System.Convert).GetMethod("ToBase64String",new Type[] { typeof(byte[])});
         public static readonly System.Reflection.MethodInfo writeMethodInfo = typeof(NFinal.IO.IWriter).GetMethod("Write", new Type[] { typeof(string) });
         public static readonly System.Reflection.MethodInfo WriteJsonReverseStringMethodInfo = typeof(NFinal.WriterExtension).GetMethod("WriteJsonReverseString", new Type[] {typeof(NFinal.IO.IWriter), typeof(string) });
-        public static void GetJson<TModel>(TModel model,NFinal.IO.IWriter writer, DateTimeFormat format)
+        public static void WriteJson<TModel>(TModel model,NFinal.IO.IWriter writer, DateTimeFormat format)
         {
             GetJsonDelegateData getJsonDelegateData;
             RuntimeTypeHandle modelTypeHandle = model.GetType().TypeHandle;

@@ -559,7 +559,7 @@ namespace NFinal.Action
             else
             {
                 NFinal.IO.StringWriter sw = new IO.StringWriter();
-                NFinal.Json.JsonHelper.GetJson(model, sw, Json.DateTimeFormat.LocalTimeNumber);
+                NFinal.Json.JsonHelper.WriteJson(model, sw, Json.DateTimeFormat.LocalTimeNumber);
                 return sw.ToString();
             }
         }
