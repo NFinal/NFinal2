@@ -409,7 +409,6 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <None Include="Code\json.nf.json">
-      <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>json.nf1.cs</LastGenOutput>
     </None>
     <Content Include="Entity\Data.nf.sql" />
