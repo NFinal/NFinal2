@@ -504,7 +504,7 @@ namespace NFinal.Action
             actionUrlData = null;
             method = null;
             urlAttribute = null;
-            actionUrl = null;
+            actionUrl = plugInfo.config.url.prefix;
             actionName = null;
 
             if (!string.IsNullOrEmpty(areaName))
@@ -518,41 +518,64 @@ namespace NFinal.Action
 
             bool hasUrlAttribute = false;
             var attributes = methodInfo.GetCustomAttributes(true);
+            bool hasActionAttribute = false;
             foreach (var attr in attributes)
             {
-                if (attr
+                var attrType = attr
 #if (NET40 || NET451 || NET461)
-                    .GetType()
+                    .GetType();
 #endif
 #if NETCORE
-                    .GetType().GetTypeInfo()
+                    .GetType().GetTypeInfo();
 #endif
-                    .IsSubclassOf(typeof(UrlAttribute)))
+                if (
+                    attrType.IsSubclassOf(typeof(UrlAttribute)))
                 {
                     hasUrlAttribute = true;
                     urlAttribute = (UrlAttribute)attr;
-                    actionUrlData = NFinal.Url.ActionUrlHelper.GetActionUrlData(urlAttribute.urlString);
-                    actionUrl = actionUrlData.actionKey;
+                    actionUrlData = NFinal.Url.ActionUrlHelper.GetActionUrlData(plugInfo.config.url.prefix 
+                        + urlAttribute.urlString);
+                    switch (urlAttribute.methodType)
+                    {
+                        case MethodType.GET:method =new string[] { "GET" };break;
+                        case MethodType.POST:method =new string[] { "POST" };break;
+                        case MethodType.PUT:method = new string[] { "PUT" };break;
+                        case MethodType.DELETE:method = new string[] { "DELETE" };break;
+                        default:method = null;break;
+                    }
+                    actionUrl += actionUrlData.actionKey;
                     break;
-                } 
+                }
+                else if (attrType.IsSubclassOf(typeof(ActionAttribute)))
+                {
+                    hasActionAttribute = true;
+                    actionName = ((ActionAttribute)attr).Name;
+                }
             }
             if (!hasUrlAttribute)
             {
-                actionUrl += "/" + methodInfo.Name + plugInfo.config.url.extension;
+                if (hasActionAttribute)
+                {
+                    actionUrl += "/" + actionName + plugInfo.config.url.extension;
+                }
+                else
+                {
+                    actionUrl += "/" + methodInfo.Name + plugInfo.config.url.extension;
+                }
+            }
+            if (actionUrl[actionUrl.Length - 1] == '/')
+            {
+                actionUrl = plugInfo.config.url.defaultDocument;
             }
             if (method == null)
             {
                 method = plugInfo.config.verbs;
-                foreach (var m in method)
-                {
-                    actionKeys.Add( m + ":" + actionUrl);
-                }
             }
-            else
+            foreach (var m in method)
             {
-                actionKeys.Add(method + ":" + actionUrl);
+                actionKeys.Add(m + ":" + actionUrl);
             }
-            
+
             return actionKeys.ToArray();
             //UrlAttribute[] urlAttributes = (UrlAttribute[])methodInfo.GetCustomAttributes(typeof(UrlAttribute), true);
             //if (actionAttributes.Length > 0)

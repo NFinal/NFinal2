@@ -30,11 +30,9 @@ namespace NFinal
         /// 控制器行为的URl设置
         /// </summary>
         /// <param name="urlString">请求URL</param>
-        /// <param name="queryString">请求的QueryString的key数组</param>
-        public UrlAttribute(string urlString, params string[] queryString)
+        public UrlAttribute(string urlString)
         {
             this.urlString = urlString;
-            this.queryString = queryString;
             this.methodType = MethodType.NONE;
             this.contentType = "text/html; charset=utf-8";
             this.compressMode = CompressMode.None;
@@ -43,10 +41,6 @@ namespace NFinal
         /// 请求URL
         /// </summary>
         public string urlString { get; set; }
-        /// <summary>
-        /// 请求的QueryString的key数组
-        /// </summary>
-        public string[] queryString { get; set; }
         /// <summary>
         /// 请求的类型
         /// </summary>
@@ -69,11 +63,9 @@ namespace NFinal
         /// form表单提交并返回html
         /// </summary>
         /// <param name="urlString">URL请求路径</param>
-        /// <param name="queryString">请求的QueryString的key数组</param>
-        public FormHtmlAttribute(string urlString, params string[] queryString):base(urlString, queryString)
+        public FormHtmlAttribute(string urlString):base(urlString)
         {
             this.urlString = urlString;
-            this.queryString = queryString;
             this.compressMode = CompressMode.None;
         }
     }
@@ -98,8 +90,7 @@ namespace NFinal
         /// get提交并返回html
         /// </summary>
         /// <param name="urlString">URL请求路径</param>
-        /// <param name="queryString">请求的QueryString的key数组</param>
-        public GetHtmlAttribute(string urlString, params string[] queryString) : base(urlString, queryString)
+        public GetHtmlAttribute(string urlString) : base(urlString)
         {
             this.methodType = MethodType.GET;
             this.contentType = "text/html; charset=utf-8";
@@ -114,8 +105,7 @@ namespace NFinal
         /// post提交并返回html
         /// </summary>
         /// <param name="urlString">URL请求路径</param>
-        /// <param name="queryString">请求的QueryString的key数组</param>
-        public PostHtmlAttribute(string urlString, params string[] queryString) : base(urlString, queryString)
+        public PostHtmlAttribute(string urlString) : base(urlString)
         {
             this.methodType= this.methodType = MethodType.POST;
             this.contentType = "text/html; charset=utf-8";
@@ -250,8 +240,7 @@ namespace NFinal
         /// get请求后页面重定向
         /// </summary>
         /// <param name="urlString">URL请求路径</param>
-        /// <param name="queryString">请求的QueryString的key数组</param>
-        public GetRedirectAttribute(string urlString, params string[] queryString) : base(urlString, queryString)
+        public GetRedirectAttribute(string urlString) : base(urlString)
         {
             this.methodType = MethodType.GET;
             this.contentType = "text/html; charset=utf-8";
@@ -290,8 +279,7 @@ namespace NFinal
         /// get请求后返回json
         /// </summary>
         /// <param name="urlString">URL请求路径</param>
-        /// <param name="queryString">请求的QueryString的key数组</param>
-        public GetJsonAttribute(string urlString, params string[] queryString) : base(urlString, queryString)
+        public GetJsonAttribute(string urlString) : base(urlString)
         {
             this.methodType = MethodType.GET;
             this.contentType = "application/json; charset=utf-8";
@@ -306,8 +294,7 @@ namespace NFinal
         /// post请求后返回json
         /// </summary>
         /// <param name="urlString">URL请求路径</param>
-        /// <param name="queryString">请求的QueryString的key数组</param>
-        public PostJsonAttribute(string urlString, params string[] queryString) : base(urlString, queryString)
+        public PostJsonAttribute(string urlString) : base(urlString)
         {
             this.methodType = MethodType.POST;
             this.contentType = "application/json; charset=utf-8";
@@ -766,8 +753,7 @@ namespace NFinal
         /// get请求后返回xml文本
         /// </summary>
         /// <param name="urlString">URL请求路径</param>
-        /// <param name="queryString">请求的QueryString的key数组</param>
-        public GetXmlAttribute(string urlString,params string[] queryString):base(urlString, queryString)
+        public GetXmlAttribute(string urlString):base(urlString)
         { }
     }
     /// <summary>
@@ -780,7 +766,7 @@ namespace NFinal
         /// </summary>
         /// <param name="urlString">URL请求路径</param>
         /// <param name="queryString">请求的QueryString的key数组</param>
-        public PostXmlAttribute(string urlString,params string[] queryString):base(urlString,queryString)
+        public PostXmlAttribute(string urlString):base(urlString)
         { }
     }
     //   /// <summary>

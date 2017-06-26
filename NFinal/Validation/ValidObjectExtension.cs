@@ -80,7 +80,7 @@ namespace NFinal.Validation
         }
         public static ValidObject IsEmail(this ValidObject obj)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须为邮箱", false);
             Regex regex = new Regex(Pattern.email);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -88,7 +88,7 @@ namespace NFinal.Validation
         }
         public static ValidObject IsUrl(this ValidObject obj)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须为Url", false);
             Regex regex = new Regex(Pattern.url);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -96,7 +96,7 @@ namespace NFinal.Validation
         }
         public static ValidObject IsDomain(this ValidObject obj)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须为域名", false);
             Regex regex = new Regex(Pattern.domain);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -104,7 +104,7 @@ namespace NFinal.Validation
         }
         public static ValidObject IsMobile(this ValidObject obj)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须为手机号", false);
             Regex regex = new Regex(Pattern.mobile);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -112,7 +112,7 @@ namespace NFinal.Validation
         }
         public static ValidObject IsTelephone(this ValidObject obj)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须为电话号码", false);
             Regex regex = new Regex(Pattern.tel);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -120,7 +120,7 @@ namespace NFinal.Validation
         }
         public static ValidObject IsIDCard(this ValidObject obj)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须为身份证号", false);
             Regex regex = new Regex(Pattern.idcard);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -128,7 +128,7 @@ namespace NFinal.Validation
         }
         public static ValidObject IsChinese(this ValidObject obj)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须为中文", false);
             Regex regex = new Regex(Pattern.chinese);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -136,7 +136,7 @@ namespace NFinal.Validation
         }
         public static ValidObject IsQQ(this ValidObject obj)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须为QQ", false);
             Regex regex = new Regex(Pattern.qq);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -144,7 +144,7 @@ namespace NFinal.Validation
         }
         public static ValidObject IsPostCode(this ValidObject obj)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须为邮政编码", false);
             Regex regex = new Regex(Pattern.postcode);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -152,7 +152,7 @@ namespace NFinal.Validation
         }
         public static ValidObject IsIp(this ValidObject obj)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须为IP地址", false);
             Regex regex = new Regex(Pattern.ip);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -205,7 +205,7 @@ namespace NFinal.Validation
         }
         public static ValidObject Regex(this ValidObject obj, string pattern)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数必须符合正则"+pattern, false);
             Regex regex = new Regex(pattern);
             status.isDirty = !regex.IsMatch(obj.value);
             obj.validResult.Add(status);
@@ -213,7 +213,7 @@ namespace NFinal.Validation
         }
         public static ValidObject Length(this ValidObject obj, int len)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数长度必须为"+len, false);
             if (obj.value.Length==len)
             {
                 status.isDirty = false;
@@ -227,7 +227,7 @@ namespace NFinal.Validation
         }
         public static ValidObject Length(this ValidObject obj, int min, int max)
         {
-            ValidateStatus status = new ValidateStatus("参数必须为数字", false);
+            ValidateStatus status = new ValidateStatus("参数长度必须大于"+min+"小于"+max, false);
             if (obj.value.Length >= min && obj.value.Length<=max)
             {
                 status.isDirty = false;
