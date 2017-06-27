@@ -16,7 +16,7 @@ namespace NFinalCorePlug.Controllers
         public void Default(Code.User model)
         {
             this.ViewBag.Message = "Hello World!";
-            this.ViewBag.Title = "Title";
+            this.ViewBag.Title = "Title";     
             this.Render();
         }
         public void Ajax()

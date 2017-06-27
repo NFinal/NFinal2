@@ -41,7 +41,7 @@ namespace NFinalCompiler.Controller
                 {
                     sw.Write(us.ToFullString());
                 }
-                sw.WriteLine("//此代码由NFinalControllerGenerator生成。");
+                sw.WriteLine("//此代码由NFinalCompiler生成。");
                 sw.WriteLine("//http://bbs.nfinal.com");
                 sw.Write("namespace ");
                 sw.Write(controllerSymbol.ContainingNamespace.ToString());
