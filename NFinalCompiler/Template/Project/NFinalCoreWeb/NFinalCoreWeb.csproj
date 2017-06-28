@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp1.1\nfinal.json" />
+    <Content Include="bin\Debug\netcoreapp1.1\Plugs\plug.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Debug\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Index\Template.cshtml">
+      <Generator>
+      </Generator>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
+    <PackageReference Include="NFinal2" Version="2.0.12-beta-0003" />
+    <PackageReference Include="NFinal2.Web" Version="1.0.2-rc1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="BaseController.cs">
+      <Generator />
+    </Compile>
+    <Compile Update="BaseController.model.cs">
+      <DependentUpon>BaseController.cs</DependentUpon>
+    </Compile>
+    <Content Update="Views\Index\Template.cshtml">
+      <Generator />
+    </Content>
+  </ItemGroup>
+</Project>

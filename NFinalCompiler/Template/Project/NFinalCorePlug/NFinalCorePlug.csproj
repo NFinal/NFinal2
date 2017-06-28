@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NFinal2" Version="2.0.12-beta-0003" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Controllers\IndexController.cs">
+      <Generator />
+    </Compile>
+    <Compile Update="Controllers\IndexController.model.cs">
+      <DependentUpon>IndexController.cs</DependentUpon>
+    </Compile>
+    <None Update="Views\Index\Html.cshtml">
+      <Generator />
+    </None>
+    <Compile Update="BaseController.cs">
+      <Generator />
+    </Compile>
+    <Compile Update="BaseController.model.cs">
+      <DependentUpon>BaseController.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
+</Project>

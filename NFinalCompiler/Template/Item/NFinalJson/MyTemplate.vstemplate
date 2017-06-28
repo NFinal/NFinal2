@@ -1,0 +1,19 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>data.json</DefaultName>
+    <Name>NFinalJson</Name>
+    <Description>NFinal Json Item.
+Convert Json to Class
+http://help.nfinal.com
+author:Lucas
+QQ:348764327</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.jpg</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+	<ProjectItem ItemType="Content" SubType="Code" TargetFileName="$fileinputname$.nf.json" ReplaceParameters="true">data.json</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

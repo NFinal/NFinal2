@@ -1,0 +1,33 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>NFinalCorePlug</Name>
+    <Description>&lt;没有可用的说明&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>NFinalCorePlug</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="NFinalCorePlug.csproj" File="NFinalCorePlug.csproj" ReplaceParameters="true">
+      <Folder Name="bin" TargetFolderName="bin" />
+      <Folder Name="Controllers" TargetFolderName="Controllers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="IndexController.cs">IndexController.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IndexController.model.cs">IndexController.model.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Views" TargetFolderName="Views">
+        <Folder Name="Index" TargetFolderName="Index">
+          <ProjectItem ReplaceParameters="true" TargetFileName="Html.cshtml">Html.cshtml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="Html.template.cs">Html.template.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="BaseController.cs">BaseController.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="BaseController.model.cs">BaseController.model.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

@@ -1,0 +1,14 @@
+﻿{
+  //调试设置
+  "debug": {
+    "enable": true,
+    "url": "http://localhost:55713",
+    "directory": "/Debug"
+  },
+  //项目类型
+  "projectType": "Web",
+  "server": {
+    "url": "http://www.domain.com",
+    "indexDocument": "/Index.html"
+  }
+}

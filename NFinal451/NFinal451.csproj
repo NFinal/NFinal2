@@ -275,8 +275,17 @@
     <Compile Include="..\nfinal\exceptions\ModelNotFoundException.cs">
       <Link>Core\Exceptions\ModelNotFoundException.cs</Link>
     </Compile>
+    <Compile Include="..\NFinal\Exceptions\NFinalConfigLoadException.cs">
+      <Link>Core\Exceptions\NFinalConfigLoadException.cs</Link>
+    </Compile>
     <Compile Include="..\NFinal\Exceptions\NotFoundExportActionException.cs">
       <Link>Core\Exceptions\NotFoundExportActionException.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Exceptions\PlugAssemblyNotFoundException.cs">
+      <Link>Core\Exceptions\PlugAssemblyNotFoundException.cs</Link>
+    </Compile>
+    <Compile Include="..\NFinal\Exceptions\PlugConfigLoadException.cs">
+      <Link>Core\Exceptions\PlugConfigLoadException.cs</Link>
     </Compile>
     <Compile Include="..\nfinal\exceptions\ViewModelTypeUnMatched.cs">
       <Link>Core\Exceptions\ViewModelTypeUnMatched.cs</Link>

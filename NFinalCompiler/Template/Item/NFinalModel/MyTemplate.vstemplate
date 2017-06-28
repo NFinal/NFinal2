@@ -1,0 +1,18 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>Database.sql</DefaultName>
+    <Name>NFinalModel</Name>
+    <Description>NFinal Model Item
+http://www.help.nfinal.com
+author:Lucas
+QQ:348764327</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.jpg</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem ItemType="Content" SubType="" TargetFileName="$fileinputname$.nf.sql" ReplaceParameters="true">Database.sql</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

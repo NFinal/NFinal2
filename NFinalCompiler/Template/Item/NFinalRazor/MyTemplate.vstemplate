@@ -1,0 +1,19 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>Index.cshtml</DefaultName>
+    <Name>NFinalRazorTemplate</Name>
+    <Description>NFinal Razor Template Item
+http://www.help.nfinal.com
+author:Lucas
+QQ:348764327</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.jpg</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem ItemType="Content" SubType="Code" TargetFileName="$fileinputname$.cshtml" ReplaceParameters="true">Index.cshtml</ProjectItem>
+    <ProjectItem ItemType="Compile" SubType="Code" DependentUpon ="$fileinputname$.cshtml" TargetFileName="$fileinputname$.cshtml/$fileinputname$.template.cs" ReplaceParameters="true">Index.template.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

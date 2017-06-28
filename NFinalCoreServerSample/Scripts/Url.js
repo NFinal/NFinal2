@@ -26,5 +26,5 @@ var Url={
             {
             return "/Index/Ajax.html";
             }
-    }
+    } 
 };

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NFinal4.Core.Filter
+namespace NFinal.Core.Filter
 {
     /// <summary>
     /// Http响应信息过滤器

@@ -1,0 +1,18 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>config.json</DefaultName>
+    <Name>NFinalConfig</Name>
+    <Description>NFinal Config Item.
+http://help.nfinal.com
+author:Lucas
+QQ:348764327</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.jpg</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+	<ProjectItem ItemType="Content" SubType="" TargetFileName="nfinal.json" ReplaceParameters="false">nfinal.json</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

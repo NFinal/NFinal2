@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp1.1\nfinal.json" />
+    <Content Include="bin\Debug\netcoreapp1.1\Plugs\Main\plug.json" />
+    <Content Include="bin\NFinal.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\NFinal.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NFinal2" Version="2.0.12-beta-0003" />
+    <PackageReference Include="NFinal2.Host" Version="1.0.2-rc1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="BaseController.cs">
+      <Generator />
+    </Compile>
+    <Compile Update="BaseController.model.cs">
+      <DependentUpon>BaseController.cs</DependentUpon>
+    </Compile>
+    <None Update="Views\Index\Template.cshtml">
+      <Generator />
+    </None>
+    <Compile Update="Controllers\IndexController.cs">
+      <Generator />
+    </Compile>
+    <Compile Update="Controllers\IndexController.model.cs">
+      <DependentUpon>IndexController.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

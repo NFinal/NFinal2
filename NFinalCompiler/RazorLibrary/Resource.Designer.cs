@@ -83,6 +83,16 @@ namespace NFinalCompiler.RazorLibrary {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
+        internal static byte[] NFinal {
+            get {
+                object obj = ResourceManager.GetObject("NFinal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
         internal static byte[] System_Runtime {
             get {
                 object obj = ResourceManager.GetObject("System_Runtime", resourceCulture);

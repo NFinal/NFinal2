@@ -1,0 +1,58 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>NFinalCoreServer</Name>
+    <Description>&lt;没有可用的说明&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>NFinalCoreServer</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="NFinalCoreServer.csproj" File="NFinalCoreServer.csproj" ReplaceParameters="true">
+      <Folder Name="bin" TargetFolderName="bin">
+        <Folder Name="Debug" TargetFolderName="Debug">
+          <Folder Name="netcoreapp1.1" TargetFolderName="netcoreapp1.1">
+            <Folder Name="Plugs" TargetFolderName="Plugs">
+              <Folder Name="Main" TargetFolderName="Main">
+                <ProjectItem ReplaceParameters="true" TargetFileName="plug.json">plug.json</ProjectItem>
+              </Folder>
+            </Folder>
+            <ProjectItem ReplaceParameters="true" TargetFileName="nfinal.json">nfinal.json</ProjectItem>
+          </Folder>
+        </Folder>
+        <ProjectItem ReplaceParameters="false" TargetFileName="NFinal.dll">NFinal.dll</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="NFinal.xml">NFinal.xml</ProjectItem>
+      </Folder>
+      <Folder Name="Controllers" TargetFolderName="Controllers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="IndexController.cs">IndexController.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IndexController.model.cs">IndexController.model.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Debug" TargetFolderName="Debug">
+        <Folder Name="NFinalCoreServer" TargetFolderName="NFinalCoreServer">
+          <Folder Name="Controllers" TargetFolderName="Controllers">
+            <Folder Name="Index" TargetFolderName="Index">
+              <ProjectItem ReplaceParameters="true" TargetFileName="Index.html">Index.html</ProjectItem>
+              <ProjectItem ReplaceParameters="true" TargetFileName="Template.html">Template.html</ProjectItem>
+            </Folder>
+          </Folder>
+        </Folder>
+      </Folder>
+      <Folder Name="Views" TargetFolderName="Views">
+        <Folder Name="Index" TargetFolderName="Index">
+          <ProjectItem ReplaceParameters="true" TargetFileName="Template.cshtml">Template.cshtml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="Template.template.cs">Template.template.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="BaseController.cs">BaseController.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="BaseController.model.cs">BaseController.model.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Program.cs">Program.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Startup.cs">Startup.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

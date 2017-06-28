@@ -69,8 +69,15 @@ namespace NFinal.Config
                     string nfinalJsonText = nfinalConfigReader.ReadToEnd();
                     nfinalConfigReader.Dispose();
                     nfinalJsonText = DeleteComment(nfinalJsonText);
-                    Configration.globalConfig = Newtonsoft.Json.JsonConvert.DeserializeObject<NFinal.Config.Global.GlobalConfig>(nfinalJsonText);
-                    Configration.globalConfig.JsonObject = SimpleJSON.JSON.Parse(nfinalJsonText).AsObject;
+                    try
+                    {
+                        Configration.globalConfig = Newtonsoft.Json.JsonConvert.DeserializeObject<NFinal.Config.Global.GlobalConfig>(nfinalJsonText);
+                        Configration.globalConfig.JsonObject = SimpleJSON.JSON.Parse(nfinalJsonText).AsObject;
+                    }
+                    catch
+                    {
+                        throw new NFinal.Exceptions.NFinalConfigLoadException(nfinalJsonText);
+                    }
                     NFinal.Config.Plug.PlugConfig plugConfig = null;
                     string nfinalPlugFolder = NFinal.IO.Path.GetApplicationPath("/Plugs/");
                     string[] plugJsonFileNameList = Directory.GetFiles(nfinalPlugFolder, "plug.json", SearchOption.AllDirectories);
@@ -80,14 +87,21 @@ namespace NFinal.Config
                         string plugJsonFileName = plugJsonFileNameList[i];
                         if (File.Exists(plugJsonFileName))
                         {
+                            string plugJsonText = "";
                             using (StreamReader streamReader = System.IO.File.OpenText(plugJsonFileName))
                             {
-                                string plugJsonText = streamReader.ReadToEnd();
-                                streamReader.Dispose();
-                                plugJsonText = DeleteComment(plugJsonText);
+                                plugJsonText = streamReader.ReadToEnd();
+                            }
+                            plugJsonText = DeleteComment(plugJsonText);
+                            try
+                            {
                                 plugConfig = Newtonsoft.Json.JsonConvert.DeserializeObject<NFinal.Config.Plug.PlugConfig>(plugJsonText);
                                 plugConfig.JsonObject = SimpleJSON.JSON.Parse(nfinalJsonText).AsObject;
                                 plugConfigDictionary.Add(plugConfig.plug.name, plugConfig);
+                            }
+                            catch
+                            {
+                                throw new NFinal.Exceptions.PlugConfigLoadException(plugJsonText);
                             }
                         }
                         else

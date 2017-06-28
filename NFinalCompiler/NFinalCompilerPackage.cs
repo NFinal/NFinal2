@@ -244,6 +244,16 @@ namespace NFinalCompiler
             }
             else
             {
+                fileName = Path.Combine(binFolder,"NFinal.dll");
+                buffer = RazorLibrary.Resource.NFinal;
+                if (!File.Exists(fileName))
+                {
+                    using (FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                    {
+                        stream.Write(buffer, 0, buffer.Length);
+                        stream.Close();
+                    }
+                }
                 fileName = Path.Combine(binFolder, "Microsoft.AspNetCore.Razor.dll");
                 buffer = RazorLibrary.Resource.Microsoft_AspNetCore_Razor;
                 if (!File.Exists(fileName))

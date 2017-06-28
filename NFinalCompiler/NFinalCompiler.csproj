@@ -220,6 +220,34 @@
     <Compile Include="Json\JsonClassGeneratorLib\ICodeWriter.cs" />
     <Compile Include="Json\JsonClassGeneratorLib\IJsonClassGeneratorConfig.cs" />
     <Compile Include="Json\JsonClassGeneratorLib\JsonClassGenerator.cs" />
+    <Content Include="ItemTemplates\NFinalConfig.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ItemTemplates\NFinalCoreAction.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ItemTemplates\NFinalJson.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ItemTemplates\NFinalModel.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ItemTemplates\NFinalOwinAction.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ItemTemplates\NFinalPlugConfig.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ItemTemplates\NFinalRazor.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="Json\JsonClassGeneratorLib\JsonClassHelper.cs" />
     <Compile Include="Json\JsonClassGeneratorLib\JsonType.cs" />
     <Compile Include="Json\JsonClassGeneratorLib\JsonTypeEnum.cs" />
@@ -235,6 +263,7 @@
     <Content Include="RazorLibrary\Microsoft.AspNetCore.Razor.dll" />
     <Content Include="RazorLibrary\Microsoft.AspNetCore.Razor.xml" />
     <Content Include="RazorLibrary\Microsoft.AspNetCore.Runtime.dll" />
+    <Content Include="RazorLibrary\NFinal.dll" />
     <Content Include="RazorLibrary\System.Runtime.dll" />
     <Content Include="RazorLibrary\System.Runtime.xml" />
     <Content Include="RazorLibrary\System.Web.Razor.dll" />
@@ -245,6 +274,30 @@
     <None Include="app.config" />
     <None Include="Key.snk" />
     <None Include="packages.config" />
+    <Content Include="ProjectTemplates\NFinalCorePlug.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ProjectTemplates\NFinalCoreServer.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ProjectTemplates\NFinalCoreWeb.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ProjectTemplates\NFinalPlug.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ProjectTemplates\NFinalServer.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ProjectTemplates\NFinalWeb.zip">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -424,6 +477,7 @@
   <ItemGroup>
     <Folder Include="Js\" />
     <Folder Include="Less\" />
+    <Folder Include="Template\" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

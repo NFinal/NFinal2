@@ -67,7 +67,7 @@ namespace NFinal.Plugs
                     }
                     else
                     {
-                        loadSuccess = false;
+                        throw new NFinal.Exceptions.PlugAssemblyNotFoundException(assemblyFilePath);
                     }
                     plugInfo = new PlugInfo();
                     if (loadSuccess)
