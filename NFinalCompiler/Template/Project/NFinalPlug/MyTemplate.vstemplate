@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
     <Name>NFinalPlug</Name>
-    <Description>&lt;没有可用的说明&gt;</Description>
+    <Description>&lt;基于.net framework的插件项目&gt;</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>
     </ProjectSubType>

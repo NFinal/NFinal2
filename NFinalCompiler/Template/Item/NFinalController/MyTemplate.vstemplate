@@ -1,0 +1,19 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>IndexController.cs</DefaultName>
+    <Name>NFinalController</Name>
+    <Description>NFinal Core Controller Item.
+http://www.help.nfinal.com
+author:Lucas
+QQ:348764327</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.jpg</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem ItemType="Compile" SubType="Code" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">IndexController.cs</ProjectItem>
+    <ProjectItem ItemType="Compile" SubType="Code" DependentUpon="$fileinputname$.cs" TargetFileName="$fileinputname$.cs/$fileinputname$.model.cs" ReplaceParameters="true">IndexController.model.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

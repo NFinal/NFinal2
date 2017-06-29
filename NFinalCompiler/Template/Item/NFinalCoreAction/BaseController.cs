@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NFinal;
 
 namespace $rootnamespace$
 {
-    public class $safeitemname$_Model
+    public class $safeitemname$:NFinal.CoreAction
     {
-		
+        
     }
 }

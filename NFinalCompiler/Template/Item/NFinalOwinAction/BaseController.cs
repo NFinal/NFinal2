@@ -6,9 +6,6 @@ namespace $rootnamespace$
 {
     public class $safeitemname$:NFinal.OwinAction
     {
-        public void Index()
-        {
-			
-        }
+		
     }
 }

@@ -1,0 +1,57 @@
+﻿{
+  "plug": {
+    "enable": true,
+    "name": "Main",
+    "urlPrefix": null,
+    "description": "宿主项目",
+    //程序集路径，相对路径，根目录为宿主程序集输出目录。
+    "assemblyPath": "/$safeprojectname$.dll"
+  },
+  //用户自定义设置
+  "appSettings": {
+    "key": "value"
+  },
+  //连接字符串设置
+  "connectionStrings": {
+    "Common": {
+      "connectionString": "Data Source=|ModuleDataDirectory|Common.db;Pooling=true;FailIfMissing=false",
+      "providerName": "System.Data.SQLite"
+    }
+  },
+  "verbs": [ "GET", "POST", "HEAD", "DEBUG" ],
+  //Session设置
+  "sessionState": {
+    "cookieName": "session_id",
+    "mode": "Redis",
+    "stateConnectionString": "localhost",
+    "timeout": 20,
+    "prefix": ""
+  },
+  //Url设置
+  "url": {
+    "prefix": "",
+    "extension": ".html",
+    "defaultDocument": "index.html"
+  },
+  //Cookie设置
+  "cookie": {
+    "prefix": ""
+  },
+  //默认皮肤
+  "defaultSkin": null,
+  //用户自定义错误
+  "customErrors": {
+    "defaultRedirect": "Err.htm",
+    "mode": "Off",
+    "errors": [
+      {
+        "statusCode": 403,
+        "redirect": "NoAccess.htm"
+      },
+      {
+        "statusCode": 404,
+        "redirect": "FileNotFound.htm"
+      }
+    ]
+  }
+}

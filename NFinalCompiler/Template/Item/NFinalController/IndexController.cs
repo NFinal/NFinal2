@@ -5,7 +5,7 @@ using NFinal;
 
 namespace $rootnamespace$
 {
-    public class $safeitemname$:NFinal.CoreAction
+    public class $safeitemname$ : BaseController
     {
         public void Index()
         {

@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
     <Name>NFinalServer</Name>
-    <Description>&lt;没有可用的说明&gt;</Description>
+    <Description>&lt;基于.net framework的控制台应用程序的宿主项目&gt;</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>
     </ProjectSubType>
@@ -24,12 +24,16 @@
           <Folder Name="Plugs" TargetFolderName="Plugs">
             <ProjectItem ReplaceParameters="true" TargetFileName="plug.json">plug.json</ProjectItem>
           </Folder>
+          <Folder Name="Scripts" TargetFolderName="Scripts">
+            <ProjectItem ReplaceParameters="true" TargetFileName="Url.js">Url.js</ProjectItem>
+          </Folder>
         </Folder>
       </Folder>
       <Folder Name="Controllers" TargetFolderName="Controllers">
         <ProjectItem ReplaceParameters="true" TargetFileName="IndexController.cs">IndexController.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="IndexController.model.cs">IndexController.model.cs</ProjectItem>
       </Folder>
+      <Folder Name="Debug" TargetFolderName="Debug" />
       <ProjectItem ReplaceParameters="true" TargetFileName="packages.config">packages.config</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="Program.cs">Program.cs</ProjectItem>
       <Folder Name="Properties" TargetFolderName="Properties">

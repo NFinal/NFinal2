@@ -3,6 +3,17 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Debug\NFinalCoreWeb\**" />
+    <Content Remove="Debug\NFinalCoreWeb\**" />
+    <EmbeddedResource Remove="Debug\NFinalCoreWeb\**" />
+    <None Remove="Debug\NFinalCoreWeb\**" />
+  </ItemGroup>
+  <ItemGroup>
+	<Compile Remove="@(Compile)" />
+	<Content Remove="@(Content)" />
+	<EmbeddedResource Remove="@(EmbeddedResource)" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="bin\Debug\netcoreapp1.1\nfinal.json" />
     <Content Include="bin\Debug\netcoreapp1.1\Plugs\plug.json" />
   </ItemGroup>
@@ -23,14 +34,27 @@
     <PackageReference Include="NFinal2.Web" Version="1.0.2-rc1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="BaseController.cs">
+	<Compile Include="Controllers\IndexController.cs" />
+	<Compile Include="Controllers\IndexController.model.cs" />
+	<Compile Include="Program.cs">
+	  <Generator />
+	</Compile>
+	<Compile Include="Startup.cs">
+	  <Generator />
+	</Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseController.cs">
       <Generator />
     </Compile>
-    <Compile Update="BaseController.model.cs">
+    <Compile Include="BaseController.model.cs">
       <DependentUpon>BaseController.cs</DependentUpon>
     </Compile>
-    <Content Update="Views\Index\Template.cshtml">
+    <Content Include="Views\Index\Template.cshtml">
       <Generator />
     </Content>
+	<Compile Include="Views\Index\Template.template.cs">
+	  <DependentUpon>Template.cshtml</DependentUpon>
+	</Compile>
   </ItemGroup>
 </Project>

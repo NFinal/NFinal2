@@ -3,22 +3,28 @@
     <TargetFramework>netstandard1.5</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+	<Compile Remove="@(Compile)" />
+	<Content Remove="@(Content)" />
+	<EmbeddedResource Remove="@(EmbeddedResource)" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="NFinal2" Version="2.0.12-beta-0003" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Controllers\IndexController.cs">
-      <Generator />
-    </Compile>
-    <Compile Update="Controllers\IndexController.model.cs">
+	<Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\IndexController.model.cs">
       <DependentUpon>IndexController.cs</DependentUpon>
     </Compile>
-    <None Update="Views\Index\Html.cshtml">
+    <None Include="Views\Index\Html.cshtml">
       <Generator />
     </None>
-    <Compile Update="BaseController.cs">
+	<Compile Include="Views\Index\Html.template.cs">
+	  <DependentUpon>Html.cshtml</DependentUpon>
+	</Compile>
+    <Compile Include="BaseController.cs">
       <Generator />
     </Compile>
-    <Compile Update="BaseController.model.cs">
+    <Compile Include="BaseController.model.cs">
       <DependentUpon>BaseController.cs</DependentUpon>
     </Compile>
   </ItemGroup>

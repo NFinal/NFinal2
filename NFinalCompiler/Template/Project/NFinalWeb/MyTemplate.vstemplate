@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
     <Name>NFinalWeb</Name>
-    <Description>&lt;没有可用的说明&gt;</Description>
+    <Description>&lt;基于.net framework的Web应用程序的宿主项目&gt;</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>
     </ProjectSubType>
@@ -28,10 +28,14 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="IndexController.cs">IndexController.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="IndexController.model.cs">IndexController.model.cs</ProjectItem>
       </Folder>
+      <Folder Name="Debug" TargetFolderName="Debug" />
       <ProjectItem ReplaceParameters="true" TargetFileName="nfinal.json">nfinal.json</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="packages.config">packages.config</ProjectItem>
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Scripts" TargetFolderName="Scripts">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Url.js">Url.js</ProjectItem>
       </Folder>
       <ProjectItem ReplaceParameters="true" TargetFileName="Startup.cs">Startup.cs</ProjectItem>
       <Folder Name="Views" TargetFolderName="Views">
