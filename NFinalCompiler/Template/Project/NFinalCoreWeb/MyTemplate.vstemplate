@@ -1,10 +1,9 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>NFinalCoreWeb</Name>
-    <Description>&lt;基于.net core的Web应用程序的宿主项目&gt;</Description>
+    <Name>NFinalCoreWeb(.NET Core)</Name>
+    <Description>&lt;基于.net core的Web应用程序的宿主项目Support for visual studio 2017+&gt;</Description>
     <ProjectType>CSharp</ProjectType>
-    <ProjectSubType>
-    </ProjectSubType>
+    <ProjectSubType>NFinal</ProjectSubType>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>NFinalCoreWeb</DefaultName>
